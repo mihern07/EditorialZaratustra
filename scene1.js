@@ -8,8 +8,8 @@ export default class Game extends Phaser.Scene {
     }
   
     create() {
-      let bg=this.add.sprite(500,392,"background") // Los NPC's solo se ven por encima del bg
-      let fg=this.add.sprite(500,392,"foreground") 
+      let bg=this.add.sprite(600,392,"background") // Los NPC's solo se ven por encima del bg
+      let fg=this.add.sprite(600,392,"foreground") 
     }
   
     update(time, delta) {}
