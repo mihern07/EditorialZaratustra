@@ -1,5 +1,6 @@
 import Clock from "./Clock.js";
 
+let spriteClock;
 export default class Game extends Phaser.Scene {
 
     /** @type {Clock} */
@@ -8,15 +9,22 @@ export default class Game extends Phaser.Scene {
     constructor() {
       super({ key: "main" });
     }
-    preload() {}
+    preload() {
+      this.load.image("clock","sprites/clockPrototype.png");
+      this.load.image("manecilla","sprites/manecilla.png");
+    }
   
     create() {
       this.add.text(10, 10, "¡Hola, mundo!", { fontColor: 0xffff00 });
 
-      const timerLabel = this.add.text(300, 50, '0', {fontSize: 48}).setOrigin(0.5);
+      spriteClock = this.add.sprite(900,150,"clock");
+      spriteClock.setScale(0.5);
+
+      let timerLabel = this.add.sprite(900,150,"manecilla");
+      timerLabel.setScale(0.5);
     
       this.clock = new Clock(this, timerLabel);
-      this.clock.start(this.handleTimeFinished.bind(this), '45000');
+      this.clock.start(this.handleTimeFinished.bind(this), '180000');
     }
   
     handleTimeFinished(){
@@ -25,7 +33,6 @@ export default class Game extends Phaser.Scene {
 
     update(time, delta) {
         this.clock.update();
-
     }
   }
   
