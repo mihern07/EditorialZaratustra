@@ -1,23 +1,23 @@
-export default class Clock{
+export default class Clock extends Phaser.GameObjects.Sprite{
     /** @type {Phaser.Scene} */
     scene
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    label
 
     /** @type {Phaser.Time.timerEvent} */
     timerEvent
 
+    /** @type {Phaser.GameObjects.Sprite} */
+    manecilla
+
     duration = 0;
 
-    /**
-     * 
-     * @param {Phaser.Scene} scene 
-     * @param {Phaser.GameObjects.Sprite} label 
-     */
-    constructor(scene, label){
+    constructor(scene, x, y, clockImage, manecillaImage){
+        super(scene,x,y, clockImage);
         this.scene = scene;
-        this.label = label;
+        this.setScale(0.5);
+        scene.add.existing(this);
+
+        this.manecilla = scene.add.sprite(x,y, manecillaImage);
+        this.manecilla.setScale(0.5);
     }
 
     /**
@@ -60,6 +60,6 @@ export default class Clock{
         const seconds = remaining / 1000;
         const time = elapsed /1000;
 
-        this.label.angle = time;
+        this.manecilla.angle = time;
     }
 }
