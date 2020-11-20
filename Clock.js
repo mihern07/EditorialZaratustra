@@ -2,6 +2,7 @@ export default class Clock{
     /** @type {Phaser.Scene} */
     scene
 
+    /** @type {Phaser.GameObjects.Sprite} */
     label
 
     /** @type {Phaser.Time.timerEvent} */
@@ -12,6 +13,7 @@ export default class Clock{
     /**
      * 
      * @param {Phaser.Scene} scene 
+     * @param {Phaser.GameObjects.Sprite} label 
      */
     constructor(scene, label){
         this.scene = scene;
@@ -58,5 +60,6 @@ export default class Clock{
         const seconds = remaining / 1000;
         const time = elapsed /1000;
 
+        this.label.angle = time;
     }
 }
