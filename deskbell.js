@@ -36,8 +36,4 @@ export default class DeskBell extends Phaser.GameObjects.Sprite  {
             this.clicked = false;
       });
     }
-
-    // changeSprite(){
-      
-    // }
   }

@@ -4,7 +4,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
 
         super(scene,x,y, sprite);
 
-        
+        this.firstPosX = this.x;
         this.setScale(.5);
         this.scene.add.existing(this);
 
@@ -18,7 +18,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
         this.body.setVelocityX(0);
     }
     quetemuevas(){
-        this.body.setVelocityX(-170);
+        this.body.setVelocityX(-190);
     }
 
     preUpdate(){
@@ -26,6 +26,11 @@ export default class Character extends Phaser.GameObjects.Sprite{
         if(!this.hasStopped && this.x < 540){
             this.quetepares();
             this.hasStopped = true;
+        }
+        if (this.x < 120){
+            this.quetepares();
+            this.x = this.firstPosX;
+            this.hasStopped = false;
         }
     }
 
