@@ -46,7 +46,7 @@ export default class Game extends Phaser.Scene {
 
       //Personaje
   
-      let chara  = new Character(this,955,380,"character")
+      this.chara  = new Character(this,955,380,"character")
 
       let fg=this.add.sprite(550,392,"foreground") 
 
@@ -68,9 +68,11 @@ export default class Game extends Phaser.Scene {
     handleTimeFinished(){
 
     }
+
+
   
     update(time, delta) {
         this.clock.update();
-        //this.chara.Move();
+        this.chara.quetepares();;
     }
   }
