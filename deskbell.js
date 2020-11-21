@@ -1,5 +1,3 @@
-//import Clock from "./Clock.js";
-
 export default class DeskBell extends Phaser.GameObjects.Sprite  {
 
           /** @type {Phaser.GameObjects.Sprite} */
