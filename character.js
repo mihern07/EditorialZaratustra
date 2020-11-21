@@ -10,12 +10,23 @@ export default class Character extends Phaser.GameObjects.Sprite{
 
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
-        this.body.setVelocityX(-10);
+        this.body.setVelocityX(0);
+        this.hasStopped = false;
     }
 
     quetepares(){
         this.body.setVelocityX(0);
     }
+    quetemuevas(){
+        this.body.setVelocityX(-170);
+    }
 
+    preUpdate(){
+
+        if(!this.hasStopped && this.x < 540){
+            this.quetepares();
+            this.hasStopped = true;
+        }
+    }
 
 }

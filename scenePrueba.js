@@ -6,15 +6,6 @@ import Character from "./character.js";
 
 export default class Game extends Phaser.Scene {
 
-// /** @type {Phaser.GameObjects.Sprite} */
-// clock
-
-// /** @type {Phaser.GameObjects.Sprite} */
-// dialogue
-
-// /** @type {Phaser.GameObjects.image} */
-// clockImage
-
     constructor() {
       super({ key: "main" });
     }
@@ -38,7 +29,7 @@ export default class Game extends Phaser.Scene {
 
 
       //FONDO
-      let bg=this.add.sprite(550,397,"background") // Los NPC's solo se ven por encima del bg
+      this.bg=this.add.sprite(550,397,"background") // Los NPC's solo se ven por encima del bg
 
       //CLOCK
       this.clock = new Clock(this, 750, 55, "clock", "manecilla");
@@ -48,16 +39,16 @@ export default class Game extends Phaser.Scene {
   
       this.chara  = new Character(this,955,380,"character")
 
-      let fg=this.add.sprite(550,392,"foreground") 
+      this.fg=this.add.sprite(550,392,"foreground") 
 
 
       //LIBRO
       
-      let book = new Book(this,550,600,"book","book2")
+      this.book = new Book(this,550,600,"book","book2")
 
       //DESKBELL
   
-      let bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed")
+      this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed")
 
       //DIALOGUE
       //let texto = 'Dejame pasar, he perdido a mi padre';
@@ -73,6 +64,9 @@ export default class Game extends Phaser.Scene {
   
     update(time, delta) {
         this.clock.update();
-        this.chara.quetepares();;
+        //this.chara.quetemuevas();
+        if (this.bell.clicked){
+          this.chara.quetemuevas();
+        }
     }
   }
