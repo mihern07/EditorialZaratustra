@@ -18,7 +18,7 @@ export default class Book extends Phaser.GameObjects.Sprite{
         this.setInteractive();
         
         this.Libro2=scene.add.sprite(x,y,sprite2).setInteractive();
-        this.Libro2.setScale(.3)
+        this.Libro2.setScale(.5)
   
         this.Libro2.visible=false; //visible permite hacer visible o no un sprite.
       
