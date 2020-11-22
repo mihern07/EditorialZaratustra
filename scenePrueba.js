@@ -3,6 +3,7 @@ import Clock from "./Clock.js";
 import Dialogue from "./dialogue.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
+import RedButton from "./redButton.js";
 
 export default class Game extends Phaser.Scene {
 
@@ -10,16 +11,18 @@ export default class Game extends Phaser.Scene {
       super({ key: "main" });
     }
     preload() { //Carga de sprites
-      this.load.image("background", "sprites/Background.png")
-      this.load.image("foreground", "sprites/Foreground.png")
-      this.load.image("book","sprites/LibroCerrado.png");
-      this.load.image("book2","sprites/LibroAbierto.png");
-      this.load.image("clock","sprites/clockPrototype.png");
-      this.load.image("manecilla","sprites/manecilla.png");
-      this.load.image("box", "sprites/dialoguebox.png");
-      this.load.image("character", "sprites/Personaje.png");
-      this.load.image("deskBellPressed","sprites/TimbrePulsado.png");
-      this.load.spritesheet("deskBellSP","sprites/TimbreSheet.png", { frameWidth: 385, frameHeight: 356 });
+      this.load.image("background", "sprites/Background.png") //Fondo = background
+      this.load.image("foreground", "sprites/Foreground.png") //Mesa = foreground
+      this.load.image("book","sprites/LibroCerrado.png"); //Libro cerrado = book
+      this.load.image("book2","sprites/LibroAbierto.png"); //libro abierto = book2
+      this.load.image("clock","sprites/clockPrototype.png"); //Reloj = clock
+      this.load.image("manecilla","sprites/manecilla.png"); //Manecilla = manecilla
+      this.load.image("box", "sprites/dialoguebox.png"); //Bocadillo = box
+      this.load.image("character", "sprites/Personaje.png"); //personaje = character
+      this.load.image("deskBellPressed","sprites/TimbrePulsado.png"); //timbre pulsado = deskBellPressed
+      this.load.spritesheet("deskBellSP","sprites/TimbreSheet.png", { frameWidth: 385, frameHeight: 356 }); //timbre = deskBellSP
+      this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
+      this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
     }
   
     create() {
@@ -32,23 +35,30 @@ export default class Game extends Phaser.Scene {
       this.bg=this.add.sprite(550,397,"background") // Los NPC's solo se ven por encima del bg
 
       //CLOCK
-      this.clock = new Clock(this, 750, 55, "clock", "manecilla");
+      this.clock = new Clock(this, 750, 55, "clock", "manecilla"); //Inicializa reloj
       this.clock.start(this.handleTimeFinished.bind(this), '180000');
 
       //Personaje
   
-      this.chara  = new Character(this,955,380,"character")
+      this.chara  = new Character(this,955,380,"character") //Inicializa personaje
 
-      this.fg=this.add.sprite(550,392,"foreground") 
+      this.fg=this.add.sprite(550,392,"foreground")  //Inicializa mesa
 
 
       //LIBRO
       
-      this.book = new Book(this,550,600,"book","book2")
+      this.book = new Book(this,550,600,"book","book2") //Inicializa libro
+      this.book.visible=false;
 
       //DESKBELL
   
-      this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed")
+      this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed") //Inicializa timbre
+
+      //TINTEROS
+
+      this.tinteroVerde = new RedButton(this,200,600,"tinteroV") //Inicializa tintero verde
+
+      this.tinteroRojo = new RedButton(this,300,600,"tinteroR") //Inicializa tintero rojo
 
       //DIALOGUE
       //let texto = 'Dejame pasar, he perdido a mi padre';
@@ -65,7 +75,28 @@ export default class Game extends Phaser.Scene {
     update(time, delta) {
         this.clock.update();
         //this.chara.quetemuevas();
-        if (this.bell.clicked){
+
+        if (this.bell.clicked){ //Timbre
+          this.chara.quepases();
+        }
+
+        if(this.chara.hasStopped) //Aparece libro
+        {
+          this.book.visible=true;
+        }
+
+        if(!this.chara.hasStopped) //Desaparece libro
+        {
+          this.book.cerrarSprites();
+        }
+
+        if(this.tinteroRojo.clicked) //Boton de alarma
+        {
+          this.chara.quetevayas();
+        }
+
+        if(this.tinteroVerde.clicked) //Boton de alarma
+        {
           this.chara.quetemuevas();
         }
     }

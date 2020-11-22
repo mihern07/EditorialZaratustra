@@ -27,15 +27,22 @@ export default class Book extends Phaser.GameObjects.Sprite{
           //hacer algo.
           console.log("Libro pulsado");
           this.visible=!this.visible;
-          this.Libro2.visible=!this.Libro2.visible;
+        this.Libro2.visible=!this.Libro2.visible;
         })
 
         this.Libro2.on("pointerdown", pointer => {
             //hacer algo.
             console.log("Libro pulsado");
             this.visible=!this.visible;
-            this.Libro2.visible=!this.Libro2.visible;
+        this.Libro2.visible=!this.Libro2.visible;
         })
+
+
+    }  
+
+    cerrarSprites()
+    {
+        this.visible=false;
+        this.Libro2.visible=false;
     }
-  
 }

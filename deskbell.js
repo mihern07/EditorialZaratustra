@@ -24,16 +24,18 @@ export default class DeskBell extends Phaser.GameObjects.Sprite  {
       this.on('pointerdown', pointer => {
         if (pointer.isDown) {
           console.log("Timbre pulsado");
-            this.Bell2.visible=!this.Bell2.visible;
-            this.visible=!this.visible;
-            this.clicked = true;
+          this.Bell2.visible=!this.Bell2.visible;
+          this.visible=!this.visible;
+          this.clicked = !this.clicked;
         }
       });
 
       this.Bell2.on('pointerup', pointer => {
-            this.Bell2.visible=!this.Bell2.visible;
-            this.visible=!this.visible;
-            this.clicked = false;
+        this.Bell2.visible=!this.Bell2.visible;
+        this.visible=!this.visible;
+        this.clicked = !this.clicked;
       });
+
+ 
     }
   }
