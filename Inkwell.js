@@ -14,13 +14,13 @@ this.setScale(.7);
 //Cuando es pulsado dicho sprite...
 this.on('pointerdown', pointer => {
   if (pointer.isDown) {
-    console.log("Botón seguridad pulsado");
+    //console.log("Botón seguridad pulsado");
       this.clicked = true;
   }
 });
 
 this.on('pointerup', pointer => {
-      console.log("Botón seguridad pulsado");
+      //console.log("Botón seguridad pulsado");
         this.clicked = false;
   });
 }

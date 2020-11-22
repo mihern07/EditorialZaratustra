@@ -86,7 +86,7 @@ export default class Game extends Phaser.Scene {
           this.chara.EnterChar();
         }
 
-        if(this.chara.hasStopped) //Aparece libro
+        if(this.chara.currentS === this.chara.States.SHOW) //Aparece libro
         {
           this.book.visible=true;
         }
