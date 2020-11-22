@@ -19,15 +19,20 @@ export default class Book extends Phaser.GameObjects.Sprite{
         scene.add.existing(this);
         
         this.setInteractive();
-        
-        this.Libro2 = scene.add.sprite(x,y,sprite2).setInteractive();
+
+        this.Libro2 = scene.add.sprite(this.x,this.y,sprite2).setInteractive();
         
         this.Libro2.setScale(.5)
         
-        this.Libro2.visible = false; //visible permite hacer visible o no un sprite.
+        this.scene.input.setDraggable(this.Libro2);
+        this.scene.input.setDraggable(this);
 
-        this.draggable = true;
-        this.Libro2.draggable = true;
+        this.Libro2.visible = false; //visible permite hacer visible o no un sprite.
+        
+        this.scene.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+            gameObject.x = dragX;
+            gameObject.y = dragY
+        })
 
         //Cuando es pulsado dicho sprite...
         this.on("pointerdown", pointer => {
