@@ -3,7 +3,7 @@ import Clock from "./Clock.js";
 import Dialogue from "./dialogue.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
-import RedButton from "./redButton.js";
+import Inkwell from "./Inkwell.js";
 
 export default class Game extends Phaser.Scene {
 
@@ -60,9 +60,9 @@ export default class Game extends Phaser.Scene {
 
       //TINTEROS
 
-      this.tinteroVerde = new RedButton(this,200,600,"tinteroV") //Inicializa tintero verde
+      this.tinteroVerde = new Inkwell(this,200,600,"tinteroV") //Inicializa tintero verde
 
-      this.tinteroRojo = new RedButton(this,300,600,"tinteroR") //Inicializa tintero rojo
+      this.tinteroRojo = new Inkwell(this,300,600,"tinteroR") //Inicializa tintero rojo
 
       //DIALOGUE
       //let texto = 'Dejame pasar, he perdido a mi padre';
@@ -81,7 +81,7 @@ export default class Game extends Phaser.Scene {
         //this.chara.quetemuevas();
 
         if (this.bell.clicked){ //Timbre
-          this.chara.quepases();
+          this.chara.EnterChar();
         }
 
         if(this.chara.hasStopped) //Aparece libro
@@ -96,12 +96,12 @@ export default class Game extends Phaser.Scene {
 
         if(this.tinteroRojo.clicked) //Boton de alarma
         {
-          this.chara.quetevayas();
+          this.chara.DenyChar();
         }
 
         if(this.tinteroVerde.clicked) //Boton de alarma
         {
-          this.chara.quetemuevas();
+          this.chara.AcceptChar();
         }
     }
   }

@@ -1,18 +1,17 @@
-export default class RedButton extends Phaser.GameObjects.Sprite  {
+export default class Inkwell extends Phaser.GameObjects.Sprite  {
 
 constructor(scene,x,y, sprite, sprite2) {
 super(scene,x,y,sprite);
 this.scene=scene;
 
 scene.add.existing(this);
-this.setInteractive();
-this.clicked = false;
-
+this.setInteractive(); //Lo hacemos interactivo (puedes pulsarlo)
+this.clicked = false; //Creamos variable booleana clicked.
 this.setScale(.7);
 
 //this.scene.physics.add.existing(this, true);
 
-
+//Cuando es pulsado dicho sprite...
 this.on('pointerdown', pointer => {
   if (pointer.isDown) {
     console.log("Botón seguridad pulsado");

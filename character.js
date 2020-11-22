@@ -4,33 +4,33 @@ export default class Character extends Phaser.GameObjects.Sprite{
 
         super(scene,x,y, sprite);
 
-        this.firstPosX = this.x;
+        this.firstPosX = this.x; //Creamos la variable firstPosX (guardar la posicion inicial)
         this.setScale(.5);
         this.scene.add.existing(this);
 
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
         this.body.setVelocityX(0);
-        this.hasStopped = false;
-        this.exists=false;
+        this.hasStopped = false; //Creamos variable booleana hasStopped (saber si esta parado)
+        this.exists=false; //Creamos variable booleana exists (no permite dar mas de 1 instruccion al personaje)
     }
 
-    quepases()
+    EnterChar() //Método para que el personaje entre
     {
         if(!this.exists && !this.hasStopped)
         this.body.setVelocityX(-190);
     }
-    quetepares(){
+    StopChar(){ //Método para que el personaje pare
         this.body.setVelocityX(0);
     }
-    quetemuevas(){
+    AcceptChar(){ //Método para que el personaje entre (aceptado)
         if(this.exists)
         {
         this.body.setVelocityX(-190);
         this.exists=false;
         }
     }
-    quetevayas()
+    DenyChar() //Método para que el personaje salga (denegado)
     {
         if(this.exists)
         {        
@@ -42,19 +42,19 @@ export default class Character extends Phaser.GameObjects.Sprite{
 
     preUpdate(){
 
-        if(!this.hasStopped && this.x < 540){
-            this.quetepares();
+        if(!this.hasStopped && this.x < 540){ //Cuando llegue al medio, se detiene el personaje
+            this.StopChar();
             this.hasStopped = true;
             this.exists=true;
         }
-        if (this.x < 120){
-            this.quetepares();
+        if (this.x < 120){ //Cuando salga del campo de vision, por la izquierda, se le reinicia
+            this.StopChar();
             this.x = this.firstPosX;
             this.hasStopped = false;
         }
-        if(this.hasStopped && this.x>this.firstPosX)
+        if(this.hasStopped && this.x>this.firstPosX) //Cuando salga del campo de vision, por la derecha, se le reinicia
         {
-            this.quetepares();
+            this.StopChar();
             this.x = this.firstPosX;
             this.hasStopped = false;
         }

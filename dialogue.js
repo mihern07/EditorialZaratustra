@@ -10,7 +10,7 @@ export default class Dialogue extends Phaser.GameObjects.Sprite{
         scene.add.existing(this);
     
         
-        this.texto=scene.add.text(x-120,y,texto, {color: 0x0A0A0A});
+        this.texto=scene.add.text(x-120,y,texto, {color: 0x0A0A0A}); //Añadimos texto.
         this.texto.setScale(.7);
     }
 }
