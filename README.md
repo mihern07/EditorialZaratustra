@@ -66,7 +66,7 @@ Se busca un loop jugable rápido, donde el jugador deberá tener en cuenta vario
 
 Desde el menú principal se podrá acceder a las opciones: &quot;Jugar&quot;, &quot;Opciones&quot;, &quot;Créditos&quot; y &quot;Salir&quot;.
 
-![](RackMultipart20201122-4-19mp3ec_html_c03feebff4b7cb5d.png)
+![ImagenJuego](../master/readmeImages/screenshot.jpg)
 
 _Imagen provisional de menú (opciones en la página derecha)_
 
