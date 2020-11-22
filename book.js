@@ -13,6 +13,9 @@ export default class Book extends Phaser.GameObjects.Sprite{
     {
         super(scene,x,y,sprite)
         
+        this.firstPosX = this.x;
+        this.firstPosY = this.y;
+
         this.scene = scene;
         this.setScale(.3);
         
@@ -24,14 +27,21 @@ export default class Book extends Phaser.GameObjects.Sprite{
         
         this.Libro2.setScale(.5)
         
-        this.scene.input.setDraggable(this.Libro2);
+        //this.scene.input.setDraggable(this.Libro2);
         this.scene.input.setDraggable(this);
+
+        this.setDamping = true;
+        this.Libro2.setDamping = true;
 
         this.Libro2.visible = false; //visible permite hacer visible o no un sprite.
         
-        this.scene.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-            gameObject.x = dragX;
-            gameObject.y = dragY
+        this.on('drag', pointer=> {
+            if(pointer.leftButtonDown()){
+                this.x = pointer.x;
+                this.y = pointer.y;
+                this.Libro2.x = this.x;
+                this.Libro2.y = this.y;
+            }
         })
 
         //Cuando es pulsado dicho sprite...
@@ -57,5 +67,12 @@ export default class Book extends Phaser.GameObjects.Sprite{
     {
         this.visible=false;
         this.Libro2.visible=false;
+    }
+
+    resetPos(){
+        this.x = this.firstPosX;
+        this.y = this.firstPosY;
+        this.Libro2.x = this.firstPosX;
+        this.Libro2.y = this.firstPosY;
     }
 }

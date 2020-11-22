@@ -48,12 +48,6 @@ export default class Game extends Phaser.Scene {
 
       this.fg = this.add.sprite(550,392,"foreground") 
 
-
-      //LIBRO
-      
-      this.book = new Book(this,550,600,"book","book2") //Inicializa libro
-      this.book.visible=false;
-
       //DESKBELL
   
       this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed") //Inicializa timbre
@@ -67,6 +61,14 @@ export default class Game extends Phaser.Scene {
       //DIALOGUE
       //let texto = 'Dejame pasar, he perdido a mi padre';
       //this.dialogue = new Dialogue(this, 400, 425, "box", texto);
+
+      
+
+      //LIBRO
+      
+      this.book = new Book(this,550,600,"book","book2") //Inicializa libro
+      this.book.visible=false;
+
 
     }
 
@@ -89,19 +91,18 @@ export default class Game extends Phaser.Scene {
           this.book.visible=true;
         }
 
-        if(!this.chara.hasStopped) //Desaparece libro
-        {
-          this.book.cerrarSprites();
-        }
-
         if(this.tinteroRojo.clicked) //Boton de alarma
         {
           this.chara.DenyChar();
+          this.book.cerrarSprites();
+          this.book.resetPos(); //Devuelve posición inicial al book
         }
 
         if(this.tinteroVerde.clicked) //Boton de alarma
         {
           this.chara.AcceptChar();
+          this.book.cerrarSprites();
+          this.book.resetPos(); //Devuelve posición inicial al book
         }
     }
   }
