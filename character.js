@@ -12,7 +12,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
         this.body.allowGravity = false;
         this.body.setVelocityX(0);
 
-        const SPEED = 190;
+        this.SPEED = 190;
         const MIDDLE = 540;
         
         //STOP: en el mostrador
@@ -24,32 +24,33 @@ export default class Character extends Phaser.GameObjects.Sprite{
 
     EnterChar() //Método para que el personaje entre
     {
-        this.body.setVelocityX(-SPEED);
+        if(this.States.GOING)
+            this.body.setVelocityX(-this.SPEED);
     }
     StopChar(){ //Método para que el personaje pare
         this.body.setVelocityX(0);
     }
     AcceptChar(){ //Método para que el personaje entre (aceptado)
-        if(this.hasStopped)
+        if(this.States.STOP)
         {
-            this.body.setVelocityX(-SPEED);
+            this.body.setVelocityX(-this.SPEED);
             this.exists=false;
-            this.hasStopped = false;
+            this.States = this.States.ANSWER;
         }
     }
     DenyChar() //Método para que el personaje salga (denegado)
     {
-        if(this.hasStopped)
+        if(this.States.STOP)
         {        
-            this.hasStopped = false;
-            this.body.setVelocityX(SPEED);
+            this.body.setVelocityX(this.SPEED);
             this.exists=false;
+            this.States = this.States.ANSWER;
         }
     }
 
     preUpdate(){
 
-        if(!this.hasStopped && this.x > 539 && this.x < 540){ //Cuando llegue al medio, se detiene el personaje
+        if(this.States.GOING && this.x < 540){ //Cuando llegue al medio, se detiene el personaje
             this.StopChar();
             this.hasStopped = true;
         }
