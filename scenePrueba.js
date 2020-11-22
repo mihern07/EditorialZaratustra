@@ -24,15 +24,19 @@ export default class Game extends Phaser.Scene {
       this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
       this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
     }
-  
+    
+
     create() {
         //GLOBAL
         this.input.mouse.disableContextMenu(); //No permite click derecho en el juego.
-        let pointer=this.input.activePointer; // Raton.
-
-
+        let pointer = this.input.activePointer; // Raton.
+        //----Prueba de array de diálogos y enum guía
+        // let dialogues = ["Dejame pasar, he perdido a mi padre"];
+        // const dialoguesEnum = {
+        //   PERDIDO = 0,
+        // }
       //FONDO
-      this.bg=this.add.sprite(550,397,"background") // Los NPC's solo se ven por encima del bg
+      this.bg = this.add.sprite(550,397,"background") // Los NPC's solo se ven por encima del bg
 
       //CLOCK
       this.clock = new Clock(this, 750, 55, "clock", "manecilla"); //Inicializa reloj
@@ -42,7 +46,7 @@ export default class Game extends Phaser.Scene {
   
       this.chara  = new Character(this,955,380,"character") //Inicializa personaje
 
-      this.fg=this.add.sprite(550,392,"foreground")  //Inicializa mesa
+      this.fg = this.add.sprite(550,392,"foreground") 
 
 
       //LIBRO

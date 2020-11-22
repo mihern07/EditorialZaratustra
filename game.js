@@ -5,7 +5,8 @@ export default class Game extends Phaser.Scene {
   preload() {}
 
   create() {
-    this.add.text(10, 10, "¡Hola, mundo!", { fontColor: 0xffff00 });
+    this.add.text(10, 10, "¡Mla!", { fontColor: 0xffff00 });
+
   }
 
   update(time, delta) {}
