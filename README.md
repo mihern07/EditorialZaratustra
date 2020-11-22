@@ -17,6 +17,12 @@ Versión 1.0 - 16 de octubre de 2020
 | **Público objetivo:** Mayores de 16 años. | **Plataformas:** PC con teclado y ratón. |
 | **Cantidades:** (no es necesario de momento)_Escenarios: __Objetos:_ _Armas:__ Personajes:_ _Palabras:_ _Grabaciones de voz:_ | **Hitos:** _Fecha de propuesta del concepto (14/10/2020)__Fechas de pre-producción (/2020)__Fechas de producción (/2020 -/2020)__Fecha de lanzamiento (/2020)_ |
 
+**Página del juego**
+https://mihern07.github.io/EditorialZaratustra/
+
+**Página de gestión**
+https://www.pivotaltracker.com/projects/2470815
+
 **Descripción**
 
 El juego se sitúa en el Madrid de los años 20. Nos encontramos en la recepción de la Editorial Zaratustra, donde nuestro trabajo será decidir si los libros que nos entregan serán rentables a la editorial al más puro estilo &quot;Papers, Please&quot;. A lo largo de las jornadas, la partida se irá complicando, de manera que el jugador tendrá que tener más factores en cuenta para hacer bien su trabajo y no ser despedido.
