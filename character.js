@@ -17,20 +17,26 @@ export default class Character extends Phaser.GameObjects.Sprite{
 
     quepases()
     {
-        if(!this.exists)
+        if(!this.exists && !this.hasStopped)
         this.body.setVelocityX(-190);
-        this.exists=true;
     }
     quetepares(){
         this.body.setVelocityX(0);
     }
     quetemuevas(){
         if(this.exists)
+        {
         this.body.setVelocityX(-190);
+        this.exists=false;
+        }
     }
     quetevayas()
     {
-        this.body.setVelocityX(190);
+        if(this.exists)
+        {        
+            this.body.setVelocityX(190);
+            this.exists=false;
+        }
     }
     
 
@@ -39,19 +45,18 @@ export default class Character extends Phaser.GameObjects.Sprite{
         if(!this.hasStopped && this.x < 540){
             this.quetepares();
             this.hasStopped = true;
+            this.exists=true;
         }
         if (this.x < 120){
             this.quetepares();
             this.x = this.firstPosX;
             this.hasStopped = false;
-            this.exists=false;
         }
         if(this.hasStopped && this.x>this.firstPosX)
         {
             this.quetepares();
             this.x = this.firstPosX;
             this.hasStopped = false;
-            this.exists=false;
         }
     }
 
