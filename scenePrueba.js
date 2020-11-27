@@ -4,6 +4,7 @@ import Dialogue from "./dialogue.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
 import Inkwell from "./Inkwell.js";
+import Document from "./document.js";
 
 export default class Game extends Phaser.Scene {
 
@@ -24,6 +25,10 @@ export default class Game extends Phaser.Scene {
       this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
       this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
       this.load.text("ninio", "dialogue/Ninio.txt");
+      this.load.image("document", "sprites/Documento.png");
+      this.load.image("pen", "sprites/Pen.png");
+      this.load.image("penV", "sprites/PenGreen.png");
+      this.load.image("penR", "sprites/PenRed.png");
     }
     
 
@@ -64,7 +69,10 @@ export default class Game extends Phaser.Scene {
       //let texto = 'Dejame pasar, he perdido a mi padre';
       //this.dialogue = new Dialogue(this, 400, 425, "box", texto);
 
-      
+      //DOCUMENTO
+
+      this.document = new Document(this,500,600,"document") //Inicializa documento
+      this.document.visible=false;
 
       //LIBRO
       
@@ -91,6 +99,7 @@ export default class Game extends Phaser.Scene {
         if(this.chara.currentS === this.chara.States.SHOW) //Aparece libro
         {
           this.book.visible=true;
+          this.document.visible=true;
         }
 
         if(this.tinteroRojo.clicked) //Boton de alarma
@@ -98,6 +107,7 @@ export default class Game extends Phaser.Scene {
           this.chara.DenyChar();
           this.book.cerrarSprites();
           this.book.resetPos(); //Devuelve posición inicial al book
+          this.document.resetPos(); //Devuelve posición inicial al document
         }
 
         if(this.tinteroVerde.clicked) //Boton de alarma
@@ -105,6 +115,7 @@ export default class Game extends Phaser.Scene {
           this.chara.AcceptChar();
           this.book.cerrarSprites();
           this.book.resetPos(); //Devuelve posición inicial al book
+          this.document.resetPos(); //Devuelve posición inicial al document
         }
     }
   }
