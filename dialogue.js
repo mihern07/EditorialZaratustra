@@ -11,6 +11,20 @@ export default class Dialogue extends Phaser.GameObjects.Sprite{
     
         
         this.texto=scene.add.text(x-120,y,texto, {color: 0x0A0A0A}); //Añadimos texto.
-        this.texto.setScale(.7);
+        this.texto.setStroke('#000000', 3);
+    }
+
+    setText (text){
+        this.texto.text = text;
+    }
+
+    setVisible (isVisible){
+        if (isVisible == true){
+            this.visible = true;
+            this.texto.visible = true;
+        }else{
+            this.visible = false;
+            this.texto.visible = false;
+        }
     }
 }
