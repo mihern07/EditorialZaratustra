@@ -1,4 +1,5 @@
 import Dialogue from "./dialogue.js";
+import Book from "./book.js";
 
 export default class Character extends Phaser.GameObjects.Sprite{
 
@@ -13,7 +14,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
     /** @type {Phaser.GameObjects.Sprite} */
     dialogueSprite
 
-    constructor(scene,x,y, sprite, dialogue, dialogueSprite){
+    constructor(scene,x,y, sprite, dialogue, dialogueSprite, bookSprite1, bookSprite2){
 
         super(scene,x,y, sprite);
         this.scene = scene;
@@ -38,12 +39,19 @@ export default class Character extends Phaser.GameObjects.Sprite{
         this.dialogueSprite = dialogueSprite;
         this.dialogue = new Dialogue(this.scene, 400, 425, this.dialogueSprite, this.texto.slice(0,2))
         this.dialogue.setVisible(false);
+
+        //Libro
+        this.bookSprite1 = bookSprite1;
+        this.bookSprite2 = bookSprite2;
+        this.book = new Book(this,550,600,bookSprite1,bookSprite2) //Inicializa libro
+        this.hasBook = false;
     }
 
     EnterChar(){ //Método para que el personaje entre
         if(this.currentS === this.States.INI){
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.GOING;
+            this.CreateBook();
         }
     }
 
@@ -65,6 +73,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.ANSWER;
             this.dialogue.setText(this.texto.slice(8,10))
+            this.RetrieveBook();
         }
     }
 
@@ -74,7 +83,24 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.body.setVelocityX(this.SPEED);
             this.currentS = this.States.ANSWER;
             this.dialogue.setText(this.texto.slice(6,8))
+            this.RetrieveBook();
         }
+    }
+
+    CreateBook(){ //Inicializa el libro del personaje 
+        this.hasBook = true;
+    }
+
+    RetrieveBook(){ //
+        if(this.hasBook){
+            this.book.cerrarSprites();
+            this.book.resetPos(); //Devuelve posición inicial al book
+        }
+    }
+
+    ShowBook(){
+        if(this.hasBook)
+            this.book.visible = true;
     }
 
     preUpdate(){

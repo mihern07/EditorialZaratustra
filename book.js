@@ -17,24 +17,26 @@ export default class Book extends Phaser.GameObjects.Sprite{
         this.firstPosY = this.y;
 
         this.scene = scene;
+
+        this.visible = false;
+
         this.setScale(.3);
         
+        //Lo añade a la escena
         scene.add.existing(this);
         
-        this.setInteractive();
+        //Permite interactuar con él
+        this.setInteractive({draggable: true, dropZone: true});
 
+        //Sprite ibro abierto
         this.Libro2 = scene.add.sprite(this.x,this.y,sprite2).setInteractive();
-        
         this.Libro2.setScale(.5)
-        
-        //this.scene.input.setDraggable(this.Libro2);
-        this.scene.input.setDraggable(this);
+        this.Libro2.visible = false; 
 
-        this.setDamping = true;
-        this.Libro2.setDamping = true;
+        //Configuración del Drag        
+        this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
+        //this.body.setBoundsRectangle(this.bound);
 
-        this.Libro2.visible = false; //visible permite hacer visible o no un sprite.
-        
         this.on('drag', pointer=> {
             if(pointer.leftButtonDown()){
                 this.x = pointer.x;
