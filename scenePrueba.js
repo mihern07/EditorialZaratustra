@@ -1,6 +1,4 @@
-import Book from "./book.js";
 import Clock from "./Clock.js";
-import Dialogue from "./dialogue.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
 import Inkwell from "./Inkwell.js";
@@ -51,34 +49,24 @@ export default class Game extends Phaser.Scene {
       //Personaje
       let archivoDialogo = this.cache.text.get("ninio");
       archivoDialogo = archivoDialogo.split("\n");
-      this.chara  = new Character(this,955,380,"character", archivoDialogo, "box") //Inicializa personaje
+      this.chara  = new Character(this,955,380,"character", archivoDialogo, "box", "book", "book2"); //Inicializa personaje
 
-      this.fg = this.add.sprite(550,392,"foreground") 
+      this.fg = this.add.sprite(550,392,"foreground"); 
 
       //DESKBELL
   
-      this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed") //Inicializa timbre
+      this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed"); //Inicializa timbre
 
       //TINTEROS
 
-      this.tinteroVerde = new Inkwell(this,200,600,"tinteroV") //Inicializa tintero verde
+      this.tinteroVerde = new Inkwell(this,200,600,"tinteroV"); //Inicializa tintero verde
 
-      this.tinteroRojo = new Inkwell(this,300,600,"tinteroR") //Inicializa tintero rojo
-
-      //DIALOGUE
-      //let texto = 'Dejame pasar, he perdido a mi padre';
-      //this.dialogue = new Dialogue(this, 400, 425, "box", texto);
+      this.tinteroRojo = new Inkwell(this,300,600,"tinteroR"); //Inicializa tintero rojo
 
       //DOCUMENTO
 
       this.document = new Document(this,500,600,"document") //Inicializa documento
       this.document.visible=false;
-
-      //LIBRO
-      
-      this.book = new Book(this,550,600,"book","book2") //Inicializa libro
-      this.book.visible=false;
-
 
     }
 
@@ -98,24 +86,17 @@ export default class Game extends Phaser.Scene {
 
         if(this.chara.currentS === this.chara.States.SHOW) //Aparece libro
         {
-          this.book.visible=true;
-          this.document.visible=true;
+          this.chara.ShowBook();
         }
 
         if(this.tinteroRojo.clicked) //Boton de alarma
         {
           this.chara.DenyChar();
-          this.book.cerrarSprites();
-          this.book.resetPos(); //Devuelve posición inicial al book
-          this.document.resetPos(); //Devuelve posición inicial al document
         }
 
         if(this.tinteroVerde.clicked) //Boton de alarma
         {
           this.chara.AcceptChar();
-          this.book.cerrarSprites();
-          this.book.resetPos(); //Devuelve posición inicial al book
-          this.document.resetPos(); //Devuelve posición inicial al document
         }
     }
   }
