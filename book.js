@@ -34,7 +34,7 @@ export default class Book extends Phaser.GameObjects.Sprite{
         this.Libro2.visible = false; 
 
         //Configuración del Drag        
-        this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
+        //this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
         //this.body.setBoundsRectangle(this.bound);
 
         this.on('drag', pointer=> {

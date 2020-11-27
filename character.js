@@ -43,7 +43,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
         //Libro
         this.bookSprite1 = bookSprite1;
         this.bookSprite2 = bookSprite2;
-        this.book = new Book(this,550,600,bookSprite1,bookSprite2) //Inicializa libro
+        this.book = new Book(this.scene,550,600,bookSprite1,bookSprite2) //Inicializa libro
         this.hasBook = false;
     }
 
@@ -60,7 +60,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.body.setVelocityX(0);
             this.currentS = this.States.SHOW;
             this.dialogue.setVisible(true);
-
+            this.ShowBook();
         }
         else if(this.currentS === this.States.ANSWER){
             this.body.setVelocityX(0);
