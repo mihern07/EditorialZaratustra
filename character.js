@@ -1,9 +1,22 @@
+import Dialogue from "./dialogue.js";
+
 export default class Character extends Phaser.GameObjects.Sprite{
 
-    constructor(scene,x,y, sprite){
+    /** @type {Phaser.GameObjects.Text} */
+    texto
+
+    dialogue
+
+    /** @type {Phaser.Scene} */
+    scene
+
+    /** @type {Phaser.GameObjects.Sprite} */
+    dialogueSprite
+
+    constructor(scene,x,y, sprite, dialogue, dialogueSprite){
 
         super(scene,x,y, sprite);
-
+        this.scene = scene;
         this.firstPosX = this.x; //Creamos la variable firstPosX (guardar la posicion inicial)
         this.setScale(.5);
         this.scene.add.existing(this);
@@ -19,6 +32,12 @@ export default class Character extends Phaser.GameObjects.Sprite{
         //ANSWER: al volver, izq. o dcha.
         this.States = {INI: 0, GOING: 1, SHOW: 2, ANSWER: 3}; 
         this.currentS = this.States.INI;
+
+        //Dialogos
+        this.texto = dialogue;
+        this.dialogueSprite = dialogueSprite;
+        this.dialogue = new Dialogue(this.scene, 400, 425, this.dialogueSprite, this.texto.slice(0,2))
+        this.dialogue.setVisible(false);
     }
 
     EnterChar(){ //Método para que el personaje entre
@@ -32,6 +51,8 @@ export default class Character extends Phaser.GameObjects.Sprite{
         if(this.currentS === this.States.GOING){
             this.body.setVelocityX(0);
             this.currentS = this.States.SHOW;
+            this.dialogue.setVisible(true);
+
         }
         else if(this.currentS === this.States.ANSWER){
             this.body.setVelocityX(0);
@@ -43,6 +64,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
         if(this.currentS === this.States.SHOW){
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.ANSWER;
+            this.dialogue.setText(this.texto.slice(8,10))
         }
     }
 
@@ -51,6 +73,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
         if(this.currentS === this.States.SHOW){
             this.body.setVelocityX(this.SPEED);
             this.currentS = this.States.ANSWER;
+            this.dialogue.setText(this.texto.slice(6,8))
         }
     }
 
@@ -63,10 +86,14 @@ export default class Character extends Phaser.GameObjects.Sprite{
         else if (this.currentS === this.States.ANSWER && this.x < 120){ //Cuando salga del campo de vision, por la izquierda, se le reinicia
             this.StopChar();
             this.x = this.firstPosX;
+            this.dialogue.setText(this.texto.slice(0,2));
+            this.dialogue.setVisible(false);
         }
         else if(this.currentS === this.States.ANSWER && this.x > this.firstPosX){ //Cuando salga del campo de vision, por la derecha, se le reinicia
             this.StopChar();
             this.x = this.firstPosX;
+            this.dialogue.setText(this.texto.slice(0,2));
+            this.dialogue.setVisible(false);
         }
     }
 

@@ -23,6 +23,7 @@ export default class Game extends Phaser.Scene {
       this.load.spritesheet("deskBellSP","sprites/TimbreSheet.png", { frameWidth: 385, frameHeight: 356 }); //timbre = deskBellSP
       this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
       this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
+      this.load.text("ninio", "dialogue/Ninio.txt");
     }
     
 
@@ -43,8 +44,9 @@ export default class Game extends Phaser.Scene {
       this.clock.start(this.handleTimeFinished.bind(this), '180000');
 
       //Personaje
-  
-      this.chara  = new Character(this,955,380,"character") //Inicializa personaje
+      let archivoDialogo = this.cache.text.get("ninio");
+      archivoDialogo = archivoDialogo.split("\n");
+      this.chara  = new Character(this,955,380,"character", archivoDialogo, "box") //Inicializa personaje
 
       this.fg = this.add.sprite(550,392,"foreground") 
 
