@@ -56,7 +56,7 @@ export default class Game extends Phaser.Scene {
 
       this.fg = this.add.sprite(550,392,"foreground") 
 
-      this.Board = new Board(this, 965,340,"board", "postIt") 
+      this.Board = new Board(this, 965,340,13,"board", "postIt") 
 
       //DESKBELL
   
