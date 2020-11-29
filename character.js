@@ -1,5 +1,6 @@
 import Dialogue from "./dialogue.js";
 import Book from "./book.js";
+import Clock from "./Clock.js";
 
 export default class Character extends Phaser.GameObjects.Sprite{
 
@@ -60,6 +61,12 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.body.setVelocityX(0);
             this.currentS = this.States.SHOW;
             this.dialogue.setVisible(true);
+            this.firstClock = new Clock(this.scene, 0,0, this.dialogueSprite, this.dialogueSprite);
+            this.firstClock.start(this.ShowFirstDialogue.bind(this), '7000');
+            this.firstClock.setInvisible();
+            this.secondClock = new Clock(this.scene, 0,0, this.dialogueSprite, this.dialogueSprite);
+            this.secondClock.start(this.ShowSecondDialogue.bind(this), '14000');
+            this.secondClock.setInvisible();
             this.ShowBook();
         }
         else if(this.currentS === this.States.ANSWER){
@@ -72,6 +79,8 @@ export default class Character extends Phaser.GameObjects.Sprite{
         if(this.currentS === this.States.SHOW){
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.ANSWER;
+            this.firstClock.stop();
+            this.secondClock.stop();
             this.dialogue.setText(this.texto.slice(8,10))
             this.RetrieveBook();
         }
@@ -82,9 +91,19 @@ export default class Character extends Phaser.GameObjects.Sprite{
         if(this.currentS === this.States.SHOW){
             this.body.setVelocityX(this.SPEED);
             this.currentS = this.States.ANSWER;
+            this.firstClock.stop();
+            this.secondClock.stop();
             this.dialogue.setText(this.texto.slice(6,8))
             this.RetrieveBook();
         }
+    }
+
+    ShowFirstDialogue(){
+        this.dialogue.setText(this.texto.slice(2,4))
+    }
+
+    ShowSecondDialogue(){
+        this.dialogue.setText(this.texto.slice(4,6))
     }
 
     CreateBook(){ //Inicializa el libro del personaje 

@@ -43,6 +43,11 @@ export default class Clock extends Phaser.GameObjects.Sprite{
         })
     }
 
+    setInvisible(){
+        this.visible = false;
+        this.manecilla.visible = false;
+    }
+
     stop(){
         if (this.timerEvent){
             this.timerEvent.destroy();
