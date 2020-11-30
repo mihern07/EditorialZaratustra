@@ -27,6 +27,7 @@ export default class Game extends Phaser.Scene {
       this.load.image("pen", "sprites/Pen.png");
       this.load.image("penV", "sprites/PenGreen.png");
       this.load.image("penR", "sprites/PenRed.png");
+      this.load.image("calendarOriginal", "sprites/Calendar31-04.png");
     }
     
 
@@ -68,6 +69,9 @@ export default class Game extends Phaser.Scene {
       this.document = new Document(this,500,600,"document") //Inicializa documento
       this.document.visible=false;
 
+      //CALENDARIO
+      this.calendar = this.add.sprite(100, 300, "calendarOriginal");
+      this.calendar.setScale(0.45)
     }
 
     handleTimeFinished(){
