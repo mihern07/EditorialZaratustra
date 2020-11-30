@@ -1,11 +1,17 @@
-Correos: Buenos días, vengo a entregar la correspondencia del día.
+Correos:
+Buenos días, vengo a entregar la correspondencia del día.
 
-Correos: Perdone, pero no tengo todo el día… ¿Podría por favor dejarme pasar?
+Correos:
+Perdone, pero no tengo todo el día… ¿Podría por favor dejarme pasar?
 
-Correos: .....
+Correos:
+.....
 
-Correos: ..... (Quiero irme a mi casa...)
+Correos:
+..... (Quiero irme a mi casa...)
 
-Correos: Creo que es la primera vez que no me dejan entregar el correo... en fin...
+Correos:
+Creo que es la primera vez que no me dejan entregar el correo... en fin...
 
-Correos: Que pase un buen día.
+Correos:
+Que pase un buen día.

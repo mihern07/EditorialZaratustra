@@ -38,7 +38,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
         //Dialogos
         this.texto = dialogue;
         this.dialogueSprite = dialogueSprite;
-        this.dialogue = new Dialogue(this.scene, 400, 425, this.dialogueSprite, this.texto.slice(0,2))
+        this.dialogue = new Dialogue(this.scene, 530, 415, this.dialogueSprite, this.texto.slice(0,3))
         this.dialogue.setVisible(false);
 
         //Libro
@@ -81,7 +81,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.currentS = this.States.ANSWER;
             this.firstClock.stop();
             this.secondClock.stop();
-            this.dialogue.setText(this.texto.slice(8,10))
+            this.dialogue.setText(this.texto.slice(12,15))
             this.RetrieveBook();
         }
     }
@@ -93,17 +93,17 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.currentS = this.States.ANSWER;
             this.firstClock.stop();
             this.secondClock.stop();
-            this.dialogue.setText(this.texto.slice(6,8))
+            this.dialogue.setText(this.texto.slice(9,12))
             this.RetrieveBook();
         }
     }
 
     ShowFirstDialogue(){
-        this.dialogue.setText(this.texto.slice(2,4))
+        this.dialogue.setText(this.texto.slice(3,6))
     }
 
     ShowSecondDialogue(){
-        this.dialogue.setText(this.texto.slice(4,6))
+        this.dialogue.setText(this.texto.slice(6,9))
     }
 
     CreateBook(){ //Inicializa el libro del personaje 

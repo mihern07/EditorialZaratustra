@@ -1,9 +1,8 @@
-import Book from "./book.js";
 import Clock from "./Clock.js";
-import Dialogue from "./dialogue.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
 import Inkwell from "./Inkwell.js";
+import Document from "./document.js";
 
 export default class Game extends Phaser.Scene {
 
@@ -17,13 +16,17 @@ export default class Game extends Phaser.Scene {
       this.load.image("book2","sprites/LibroAbierto.png"); //libro abierto = book2
       this.load.image("clock","sprites/clockPrototype.png"); //Reloj = clock
       this.load.image("manecilla","sprites/manecilla.png"); //Manecilla = manecilla
-      this.load.image("box", "sprites/dialoguebox.png"); //Bocadillo = box
+      this.load.image("box", "sprites/dialogueBoxv2.0.png"); //Bocadillo = box
       this.load.image("character", "sprites/Personaje.png"); //personaje = character
       this.load.image("deskBellPressed","sprites/TimbrePulsado.png"); //timbre pulsado = deskBellPressed
       this.load.spritesheet("deskBellSP","sprites/TimbreSheet.png", { frameWidth: 385, frameHeight: 356 }); //timbre = deskBellSP
       this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
       this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
       this.load.text("ninio", "dialogue/Ninio.txt");
+      this.load.image("document", "sprites/Documento.png");
+      this.load.image("pen", "sprites/Pen.png");
+      this.load.image("penV", "sprites/PenGreen.png");
+      this.load.image("penR", "sprites/PenRed.png");
     }
     
 
@@ -46,25 +49,24 @@ export default class Game extends Phaser.Scene {
       //Personaje
       let archivoDialogo = this.cache.text.get("ninio");
       archivoDialogo = archivoDialogo.split("\n");
-      this.chara  = new Character(this,955,380,"character", archivoDialogo, "box") //Inicializa personaje
+      this.chara  = new Character(this,955,380,"character", archivoDialogo, "box", "book", "book2"); //Inicializa personaje
 
-      this.fg = this.add.sprite(550,392,"foreground") 
+      this.fg = this.add.sprite(550,392,"foreground"); 
 
       //DESKBELL
   
-      this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed") //Inicializa timbre
+      this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed"); //Inicializa timbre
 
       //TINTEROS
 
-      this.tinteroVerde = new Inkwell(this,200,600,"tinteroV") //Inicializa tintero verde
+      this.tinteroVerde = new Inkwell(this,200,600,"tinteroV"); //Inicializa tintero verde
 
-      this.tinteroRojo = new Inkwell(this,300,600,"tinteroR") //Inicializa tintero rojo
+      this.tinteroRojo = new Inkwell(this,300,600,"tinteroR"); //Inicializa tintero rojo
 
-      //LIBRO
-      
-      this.book = new Book(this,550,600,"book","book2") //Inicializa libro
-      this.book.visible=false;
+      //DOCUMENTO
 
+      this.document = new Document(this,500,600,"document") //Inicializa documento
+      this.document.visible=false;
 
     }
 
@@ -84,21 +86,17 @@ export default class Game extends Phaser.Scene {
 
         if(this.chara.currentS === this.chara.States.SHOW) //Aparece libro
         {
-          this.book.visible=true;
+          this.chara.ShowBook();
         }
 
         if(this.tinteroRojo.clicked) //Boton de alarma
         {
           this.chara.DenyChar();
-          this.book.cerrarSprites();
-          this.book.resetPos(); //Devuelve posición inicial al book
         }
 
         if(this.tinteroVerde.clicked) //Boton de alarma
         {
           this.chara.AcceptChar();
-          this.book.cerrarSprites();
-          this.book.resetPos(); //Devuelve posición inicial al book
         }
     }
   }
