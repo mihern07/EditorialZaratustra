@@ -21,7 +21,7 @@ export default class Book extends Phaser.GameObjects.Sprite{
         this.visible = false;
 
         this.setScale(.3);
-        
+        this.setDepth(1);
         //Lo añade a la escena
         scene.add.existing(this);
         
@@ -35,6 +35,7 @@ export default class Book extends Phaser.GameObjects.Sprite{
 
         this.Libro2.x = this.scene.game.config.width/2;
         this.Libro2.y = this.scene.game.config.height/2;
+        this.Libro2.setDepth(1);
         //Configuración del Drag        
         //this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
         //this.body.setBoundsRectangle(this.bound);
