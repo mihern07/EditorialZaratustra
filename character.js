@@ -32,23 +32,21 @@ export default class Character extends Phaser.GameObjects.Sprite{
         //SHOW: en el mostrador con el libro
         //GOING: desde el spawn al mostrador
         //ANSWER: al volver, izq. o dcha.
-        this.States = {INI: 0, GOING: 1, SHOW: 2, ANSWER: 3}; 
+        this.States = {INI: 0, GOING: 1, SHOW: 2, ANSWER: 3, WAIT: 4}; 
         this.currentS = this.States.INI;
 
         //Dialogos
         this.texto = dialogue;
         this.dialogueSprite = dialogueSprite;
-        this.dialogue = new Dialogue(this.scene, 530, 415, this.dialogueSprite, this.texto.slice(0,3))
+        this.dialogue = new Dialogue(scene, 530, 415, this.dialogueSprite, this.texto.slice(0,3));
         this.dialogue.setVisible(false);
 
         //Libro
-        this.bookSprite1 = bookSprite1;
-        this.bookSprite2 = bookSprite2;
-        this.book = new Book(this.scene,550,600,bookSprite1,bookSprite2) //Inicializa libro
+        this.book = new Book(scene,500,550, bookSprite1, bookSprite2); //Inicializa libro
         this.hasBook = false;
     }
 
-    EnterChar(){ //Método para que el personaje entre
+    EnterChar(){ // El personaje entre (puerta)
         if(this.currentS === this.States.INI){
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.GOING;
@@ -56,27 +54,33 @@ export default class Character extends Phaser.GameObjects.Sprite{
         }
     }
 
-    StopChar(){ //Método para que el personaje pare
+    StopChar(){ // El personaje pare
         if(this.currentS === this.States.GOING){
             this.body.setVelocityX(0);
+
             this.currentS = this.States.SHOW;
+            
             this.dialogue.setVisible(true);
+            
+            this.ShowBook();
+
             this.firstClock = new Clock(this.scene, 0,0, this.dialogueSprite, this.dialogueSprite);
             this.firstClock.start(this.ShowFirstDialogue.bind(this), '7000');
             this.firstClock.setInvisible();
+            
             this.secondClock = new Clock(this.scene, 0,0, this.dialogueSprite, this.dialogueSprite);
             this.secondClock.start(this.ShowSecondDialogue.bind(this), '14000');
             this.secondClock.setInvisible();
-            this.ShowBook();
         }
         else if(this.currentS === this.States.ANSWER){
             this.body.setVelocityX(0);
+            
             this.currentS = this.States.INI;
         }
     }
 
-    AcceptChar(){ //Método para que el personaje entre (aceptado)
-        if(this.currentS === this.States.SHOW){
+    AcceptChar(){ // El personaje entre (aceptado)
+        if(this.currentS === this.States.WAIT){
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.ANSWER;
             this.firstClock.stop();
@@ -86,14 +90,17 @@ export default class Character extends Phaser.GameObjects.Sprite{
         }
     }
 
-    DenyChar() //Método para que el personaje salga (denegado)
+    DenyChar() // El personaje salga (denegado)
     {
-        if(this.currentS === this.States.SHOW){
+        if(this.currentS === this.States.WAIT){
             this.body.setVelocityX(this.SPEED);
             this.currentS = this.States.ANSWER;
+
             this.firstClock.stop();
             this.secondClock.stop();
+            
             this.dialogue.setText(this.texto.slice(9,12))
+            
             this.RetrieveBook();
         }
     }
@@ -118,8 +125,12 @@ export default class Character extends Phaser.GameObjects.Sprite{
     }
 
     ShowBook(){
-        if(this.hasBook)
+        if(this.hasBook){
             this.book.visible = true;
+            this.currentS = this.States.WAIT;
+            console.log("ABRO LIBRO - " + this.book.visible);
+
+        }
     }
 
     preUpdate(){

@@ -3,6 +3,7 @@ import DeskBell from "./deskbell.js";
 import Character from "./character.js";
 import Inkwell from "./Inkwell.js";
 import Document from "./document.js";
+import Book from "./book.js";
 
 export default class Game extends Phaser.Scene {
 
@@ -51,6 +52,7 @@ export default class Game extends Phaser.Scene {
       archivoDialogo = archivoDialogo.split("\n");
       this.chara  = new Character(this,955,380,"character", archivoDialogo, "box", "book", "book2"); //Inicializa personaje
 
+      //FOREGROUND(MESA)
       this.fg = this.add.sprite(550,392,"foreground"); 
 
       //DESKBELL
@@ -67,7 +69,6 @@ export default class Game extends Phaser.Scene {
 
       this.document = new Document(this,500,600,"document") //Inicializa documento
       this.document.visible=false;
-
     }
 
     handleTimeFinished(){

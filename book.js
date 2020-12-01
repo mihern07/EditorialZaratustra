@@ -30,19 +30,26 @@ export default class Book extends Phaser.GameObjects.Sprite{
 
         //Sprite ibro abierto
         this.Libro2 = scene.add.sprite(this.x,this.y,sprite2).setInteractive();
-        this.Libro2.setScale(.5)
-        this.Libro2.visible = false; 
+        this.Libro2.setScale(7.5);
+        this.Libro2.visible = false;
 
+        this.Libro2.x = this.scene.game.config.width/2;
+        this.Libro2.y = this.scene.game.config.height/2;
         //Configuración del Drag        
         //this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
         //this.body.setBoundsRectangle(this.bound);
 
         this.on('drag', pointer=> {
-            if(pointer.leftButtonDown()){
+            
+            if((pointer.x > 250  
+             && pointer.x < 750
+             && pointer.y > 350 
+             && pointer.y < 800) 
+             && pointer.leftButtonDown()){
+
                 this.x = pointer.x;
                 this.y = pointer.y;
-                this.Libro2.x = this.x;
-                this.Libro2.y = this.y;
+
             }
         })
 
@@ -69,6 +76,8 @@ export default class Book extends Phaser.GameObjects.Sprite{
     {
         this.visible=false;
         this.Libro2.visible=false;
+
+        console.log("CIERRO LIBRO");
     }
 
     resetPos(){
