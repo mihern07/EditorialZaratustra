@@ -6,7 +6,6 @@ import Character from "./character.js";
 import Inkwell from "./Inkwell.js";
 import Document from "./document.js";
 import Board from "./board.js";
-import PostIt from "./postIt.js";
 
 export default class Game extends Phaser.Scene {
 
@@ -57,7 +56,7 @@ export default class Game extends Phaser.Scene {
       this.fg = this.add.sprite(550,392,"foreground") 
 
       this.Board = new Board(this, 965,340,13,"board", "postIt") 
-
+      
       //DESKBELL
   
       this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed") //Inicializa timbre

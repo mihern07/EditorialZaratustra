@@ -3,7 +3,8 @@ import DeskBell from "./deskbell.js";
 import Character from "./character.js";
 import Inkwell from "./Inkwell.js";
 import Document from "./document.js";
-import Book from "./book.js";
+import Board from "./board.js";
+import Pen from "./pen.js";
 
 export default class Game extends Phaser.Scene {
 
@@ -17,7 +18,7 @@ export default class Game extends Phaser.Scene {
       this.load.image("book2","sprites/LibroAbierto.png"); //libro abierto = book2
       this.load.image("clock","sprites/clockPrototype.png"); //Reloj = clock
       this.load.image("manecilla","sprites/manecilla.png"); //Manecilla = manecilla
-      this.load.image("box", "sprites/dialoguebox.png"); //Bocadillo = box
+      this.load.image("box", "sprites/dialogueBoxv2.0.png"); //Bocadillo = box
       this.load.image("character", "sprites/Personaje.png"); //personaje = character
       this.load.image("deskBellPressed","sprites/TimbrePulsado.png"); //timbre pulsado = deskBellPressed
       this.load.spritesheet("deskBellSP","sprites/TimbreSheet.png", { frameWidth: 385, frameHeight: 356 }); //timbre = deskBellSP
@@ -28,6 +29,9 @@ export default class Game extends Phaser.Scene {
       this.load.image("pen", "sprites/Pen.png");
       this.load.image("penV", "sprites/PenGreen.png");
       this.load.image("penR", "sprites/PenRed.png");
+      this.load.image("board", "sprites/Board.png"); // Board
+      this.load.image("postIt", "sprites/PostItBlanco.png"); // PostIt
+      this.load.image("calendarOriginal", "sprites/Calendar31-04.png");
     }
     
 
@@ -55,6 +59,9 @@ export default class Game extends Phaser.Scene {
       //FOREGROUND(MESA)
       this.fg = this.add.sprite(550,392,"foreground"); 
 
+      //BOARD(CORCHO)
+      this.Board = new Board(this, 965,340,13,"board", "postIt") 
+
       //DESKBELL
   
       this.bell  = new DeskBell(this,825,500,"deskBellSP", "deskBellPressed"); //Inicializa timbre
@@ -69,6 +76,14 @@ export default class Game extends Phaser.Scene {
 
       this.document = new Document(this,500,600,"document") //Inicializa documento
       this.document.visible=false;
+
+      //CALENDARIO
+      this.calendar = this.add.sprite(100, 300, "calendarOriginal");
+      this.calendar.setScale(0.45)
+
+      //PLUMA
+
+      this.pen = new Pen(this,700,600,"pen");
     }
 
     handleTimeFinished(){

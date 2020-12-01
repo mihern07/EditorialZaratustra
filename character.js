@@ -128,8 +128,6 @@ export default class Character extends Phaser.GameObjects.Sprite{
         if(this.hasBook){
             this.book.visible = true;
             this.currentS = this.States.WAIT;
-            console.log("ABRO LIBRO - " + this.book.visible);
-
         }
     }
 
