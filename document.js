@@ -23,10 +23,15 @@ export default class Document extends Phaser.GameObjects.Sprite{
         this.setDamping = true;
         
         this.on('drag', pointer=> {
-            if(pointer.leftButtonDown()){
+            if((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()){
                 this.x = pointer.x;
                 this.y = pointer.y;
             }
+            
+            // if(pointer.leftButtonDown()){
+            //     this.x = pointer.x;
+            //     this.y = pointer.y;
+            // }
         })
     }
 

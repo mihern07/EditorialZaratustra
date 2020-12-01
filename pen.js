@@ -62,7 +62,7 @@ export default class Pen extends Phaser.GameObjects.Sprite{
         }
         
         this.on('drag', pointer=> {
-            if(pointer.leftButtonDown()){
+            if((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()){
                 this.x = pointer.x;
                 this.y = pointer.y;
                 this.PenV.x = this.x;
@@ -70,6 +70,15 @@ export default class Pen extends Phaser.GameObjects.Sprite{
                 this.PenR.x = this.x;
                 this.PenR.y = this.y;
             }
+
+            // if(pointer.leftButtonDown()){
+            //     this.x = pointer.x;
+            //     this.y = pointer.y;
+            //     this.PenV.x = this.x;
+            //     this.PenV.y = this.y;
+            //     this.PenR.x = this.x;
+            //     this.PenR.y = this.y;
+            // }
         })
 
         this.PenV.on('drag', pointer=> {
