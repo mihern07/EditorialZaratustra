@@ -12,6 +12,7 @@ export default class Document extends Phaser.GameObjects.Sprite{
 
         this.scene = scene;
         this.setScale(.3);
+        this.setDepth(1);
         
         scene.add.existing(this);
         
@@ -19,6 +20,7 @@ export default class Document extends Phaser.GameObjects.Sprite{
         
         //this.scene.input.setDraggable(this.Libro2);
         this.scene.input.setDraggable(this);
+        this.visible=false;
 
         this.setDamping = true;
         

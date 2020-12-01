@@ -2,7 +2,6 @@ import Clock from "./Clock.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
 import Inkwell from "./Inkwell.js";
-import Document from "./document.js";
 import Board from "./board.js";
 import Pen from "./pen.js";
 
@@ -54,7 +53,7 @@ export default class Game extends Phaser.Scene {
       //Personaje
       let archivoDialogo = this.cache.text.get("ninio");
       archivoDialogo = archivoDialogo.split("\n");
-      this.chara  = new Character(this,955,380,"character", archivoDialogo, "box", "book", "book2"); //Inicializa personaje
+      this.chara  = new Character(this,955,380,"character", archivoDialogo, "box", "book", "book2","document"); //Inicializa personaje
 
       //FOREGROUND(MESA)
       this.fg = this.add.sprite(550,392,"foreground"); 
@@ -71,11 +70,6 @@ export default class Game extends Phaser.Scene {
       this.tinteroVerde = new Inkwell(this,200,600,"tinteroV"); //Inicializa tintero verde
 
       this.tinteroRojo = new Inkwell(this,300,600,"tinteroR"); //Inicializa tintero rojo
-
-      //DOCUMENTO
-
-      this.document = new Document(this,500,600,"document") //Inicializa documento
-      this.document.visible=false;
 
       //CALENDARIO
       this.calendar = this.add.sprite(100, 300, "calendarOriginal");
@@ -103,6 +97,7 @@ export default class Game extends Phaser.Scene {
         if(this.chara.currentS === this.chara.States.SHOW) //Aparece libro
         {
           this.chara.ShowBook();
+          this.chara.ShowDocument();
         }
 
         if(this.tinteroRojo.clicked) //Boton de alarma

@@ -1,6 +1,7 @@
 import Dialogue from "./dialogue.js";
 import Book from "./book.js";
 import Clock from "./Clock.js";
+import Document from "./document.js";
 
 export default class Character extends Phaser.GameObjects.Sprite{
 
@@ -15,7 +16,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
     /** @type {Phaser.GameObjects.Sprite} */
     dialogueSprite
 
-    constructor(scene,x,y, sprite, dialogue, dialogueSprite, bookSprite1, bookSprite2){
+    constructor(scene,x,y, sprite, dialogue, dialogueSprite, bookSprite1, bookSprite2, documentSprite){
 
         super(scene,x,y, sprite);
         this.scene = scene;
@@ -44,6 +45,10 @@ export default class Character extends Phaser.GameObjects.Sprite{
         //Libro
         this.book = new Book(scene,500,550, bookSprite1, bookSprite2); //Inicializa libro
         this.hasBook = false;
+
+        //Documento
+        this.document = new Document(scene,650,550,documentSprite); //Inicializa documento
+        this.hasdocument = false;
     }
 
     EnterChar(){ // El personaje entre (puerta)
@@ -51,6 +56,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.GOING;
             this.CreateBook();
+            this.CreateDocument();
         }
     }
 
@@ -63,6 +69,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.dialogue.setVisible(true);
             
             this.ShowBook();
+            this.ShowDocument();
 
             this.firstClock = new Clock(this.scene, 0,0, this.dialogueSprite, this.dialogueSprite);
             this.firstClock.start(this.ShowFirstDialogue.bind(this), '7000');
@@ -87,6 +94,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.secondClock.stop();
             this.dialogue.setText(this.texto.slice(12,15))
             this.RetrieveBook();
+            this.RetrieveDocument();
         }
     }
 
@@ -102,6 +110,7 @@ export default class Character extends Phaser.GameObjects.Sprite{
             this.dialogue.setText(this.texto.slice(9,12))
             
             this.RetrieveBook();
+            this.RetrieveDocument();
         }
     }
 
@@ -117,6 +126,10 @@ export default class Character extends Phaser.GameObjects.Sprite{
         this.hasBook = true;
     }
 
+    CreateDocument(){ //Inicializa el documento del personaje 
+        this.hasdocument = true;
+    }
+
     RetrieveBook(){ //
         if(this.hasBook){
             this.book.cerrarSprites();
@@ -124,10 +137,23 @@ export default class Character extends Phaser.GameObjects.Sprite{
         }
     }
 
+    RetrieveDocument(){ //
+        if(this.hasdocument){
+            this.document.visible=false;
+            this.document.resetPos(); //Devuelve posición inicial al book
+        }
+    }
+
     ShowBook(){
         if(this.hasBook){
             this.book.visible = true;
             this.currentS = this.States.WAIT;
+        }
+    }
+
+    ShowDocument(){
+        if(this.hasdocument){
+            this.document.visible = true;
         }
     }
 

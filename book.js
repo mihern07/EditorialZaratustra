@@ -21,7 +21,7 @@ export default class Book extends Phaser.GameObjects.Sprite{
         this.visible = false;
 
         this.setScale(.3);
-        this.setDepth(1);
+        this.setDepth(2);
         //Lo añade a la escena
         scene.add.existing(this);
         
@@ -42,10 +42,10 @@ export default class Book extends Phaser.GameObjects.Sprite{
 
         this.on('drag', pointer=> {
             
-            if((pointer.x > 250  
-             && pointer.x < 750
-             && pointer.y > 350 
-             && pointer.y < 800) 
+            if((pointer.x > 50 
+                && pointer.y > 450 
+                && pointer.y < 900 
+                && pointer.x < 1040) 
              && pointer.leftButtonDown()){
 
                 this.x = pointer.x;
@@ -77,8 +77,6 @@ export default class Book extends Phaser.GameObjects.Sprite{
     {
         this.visible=false;
         this.Libro2.visible=false;
-
-        console.log("CIERRO LIBRO");
     }
 
     resetPos(){
