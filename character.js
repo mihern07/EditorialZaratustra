@@ -166,13 +166,13 @@ export default class Character extends Phaser.GameObjects.Sprite{
         else if (this.currentS === this.States.ANSWER && this.x < 120){ //Cuando salga del campo de vision, por la izquierda, se le reinicia
             this.StopChar();
             this.x = this.firstPosX;
-            this.dialogue.setText(this.texto.slice(0,2));
+            this.dialogue.setText(this.texto.slice(0,3));
             this.dialogue.setVisible(false);
         }
         else if(this.currentS === this.States.ANSWER && this.x > this.firstPosX){ //Cuando salga del campo de vision, por la derecha, se le reinicia
             this.StopChar();
             this.x = this.firstPosX;
-            this.dialogue.setText(this.texto.slice(0,2));
+            this.dialogue.setText(this.texto.slice(0,3));
             this.dialogue.setVisible(false);
         }
     }

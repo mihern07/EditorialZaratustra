@@ -1,14 +1,14 @@
-Mujer del jefe:
+Mujer del jefe
 Hola, buenas. Mi marido (Insertar nombre del jefe)
-se dejó las llaves en casa, puedo pasar a entregárselas.
-Mujer del jefe:
-Perdona, ¿podría dejarme pasar
- Que yo sepa no le pagan para que vaguee en el trabajo.
-Mujer del jefe:
+se dejó las llaves, puedo pasar a entregárselas.
+Mujer del jefe
+Perdona, ¿podría dejarme pasar? Que yo sepa no le
+pagan para que vaguee en el trabajo.
+Mujer del jefe
 Mi marido (Insertar nombre del jefe)
 me está esperando, por favor déjeme pasar.
-Mujer del jefe:
+Mujer del jefe
 ¡Que sepa que mi marido se va a enterar de esto!
 ¡Se va a quedar usted sin trabajo!
-Mujer del jefe:
+Mujer del jefe
 Muchas gracias, que tenga un buen día.
