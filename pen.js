@@ -17,11 +17,16 @@ export default class Pen extends Phaser.GameObjects.Sprite{
         this.firstPosY = this.y;
 
         this.scene = scene;
-        this.setScale(.3);
+
+        this.scene.physics.add.existing(this);
+        this.body.allowGravity = false;
+
+        this.setScale(.2);
         
         scene.add.existing(this);
         
         this.setInteractive();        
+        this.setDepth(3);
 
         this.States = {NORMAL: 0, GREEN: 1, RED: 2}; 
         this.States=0
@@ -30,9 +35,19 @@ export default class Pen extends Phaser.GameObjects.Sprite{
 
         this.PenV = scene.add.sprite(this.x,this.y,sprite3).setInteractive(); //Pluma Verde
 
-        this.setScale(.3)
-        this.PenR.setScale(.3)
-        this.PenV.setScale(.3)
+        this.scene.physics.add.existing(this.PenR);
+        this.PenR.body.allowGravity = false;
+        this.PenR.setDepth(3);
+
+        this.scene.physics.add.existing(this.PenV);
+        this.PenV.body.allowGravity = false;
+        this.PenV.setDepth(3);
+
+        this.PenR.setScale(.2)
+        this.PenV.setScale(.2)
+
+        this.PenR.visible=false;
+        this.PenV.visible=false;
         
         this.scene.input.setDraggable(this);
         this.scene.input.setDraggable(this.PenR);
@@ -41,25 +56,6 @@ export default class Pen extends Phaser.GameObjects.Sprite{
         this.PenR.setDamping = true;
         this.PenV.setDamping = true;
         this.setDamping = true;
-
-        switch(this.States)
-        {
-            case 0: //Sprite normal
-                this.visible=true;
-                this.PenV.visible=false;
-                this.PenR.visible=false;
-                break;
-            case 1: //Sprite verde
-                this.PenV.visible=true;
-                this.visible=false;
-                this.PenR.visible=false;
-                break;
-            case 2: //Sprite rojo
-                this.PenR.visible=true;
-                this.visible=false;
-                this.PenV.visible=false;
-                break;
-        }
         
         this.on('drag', pointer=> {
             if((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()){
@@ -70,19 +66,10 @@ export default class Pen extends Phaser.GameObjects.Sprite{
                 this.PenR.x = this.x;
                 this.PenR.y = this.y;
             }
-
-            // if(pointer.leftButtonDown()){
-            //     this.x = pointer.x;
-            //     this.y = pointer.y;
-            //     this.PenV.x = this.x;
-            //     this.PenV.y = this.y;
-            //     this.PenR.x = this.x;
-            //     this.PenR.y = this.y;
-            // }
         })
 
         this.PenV.on('drag', pointer=> {
-            if(pointer.leftButtonDown()){
+            if((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()){
                 this.x = pointer.x;
                 this.y = pointer.y;
                 this.PenV.x = this.x;
@@ -93,7 +80,7 @@ export default class Pen extends Phaser.GameObjects.Sprite{
         })
 
         this.PenR.on('drag', pointer=> {
-            if(pointer.leftButtonDown()){
+            if((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()){
                 this.x = pointer.x;
                 this.y = pointer.y;
                 this.PenV.x = this.x;
@@ -102,6 +89,30 @@ export default class Pen extends Phaser.GameObjects.Sprite{
                 this.PenR.y = this.y;
             }
         })
+
+    }
+
+    // pressed(x)
+    // {
+    //     this.PenR.on("pointerup", pointer => {
+    //         if(this.physics.overlap(this, x)) { //Overlap Documento
+    //             this.chara.DenyChar();
+    //             console.log("Hay solapeD Deny");
+
+    //       }
+    //     })  
+
+    //     this.PenV.on("pointerup", pointer => {
+    //         if(this.physics.overlap(this, x)) { //Overlap Documento
+    //             this.chara.AcceptChar();
+    //             console.log("Hay solapeD Accept");
+    //       }
+    //     })  
+    // }
+
+    setNormal()
+    {
+        this.States=0; //NORMAL
     }
 
     setRed()

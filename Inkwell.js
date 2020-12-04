@@ -1,15 +1,20 @@
 export default class Inkwell extends Phaser.GameObjects.Sprite  {
 
-constructor(scene,x,y, sprite, sprite2) {
+constructor(scene,x,y, sprite) {
 super(scene,x,y,sprite);
 this.scene=scene;
 
+this.scene.physics.add.existing(this);
+this.body.allowGravity = false;
+
 scene.add.existing(this);
+
 this.setInteractive(); //Lo hacemos interactivo (puedes pulsarlo)
 this.clicked = false; //Creamos variable booleana clicked.
-this.setScale(.7);
+this.setScale(.6);
 
 //this.scene.physics.add.existing(this, true);
+
 
 //Cuando es pulsado dicho sprite...
 this.on('pointerdown', pointer => {

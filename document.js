@@ -13,6 +13,9 @@ export default class Document extends Phaser.GameObjects.Sprite{
         this.scene = scene;
         this.setScale(.3);
         this.setDepth(1);
+
+        this.scene.physics.add.existing(this);
+        this.body.allowGravity = false;
         
         scene.add.existing(this);
         
