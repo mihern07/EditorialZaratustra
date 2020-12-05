@@ -81,7 +81,7 @@ export default class Game extends Phaser.Scene {
     }
 
     handleTimeFinished(){
-
+        this.scene.start('Level2');
     }
 
 
