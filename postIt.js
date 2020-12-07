@@ -7,7 +7,7 @@ this.scene.add.existing(this);
 // Se puede arrastrar
 this.setInteractive({draggable: true, dropZone: true});
 
-this.info =scene.add.text(x-10,y-18,text, {color: 0x0A0A0A}); //Añadimos texto.
+this.info = scene.add.text(x-10,y-18,text, {color: 0x0A0A0A}); //Añadimos texto.
 this.info.setScale(.8);
 //Arrastrar con cualquiera de los clicks
 //Se determina la region exacta por la que se puede arrastrar el PostIt

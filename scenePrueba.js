@@ -11,26 +11,26 @@ export default class Game extends Phaser.Scene {
       super({ key: "main" });
     }
     preload() { //Carga de sprites
-      this.load.image("background", "sprites/Background.png") //Fondo = background
-      this.load.image("foreground", "sprites/Foreground.png") //Mesa = foreground
-      this.load.image("book","sprites/LibroCerrado.png"); //Libro cerrado = book
-      this.load.image("book2","sprites/LibroAbierto.png"); //libro abierto = book2
-      this.load.image("clock","sprites/clockPrototype.png"); //Reloj = clock
+      this.load.image("background", "sprites/background.png") //Fondo = background
+      this.load.image("foreground", "sprites/foreground.png") //Mesa = foreground
+      this.load.image("book","sprites/librocerrado.png"); //Libro cerrado = book
+      this.load.image("book2","sprites/libroabierto.png"); //libro abierto = book2
+      this.load.image("clock","sprites/clockprototype.png"); //Reloj = clock
       this.load.image("manecilla","sprites/manecilla.png"); //Manecilla = manecilla
-      this.load.image("box", "sprites/dialogueBoxv2.0.png"); //Bocadillo = box
-      this.load.image("character", "sprites/Personaje.png"); //personaje = character
-      this.load.image("deskBellPressed","sprites/TimbrePulsado.png"); //timbre pulsado = deskBellPressed
-      this.load.spritesheet("deskBellSP","sprites/TimbreSheet.png", { frameWidth: 385, frameHeight: 356 }); //timbre = deskBellSP
+      this.load.image("box", "sprites/dialogueboxv2.0.png"); //Bocadillo = box
+      this.load.image("character", "sprites/personaje.png"); //personaje = character
+      this.load.image("deskBellPressed","sprites/timbrepulsado.png"); //timbre pulsado = deskBellPressed
+      this.load.spritesheet("deskBellSP","sprites/timbresheet.png", { frameWidth: 385, frameHeight: 356 }); //timbre = deskBellSP
       this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
-      this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
-      this.load.text("ninio", "dialogue/Ninio.txt");
-      this.load.image("document", "sprites/Documento.png");
-      this.load.image("pen", "sprites/Pen.png");
-      this.load.image("penV", "sprites/PenGreen.png");
-      this.load.image("penR", "sprites/PenRed.png");
-      this.load.image("board", "sprites/Board.png"); // Board
-      this.load.image("postIt", "sprites/PostItBlanco.png"); // PostIt
-      this.load.image("calendarOriginal", "sprites/Calendar31-04.png");
+      this.load.image("tinteroR", "sprites/tinterorojo.png"); // tintero rojo = tinteroR
+      this.load.text("ninio", "dialogue/ninio.txt");
+      this.load.image("document", "sprites/documento.png");
+      this.load.image("pen", "sprites/pen.png");
+      this.load.image("penV", "sprites/pengreen.png");
+      this.load.image("penR", "sprites/penred.png");
+      this.load.image("board", "sprites/board.png"); // Board
+      this.load.image("postIt", "sprites/postitblanco.png"); // PostIt
+      this.load.image("calendarOriginal", "sprites/calendar31_04.png");
     }
     
 
