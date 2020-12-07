@@ -2,7 +2,9 @@ import Clock from "./Clock.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
 import Inkwell from "./Inkwell.js";
-import Document from "./document.js";
+import Board from "./board.js";
+import Pen from "./pen.js";
+import Events from "./events.js"
 
 export default class Game extends Phaser.Scene {
 
@@ -22,12 +24,22 @@ export default class Game extends Phaser.Scene {
       this.load.spritesheet("deskBellSP","sprites/TimbreSheet.png", { frameWidth: 385, frameHeight: 356 }); //timbre = deskBellSP
       this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
       this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
-      this.load.text("ninio", "dialogue/Ninio.txt");
       this.load.image("document", "sprites/Documento.png");
       this.load.image("pen", "sprites/Pen.png");
       this.load.image("penV", "sprites/PenGreen.png");
       this.load.image("penR", "sprites/PenRed.png");
+      this.load.image("board", "sprites/Board.png"); // Board
+      this.load.image("postIt", "sprites/PostItBlanco.png"); // PostIt
       this.load.image("calendarOriginal", "sprites/Calendar31-04.png");
+
+      this.load.text("ninio", "dialogue/Ninio.txt");
+      this.load.text("tendencias", "dialogue/personaje_tendencias.txt");
+      this.load.text("correos", "dialogue/correos.txt");
+      this.load.text("correosFalso", "dialogue/correos.txt");
+      this.load.text("mujerDelJefe", "dialogue/mujer_del_jefe.txt");
+      this.load.text("mujerdelJefeFalsa", "dialogue/mujer_del_jefe.txt");
+      this.load.text("sobornador", "dialogue/sobornador.txt");
+      this.load.text("vagabundo", "dialogue/vagabundo.txt");
     }
     
 
@@ -50,9 +62,13 @@ export default class Game extends Phaser.Scene {
       //Personaje
       let archivoDialogo = this.cache.text.get("ninio");
       archivoDialogo = archivoDialogo.split("\n");
-      this.chara  = new Character(this,955,380,"character", archivoDialogo, "box", "book", "book2"); //Inicializa personaje
+      this.chara  = new Character(this,955,380,"character", archivoDialogo, "box", "book", "book2","document"); //Inicializa personaje
 
+      //FOREGROUND(MESA)
       this.fg = this.add.sprite(550,392,"foreground"); 
+
+      //BOARD(CORCHO)
+      this.Board = new Board(this, 965,340,13,"board", "postIt") 
 
       //DESKBELL
   
@@ -64,18 +80,42 @@ export default class Game extends Phaser.Scene {
 
       this.tinteroRojo = new Inkwell(this,300,600,"tinteroR"); //Inicializa tintero rojo
 
-      //DOCUMENTO
-
-      this.document = new Document(this,500,600,"document") //Inicializa documento
-      this.document.visible=false;
-
       //CALENDARIO
       this.calendar = this.add.sprite(100, 300, "calendarOriginal");
       this.calendar.setScale(0.45)
+
+      //PLUMA
+
+      this.pen = new Pen(this,700,600,"pen");
+
+      //Preparación de los archivos de texto
+      let dialogoNinio = this.cache.text.get("ninio");
+      dialogoNinio = dialogoNinio.split("\n");
+      let dialogoTendencias = this.cache.text.get("tendencias");
+      dialogoTendencias = dialogoTendencias.split("\n");
+      let dialogoCorreos = this.cache.text.get("correos");
+      dialogoCorreos = dialogoCorreos.split("\n");
+      let dialogoCorreosFalso = this.cache.text.get("correosFalso");
+      dialogoCorreosFalso = dialogoCorreosFalso.split("\n");
+      let dialogoMujerDelJefe = this.cache.text.get("mujerDelJefe");
+      dialogoMujerDelJefe = dialogoMujerDelJefe.split("\n");
+      let dialogoMujerDelJefeFalsa = this.cache.text.get("mujerdelJefeFalsa");
+      dialogoMujerDelJefeFalsa = dialogoMujerDelJefeFalsa.split("\n");
+      let dialogoSobornador = this.cache.text.get("sobornador");
+      dialogoSobornador = dialogoSobornador.split("\n");
+      let dialogoVagabundo = this.cache.text.get("vagabundo");
+      dialogoVagabundo = dialogoVagabundo.split("\n");
+
+      this.bg.setDepth(-2); //MOVER A FONDO Para que el fondo se dibuje detrás del todo
+
+      //Inicializa los eventos
+      this.events  = new Events(this,955,380,"character", dialogoNinio, dialogoTendencias,
+      dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
+      dialogoSobornador, dialogoVagabundo, "box", "book", "book2","document");
     }
 
     handleTimeFinished(){
-
+        this.scene.start('Level2');
     }
 
 
@@ -85,22 +125,19 @@ export default class Game extends Phaser.Scene {
         //this.chara.quetemuevas();
 
         if (this.bell.clicked){ //Timbre
-          this.chara.EnterChar();
+          this.events.EnterChar();
         }
 
-        if(this.chara.currentS === this.chara.States.SHOW) //Aparece libro
-        {
-          this.chara.ShowBook();
-        }
+        this.events.CharaShowBook();
 
         if(this.tinteroRojo.clicked) //Boton de alarma
         {
-          this.chara.DenyChar();
+          this.events.DenyChar();
         }
 
         if(this.tinteroVerde.clicked) //Boton de alarma
         {
-          this.chara.AcceptChar();
+          this.events.AcceptChar();
         }
     }
   }
