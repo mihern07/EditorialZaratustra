@@ -20,7 +20,7 @@
     
     
     <script type="module">
-      import Game from "./scenePrueba.js";
+      import Game from "./gameMiguel.js";
       import Level2 from "./Level2.js";
 
       var config = {
@@ -38,7 +38,7 @@
         scene: [Game, Level2],
         physics: {
           default: "arcade",
-          arcade: { gravity: { y: 400 }, debug: true },
+          arcade: { gravity: { y: 400 }, debug: false },
         },
       };
       new Phaser.Game(config);

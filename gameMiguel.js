@@ -30,8 +30,10 @@ export default class Game extends Phaser.Scene {
       this.load.image("penR", "sprites/PenRed.png");
       this.load.image("board", "sprites/Board.png"); // Board
       this.load.image("postIt", "sprites/PostItBlanco.png"); // PostIt
-      this.load.image("calendarOriginal", "sprites/Calendar31-04.png");
+      this.load.image("calendarOriginal", "sprites/calendar31_04.png");
+      this.load.image("paperParticle", "sprites/paperParticle.png");
 
+      this.load.text("jefe", "dialogue/jefe.txt");
       this.load.text("ninio", "dialogue/Ninio.txt");
       this.load.text("tendencias", "dialogue/personaje_tendencias.txt");
       this.load.text("correos", "dialogue/correos.txt");
@@ -89,6 +91,8 @@ export default class Game extends Phaser.Scene {
       this.pen = new Pen(this,700,600,"pen");
 
       //Preparación de los archivos de texto
+      let dialogoJefe = this.cache.text.get("jefe");
+      dialogoJefe = dialogoJefe.split("\n");
       let dialogoNinio = this.cache.text.get("ninio");
       dialogoNinio = dialogoNinio.split("\n");
       let dialogoTendencias = this.cache.text.get("tendencias");
@@ -109,9 +113,11 @@ export default class Game extends Phaser.Scene {
       this.bg.setDepth(-2); //MOVER A FONDO Para que el fondo se dibuje detrás del todo
 
       //Inicializa los eventos
-      this.events  = new Events(this,955,380,"character", dialogoNinio, dialogoTendencias,
+      this.events  = new Events(this,955,380,"character", dialogoJefe, dialogoNinio, dialogoTendencias,
       dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
       dialogoSobornador, dialogoVagabundo, "box", "book", "book2","document");
+
+      this.Intro();
     }
 
     handleTimeFinished(){
@@ -140,4 +146,28 @@ export default class Game extends Phaser.Scene {
           this.events.AcceptChar();
         }
     }
+
+
+    Intro(){
+      this.cameras.main.fadeIn(2000, 0, 0, 0);
+      //this.createParticles("paperParticle");
+    }
+
+    createParticles(particleSprite)
+    {
+      //Particles
+      let leaves = this.add.particles(particleSprite);
+      leaves.createEmitter({
+          frames: [{key: particleSprite, frame: 0}],
+          x: { min: 100, max: this.game.config.width},
+          y: -50,
+          speedX: { min: -50, max: 50 },
+          speedY: { min: 100, max: 120 },
+          lifespan: 7000,
+          scale: {start: 0.1, end: 0.01},
+          rotate: {start: 0, end: 120},
+          frequency: 300
+      });
+    }
+  
   }

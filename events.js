@@ -40,8 +40,8 @@ export default class Character extends Phaser.GameObjects.GameObject{
 
     currentCharacterType
 
-    constructor(scene,x,y, sprite, dialogueNinio, dialogueTendencias, dialogueCorreos, dialogueCorreosFalso, dialogueMujerDelJefe,
-        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueSprite, bookSprite1, bookSprite2, documentSprite){
+    constructor(scene,x,y, sprite, dialogueJefe,dialogueNinio, dialogueTendencias, dialogueCorreos, dialogueCorreosFalso, dialogueMujerDelJefe,
+        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo,dialogueSprite, bookSprite1, bookSprite2, documentSprite){
         super(scene,x,y);
 
         this.x = x;
@@ -50,6 +50,7 @@ export default class Character extends Phaser.GameObjects.GameObject{
         this.scene = scene;
 
         //Diálogos
+        this.dialogueJefe = dialogueJefe;
         this.dialogueNinio = dialogueNinio;
         this.dialogueTendencias = dialogueTendencias;
         this.dialogueCorreos = dialogueCorreos;
@@ -66,7 +67,7 @@ export default class Character extends Phaser.GameObjects.GameObject{
         this.documentSprite = documentSprite;
 
         //Enum con todos los tipos distintos de personaje
-        this.enum = {normal: 0, ninio: 1, tendencias: 2, correos: 3, correosFalso: 4, mujerDelJefe: 5, mujerDelJefeFalsa: 6, sobornador: 7, vagabundo: 8};
+        this.enum = {jefe: -1, normal: 0, ninio: 1, tendencias: 2, correos: 3, correosFalso: 4, mujerDelJefe: 5, mujerDelJefeFalsa: 6, sobornador: 7, vagabundo: 8};
 
         this.currentCharacterType = this.enum.vagabundo;    //Determina el tipo de personaje que hay actualmente
 
@@ -77,6 +78,10 @@ export default class Character extends Phaser.GameObjects.GameObject{
 
     createCharacter(tipo){
         switch (tipo){
+            case -1:
+                //Jefe
+                this.chara  = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueJefe, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
+                break;
             case 0:
                 //Personaje normal
                 //Crear personaje normal sin diálogo (Quizás tendremos que mover los diálogos al Events o añadir un booleano a character)
