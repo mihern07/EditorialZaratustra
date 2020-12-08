@@ -9,16 +9,14 @@ export default class Book extends Phaser.GameObjects.Sprite {
     /** @type {Phaser.GameObjects.Sprite} */
     Libro2
 
-    constructor(scene, x, y, sprite, sprite2) {
+    constructor(scene, x, y, sprite, sprite2, genre, category, numPags) {
         super(scene, x, y, sprite)
-
         this.firstPosX = this.x;
         this.firstPosY = this.y;
 
         this.scene = scene;
 
         this.visible = false;
-
 
 
         this.setScale(.3);
@@ -37,8 +35,10 @@ export default class Book extends Phaser.GameObjects.Sprite {
         this.Libro2.x = this.scene.game.config.width / 2;
         this.Libro2.y = this.scene.game.config.height / 2;
         this.Libro2.setDepth(2);
-        //this.info = scene.add.text(this.Libro2.x-20,this.libro2.y-20,"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", {color: 0x0A0A0A}); //Añadimos texto.
-        this.info = [scene.add.text(this.x - 250, this.y - 400, "Novela", { color: 0x0A0A0A }), scene.add.text(this.x - 250, this.y - 375, "Romance", { color: 0x0A0A0A }), scene.add.text(this.x - 250, this.y - 350, "357 pags", { color: 0x0A0A0A })]; //Añadimos texto.
+       
+        this.info = [scene.add.text(this.x - 250, this.y - 400, genre, { color: 0x0A0A0A }),
+                    scene.add.text(this.x - 250, this.y - 375, category, { color: 0x0A0A0A }),
+                    scene.add.text(this.x - 250, this.y - 350, numPags + " pags", { color: 0x0A0A0A })]; //Añadimos texto. (cambiar numeros por globales)
 
         for (let i = 0; i < this.info.length; i++) {
             this.info[i].visible = false;
@@ -50,7 +50,6 @@ export default class Book extends Phaser.GameObjects.Sprite {
         //this.body.setBoundsRectangle(this.bound);
 
         this.on('drag', pointer => {
-
             if ((pointer.x > 50
                 && pointer.y > 450
                 && pointer.y < 900
