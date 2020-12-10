@@ -44,13 +44,12 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
         //Libro
         // La gestión del tipo de libro tendría que hacerse en la clase que llama a cada personaje
-        this.correctColor = true;
         this.tamPags = { thin: 0, normal: 1, thick: 2 };
         this.numPags = this.getNumPags(this.tamPags.thin); // numero pags
         this.genre = ["Novela", "Poesía", "Teatro"];
         this.category = ["Romance", "Aventura", "Suspense", "Histórico", "Policiaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"];
 
-        this.book = new Book(scene, 500, 550, bookSprite1, bookSprite2, this.genre[0], this.category[0], this.numPags, this.correctColor); //Inicializa libro
+        this.book = new Book(scene, 500, 550, bookSprite1, bookSprite2, this.genre[0], this.category[0], this.numPags); //Inicializa libro
         this.hasBook = false;
 
         //Documento

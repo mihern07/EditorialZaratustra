@@ -19,7 +19,7 @@ export default class Dialogue extends Phaser.GameObjects.Sprite{
     }
 
     setVisible (isVisible){
-        this.visible = !isVisible;
-        this.texto.visible = !isVisible;
+        this.visible = isVisible;
+        this.texto.visible = isVisible;
     }
 }
