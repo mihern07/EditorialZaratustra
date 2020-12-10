@@ -124,6 +124,10 @@ export default class Character extends Phaser.GameObjects.GameObject{
         }
     }
 
+    preUpdate(){
+        this.CharaShowBook();
+    }
+
     CharaShowBook(){
         if (this.chara.currentS === this.chara.States.SHOW){
             this.chara.ShowBook();

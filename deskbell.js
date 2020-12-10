@@ -1,11 +1,15 @@
-
+import Events from "./events.js"
 export default class DeskBell extends Phaser.GameObjects.Sprite  {
-
           /** @type {Phaser.GameObjects.Sprite} */
           Bell2
 
-    constructor(scene,x,y, sprite, sprite2) {
+          /** @type {Events} */
+          events
+
+    constructor(scene,x,y, sprite, sprite2, events) {
       super(scene,x,y,sprite);
+      this.events = events;
+      
       this.scene = scene;
       this.setScale(.2);
 
@@ -16,24 +20,21 @@ export default class DeskBell extends Phaser.GameObjects.Sprite  {
       this.Bell2.setScale(.2);
 
       this.Bell2.visible = false;
-      this.clicked = false; //Creamos variable booleana clicked.
-
       //this.scene.physics.add.existing(this, true);
 
       //Cuando es pulsado dicho sprite...
       this.on('pointerdown', pointer => {
         if(pointer.leftButtonDown()) {
           console.log("Timbre pulsado");
+          this.events.EnterChar();
           this.Bell2.visible =! this.Bell2.visible;
           this.visible =! this.visible;
-          this.clicked = true;
         }
       });
 
       this.Bell2.on('pointerup', pointer => {
           this.Bell2.visible =! this.Bell2.visible;
           this.visible =! this.visible;
-          this.clicked = false;
       });
 
  

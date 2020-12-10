@@ -1,7 +1,7 @@
-import Clock from "./Clock.js";
+import Clock from "./clock.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
-import Inkwell from "./Inkwell.js";
+import Inkwell from "./inkwell.js";
 import Board from "./board.js";
 import Pen from "./pen.js";
 
@@ -87,36 +87,35 @@ export default class Game extends Phaser.Scene {
 
   
     update(time, delta) {
-        this.clock.update();
-        //this.chara.quetemuevas();
-        if(this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
-          console.log("Hay solapeR");
-          this.pen.setRed();
+      this.clock.update();
+      //this.chara.quetemuevas();
+      if(this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
+        console.log("Hay solapeR");
+        this.pen.setRed();
       }
 
       if(this.physics.overlap(this.pen, this.tinteroVerde)) { //Overlap Verde
         console.log("Hay solapeV");
         this.pen.setGreen();
-    }
-
-    this.pen.changeColor();
-
-    this.pen.PenR.on("pointerup", pointer => {
-        if(this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Roja
-            this.chara.DenyChar();
-            this.pen.setNormal();
-            console.log("Hay solapeD Deny");
-
       }
-    })   
+
+      this.pen.changeColor();
+
+      this.pen.PenR.on("pointerup", pointer => {
+        if(this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Roja
+          this.chara.DenyChar();
+          this.pen.setNormal();
+          console.log("Hay solapeD Deny");
+        }
+      })   
     
-    this.pen.PenV.on("pointerup", pointer => {
-      if(this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Verde
+      this.pen.PenV.on("pointerup", pointer => {
+        if(this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Verde
           this.chara.AcceptChar();
           this.pen.setNormal();
           console.log("Hay solapeD Accept");
-    }
-  })
+        }
+      })
 
     // this.pen.pressed(this.chara.document);
 

@@ -29,7 +29,7 @@ export default class Pen extends Phaser.GameObjects.Sprite{
         this.setDepth(3);
 
         this.States = {NORMAL: 0, GREEN: 1, RED: 2}; 
-        this.States=0
+        this.States = this.States.NORMAL;
 
         this.PenR = scene.add.sprite(this.x,this.y,sprite2).setInteractive(); //Pluma Roja
 

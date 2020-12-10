@@ -1,7 +1,7 @@
-import Clock from "./Clock.js";
+import Clock from "./clock.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
-import Inkwell from "./Inkwell.js";
+import Inkwell from "./inkwell.js";
 import Board from "./board.js";
 import Pen from "./pen.js";
 import Events from "./events.js"
@@ -127,7 +127,7 @@ export default class Game extends Phaser.Scene {
 
   
     update(time, delta) {
-        this.clock.update();
+        //this.clock.update();
         //this.chara.quetemuevas();
 
         if (this.bell.clicked){ //Timbre

@@ -1,9 +1,9 @@
 import Book from "./book.js";
-import Clock from "./Clock.js";
+import Clock from "./clock.js";
 import Dialogue from "./dialogue.js";
 import DeskBell from "./deskbell.js";
 import Character from "./character.js";
-import Inkwell from "./Inkwell.js";
+import Inkwell from "./inkwell.js";
 import Document from "./document.js";
 import Board from "./board.js";
 

@@ -1,6 +1,6 @@
 import Dialogue from "./dialogue.js";
 import Book from "./book.js";
-import Clock from "./Clock.js";
+import Clock from "./clock.js";
 import Document from "./document.js";
 
 export default class Character extends Phaser.GameObjects.Sprite {

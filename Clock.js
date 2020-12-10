@@ -55,7 +55,7 @@ export default class Clock extends Phaser.GameObjects.Sprite{
         }
     }
 
-    update(){
+    preUpdate(){
         if (!this.timerEvent || this.duration <= 0){
             return;
         }
