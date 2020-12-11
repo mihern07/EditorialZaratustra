@@ -120,7 +120,7 @@ export default class Game extends Phaser.Scene {
   }
 
   handleTimeFinished() {
-    this.scene.start('level2');
+    this.scene.switch('level2');
   }
 
 
@@ -154,6 +154,7 @@ export default class Game extends Phaser.Scene {
       }
     })
   }
+  
   Intro() {
     this.cameras.main.fadeIn(2000, 0, 0, 0);
     //this.createParticles("paperParticle");

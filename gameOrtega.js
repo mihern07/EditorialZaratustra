@@ -11,7 +11,7 @@ import Alarm from "./alarm.js"
 export default class Game extends Phaser.Scene {
 
   constructor() {
-    super({ key: "main" });
+    super({ key: "mainO" });
   }
   preload() { //Carga de sprites
     this.load.image("background", "sprites/background.png") //Fondo = background

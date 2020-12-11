@@ -20,8 +20,9 @@
     
     
     <script type="module">
-      import Game from "./scenePrueba.js";
+      import Game from "./gameOrtega.js";
       import Level2 from "./level2.js";
+      import titleScene from "./titleScene.js";
 
       var config = {
         type: Phaser.AUTO,
@@ -35,7 +36,7 @@
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
         }, 
-        scene: [Game, Level2],
+        scene: [titleScene, Game, Level2],
         physics: {
           default: "arcade",
           arcade: { gravity: { y: 400 }, debug: false },
