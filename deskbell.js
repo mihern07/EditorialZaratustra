@@ -6,9 +6,10 @@ export default class DeskBell extends Phaser.GameObjects.Sprite  {
           /** @type {Events} */
           events
 
-    constructor(scene,x,y, sprite, sprite2, events) {
+    constructor(scene,x,y, sprite, sprite2, events, sound) {
       super(scene,x,y,sprite);
       this.events = events;
+      this.sounds = sound;
       
       this.scene = scene;
       this.setScale(.2);
@@ -26,6 +27,7 @@ export default class DeskBell extends Phaser.GameObjects.Sprite  {
       this.on('pointerdown', pointer => {
         if(pointer.leftButtonDown()) {
           console.log("Timbre pulsado");
+          this.sounds.play();
           this.events.EnterChar();
           this.Bell2.visible =! this.Bell2.visible;
           this.visible =! this.visible;
