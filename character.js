@@ -16,7 +16,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
     /** @type {Phaser.GameObjects.Sprite} */
     dialogueSprite
 
-    constructor(scene, x, y, sprite, dialogue, dialogueSprite, bookSprite1, bookSprite2, documentSprite) {
+    constructor(scene, x, y, sprite, dialogue, dialogueSprite, bookSprite1, bookSprite2, documentSprite, genre, category, tamPags) {
 
         super(scene, x, y, sprite);
         this.scene = scene;
@@ -27,7 +27,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
         this.body.setVelocityX(0);
-
+        this.bringsBook = (genre != undefined); // Determina si el personaje trae un libro
         this.SPEED = 190;
         //INI: estado inicial
         //SHOW: en el mostrador con el libro
@@ -42,15 +42,14 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.dialogue = new Dialogue(scene, 530, 415, this.dialogueSprite, this.texto.slice(0, 3));
         this.dialogue.setVisible(false);
 
-        //Libro
-        // La gestión del tipo de libro tendría que hacerse en la clase que llama a cada personaje
-        this.tamPags = { thin: 0, normal: 1, thick: 2 };
-        this.numPags = this.getNumPags(this.tamPags.thin); // numero pags
-        this.genre = ["Novela", "Poesía", "Teatro"];
-        this.category = ["Romance", "Aventura", "Suspense", "Histórico", "Policiaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"];
+        //if(this.bringsBook){
+            //Libro
+            this.numPags = this.getNumPags(tamPags); // numero pags
 
-        this.book = new Book(scene, 500, 550, bookSprite1, bookSprite2, this.genre[0], this.category[0], this.numPags); //Inicializa libro
-        this.hasBook = false;
+            this.book = new Book(scene, 500, 550, bookSprite1, bookSprite2, genre, category, this.numPags); //Inicializa libro
+            this.hasBook = false;
+        //}
+
 
         //Documento
         this.document = new Document(scene, 650, 550, documentSprite); //Inicializa documento
@@ -61,8 +60,11 @@ export default class Character extends Phaser.GameObjects.Sprite {
         if (this.currentS === this.States.INI) {
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.GOING;
-            this.CreateBook();
+            //if(this.bringsBook){
+                this.CreateBook();
+            //}
             this.CreateDocument();
+            
         }
     }
 
@@ -74,7 +76,10 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
             this.dialogue.setVisible(true);
 
-            this.ShowBook();
+            //if(this.bringsBook){
+                this.ShowBook();
+            //}
+
             this.ShowDocument();
 
             this.firstClock = new Clock(this.scene, 0, 0, this.dialogueSprite, this.dialogueSprite);
@@ -99,7 +104,9 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.firstClock.stop();
             this.secondClock.stop();
             this.dialogue.setText(this.texto.slice(12, 15))
-            this.RetrieveBook();
+            //if(this.bringsBook){
+                this.RetrieveBook();
+            //}
             this.RetrieveDocument();
         }
     }
@@ -115,7 +122,9 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
             this.dialogue.setText(this.texto.slice(9, 12))
 
-            this.RetrieveBook();
+            //if(this.bringsBook){
+                this.RetrieveBook();
+            //}
             this.RetrieveDocument();
         }
     }
