@@ -34,7 +34,7 @@ export default class Book extends Phaser.GameObjects.Sprite {
 
         this.Libro2.x = this.scene.game.config.width / 2;
         this.Libro2.y = this.scene.game.config.height / 2;
-        this.Libro2.setDepth(2);
+        this.Libro2.setDepth(4);
        
         this.info = [scene.add.text(this.x - 250, this.y - 400, genre, { color: 0x0A0A0A }),
                     scene.add.text(this.x - 250, this.y - 375, category, { color: 0x0A0A0A }),
@@ -42,7 +42,7 @@ export default class Book extends Phaser.GameObjects.Sprite {
 
         for (let i = 0; i < this.info.length; i++) {
             this.info[i].visible = false;
-            this.info[i].setDepth(3);
+            this.info[i].setDepth(4);
         }
 
         //Configuración del Drag        

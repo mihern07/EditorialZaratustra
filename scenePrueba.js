@@ -5,6 +5,9 @@ import Inkwell from "./inkwell.js";
 import Board from "./board.js";
 import Pen from "./pen.js";
 import Events from "./events.js"
+import Bodyguard from "./bodyguard.js"
+import Alarm from "./alarm.js"
+import GameManager from "./gameManager.js";
 
 export default class Game extends Phaser.Scene {
 
@@ -32,6 +35,29 @@ export default class Game extends Phaser.Scene {
     this.load.image("postIt", "sprites/postitBlanco.png"); // PostIt
     this.load.image("calendarOriginal", "sprites/calendar31_04.png");
     this.load.image("paperParticle", "sprites/paperParticle.png");
+    this.load.image("bodyguard", "sprites/guardaespaldas.png"); //Guardaespaldas = bodyguard
+
+    //Sprites de los diferentes libros
+    this.load.image("libroCHistórico", "sprites/libro_cerrado_historia.png")
+    this.load.image("libroAHistórico", "sprites/libro_abierto_historia.png")
+    this.load.image("libroCAcadémico", "sprites/libro_cerrado_academico.png");
+    this.load.image("libroAAcadémico", "sprites/libro_abierto_academico.png");
+    this.load.image("libroCAventura", "sprites/libro_cerrado_aventura.png");
+    this.load.image("libroAAventura", "sprites/libro_abierto_aventura.png");
+    this.load.image("libroCComedia", "sprites/libro_cerrado_comedia.png");
+    this.load.image("libroAComedia", "sprites/libro_abierto_comedia.png");
+    this.load.image("libroCDrama", "sprites/libro_cerrado_drama.png");
+    this.load.image("libroADrama", "sprites/libro_abierto_drama.png");
+    this.load.image("libroCFantasía", "sprites/libro_cerrado_fantasia.png");
+    this.load.image("libroAFantasía", "sprites/libro_abierto_fantasia.png");
+    this.load.image("libroCFicción", "sprites/libro_cerrado_ficcion.png");
+    this.load.image("libroAFicción", "sprites/libro_abierto_ficcion.png");
+    this.load.image("libroCPolicíaco", "sprites/libro_cerrado_policiaco.png");
+    this.load.image("libroAPolicíaco", "sprites/libro_abierto_policiaco.png");
+    this.load.image("libroCRomance", "sprites/libro_cerrado_romance.png");
+    this.load.image("libroARomance", "sprites/libro_abierto_romance.png");
+    this.load.image("libroCSuspense", "sprites/libro_cerrado_suspense.png");
+    this.load.image("libroASuspense", "sprites/libro_abierto_suspense.png");
 
     this.load.text("jefe", "dialogue/jefe.txt");
     this.load.text("ninio", "dialogue/ninio.txt");
@@ -42,6 +68,9 @@ export default class Game extends Phaser.Scene {
     this.load.text("mujerdelJefeFalsa", "dialogue/mujer_del_jefe.txt");
     this.load.text("sobornador", "dialogue/sobornador.txt");
     this.load.text("vagabundo", "dialogue/vagabundo.txt");
+    this.load.text("dialogoBase", "dialogue/dialogoBase.txt");
+
+    this.load.audio("deskbellSound", "sounds/deskbell.wav"); //Audio timbre
   }
 
 
@@ -84,7 +113,7 @@ export default class Game extends Phaser.Scene {
 
     //PLUMA
 
-    this.pen = new Pen(this,700,700,"pen", "penR","penV");
+    this.pen = new Pen(this, 700, 700, "pen", "penR", "penV");
 
     //Preparación de los archivos de texto
     let dialogoJefe = this.cache.text.get("jefe");
@@ -105,33 +134,58 @@ export default class Game extends Phaser.Scene {
     dialogoSobornador = dialogoSobornador.split("\n");
     let dialogoVagabundo = this.cache.text.get("vagabundo");
     dialogoVagabundo = dialogoVagabundo.split("\n");
+    let dialogoBase = this.cache.text.get("dialogoBase");
+    dialogoBase = dialogoBase.split("\n");
 
     this.bg.setDepth(-2); //MOVER A FONDO Para que el fondo se dibuje detrás del todo
 
-    //Inicializa los eventos
+    //Info del libro
+    this.bookInfo = {
+      novelaBien: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
+      poesiaBien: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+      teatroBien: ["Romance", "Aventura", "Suspense", "Histórico"],
+      novelaMal: ["Romance", "Suspense", "Policíaco", "Fantasía", "Comedia"],
+      poesiaMal: [],
+      teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+      everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+      numPagsBien: [0, 2],
+      numPagsMal: [1]
+    }
+
     this.events = new Events(this, 955, 380, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
       dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
-      dialogoSobornador, dialogoVagabundo, "box", "book", "book2", "document");
+      dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo);
 
     //DESKBELL
-    this.bell = new DeskBell(this, 825, 500, "deskBellSP", "deskBellPressed", this.events); //Inicializa timbre
+    this.bellSound = this.sound.add("deskbellSound");
+    this.bell = new DeskBell(this, 825, 500, "deskBellSP", "deskBellPressed", this.events, this.bellSound); //Inicializa timbre
 
-    this.Intro();
+     //SEGURIDAD
+
+     this.bodyguard = new Bodyguard(this,955,340,"bodyguard", this.events) //Inicializa bodyguard
+
+     //ALARMA
+ 
+     this.alarm = new Alarm(this,200,800,"deskBellSP", "deskBellPressed", this.bodyguard); //Inicializa alarma.
+ 
+     this.Intro();
+
+     this.gameManager = new GameManager();
   }
 
   handleTimeFinished() {
-    this.scene.switch('level2');
+    this.scene.start('level2', this.gameManager);
   }
 
 
 
   update(time, delta) {
-    if(this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
+    if (this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
       console.log("Hay solapeR");
       this.pen.setRed();
     }
 
-    if(this.physics.overlap(this.pen, this.tinteroVerde)) { //Overlap Verde
+    if (this.physics.overlap(this.pen, this.tinteroVerde)) { //Overlap Verde
       console.log("Hay solapeV");
       this.pen.setGreen();
     }
@@ -139,22 +193,22 @@ export default class Game extends Phaser.Scene {
     this.pen.changeColor();
 
     this.pen.PenR.on("pointerup", pointer => {
-      if(this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Roja
+      if (this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Roja
         this.events.DenyChar();
         this.pen.setNormal();
         console.log("Hay solapeD Deny");
       }
-    })   
-  
+    })
+
     this.pen.PenV.on("pointerup", pointer => {
-      if(this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Verde
+      if (this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Verde
         this.events.AcceptChar();
         this.pen.setNormal();
         console.log("Hay solapeD Accept");
       }
     })
   }
-  
+
   Intro() {
     this.cameras.main.fadeIn(2000, 0, 0, 0);
     //this.createParticles("paperParticle");

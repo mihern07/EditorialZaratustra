@@ -19,7 +19,7 @@ class TitleScene extends Phaser.Scene {
 	}
 
 	clickButton() {
-		this.scene.switch("mainO");
+		this.scene.switch("main");
 	}
 
 }
