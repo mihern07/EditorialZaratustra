@@ -20,6 +20,7 @@
     
     
     <script type="module">
+      import Boot from "./boot.js";
       import Game from "./scenePrueba.js";
       import Level2 from "./level2.js";
       import titleScene from "./titleScene.js";
@@ -36,7 +37,7 @@
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
         }, 
-        scene: [titleScene, Game, Level2],
+        scene: [Boot, titleScene, Game, Level2],
         physics: {
           default: "arcade",
           arcade: { gravity: { y: 400 }, debug: false },
