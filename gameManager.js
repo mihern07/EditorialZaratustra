@@ -2,6 +2,7 @@ export default class GameManager{
     constructor(){
         this.dinero = 0;
         this.strikes = 0;
+        this.objetivo = 0;
     }
 
     /**
@@ -39,14 +40,17 @@ export default class GameManager{
      * @param {*} amountToClear Cantidad necesaria para completar el nivel actual con éxito
      */
     isCleared(amountToClear){
+        this.objetivo = amountToClear;
         return this.dinero > amountToClear;
     }
 
     /**
      * Comprueba si el jugador ha llegado al límite de strikes
      * Devuelve true si el jugador ha perdido, false en caso de que aún pueda seguir jugando
+     * @param {*} amountToClear Cantidad necesaria para completar el nivel actual con éxito
      */
-    isGameOver(){
+    isGameOver(amountToClear){
+        this.objetivo = amountToClear;
         return this.strikes >= 3;
     }
 }
