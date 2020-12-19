@@ -46,6 +46,18 @@ export default class Boot extends Phaser.Scene {
         this.load.image("libroARomance", "sprites/libro_abierto_romance.png");
         this.load.image("libroCSuspense", "sprites/libro_cerrado_suspense.png");
         this.load.image("libroASuspense", "sprites/libro_abierto_suspense.png");
+
+        //Sprites de los diferentes postits
+        this.load.image("historicoPost", "sprites/postit_historico.png")
+        this.load.image("academicoPost", "sprites/postit_academico.png");
+        this.load.image("aventuraPost", "sprites/postit_aventura.png");
+        this.load.image("comediaPost", "sprites/postit_comedia.png");
+        this.load.image("dramaPost", "sprites/postit_drama.png");
+        this.load.image("fantasiaPost", "sprites/postit_fantasia.png");
+        this.load.image("ficcionPost", "sprites/postit_ficcion.png");
+        this.load.image("policiacoPost", "sprites/postit_policiaco.png");
+        this.load.image("romancePost", "sprites/postit_romance.png");
+        this.load.image("suspensePost", "sprites/postit_suspense.png");
     
         this.load.text("jefe", "dialogue/jefe.txt");
         this.load.text("ninio", "dialogue/ninio.txt");
