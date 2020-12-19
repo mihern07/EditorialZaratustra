@@ -1,15 +1,21 @@
-Nivel 1
-Nivel 2
-Nivel 3
-Nivel 4
-Nivel 5
-Nivel 6
-Nivel 7
-Nivel 8
-Nivel 9
-Nivel 10
-Nivel 11
-Nivel 12
-Nivel 13
-Nivel 14
-Nivel 15
+Jefe
+Nivel 1.1
+Nivel 1.2
+Jefe
+Nivel 2.1
+Nivel 2.2
+Jefe
+Nivel 3.1
+Nivel 3.2
+Jefe
+Nivel 4.1
+Nivel 4.2
+Jefe
+Nivel 5.1
+Nivel 5.2
+Jefe
+Nivel 6.1
+Nivel 6.2
+Jefe
+Nivel 7.1
+Nivel 7.2

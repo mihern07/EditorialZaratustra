@@ -7,6 +7,8 @@ import Events from "./events.js"
 import Bodyguard from "./bodyguard.js"
 import Alarm from "./alarm.js"
 import GameManager from "./gameManager.js";
+import Boss from "./boss.js";
+
 
 export default class Game extends Phaser.Scene {
 
@@ -108,6 +110,9 @@ export default class Game extends Phaser.Scene {
 
      this.bodyguard = new Bodyguard(this,955,340,"bodyguard", this.events) //Inicializa bodyguard
 
+     //BOSS
+     this.boss = new Boss(this, 0, 340, "bodyguard", dialogoJefe, "box", 0);
+
      //ALARMA
  
      this.alarm = new Alarm(this,200,800,"deskBellSP", "deskBellPressed", this.bodyguard); //Inicializa alarma.
@@ -115,6 +120,14 @@ export default class Game extends Phaser.Scene {
      this.Intro();
 
      this.gameManager = new GameManager();
+
+     this.music=this.sound.add("music");
+     this.music.play();
+
+     this.boss.EnterChar();
+
+     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+     this.a = 0;
   }
 
   handleTimeFinished() {
@@ -127,6 +140,12 @@ export default class Game extends Phaser.Scene {
 
 
   update(time, delta) {
+    if(this.keyEsc.isDown && this.a === 0){
+      this.a = 1;
+      this.game.scene.pause(this);
+      this.scene.launch('pause');
+    }
+
     this.events.update(); // No preUpdate porque no existe si hereda de GameObject
 
     if (this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo

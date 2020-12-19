@@ -7,6 +7,7 @@ import Events from "./events.js"
 import Bodyguard from "./bodyguard.js"
 import Alarm from "./alarm.js"
 import GameManager from "./gameManager.js";
+import Boss from "./boss.js";
 
 export default class Game extends Phaser.Scene {
 
@@ -89,13 +90,17 @@ export default class Game extends Phaser.Scene {
     }
 
     //En algun punto seran constantes
-    let numCorrects = 10; // Número mínimo de libros correctos (7 necesarios + 3 de margen)
-    let minBooks= 17; // Número mínimo de libros entre los que se encuentran los anteriores
+    this.order = {
+      numCorrects : 7, // Número mínimo de libros correctos 
+      minBooks : 17, // Número mínimo de libros entre los que se encuentran los anteriores
+      specialChara : []
+    }
 
     this.events = new Events(this, 955, 380, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
       dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
       dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo,
-      numCorrects, minBooks);
+      this.order);
+
 
     //DESKBELL
     this.bellSound = this.sound.add("deskbellSound");
@@ -103,7 +108,10 @@ export default class Game extends Phaser.Scene {
 
      //SEGURIDAD
 
-     this.bodyguard = new Bodyguard(this,955,340,"bodyguard", this.events) //Inicializa bodyguard
+     this.bodyguard = new Bodyguard(this,955,340,"bodyguard", this.events); //Inicializa bodyguard
+
+     //BOSS
+     this.boss = new Boss(this, 0, 340, "bodyguard", dialogoJefe, "box", 0);
 
      //ALARMA
  
@@ -112,7 +120,15 @@ export default class Game extends Phaser.Scene {
      this.Intro();
 
      this.gameManager = new GameManager();
+     
+     this.music=this.sound.add("music");
+     this.music.play();
+
+     this.boss.EnterChar();
+
   }
+
+  
 
   handleTimeFinished() {
     if(this.gameManager.isCleared(1500))
@@ -124,6 +140,7 @@ export default class Game extends Phaser.Scene {
 
 
   update(time, delta) {
+      
     this.events.update(); // No preUpdate porque no existe si hereda de GameObject
 
     if (this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
