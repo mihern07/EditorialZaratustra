@@ -126,6 +126,7 @@ export default class Game extends Phaser.Scene {
 
      this.boss.EnterChar();
 
+     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
   }
 
   
@@ -140,6 +141,11 @@ export default class Game extends Phaser.Scene {
 
 
   update(time, delta) {
+    if(this.keyEsc.isDown){
+      this.keyEsc.reset();
+      this.game.scene.pause(this);
+      this.scene.launch('pause');
+    }
       
     this.events.update(); // No preUpdate porque no existe si hereda de GameObject
 
