@@ -13,9 +13,19 @@ Versión 1.0 - 16 de octubre de 2020
 
 | **Resumen** |
 | --- |
-| **Géneros:** Point and click | **Modos:** Un jugador |
-| **Público objetivo:** Mayores de 16 años. | **Plataformas:** PC con teclado y ratón. |
-| **Cantidades:** (no es necesario de momento)_Escenarios: __Objetos:_ _Armas:__ Personajes:_ _Palabras:_ _Grabaciones de voz:_ | **Hitos:** _Fecha de propuesta del concepto (14/10/2020)__Fechas de pre-producción (/2020)__Fechas de producción (/2020 -/2020)__Fecha de lanzamiento (/2020)_ |
+| **Géneros:**
+Point and click |
+| **Público objetivo:**
+Mayores de 16 años. |
+| **Modos:**
+Un jugador |
+| **Plataformas:**
+PC con teclado y ratón. |
+| **Hitos:**
+Fecha de propuesta del concepto (14/10/2020)_
+Fechas de pre-producción (/2020)
+Fechas de producción (/2020 -/2020)
+Fecha de lanzamiento (/2020) |
 
 **Página del juego**
 https://mihern07.github.io/EditorialZaratustra/
@@ -33,46 +43,51 @@ El juego se sitúa en el Madrid de los años 20. Nos encontramos en la recepció
 
 1. Aspectos Generales
 
-1. Menús y modos de juego
+2. Menús y modos de juego
 
-1. Control
+2.1. Control
 
-1. Jugabilidad
+3. Jugabilidad
 
-1. Mecánica
+3.1. Mecánica
 
-1. Dinámica
+3.2. Dinámica
 
-1. Estética
-2. Eventos
+3.3. Estética
 
-5. Arquitectura
+3.4. Eventos
 
-6. Contenido
+4. Arquitectura
 
-1. Contexto y universo
+5. Contenido
 
-1. Historia
+5.1. Contexto y universo
 
-1. Narrativa
+5.2. Historia
 
-1. Niveles
+5.3. Narrativa
 
-1. Objetos
+5.4. Niveles
 
-1. Sonido SFX
+5.5. Objetos
 
-7. Referencias
+5.6. Sonido SFX
+
+6. Referencias
+
+7. Links
+
+///////////////////////////////////////////
 
 1. **Aspectos generales**
 
 Se busca un loop jugable rápido, donde el jugador deberá tener en cuenta varios factores para hacer bien su trabajo al igual que en Papers Please. Hay algunas mecánicas que diferirán de lo que nos podemos encontrar en el juego de Lucas Pope, y vendrán explicadas más adelante.
 
-1. **Menús y modos de juego**
+2. **Menús y modos de juego**
 
 Desde el menú principal se podrá acceder a las opciones: &quot;Jugar&quot;, &quot;Opciones&quot;, &quot;Créditos&quot; y &quot;Salir&quot;.
 
-![ImagenJuego](../master/readmeImages/screenshot.jpg)
+![Menú](../master/readmeImages/Logo.png)
 
 _Imagen provisional de menú (opciones en la página derecha)_
 
@@ -80,9 +95,9 @@ _Imagen provisional de menú (opciones en la página derecha)_
 
 Tiene un control similar a Papers Please, en el que se utilizará el ratón para ver los detalles de los diferentes objetos en la mesa y mover los que sean necesarios.
 
-1. **Jugabilidad**
+3. **Jugabilidad**
 
-![](RackMultipart20201122-4-19mp3ec_html_df3740c5b61b6770.jpg) ![](RackMultipart20201122-4-19mp3ec_html_1d6210db01adcc85.gif)
+![EsquemaJugabilidad](../master/readmeImages/jugabilidad.jpg)
 
 **3.1 Mecánica**
 
@@ -147,24 +162,15 @@ El arte consiste en un estilo de dibujo simple para los objetos y un estilo pare
 - Evento 1: Niño
   - Diálogos:
     - Llegada:
-
-Niño: Por favor, no encuentro a mi mamá y tengo hambre y frío… Déjame pasar un rato por aquí.
-
+      - Niño: Por favor, no encuentro a mi mamá y tengo hambre y frío… Déjame pasar un rato por aquí.
     - Mientras el jugador no haga nada:
-
-Niño: Fuera hace frío, por favor déjame pasar.
-
-Niño: Prometo que no será mucho rato, por favor déjame pasar.
-
-Mi madre te recompensará cuando se lo cuente.
-
+      - Niño: Fuera hace frío, por favor déjame pasar.
+      - Niño: Prometo que no será mucho rato, por favor déjame pasar.
+      - Mi madre te recompensará cuando se lo cuente.
     - El jugador le echa:
-
-Niño: ¿¡Acaso no tiene consciencia?! Echo de menos a mi mamá…
-
+      - Niño: ¿¡Acaso no tiene consciencia?! Echo de menos a mi mamá…
     - El jugador le deja pasar:
-
-Niño: ¡Muchas gracias, muchísimas gracias! Prometo que no me quedaré mucho tiempo.
+      - Niño: ¡Muchas gracias, muchísimas gracias! Prometo que no me quedaré mucho tiempo.
 
   - Opciones del jugador y consecuencias:
     - Echarle: un guardia aparece para echar al niño. El jugador consigue no perder más tiempo con él.
@@ -173,24 +179,14 @@ Niño: ¡Muchas gracias, muchísimas gracias! Prometo que no me quedaré mucho t
 - Evento 2: Vagabundo
   - Diálogos:
     - Llegada:
-
-Vagabundo: Déjame entrar por favor, el tiempo es frío hoy y no hay espacio en la calle para un poeta pobre estos días.
-
+      - Vagabundo: Déjame entrar por favor, el tiempo es frío hoy y no hay espacio en la calle para un poeta pobre estos días.
     - Mientras el jugador no haga nada:
-
-Vagabundo: Por favor, podré escribir poemas para vosotros,
-
-déjame entrar.
-
-Vagabundo: Os haré ganar mucho dinero con mis obras.
-
+      - Vagabundo: Por favor, podré escribir poemas para vosotros, déjame entrar.
+      - Vagabundo: Os haré ganar mucho dinero con mis obras.
     - El jugador le echa:
-
-Vagabundo: Jajaja, parece que la buena fé murió con los buenos poemas. Ojalá te pudras.
-
+      - Vagabundo: Jajaja, parece que la buena fé murió con los buenos poemas. Ojalá te pudras.
     - El jugador le deja pasar:
-
-Vagabundo: ¡Muchas gracias! Os aseguro que mis poemas serán de calidad.
+      - Vagabundo: ¡Muchas gracias! Os aseguro que mis poemas serán de calidad.
 
   - Opciones del jugador y consecuencias:
     - Echarle: un guardia aparece para echar al vagabundo. El jugador consigue no perder más tiempo con él.
@@ -199,26 +195,16 @@ Vagabundo: ¡Muchas gracias! Os aseguro que mis poemas serán de calidad.
 - Evento 3: Correos (La fecha de las cartas corresponde con la fecha actual)
   - Diálogos:
     - Llegada:
-
-Correos: Vengo a entregar la correspondencia del día.
-
+      - Correos: Vengo a entregar la correspondencia del día.
     - Mientras el jugador no haga nada:
-
-Correos: Perdone, pero no tengo todo el día… ¿Podría por favor dejarme pasar?
-
-Correos: ………..
-
-Correos: ¿Sigue vivo ahí dentro?
-
-Correos: ……… (Quiero irme a mi casa….)
-
+      - Correos: Perdone, pero no tengo todo el día… ¿Podría por favor dejarme pasar?
+      - Correos: ………..
+      - Correos: ¿Sigue vivo ahí dentro?
+      - Correos: ……… (Quiero irme a mi casa….)
     - El jugador le echa:
-
-Correos: Creo que es la primera vez que no me dejan entregar el correo… en fin...
-
+      - Correos: Creo que es la primera vez que no me dejan entregar el correo… en fin...
     - El jugador le deja pasar:
-
-Correos: Que pase un buen día.
+      - Correos: Que pase un buen día.
 
   - Opciones del jugador y consecuencias:
     - Echarle: un guardia aparece a llevarse a rastras al hombre de correos. Si es verdadero, el jugador recibe un strike.
@@ -228,22 +214,14 @@ Correos: Que pase un buen día.
 - Evento 4: Mujer del jefe (La mujer del jefe siempre menciona el supuesto nombre de su marido, si éste no coincide con el nombre de que aparece en la firma de los documentos del jugador entonces se trata de la mujer del jefe falsa)
   - Diálogos:
     - Llegada:
-
-Mujer del jefe: Hola, buenas. Mi marido (Insertar nombre del jefe) se dejó las llaves en casa, puedo pasar a entregárselas.
-
+      - Mujer del jefe: Hola, buenas. Mi marido (Insertar nombre del jefe) se dejó las llaves en casa, puedo pasar a entregárselas.
     - Mientras el jugador no haga nada:
-
-Mujer del jefe: Perdona, ¿podría dejarme pasar? Que yo sepa no le pagan para que vaguee en el trabajo.
-
-Mujer del jefe: Mi marido (Insertar nombre del jefe) me está esperando, por favor déjeme pasar.
-
+      - Mujer del jefe: Perdona, ¿podría dejarme pasar? Que yo sepa no le pagan para que vaguee en el trabajo.
+      - Mujer del jefe: Mi marido (Insertar nombre del jefe) me está esperando, por favor déjeme pasar.
     - El jugador le echa:
-
-Mujer del jefe: ¡Que sepa que mi marido se va a enterar de esto! ¡Se va a quedar usted sin trabajo!
-
+      - Mujer del jefe: ¡Que sepa que mi marido se va a enterar de esto! ¡Se va a quedar usted sin trabajo!
     - El jugador le deja pasar:
-
-Mujer del jefe: Muchas gracias, que tenga un buen día.
+      - Mujer del jefe: Muchas gracias, que tenga un buen día.
 
   - Opciones del jugador y consecuencias:
     - Echarle: un guardia aparece a llevarse a rastras a la mujer del jefe. Si es verdadera, el jugador tiene una probabilidad media de recibir un strike (Esta probabilidad será equilibrada a lo largo del desarrollo).
@@ -253,24 +231,15 @@ Mujer del jefe: Muchas gracias, que tenga un buen día.
 - Evento 5: Sobornador
   - Diálogos:
     - Llegada:
-
-Sobornador: Buenos días. Vengo a publicar este increíble libro, de hecho es un libro tan increíble que le daré un pequeño regalo por dejarme pasar. ¿Qué le parece?
-
+      - Sobornador: Buenos días. Vengo a publicar este increíble libro, de hecho es un libro tan increíble que le daré un pequeño regalo por dejarme pasar. ¿Qué le parece?
     - Mientras el jugador no haga nada:
-
-Sobornador: Venga, sabes que necesitas un poquito de ayuda extra este mes… Déjame que aporte mi pequeño grano de arena...
-
-Sobornador: Vamos, no me seas, sabes que tus jefes también se dejan de vez en cuando, ¿por qué tú ibas a ser menos?
-
-Sobornador: Nadie se va a enterar, no te preocupes.
-
+      - Sobornador: Venga, sabes que necesitas un poquito de ayuda extra este mes… Déjame que aporte mi pequeño grano de arena...
+      - Sobornador: Vamos, no me seas, sabes que tus jefes también se dejan de vez en cuando, ¿por qué tú ibas a ser menos?
+      - Sobornador: Nadie se va a enterar, no te preocupes.
     - El jugador le echa:
-
-Sobornador: Tu pérdida.
-
+      - Sobornador: Tu pérdida.
     - El jugador le deja pasar:
-
-Sobornador: Ji ji, me alegro de que nos entendamos.
+      - Sobornador: Ji ji, me alegro de que nos entendamos.
 
   - Opciones del jugador y consecuencias:
     - Echarle: un guardia aparece a llevarse a rastras al sobornador.
@@ -279,10 +248,11 @@ Sobornador: Ji ji, me alegro de que nos entendamos.
 - Evento 6: Personaje tendencias (Este personaje aparece para notificar al jugador de un cambio de tendencias en libros)
   - Diálogos:
     - Llegada:
+      - Personaje tendencias: Buenos días. Vengo a compartir mi increíble sabiduría sobre tendencias. Ha de saber usted que el género (Insertar nombre de género) está que arde.
 
-Personaje tendencias: Buenos días. Vengo a compartir mi increíble sabiduría sobre tendencias. Ha de saber usted que el género (Insertar nombre de género) está que arde.
+4. **Arquitectura**![EsquemaUML](../master/readmeImages/uml1.jpg)
 
-1. **Arquitectura**![](RackMultipart20201122-4-19mp3ec_html_8a81d7b0b30f9408.png) ![](RackMultipart20201122-4-19mp3ec_html_476988bbe6031c75.png)
+![UML](../master/readmeImages/uml2.jpg)
 
 Enlace a Diagrama de arquitectura:
 
@@ -290,7 +260,7 @@ Enlace a Diagrama de arquitectura:
 
 Enlace a Diagrama de clases UML: [https://app.creately.com/diagram/XXPXHOzG7Mq/edit](https://app.creately.com/diagram/XXPXHOzG7Mq/edit)
 
-1. **Contenido**
+5. **Contenido**
 
 **5.1 Contexto y universo**
 
@@ -319,11 +289,11 @@ Cada jornada será más enrevesada respecto a los parámetros de los libros y la
 
 **5.5 Personajes**
 
-4.0 Protagonista
+5.5.0 Protagonista
 
 - Recepcionista/a
 
-_4.1 Roles_
+_5.5.1 Roles_
 
 - Autores
 - Poetas
@@ -332,24 +302,18 @@ _4.1 Roles_
 - Gente pierde-tiempo
 - Guardia de seguridad
 
-_4.2 Arquetipos_
+_5.5.2 Arquetipos_
 
 **5.6 Objetos**
 
 | **Objeto** | **Disponibilidad** | **Función** | **Imágen** |
 | --- | --- | --- | --- |
 | Timbre | Al comienzo | Llamar al siguiente cliente |
- |
 | Radio | Quinta Jornada | Cambiar el orden de la lista de tendencias |
- |
 | Lista de tendencias (corcho) | Tercera Jornada | Mostrar la lista de tendencias, afectando a la decisión del jugador |
- |
 | Libros | Al comienzo | Papeles que te darán los personajes, donde pone la categoría de dicho libro. |
- |
 | Pluma y tinteros | Al comienzo | Aceptar o denegar la entrada de_Libros_/_Prensa_ |
- |
 | Documento de acceso | Al comienzo | Papel en blanco donde se usa la pluma para permitir pasar o no. |
- |
 
 **5.7 Sonido SFX**
 
@@ -360,8 +324,12 @@ _4.2 Arquetipos_
   - Timbre.
   - Botón de emergencia.
 
-1. **Referencias**
+**6. Referencias**
 
-1. _Papers, Please ( __Lucas Pope__ , 2013)_
-2. _Luces de Bohemia (Valle-Inclán, 1924)_
-3. _Reigns (__François Alliot, 2016)_
+- _Papers, Please ( __Lucas Pope__ , 2013)_
+- _Luces de Bohemia (Valle-Inclán, 1924)_
+- _Reigns (__François Alliot, 2016)_
+
+**7. Links**
+
+- https://www.pivotaltracker.com/n/projects/2470815
