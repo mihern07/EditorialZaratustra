@@ -1,6 +1,6 @@
 import Personaje from "./character.js";
 
-export default class Character extends Phaser.GameObjects.GameObject {
+export default class Events extends Phaser.GameObjects.GameObject {
 
     /** @type {Phaser.Scene} */
     scene
@@ -74,11 +74,8 @@ export default class Character extends Phaser.GameObjects.GameObject {
             sobornador: 7, vagabundo: 8, libroCorrecto: 9, libroIncorrecto: 10
         };
 
-        this.currentCharacterType = this.enum.libroIncorrecto;    //Determina el tipo de personaje que hay actualmente
-
-        this.createCharacter(this.currentCharacterType);
-
-        this.chara.setDepth(-1);    //MOVER ESTO A CHARACTER
+        //Determina el tipo de personaje que hay actualmente
+        this.SetRandomChara();
     }
 
     createCharacter(tipo) {
@@ -125,12 +122,14 @@ export default class Character extends Phaser.GameObjects.GameObject {
                 break;
             case 9:
                 //Personaje libro correcto
+                console.log("Personaje Correcto")
                 this.createCorrectBook();
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueBase, this.dialogueSprite, "libroC" + this.category, "libroA" + this.category, this.documentSprite, this.genre, this.category, this.tamPags);
                 break;
             case 10:
                 //Personaje Libro Incorrecto
-                this.createIncorrectChara();               
+                console.log("Personaje Incorrecto")
+                this.createIncorrectChara();
                 break;
             default:
                 console.log("El personaje buscado no existe");
@@ -138,8 +137,13 @@ export default class Character extends Phaser.GameObjects.GameObject {
         }
     }
 
-    preUpdate() {
+    update() {
+        if(this.chara.checkGone()){
+            this.chara.destroy();
+            this.SetRandomChara();
+        }
         this.CharaShowBook();
+
     }
 
     CharaShowBook() {
@@ -153,12 +157,24 @@ export default class Character extends Phaser.GameObjects.GameObject {
         this.chara.EnterChar();
     }
 
-    DenyChar() {
+    DenyChar() {   
         this.chara.DenyChar();
     }
 
     AcceptChar() {
         this.chara.AcceptChar();
+    }
+
+    SetRandomChara(){
+        let rnd = this.getRndInteger(0, 1); 
+        if (rnd == 0) {
+            this.currentCharacterType = this.enum.libroCorrecto; 
+        }
+        else{
+            this.currentCharacterType = this.enum.libroIncorrecto;
+        } 
+
+        this.createCharacter(this.currentCharacterType);
     }
 
     createCorrectBook() {
@@ -191,10 +207,10 @@ export default class Character extends Phaser.GameObjects.GameObject {
         this.tamPags = this.bookInfo.numPagsBien[this.getRndInteger(0, this.bookInfo.numPagsBien.length - 1)];
     }
 
-    createIncorrectChara(){
+    createIncorrectChara() {
         this.createCorrectBook(); // Crea un libro correcto
         let wrongAspect = this.getRndInteger(0, 2); // Selecciona el aspecto que será erróneo
-        switch(wrongAspect){
+        switch (wrongAspect) {
             case 0:
                 //Categoría errónea
                 let notEmptyGenre = [];
@@ -208,7 +224,7 @@ export default class Character extends Phaser.GameObjects.GameObject {
                     notEmptyGenre.push(this.bookInfo.teatroMal);
                 }
                 let selectGenre = this.getRndInteger(0, notEmptyGenre.length - 1);
-        
+
                 //Añadir random entre las 3
                 if (notEmptyGenre[selectGenre] == this.bookInfo.novelaMal) {
                     this.genre = "Novela";
@@ -224,21 +240,21 @@ export default class Character extends Phaser.GameObjects.GameObject {
                 }
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueBase, this.dialogueSprite, "libroC" + this.category, "libroA" + this.category, this.documentSprite, this.genre, this.category, this.tamPags);
                 break;
-            case 1: 
+            case 1:
                 //Número de páginas Incorrecto
                 this.tamPags = this.bookInfo.numPagsMal[this.getRndInteger(0, this.bookInfo.numPagsMal.length - 1)];
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueBase, this.dialogueSprite, "libroC" + this.category, "libroA" + this.category, this.documentSprite, this.genre, this.category, this.tamPags);
                 break;
             case 2:
                 //Sprite Incorrecto
-                do{
+                do {
                     this.wrongSprite = this.bookInfo.everyCategory[this.getRndInteger(0, this.bookInfo.everyCategory.length - 1)];
                 } while (this.wrongSprite == this.category);
-                
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueBase, this.dialogueSprite,  "libroC" + this.wrongSprite, "libroA" + this.wrongSprite, this.documentSprite, this.genre, this.category, this.tamPags);
+
+                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueBase, this.dialogueSprite, "libroC" + this.wrongSprite, "libroA" + this.wrongSprite, this.documentSprite, this.genre, this.category, this.tamPags);
                 break;
         }
-        
+
     }
 
     getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)

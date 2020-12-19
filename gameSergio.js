@@ -1,6 +1,5 @@
 import Clock from "./clock.js";
 import DeskBell from "./deskbell.js";
-import Character from "./character.js";
 import Inkwell from "./inkwell.js";
 import Board from "./board.js";
 import Pen from "./pen.js";
@@ -11,7 +10,7 @@ import Alarm from "./alarm.js"
 export default class Game extends Phaser.Scene {
 
   constructor() {
-    super({ key: "mainO" });
+    super({ key: "main" });
   }
   preload() { //Carga de sprites
     this.load.image("background", "sprites/background.png") //Fondo = background
@@ -88,11 +87,6 @@ export default class Game extends Phaser.Scene {
     //CLOCK
     this.clock = new Clock(this, 750, 55, "clock", "manecilla"); //Inicializa reloj
     this.clock.start(this.handleTimeFinished.bind(this), '180000');
-
-    //Personaje
-    let archivoDialogo = this.cache.text.get("ninio");
-    archivoDialogo = archivoDialogo.split("\n");
-    this.chara = new Character(this, 955, 380, "character", archivoDialogo, "box", "book", "book2", "document"); //Inicializa personaje
 
     //FOREGROUND(MESA)
     this.fg = this.add.sprite(550, 392, "foreground");
@@ -177,6 +171,8 @@ export default class Game extends Phaser.Scene {
 
 
   update(time, delta) {
+    this.events.update(); // No preUpdate porque no existe si hereda de GameObject
+
     if(this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
       console.log("Hay solapeR");
       this.pen.setRed();
@@ -190,15 +186,15 @@ export default class Game extends Phaser.Scene {
     this.pen.changeColor();
 
     this.pen.PenR.on("pointerup", pointer => {
-      if(this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Roja
-        this.events.DenyChar();
+      if(this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Roja
+        this.events.DenyChar();    
         this.pen.setNormal();
         console.log("Hay solapeD Deny");
       }
     })   
   
     this.pen.PenV.on("pointerup", pointer => {
-      if(this.physics.overlap(this.pen, this.chara.document)) { //Overlap Documento Pluma Verde
+      if(this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Verde
         this.events.AcceptChar();
         this.pen.setNormal();
         console.log("Hay solapeD Accept");
