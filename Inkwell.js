@@ -11,7 +11,7 @@ scene.add.existing(this);
 
 this.setInteractive(); //Lo hacemos interactivo (puedes pulsarlo)
 this.clicked = false; //Creamos variable booleana clicked.
-this.setScale(.6);
+this.setScale(.75);
 
 //this.scene.physics.add.existing(this, true);
 

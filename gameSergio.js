@@ -96,9 +96,9 @@ export default class Game extends Phaser.Scene {
 
     //TINTEROS
 
-    this.tinteroVerde = new Inkwell(this, 200, 600, "tinteroV"); //Inicializa tintero verde
+    this.tinteroVerde = new Inkwell(this, 180, 670, "tinteroV"); //Inicializa tintero verde
 
-    this.tinteroRojo = new Inkwell(this, 950, 600, "tinteroR"); //Inicializa tintero rojo
+    this.tinteroRojo = new Inkwell(this, 925, 670, "tinteroR"); //Inicializa tintero rojo
 
     //CALENDARIO
     this.calendar = this.add.sprite(100, 300, "calendarOriginal");
@@ -145,9 +145,13 @@ export default class Game extends Phaser.Scene {
       numPagsMal : [1]
     }
 
+    //En algun punto seran constantes
+    let numCorrects = 10; // Número mínimo de libros correctos (7 necesarios + 3 de margen)
+    let minBooks= 17; // Número mínimo de libros entre los que se encuentran los anteriores
+
     this.events = new Events(this, 955, 380, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
       dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
-      dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo);
+      dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo, numCorrects, minBooks);
 
     //DESKBELL
     this.bellSound = this.sound.add("deskbellSound");

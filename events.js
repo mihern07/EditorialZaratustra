@@ -42,7 +42,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
 
     constructor(scene, x, y, sprite, dialogueJefe, dialogueNinio, dialogueTendencias, dialogueCorreos, dialogueCorreosFalso, dialogueMujerDelJefe,
-        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueBase, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo) {
+        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueBase, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo, numCorrect, minBooks) {
         super(scene, x, y);
 
         this.x = x;
@@ -67,6 +67,8 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.bookSprite1 = bookSprite1;
         this.bookSprite2 = bookSprite2;
         this.documentSprite = documentSprite;
+        this.numCorrect = numCorrect;
+        this.minBooks = minBooks;
 
         //Enum con todos los tipos distintos de personaje
         this.enum = {
