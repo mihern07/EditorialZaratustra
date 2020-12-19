@@ -41,7 +41,7 @@ export default class GameManager{
      */
     isCleared(amountToClear){
         this.objetivo = amountToClear;
-        return this.dinero > amountToClear;
+        return this.dinero >= amountToClear;
     }
 
     /**

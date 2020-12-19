@@ -29,7 +29,7 @@ export default class Game extends Phaser.Scene {
 
     //CLOCK
     this.clock = new Clock(this, 750, 55, "clock", "manecilla"); //Inicializa reloj
-    this.clock.start(this.handleTimeFinished.bind(this), '10000');
+    this.clock.start(this.handleTimeFinished.bind(this), '180000');
 
     //Personaje
     let archivoDialogo = this.cache.text.get("ninio");
