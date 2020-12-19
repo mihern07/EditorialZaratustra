@@ -42,7 +42,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
 
     constructor(scene, x, y, sprite, dialogueJefe, dialogueNinio, dialogueTendencias, dialogueCorreos, dialogueCorreosFalso, dialogueMujerDelJefe,
-        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueBase, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo, numCorrect, minBooks) {
+        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueBase, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo, order) {
         super(scene, x, y);
 
         this.x = x;
@@ -67,68 +67,75 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.bookSprite1 = bookSprite1;
         this.bookSprite2 = bookSprite2;
         this.documentSprite = documentSprite;
-        this.numCorrect = numCorrect;
-        this.minBooks = minBooks;
+        this.order = order;
+        this.contKnownCharas = 0;
 
         //Enum con todos los tipos distintos de personaje
-        this.enum = {
-            jefe: -1, normal: 0, ninio: 1, tendencias: 2, correos: 3, correosFalso: 4, mujerDelJefe: 5, mujerDelJefeFalsa: 6,
-            sobornador: 7, vagabundo: 8, libroCorrecto: 9, libroIncorrecto: 10
+        this.charaTypes = {
+            ninio: 0, tendencias: 1, correos: 2, correosFalso: 3, mujerDelJefe: 4, mujerDelJefeFalsa: 5,
+            sobornador: 6, vagabundo: 7, libroCorrecto: 8, libroIncorrecto: 9
         };
 
-        //Determina el tipo de personaje que hay actualmente
-        this.SetRandomChara();
+        let cont = 0;
+        this.clientOrder = [];
+        for (let i = 0; i < this.order.numCorrects; i++) { // Añade los minimos correctos
+            this.clientOrder.push(this.charaTypes.libroCorrecto);
+            cont++;
+        }
+        for (let i = cont; i < this.order.minBooks; i++) { // Añade el resto (correctos o incorrectos)
+            this.clientOrder.push(this.getRndInteger(this.charaTypes.libroCorrecto, this.charaTypes.libroIncorrecto));
+        }
+        for (let i = 0; i < this.order.specialChara.length; i++) { // Añade los personajes de evento
+            this.clientOrder.push(this.order.specialChara[i]);
+        }
+        this.clientOrder = this.clientOrder.sort(() => Math.random() - 0.5); // Mezcla elementos de la array (https://flaviocopes.com/how-to-shuffle-array-javascript/)
+
+        console.log(this.clientOrder);
+        //Crea el primer personaje
+        this.SetChara();
     }
 
     createCharacter(tipo) {
         switch (tipo) {
-            case -1:
-                //Jefe
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueJefe, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
-                break;
             case 0:
-                //Personaje normal
-                //Crear personaje normal sin diálogo (Quizás tendremos que mover los diálogos al Events o añadir un booleano a character)
-                break;
-            case 1:
                 //Niño
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueNinio, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
                 break;
-            case 2:
+            case 1:
                 //Personaje tendencias
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueTendencias, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
                 break;
-            case 3:
+            case 2:
                 //Correos
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueCorreos, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
                 break;
-            case 4:
+            case 3:
                 //Correos falso
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueCorreosFalso, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
                 break;
-            case 5:
+            case 4:
                 //Mujer del jefe
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueMujerDelJefe, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
                 break;
-            case 6:
+            case 5:
                 //Mujer del jefe falsa
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueMujerDelJefeFalsa, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
                 break;
-            case 7:
+            case 6:
                 //Sobornador
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueSobornador, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
                 break;
-            case 8:
+            case 7:
                 //Vagabundo
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueVagabundo, this.dialogueSprite, this.bookSprite1, this.bookSprite2, this.documentSprite);
                 break;
-            case 9:
+            case 8:
                 //Personaje libro correcto
                 console.log("Personaje Correcto")
                 this.createCorrectBook();
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueBase, this.dialogueSprite, "libroC" + this.category, "libroA" + this.category, this.documentSprite, this.genre, this.category, this.tamPags);
                 break;
-            case 10:
+            case 9:
                 //Personaje Libro Incorrecto
                 console.log("Personaje Incorrecto")
                 this.createIncorrectChara();
@@ -140,9 +147,14 @@ export default class Events extends Phaser.GameObjects.GameObject {
     }
 
     update() {
-        if(this.chara.checkGone()){
+        if (this.chara.checkGone()) {
             this.chara.destroy();
-            this.SetRandomChara();
+            if (this.contKnownCharas < this.clientOrder.length){
+                this.SetChara();
+            }
+            else{
+                this.SetRandomChara();
+            }
         }
         this.CharaShowBook();
 
@@ -159,7 +171,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.chara.EnterChar();
     }
 
-    DenyChar() {   
+    DenyChar() {
         this.chara.DenyChar();
     }
 
@@ -167,16 +179,17 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.chara.AcceptChar();
     }
 
-    SetRandomChara(){
-        let rnd = this.getRndInteger(0, 1); 
-        if (rnd == 0) {
-            this.currentCharacterType = this.enum.libroCorrecto; 
-        }
-        else{
-            this.currentCharacterType = this.enum.libroIncorrecto;
-        } 
+    // Crea el siguiente personaje en la lista de necesarios
+    SetChara() {  
+        //this.currentCharacterType = this.charaTypes.libroIncorrecto;
+        this.createCharacter(this.clientOrder[this.contKnownCharas]);
+        this.contKnownCharas++;
+    }
 
-        this.createCharacter(this.currentCharacterType);
+    // Crea un personaje aleatorio entre correcto e incorrecto
+    SetRandomChara() {
+        let rnd = this.getRndInteger(this.charaTypes.libroCorrecto, this.charaTypes.libroIncorrecto);
+        this.createCharacter(rnd);
     }
 
     createCorrectBook() {
