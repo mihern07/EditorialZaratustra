@@ -59,6 +59,8 @@ export default class Boot extends Phaser.Scene {
         this.load.text("dialogoBase", "dialogue/dialogoBase.txt");
     
         this.load.audio("deskbellSound", "sounds/deskbell.wav"); //Audio timbre
+        this.load.audio("npcSound","sounds/npc.wav");
+        this.load.audio("music","sounds/music.wav");
       }
 
       create(){

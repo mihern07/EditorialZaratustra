@@ -23,6 +23,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.firstPosX = this.x; //Creamos la variable firstPosX (guardar la posicion inicial)
         this.setScale(.5);
         this.scene.add.existing(this);
+        this.npc=this.scene.sound.add("npcSound");
 
 
         this.setDepth(-1);    //MOVER ESTO A CHARACTER
@@ -78,6 +79,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.currentS = this.States.SHOW;
 
             this.dialogue.setVisible(true);
+            this.npc.play();
 
             //if(this.bringsBook){
             this.ShowBook();
@@ -107,6 +109,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.firstClock.stop();
             this.secondClock.stop();
             this.dialogue.setText(this.texto.slice(12, 15))
+            this.npc.play();
             //if(this.bringsBook){
             this.RetrieveBook();
             //}
@@ -124,6 +127,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.secondClock.stop();
 
             this.dialogue.setText(this.texto.slice(9, 12))
+            this.npc.play();
 
             //if(this.bringsBook){
             this.RetrieveBook();
@@ -134,10 +138,12 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
     ShowFirstDialogue() {
         this.dialogue.setText(this.texto.slice(3, 6))
+        this.npc.play();
     }
 
     ShowSecondDialogue() {
         this.dialogue.setText(this.texto.slice(6, 9))
+        this.npc.play();
     }
 
     CreateBook() { //Inicializa el libro del personaje 
