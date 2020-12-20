@@ -9,6 +9,7 @@ import Alarm from "./alarm.js"
 import GameManager from "./gameManager.js";
 import Boss from "./boss.js";
 
+
 export default class Game extends Phaser.Scene {
 
   constructor() {
@@ -34,6 +35,10 @@ export default class Game extends Phaser.Scene {
 
     //FOREGROUND(MESA)
     this.fg = this.add.sprite(550, 392, "foreground");
+
+    this.gameManager = new GameManager();
+    // Determinar el numero minimo de ingresos necesarios para ganar el nivel y el numero de strikes hasta el game over
+    this.gameManager.setGameOver(1500,2); 
 
     //BOARD(CORCHO)
     this.Board = new Board(this, 965, 340, 13, "board", "postIt")
@@ -85,8 +90,8 @@ export default class Game extends Phaser.Scene {
       poesiaMal: [],
       teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
       everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-      numPagsBien: [0, 2],
-      numPagsMal: [1]
+      numPagsBien: [0, 2], // libro corto y largo
+      numPagsMal: [1] // libro mediano
     }
 
     //En algun punto seran constantes
@@ -99,8 +104,7 @@ export default class Game extends Phaser.Scene {
     this.events = new Events(this, 955, 380, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
       dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
       dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo,
-      this.order);
-
+      this.order, this.gameManager);
 
     //DESKBELL
     this.bellSound = this.sound.add("deskbellSound");
@@ -108,7 +112,7 @@ export default class Game extends Phaser.Scene {
 
      //SEGURIDAD
 
-     this.bodyguard = new Bodyguard(this,955,340,"bodyguard", this.events); //Inicializa bodyguard
+     this.bodyguard = new Bodyguard(this,955,340,"bodyguard", this.events) //Inicializa bodyguard
 
      //BOSS
      this.boss = new Boss(this, 0, 340, "bodyguard", dialogoJefe, "box", 0);
@@ -119,20 +123,17 @@ export default class Game extends Phaser.Scene {
  
      this.Intro();
 
-     this.gameManager = new GameManager();
-     
      this.music=this.sound.add("music");
      this.music.play();
 
      this.boss.EnterChar();
 
-     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+     this.a = 0;
   }
 
-  
-
   handleTimeFinished() {
-    if(this.gameManager.isCleared(1500))
+    if(this.gameManager.isCleared())
       this.scene.start('victoryScene', this.gameManager)
     else
       this.scene.start('gameOverScene', this.gameManager);
@@ -141,41 +142,42 @@ export default class Game extends Phaser.Scene {
 
 
   update(time, delta) {
-    if(this.keyEsc.isDown){
-      this.keyEsc.reset();
-      this.game.scene.pause(this);
-      this.scene.launch('pause');
-    }
-      
-    this.events.update(); // No preUpdate porque no existe si hereda de GameObject
-
-    if (this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
-      console.log("Hay solapeR");
-      this.pen.setRed();
-    }
-
-    if (this.physics.overlap(this.pen, this.tinteroVerde)) { //Overlap Verde
-      console.log("Hay solapeV");
-      this.pen.setGreen();
-    }
-
-    this.pen.changeColor();
-
-    this.pen.PenR.on("pointerup", pointer => {
-      if (this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Roja
-        this.events.DenyChar();
-        this.pen.setNormal();
-        console.log("Hay solapeD Deny");
+    if(!this.gameManager.isGameOver()){ // Comprueba si no se han recibido los strikes minimos
+      if(this.keyEsc.isDown && this.a === 0){
+        this.a = 1;
+        this.game.scene.pause(this);
+        this.scene.launch('pause');
       }
-    })
-
-    this.pen.PenV.on("pointerup", pointer => {
-      if (this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Verde
-        this.events.AcceptChar();
-        this.pen.setNormal();
-        console.log("Hay solapeD Accept");
+  
+      this.events.update(); // No preUpdate porque no existe si hereda de GameObject
+  
+      if (this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
+        this.pen.setRed();
       }
-    })
+  
+      if (this.physics.overlap(this.pen, this.tinteroVerde)) { //Overlap Verde
+        this.pen.setGreen();
+      }
+  
+      this.pen.changeColor();
+  
+      this.pen.PenR.on("pointerup", pointer => {
+        if (!this.pen.hasSigned && this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Roja
+          this.events.DenyChar();
+          this.pen.setNormal();
+        }
+      })
+  
+      this.pen.PenV.on("pointerup", pointer => {
+        if (!this.pen.hasSigned && this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Verde
+          this.events.AcceptChar();
+          this.pen.setNormal();
+        }
+      })
+    }
+    else{
+      this.scene.start('gameOverScene', this.gameManager);
+    }
   }
 
   Intro() {
