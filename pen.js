@@ -30,6 +30,7 @@ export default class Pen extends Phaser.GameObjects.Sprite{
 
         this.States = {NORMAL: 0, GREEN: 1, RED: 2}; 
         this.States = this.States.NORMAL;
+        this.hasSigned = false;
 
         this.PenR = scene.add.sprite(this.x,this.y,sprite2).setInteractive(); //Pluma Roja
 
@@ -113,16 +114,19 @@ export default class Pen extends Phaser.GameObjects.Sprite{
     setNormal()
     {
         this.States=0; //NORMAL
+        this.hasSigned = true;
     }
 
     setRed()
     {
         this.States=2; //ROJO
+        this.hasSigned = false;
     }
 
     setGreen()
     {
         this.States=1; //VERDE
+        this.hasSigned = false;
     }
 
     changeColor()

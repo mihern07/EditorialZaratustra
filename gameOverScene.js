@@ -17,7 +17,7 @@ export default class GameOverScene extends Phaser.Scene{
         this.puntuacion = this.add.text(325, 300, this.gameManager.dinero + "€/" + this.gameManager.objetivo + "€ conseguidos");
         this.puntuacion.setTint(0xE31B1B);
         this.puntuacion.setFontSize(40);
-        this.strikes = this.add.text(315, 400, this.gameManager.strikes + "/3 strikes recibidos");
+        this.strikes = this.add.text(315, 400, this.gameManager.strikes + "/"+ this.gameManager.numMaxStrikes + " strikes recibidos");
         this.strikes.setTint(0xE31B1B);
         this.strikes.setFontSize(40);
         this.button = this.add.sprite(550, 600, "buttonNotPressed");

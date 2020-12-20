@@ -42,7 +42,8 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
 
     constructor(scene, x, y, sprite, dialogueJefe, dialogueNinio, dialogueTendencias, dialogueCorreos, dialogueCorreosFalso, dialogueMujerDelJefe,
-        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueBase, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo, order) {
+        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueBase, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo,
+        order, gameManager) {
         super(scene, x, y);
 
         this.x = x;
@@ -68,6 +69,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.bookSprite2 = bookSprite2;
         this.documentSprite = documentSprite;
         this.order = order;
+        this.gameManager = gameManager;
         this.contKnownCharas = 0;
 
         //Enum con todos los tipos distintos de personaje
@@ -134,11 +136,13 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Personaje Correcto")
                 this.createCorrectBook();
                 this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueBase, this.dialogueSprite, "libroC" + this.category, "libroA" + this.category, this.documentSprite, this.genre, this.category, this.tamPags);
+                this.isCorrectCharacter = true;
                 break;
             case 9:
                 //Personaje Libro Incorrecto
                 console.log("Personaje Incorrecto")
                 this.createIncorrectChara();
+                this.isCorrectCharacter = false;
                 break;
             default:
                 console.log("El personaje buscado no existe");
@@ -149,7 +153,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
     update() {
         if (this.chara.checkGone()) {
             this.chara.destroy();
-            if (this.contKnownCharas < this.clientOrder.length){
+            if (this.contKnownCharas < this.clientOrder.length){ // creación de nuevo personaje
                 this.SetChara();
             }
             else{
@@ -173,10 +177,22 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
     DenyChar() {
         this.chara.DenyChar();
+        console.log(this.gameManager.dinero);
+        console.log(this.gameManager.strikes);
+        console.log(this.gameManager.bookStrikeCont);
     }
 
     AcceptChar() {
         this.chara.AcceptChar();
+        if (this.isCorrectCharacter){ // adicion de puntos
+            this.gameManager.AddSubstractMoney(200); // 20 será constante 
+        }
+        else{
+            this.gameManager.BookStrike();
+        }
+        console.log(this.gameManager.dinero);
+        console.log(this.gameManager.strikes);
+        console.log(this.gameManager.bookStrikeCont);
     }
 
     // Crea el siguiente personaje en la lista de necesarios

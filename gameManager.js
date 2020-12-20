@@ -2,7 +2,9 @@ export default class GameManager{
     constructor(){
         this.dinero = 0;
         this.strikes = 0;
-        this.objetivo = 0;
+        this.objetivo = 0; // Se gestiona con los métodos de la clase para que varíe entre niveles
+        this.numMaxStrikes = 0; // Se gestiona con los métodos de la clase para que varíe entre niveles
+        this.bookStrikeCont = 0;
     }
 
     /**
@@ -24,6 +26,17 @@ export default class GameManager{
         }
     }
 
+    //Comprueba si suficientes libros han sido fallados para recibir strike
+    BookStrike(){
+        if (this.bookStrikeCont < 2){
+            this.bookStrikeCont++;
+        }
+        else{
+            this.bookStrikeCont = 0;
+            this.strikes++;
+        }
+    }
+
     /**
      * Método auxiliar que devuelve un número aleatorio entre un mínimo y un máximo
      * @param {*} min 
@@ -39,9 +52,8 @@ export default class GameManager{
      * Devuelve true si el jugador ha cumplido el objetivo, false si ha fallado
      * @param {*} amountToClear Cantidad necesaria para completar el nivel actual con éxito
      */
-    isCleared(amountToClear){
-        this.objetivo = amountToClear;
-        return this.dinero >= amountToClear;
+    isCleared(){
+        return this.dinero >= this.objetivo;
     }
 
     /**
@@ -49,8 +61,12 @@ export default class GameManager{
      * Devuelve true si el jugador ha perdido, false en caso de que aún pueda seguir jugando
      * @param {*} amountToClear Cantidad necesaria para completar el nivel actual con éxito
      */
-    isGameOver(amountToClear){
+    isGameOver(){
+        return this.strikes >= this.numMaxStrikes;
+    }
+
+    setGameOver(amountToClear, maxStrikes){
         this.objetivo = amountToClear;
-        return this.strikes >= 3;
+        this.numMaxStrikes = maxStrikes;
     }
 }
