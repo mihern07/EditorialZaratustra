@@ -23,7 +23,6 @@ export default class Document extends Phaser.GameObjects.Sprite{
         
         //this.scene.input.setDraggable(this.Libro2);
         this.scene.input.setDraggable(this);
-        this.visible=false;
 
         this.setDamping = true;
         

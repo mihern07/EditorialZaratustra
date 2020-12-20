@@ -55,7 +55,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
 
         //Documento
-        this.document = new Document(scene, 650, 550, documentSprite); //Inicializa documento
+        //Inicializa documento
+        this.docSprite = documentSprite;
         this.hasdocument = false;
         this.isGone = false;
     }
@@ -84,8 +85,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
             //if(this.bringsBook){
             this.ShowBook();
             //}
-
-            this.ShowDocument();
+            this.document = new Document(this.scene, 650, 550, this.docSprite); 
 
             this.firstClock = new Clock(this.scene, 0, 0, this.dialogueSprite, this.dialogueSprite);
             this.firstClock.start(this.ShowFirstDialogue.bind(this), '7000');
@@ -172,12 +172,6 @@ export default class Character extends Phaser.GameObjects.Sprite {
         if (this.hasBook) {
             this.book.visible = true;
             this.currentS = this.States.WAIT;
-        }
-    }
-
-    ShowDocument() {
-        if (this.hasdocument) {
-            this.document.visible = true;
         }
     }
 
