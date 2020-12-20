@@ -146,7 +146,7 @@ export default class Game extends Phaser.Scene {
       if(this.keyEsc.isDown && this.a === 0){
         this.a = 1;
         this.game.scene.pause(this);
-        this.scene.launch('pause');
+        this.scene.launch('pause',this.music);
       }
   
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject

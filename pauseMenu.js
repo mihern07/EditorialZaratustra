@@ -17,6 +17,7 @@ class pauseMenu extends Phaser.Scene {
                 if(pointer.y > this.menu.y){
                     console.log("titleEscene");
                     this.scene.stop('main');
+                    this.musics.stop();
                     this.scene.switch('titleScene');
                 }
                 else{
@@ -26,6 +27,11 @@ class pauseMenu extends Phaser.Scene {
                 }
             }
         })
+    }
+
+    init(music)
+    {
+        this.musics = music;
     }
 
 }
