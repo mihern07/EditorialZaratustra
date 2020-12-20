@@ -1,3 +1,38 @@
 h1 {
   text-align: center;
+  font-size: xx-large;
+  color:saddlebrown;
+}
+
+h2 {
+  text-align: center;
+  font-size: x-large;
+  color:saddlebrown;
+}
+
+h3{
+  text-align: center;
+  color:saddlebrown;
+}
+
+body{
+  background-image: url("sprites/teamLogoSprite.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  background-attachment: fixed;
+}
+
+td{
+  height:200px;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+tbody{
+  background-image: url("sprites/paper-dialog.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:center;
 }
