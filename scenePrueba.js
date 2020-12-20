@@ -128,8 +128,7 @@ export default class Game extends Phaser.Scene {
 
      this.boss.EnterChar();
 
-     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-     this.a = 0;
+     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
   }
 
   handleTimeFinished() {
@@ -143,10 +142,10 @@ export default class Game extends Phaser.Scene {
 
   update(time, delta) {
     if(!this.gameManager.isGameOver()){ // Comprueba si no se han recibido los strikes minimos
-      if(this.keyEsc.isDown && this.a === 0){
-        this.a = 1;
+      if(this.keyEsc.isDown){
+        this.keyEsc.reset();
         this.game.scene.pause(this);
-        this.scene.launch('pause',this.music);
+        this.scene.launch('pause', this.music);
       }
   
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject
