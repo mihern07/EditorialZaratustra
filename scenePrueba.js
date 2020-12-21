@@ -85,7 +85,7 @@ export default class Game extends Phaser.Scene {
     this.bookInfo = {
       novelaBien: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
       poesiaBien: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-      teatroBien: ["Romance", "Aventura", "Suspense", "Histórico"],
+      teatroBien: ["Romance", "Aventura", "Histórico", "Suspense"],
       novelaMal: ["Romance", "Suspense", "Policíaco", "Fantasía", "Comedia"],
       poesiaMal: [],
       teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
@@ -115,7 +115,7 @@ export default class Game extends Phaser.Scene {
      this.bodyguard = new Bodyguard(this,955,340,"bodyguard", this.events) //Inicializa bodyguard
 
      //BOSS
-     this.boss = new Boss(this, 0, 340, "bodyguard", dialogoJefe, "box", 0);
+     this.boss = new Boss(this, 0, 340, "bodyguard", dialogoJefe, "box", 0, 3, this.bookInfo);
 
      //ALARMA
  
@@ -123,10 +123,10 @@ export default class Game extends Phaser.Scene {
  
      this.Intro();
 
-     this.music=this.sound.add("music");
+     this.music = this.sound.add("music"); //Música manejable
      this.music.play();
 
-     this.boss.EnterChar();
+     this.boss.EnterChar(); //Entrada el Boss
 
      this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
   }
@@ -198,6 +198,10 @@ export default class Game extends Phaser.Scene {
       rotate: { start: 0, end: 120 },
       frequency: 300
     });
+  }
+
+  bossFinished(){
+    this.bell.startWork();
   }
 
 }
