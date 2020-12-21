@@ -1,6 +1,6 @@
 Jefe
-Nivel 1.1
-Nivel 1.2
+¡Bienvenido a tu nuevo puesto! Para empezar, revisa
+que no se cuele nadie con una categoría incorrecta.
 Jefe
 Nivel 2.1
 Nivel 2.2
