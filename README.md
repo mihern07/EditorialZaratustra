@@ -11,6 +11,12 @@ _Daniel Illanes, Alejandro Ortega, Miguel Hernández, Sergio José Alfonso (Chik
 
 Versión 1.0 - 16 de octubre de 2020
 
+**Página del juego**
+https://mihern07.github.io/EditorialZaratustra/
+
+**Página de gestión (Pivotal)**
+https://www.pivotaltracker.com/projects/2470815
+
 | **Resumen** |
 | --- |
 | **Géneros:**
@@ -26,12 +32,6 @@ Fecha de propuesta del concepto (14/10/2020)_
 Fechas de pre-producción (/2020)
 Fechas de producción (/2020 -/2020)
 Fecha de lanzamiento (/2020) |
-
-**Página del juego**
-https://mihern07.github.io/EditorialZaratustra/
-
-**Página de gestión**
-https://www.pivotaltracker.com/projects/2470815
 
 **Descripción**
 
