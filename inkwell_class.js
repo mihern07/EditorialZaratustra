@@ -1,3 +1,5 @@
+import {inkwellConst} from "./constants.js";
+
 export default class Inkwell extends Phaser.GameObjects.Sprite  {
 
 constructor(scene,x,y, sprite) {
@@ -11,7 +13,7 @@ scene.add.existing(this);
 
 this.setInteractive(); //Lo hacemos interactivo (puedes pulsarlo)
 this.clicked = false; //Creamos variable booleana clicked.
-this.setScale(.75);
+this.setScale(inkwellConst.scale);
 
 //this.scene.physics.add.existing(this, true);
 

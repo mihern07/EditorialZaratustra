@@ -1,3 +1,5 @@
+import {penConst} from "./constants.js";
+
 export default class Pen extends Phaser.GameObjects.Sprite{
 
     /** @type {Phaser.Scene} */
@@ -21,12 +23,12 @@ export default class Pen extends Phaser.GameObjects.Sprite{
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
 
-        this.setScale(.2);
+        this.setScale(penConst.scale);
         
         scene.add.existing(this);
         
         this.setInteractive();        
-        this.setDepth(3);
+        this.setDepth(penConst.depth);
 
         this.States = {NORMAL: 0, GREEN: 1, RED: 2}; 
         this.States = this.States.NORMAL;
@@ -38,14 +40,14 @@ export default class Pen extends Phaser.GameObjects.Sprite{
 
         this.scene.physics.add.existing(this.PenR);
         this.PenR.body.allowGravity = false;
-        this.PenR.setDepth(3);
+        this.PenR.setDepth(penConst.depth);
 
         this.scene.physics.add.existing(this.PenV);
         this.PenV.body.allowGravity = false;
-        this.PenV.setDepth(3);
+        this.PenV.setDepth(penConst.depth);
 
-        this.PenR.setScale(.2)
-        this.PenV.setScale(.2)
+        this.PenR.setScale(penConst.scale)
+        this.PenV.setScale(penConst.scale)
 
         this.PenR.visible=false;
         this.PenV.visible=false;

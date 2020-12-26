@@ -1,6 +1,9 @@
 export default class Boot extends Phaser.Scene {
     constructor() {
         super({ key: "boot" });
+
+        const deskBellScale = .2;
+
     }
     preload() { //Carga de sprites
         this.load.image("background", "sprites/backgroundSprite.png") //Fondo = background

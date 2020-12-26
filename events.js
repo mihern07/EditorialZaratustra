@@ -1,4 +1,5 @@
 import Personaje from "./character.js";
+import { eventsConst } from "./constants.js";
 
 export default class Events extends Phaser.GameObjects.GameObject {
 
@@ -153,10 +154,10 @@ export default class Events extends Phaser.GameObjects.GameObject {
     update() {
         if (this.chara.checkGone()) {
             this.chara.destroy();
-            if (this.contKnownCharas < this.clientOrder.length){ // creación de nuevo personaje
+            if (this.contKnownCharas < this.clientOrder.length) { // creación de nuevo personaje
                 this.SetChara();
             }
-            else{
+            else {
                 this.SetRandomChara();
             }
         }
@@ -184,10 +185,10 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
     AcceptChar() {
         this.chara.AcceptChar();
-        if (this.isCorrectCharacter){ // adicion de puntos
-            this.gameManager.AddSubstractMoney(200); // 20 será constante 
+        if (this.isCorrectCharacter) { // adicion de puntos
+            this.gameManager.AddSubstractMoney(eventsConst.moneyAmount); // 20 será constante 
         }
-        else{
+        else {
             this.gameManager.BookStrike();
         }
         console.log(this.gameManager.dinero);
@@ -196,7 +197,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
     }
 
     // Crea el siguiente personaje en la lista de necesarios
-    SetChara() {  
+    SetChara() {
         //this.currentCharacterType = this.charaTypes.libroIncorrecto;
         this.createCharacter(this.clientOrder[this.contKnownCharas]);
         this.contKnownCharas++;

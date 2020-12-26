@@ -1,4 +1,6 @@
 import Bodyguard from "./bodyguard.js"
+import {alarmConst} from "./constants.js";
+
 export default class DeskBell extends Phaser.GameObjects.Sprite  {
           /** @type {Phaser.GameObjects.Sprite} */
           Bell2
@@ -7,7 +9,7 @@ export default class DeskBell extends Phaser.GameObjects.Sprite  {
       super(scene,x,y,sprite);
       
       this.scene = scene;
-      this.setScale(.2);
+      this.setScale(alarmConst.scale);
 
       this.bodyguard=bodyguards;
 
@@ -15,7 +17,7 @@ export default class DeskBell extends Phaser.GameObjects.Sprite  {
       this.setInteractive(); //Lo hacemos interactivo (poder pulsarlo)
 
       this.Bell2 = scene.add.sprite(x,y,sprite2).setInteractive(); //Creamos el sprite 2 (timbre pulsado)
-      this.Bell2.setScale(.2);
+      this.Bell2.setScale(alarmConst.scale);
 
       this.Bell2.visible = false;
       //this.scene.physics.add.existing(this, true);

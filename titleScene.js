@@ -1,3 +1,5 @@
+import {titleConst} from "./constants.js";
+
 class TitleScene extends Phaser.Scene {
 
 	constructor() {
@@ -11,20 +13,20 @@ class TitleScene extends Phaser.Scene {
 	}
 
 	create() {
-		var bg = this.add.sprite(15,0,'title');
+		var bg = this.add.sprite(titleConst.bgPosX,titleConst.bgPosY,'title');
 		
 		bg.setOrigin(0,0);
 		
-		bg.scale = 0.57;
+		bg.scale = titleConst.bgScale;
 		
-		var anim = this.add.sprite(50,390, 'anim');
-		var animBold = this.add.sprite(50, 390, 'anim2');
+		var anim = this.add.sprite(titleConst.animPosX,titleConst.animPosY, 'anim');
+		var animBold = this.add.sprite(titleConst.animPosX,titleConst.animPosY, 'anim2');
 		
 		anim.setOrigin(0,0);
 		animBold.setOrigin(0,0);
 
-		anim.scale = 0.6;
-		animBold.scale = 0.6;
+		anim.scale = titleConst.animScale;
+		animBold.scale = titleConst.animScale;
 	
 		animBold.visible = false;
 

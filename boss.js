@@ -1,4 +1,5 @@
 import Dialogue from "./dialogue.js";
+import {bossConst} from "./constants.js";
 
 export default class Boss extends Phaser.GameObjects.Sprite {
 
@@ -16,9 +17,9 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         super(scene, x, y, sprite);
         this.scene = scene;
         this.firstPosX = this.x; //Creamos la variable firstPosX (guardar la posicion inicial)
-        this.setScale(.5);
+        this.setScale(bossConst.scale);
         this.scene.add.existing(this);
-        this.setDepth(-2);
+        this.setDepth(bossConst.depth);
 
         this.bookInfo = bookInfo;
 
@@ -28,11 +29,11 @@ export default class Boss extends Phaser.GameObjects.Sprite {
 
         this.texto = dialogue;
         this.dialogueSprite = dialogueSprite;
-        this.dialogue = new Dialogue(scene, 530, 415, this.dialogueSprite, this.texto.slice(level, level + 3));
+        this.dialogue = new Dialogue(scene, bossConst.dialoguePosX, bossConst.dialoguePosY, this.dialogueSprite, this.texto.slice(level, level + 3));
         this.dialogue.setVisible(false);
         this.dialogue.setInteractive();
 
-        this.SPEED = 190;
+        this.SPEED = bossConst.speed;
         //INI: estado inicial
         //SHOW: en el mostrador con el libro
         //GOING: desde el spawn al mostrador
