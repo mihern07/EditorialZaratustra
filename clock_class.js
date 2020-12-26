@@ -1,14 +1,4 @@
 export default class Clock extends Phaser.GameObjects.Sprite{
-    /** @type {Phaser.Scene} */
-    scene
-
-    /** @type {Phaser.Time.timerEvent} */
-    timerEvent
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    manecilla
-
-    duration = 0;
 
     constructor(scene, x, y, clockImage, manecillaImage){
         super(scene,x,y, clockImage);
