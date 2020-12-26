@@ -5,8 +5,6 @@
 
 **Grupo 09**
 
-![](RackMultipart20201122-4-19mp3ec_html_2b1e88affe78ade.jpg)
-
 _Daniel Illanes, Alejandro Ortega, Miguel Hernández, Sergio José Alfonso (Chikito)_
 
 Versión 1.0 - 16 de octubre de 2020
@@ -87,7 +85,7 @@ Se busca un loop jugable rápido, donde el jugador deberá tener en cuenta vario
 
 Desde el menú principal se podrá acceder a las opciones: &quot;Jugar&quot;, &quot;Opciones&quot;, &quot;Créditos&quot; y &quot;Salir&quot;.
 
-![Menú](../master/readmeImages/Logo.png)
+![Menu](readmeImages/Logo.png)
 
 _Imagen provisional de menú (opciones en la página derecha)_
 
@@ -97,7 +95,7 @@ Tiene un control similar a Papers Please, en el que se utilizará el ratón para
 
 3. **Jugabilidad**
 
-![EsquemaJugabilidad](../master/readmeImages/jugabilidad.jpg)
+![EsquemaJugabilidad](readmeImages/jugabilidad.jpg)
 
 **3.1 Mecánica**
 
@@ -250,9 +248,9 @@ El arte consiste en un estilo de dibujo simple para los objetos y un estilo pare
     - Llegada:
       - Personaje tendencias: Buenos días. Vengo a compartir mi increíble sabiduría sobre tendencias. Ha de saber usted que el género (Insertar nombre de género) está que arde.
 
-4. **Arquitectura**![EsquemaUML](../master/readmeImages/uml1.jpg)
+4. **Arquitectura**![EsquemaUML](readmeImages/uml1.jpg)
 
-![UML](../master/readmeImages/uml2.jpg)
+![UML](readmeImages/uml2.jpg)
 
 Enlace a Diagrama de arquitectura:
 
