@@ -1,4 +1,5 @@
 import Dialogue from "./dialogue.js";
+import RuleDoc from "./ruledoc.js";
 import {bossConst} from "./constants.js";
 
 export default class Boss extends Phaser.GameObjects.Sprite {
@@ -34,6 +35,10 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         this.dialogue.setInteractive();
 
         this.SPEED = bossConst.speed;
+
+         //REGLAS
+        this.rules = new RuleDoc(this.scene, bossConst.rulesPosX, bossConst.rulesPosY, "rules", "openedRules", this.bookInfo.numPagsBien);
+
         //INI: estado inicial
         //SHOW: en el mostrador con el libro
         //GOING: desde el spawn al mostrador
@@ -201,7 +206,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
 
     preUpdate() {
 
-        if (this.currentS === this.States.GOING && this.x > 540) { //Cuando llegue al medio, se detiene el personaje
+        if (this.currentS === this.States.GOING && this.x > bossConst.midPos) { //Cuando llegue al medio, se detiene el personaje
             this.StopChar();
             //DIALOGO
             this.dialogue.setVisible(true);
@@ -210,6 +215,9 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         else if (this.currentS === this.States.ANSWER && this.x < this.firstPosX) { //Cuando salga del campo de vision, por la izquierda, desaparece
             this.visible = false;
             this.scene.bossAnswered = true;
+        }
+        else if(this.currentS === this.States.ANSWER && this.x > bossConst.midPos){
+            this.rules.visible = true;
         }
     }
 }

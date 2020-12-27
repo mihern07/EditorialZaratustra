@@ -114,6 +114,10 @@ export const clockConst = {
 export const bossConst = {
     dialoguePosX: 530,
     dialoguePosY: 415,
+    rulesPosX: 650,
+    rulesPosY: 550,
+
+    midPos: 540,
 
     scale: .5,
     depth: -2,
@@ -126,8 +130,10 @@ export const bookConst = {
     secondOffsetY: 375,
     thirdOffsetY: 350,
 
-    scale: 1.7,
-    depth: 4
+    scale: .3,
+    depth: 2,
+    openedScale: 1.7,
+    openedDepth: 4
 }
 export const characterConst = {
     dialoguePosX: 530,
@@ -195,4 +201,14 @@ export const postItConst = {
     offsetY: -18,
 
     scale: .8
+}
+export const ruleConst = {
+    offsetX: -270,
+    offsetY: -260,
+    offsetYAcum: 25,
+
+    scale: .3,
+    depth: 2,
+    openedScale: .5,
+    openedDepth: 4
 }
