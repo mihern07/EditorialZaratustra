@@ -1,49 +1,10 @@
 import Personaje from "./character.js";
+import Newspaper from "./newspaper.js";
 
 export default class Events extends Phaser.GameObjects.GameObject {
-
-    /** @type {Phaser.Scene} */
-    scene
-
-    x   //Posición del personaje
-
-    y   //Posición del personaje
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    sprite              //Sprite del personaje
-
-    //Variables para los diálogos
-    dialogueNinio
-    dialogueTendencias
-    dialogueCorreos
-    dialogueCorreosFalso
-    dialogueMujerDelJefe
-    dialogueMujerDelJefeFalsa
-    dialogueSobornador
-    dialogueVagabundo
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    dialogueSprite      //Sprite con el cuadro de texto
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    bookSprite1              //Sprite del libro1
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    bookSprite2              //Sprite del libro2
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    documentSprite           //Sprite del documento
-
-    enum        //Enum con los tipos de personaje
-
-    chara
-
-    currentCharacterType
-
-
     constructor(scene, x, y, sprite, dialogueJefe, dialogueNinio, dialogueTendencias, dialogueCorreos, dialogueCorreosFalso, dialogueMujerDelJefe,
         dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueBase, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo,
-        order, gameManager) {
+        order, gameManager, day, month, year) {
         super(scene, x, y);
 
         this.x = x;
@@ -91,6 +52,12 @@ export default class Events extends Phaser.GameObjects.GameObject {
             this.clientOrder.push(this.order.specialChara[i]);
         }
         this.clientOrder = this.clientOrder.sort(() => Math.random() - 0.5); // Mezcla elementos de la array (https://flaviocopes.com/how-to-shuffle-array-javascript/)
+
+        this.day =day;
+        this.month = month;
+        this.year = year;
+
+        this.createIncorrectNewspaper();
 
         console.log(this.clientOrder);
         //Crea el primer personaje
@@ -286,6 +253,22 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 break;
         }
 
+    }
+
+    createCorrectNewspaper(){
+        this.newspaper = new Newspaper(this.scene,this.scene.game.config.width/4, this.scene.game.config.height/1.5, "littleNewspaper", "bigNewspaper", this.day, this.month, this.year, "Ejemplo de noticia");
+    }
+
+    createIncorrectNewspaper(){
+        this.incorrectDay = this.getRndInteger(1, 30);
+        this.incorrectMonth = this.getRndInteger(1,12);
+        this.incorrectYear = this.getRndInteger(1960,2040);
+        while(this.incorrectDay==this.day&&this.incorrectMonth==this.month&&this.incorrectYear==year){
+            this.incorrectDay = this.getRndInteger(1, 30);
+            this.incorrectMonth = this.getRndInteger(1,12);
+            this.incorrectYear = this.getRndInteger(1960,2040);
+        }
+        this.newspaper = new Newspaper(this.scene,this.scene.game.config.width/4, this.scene.game.config.height/1.5, "littleNewspaper", "bigNewspaper", this.incorrectDay, this.incorrectMonth, this.incorrectYear, "Ejemplo de noticia");
     }
 
     getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)

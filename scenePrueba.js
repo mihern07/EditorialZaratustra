@@ -104,7 +104,7 @@ export default class Game extends Phaser.Scene {
     this.events = new Events(this, 955, 380, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
       dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
       dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo,
-      this.order, this.gameManager);
+      this.order, this.gameManager, 1, 4, 1970);
 
     //DESKBELL
     this.bellSound = this.sound.add("deskbellSound");
