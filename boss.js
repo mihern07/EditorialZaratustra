@@ -1,16 +1,6 @@
 import Dialogue from "./dialogue.js";
 
 export default class Boss extends Phaser.GameObjects.Sprite {
-
-    /** @type {Phaser.GameObjects.Text} */
-    texto
-
-    /** @type {Phaser.Scene} */
-    scene
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    dialogueSprite
-
     constructor(scene, x, y, sprite, dialogue, dialogueSprite, level, contDialogue, bookInfo) {
 
         super(scene, x, y, sprite);

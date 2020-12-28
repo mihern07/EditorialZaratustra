@@ -4,18 +4,6 @@ import Clock from "./clock_class.js";
 import Document from "./document.js";
 
 export default class Character extends Phaser.GameObjects.Sprite {
-
-    /** @type {Phaser.GameObjects.Text} */
-    texto
-
-    dialogue
-
-    /** @type {Phaser.Scene} */
-    scene
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    dialogueSprite
-
     constructor(scene, x, y, sprite, dialogue, dialogueSprite, bookSprite1, bookSprite2, documentSprite, genre, category, tamPags) {
 
         super(scene, x, y, sprite);

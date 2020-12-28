@@ -1,14 +1,4 @@
 export default class Character extends Phaser.GameObjects.Sprite {
-
-    /** @type {Phaser.GameObjects.Text} */
-    texto
-
-    /** @type {Phaser.Scene} */
-    scene
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    dialogueSprite
-
     constructor(scene, x, y, sprite, events) {
 
         super(scene, x, y, sprite);

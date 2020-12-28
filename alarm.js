@@ -1,8 +1,5 @@
 import Bodyguard from "./bodyguard.js"
 export default class DeskBell extends Phaser.GameObjects.Sprite  {
-          /** @type {Phaser.GameObjects.Sprite} */
-          Bell2
-
     constructor(scene,x,y, sprite, sprite2, bodyguards) {
       super(scene,x,y,sprite);
       

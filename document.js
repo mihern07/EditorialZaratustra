@@ -1,8 +1,4 @@
 export default class Document extends Phaser.GameObjects.Sprite{
-
-    /** @type {Phaser.Scene} */
-    scene
-
     constructor(scene,x,y,sprite)
     {
         super(scene,x,y,sprite)

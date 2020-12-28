@@ -1,11 +1,5 @@
 import Events from "./events.js"
 export default class DeskBell extends Phaser.GameObjects.Sprite {
-  /** @type {Phaser.GameObjects.Sprite} */
-  Bell2
-
-  /** @type {Events} */
-  events
-
   constructor(scene, x, y, sprite, sprite2, events, sound) {
     super(scene, x, y, sprite);
     this.events = events;

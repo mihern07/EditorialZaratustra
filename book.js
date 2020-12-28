@@ -1,14 +1,4 @@
 export default class Book extends Phaser.GameObjects.Sprite {
-
-    /** @type {Phaser.Scene} */
-    scene
-
-    // /** @type {Phaser.GameObjects.Sprite} */
-    // Libro
-
-    /** @type {Phaser.GameObjects.Sprite} */
-    Libro2
-
     constructor(scene, x, y, sprite, sprite2, genre, category, numPags) {
         super(scene, x, y, sprite)
         this.firstPosX = this.x;
