@@ -1,8 +1,8 @@
-export default class Pen extends Phaser.GameObjects.Sprite{
-    constructor(scene,x,y,sprite,sprite2,sprite3)
-    {
-        super(scene,x,y,sprite)
-        
+import { penConst } from "./constants.js";
+export default class Pen extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, sprite, sprite2, sprite3) {
+        super(scene, x, y, sprite)
+
         this.firstPosX = this.x;
         this.firstPosY = this.y;
 
@@ -11,35 +11,35 @@ export default class Pen extends Phaser.GameObjects.Sprite{
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
 
-        this.setScale(.2);
-        
-        scene.add.existing(this);
-        
-        this.setInteractive();        
-        this.setDepth(3);
+        this.setScale(penConst.scale);
 
-        this.States = {NORMAL: 0, GREEN: 1, RED: 2}; 
+        scene.add.existing(this);
+
+        this.setInteractive();
+        this.setDepth(penConst.depth);
+
+        this.States = { NORMAL: 0, GREEN: 1, RED: 2 };
         this.States = this.States.NORMAL;
         this.hasSigned = false;
 
-        this.PenR = scene.add.sprite(this.x,this.y,sprite2).setInteractive(); //Pluma Roja
+        this.PenR = scene.add.sprite(this.x, this.y, sprite2).setInteractive(); //Pluma Roja
 
-        this.PenV = scene.add.sprite(this.x,this.y,sprite3).setInteractive(); //Pluma Verde
+        this.PenV = scene.add.sprite(this.x, this.y, sprite3).setInteractive(); //Pluma Verde
 
         this.scene.physics.add.existing(this.PenR);
         this.PenR.body.allowGravity = false;
-        this.PenR.setDepth(3);
+        this.PenR.setDepth(penConst.depth);
 
         this.scene.physics.add.existing(this.PenV);
         this.PenV.body.allowGravity = false;
-        this.PenV.setDepth(3);
+        this.PenV.setDepth(penConst.depth);
 
-        this.PenR.setScale(.2)
-        this.PenV.setScale(.2)
+        this.PenR.setScale(penConst.scale)
+        this.PenV.setScale(penConst.scale)
 
-        this.PenR.visible=false;
-        this.PenV.visible=false;
-        
+        this.PenR.visible = false;
+        this.PenV.visible = false;
+
         this.scene.input.setDraggable(this);
         this.scene.input.setDraggable(this.PenR);
         this.scene.input.setDraggable(this.PenV);
@@ -47,9 +47,9 @@ export default class Pen extends Phaser.GameObjects.Sprite{
         this.PenR.setDamping = true;
         this.PenV.setDamping = true;
         this.setDamping = true;
-        
-        this.on('drag', pointer=> {
-            if((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()){
+
+        this.on('drag', pointer => {
+            if ((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()) {
                 this.x = pointer.x;
                 this.y = pointer.y;
                 this.PenV.x = this.x;
@@ -59,8 +59,8 @@ export default class Pen extends Phaser.GameObjects.Sprite{
             }
         })
 
-        this.PenV.on('drag', pointer=> {
-            if((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()){
+        this.PenV.on('drag', pointer => {
+            if ((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()) {
                 this.x = pointer.x;
                 this.y = pointer.y;
                 this.PenV.x = this.x;
@@ -70,8 +70,8 @@ export default class Pen extends Phaser.GameObjects.Sprite{
             }
         })
 
-        this.PenR.on('drag', pointer=> {
-            if((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()){
+        this.PenR.on('drag', pointer => {
+            if ((pointer.x > 50 && pointer.y > 450 && pointer.y < 900 && pointer.x < 1040) && pointer.leftButtonDown()) {
                 this.x = pointer.x;
                 this.y = pointer.y;
                 this.PenV.x = this.x;
@@ -101,47 +101,42 @@ export default class Pen extends Phaser.GameObjects.Sprite{
     //     })  
     // }
 
-    setNormal()
-    {
-        this.States=0; //NORMAL
+    setNormal() {
+        this.States = 0; //NORMAL
         this.hasSigned = true;
     }
 
-    setRed()
-    {
-        this.States=2; //ROJO
+    setRed() {
+        this.States = 2; //ROJO
         this.hasSigned = false;
     }
 
-    setGreen()
-    {
-        this.States=1; //VERDE
+    setGreen() {
+        this.States = 1; //VERDE
         this.hasSigned = false;
     }
 
-    changeColor()
-    {
-        switch(this.States)
-        {
+    changeColor() {
+        switch (this.States) {
             case 0: //Sprite normal
-                this.visible=true;
-                this.PenV.visible=false;
-                this.PenR.visible=false;
+                this.visible = true;
+                this.PenV.visible = false;
+                this.PenR.visible = false;
                 break;
             case 1: //Sprite verde
-                this.PenV.visible=true;
-                this.visible=false;
-                this.PenR.visible=false;
+                this.PenV.visible = true;
+                this.visible = false;
+                this.PenR.visible = false;
                 break;
             case 2: //Sprite rojo
-                this.PenR.visible=true;
-                this.visible=false;
-                this.PenV.visible=false;
+                this.PenR.visible = true;
+                this.visible = false;
+                this.PenV.visible = false;
                 break;
         }
     }
 
-    resetPos(){
+    resetPos() {
         this.x = this.firstPosX;
         this.y = this.firstPosY;
         this.PenV.x = this.x;

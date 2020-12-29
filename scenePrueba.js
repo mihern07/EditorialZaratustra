@@ -8,6 +8,7 @@ import Bodyguard from "./bodyguard.js"
 import Alarm from "./alarm.js"
 import GameManager from "./gameManager.js";
 import Boss from "./boss.js";
+import { sceneConst } from "./constants.js";
 
 
 export default class Game extends Phaser.Scene {
@@ -15,8 +16,6 @@ export default class Game extends Phaser.Scene {
   constructor() {
     super({ key: "main" });
   }
-
-
   create() {
     //GLOBAL
     this.input.mouse.disableContextMenu(); //No permite click derecho en el juego.
@@ -27,35 +26,36 @@ export default class Game extends Phaser.Scene {
     //   PERDIDO = 0,
     // }
     //FONDO
-    this.bg = this.add.sprite(550, 397, "background") // Los NPC's solo se ven por encima del bg
+    this.bg = this.add.sprite(sceneConst.bgPosX, sceneConst.bgPosY, "background") // Los NPC's solo se ven por encima del bg
 
     //CLOCK
-    this.clock = new Clock(this, 750, 55, "clock", "manecilla"); //Inicializa reloj
+    this.clock = new Clock(this, sceneConst.clockPosX, sceneConst.clockPosY, "clock", "manecilla"); //Inicializa reloj
     this.clock.start(this.handleTimeFinished.bind(this), '180000');
 
     //FOREGROUND(MESA)
-    this.fg = this.add.sprite(550, 392, "foreground");
+    this.fg = this.add.sprite(sceneConst.fgPosX, sceneConst.fgPosY, "foreground");
 
     this.gameManager = new GameManager();
     // Determinar el numero minimo de ingresos necesarios para ganar el nivel y el numero de strikes hasta el game over
-    this.gameManager.setGameOver(1500,2); 
+    this.gameManager.setGameOver(sceneConst.firstLevelWinCondition, sceneConst.firstLevelLooseCondition);
 
     //BOARD(CORCHO)
-    this.Board = new Board(this, 965, 340, 13, "board", "postIt")
+    this.Board = new Board(this, sceneConst.boardPosX, sceneConst.boardPosY, sceneConst.boardNumPostIts, "board", "postIt")
 
     //TINTEROS
 
-    this.tinteroVerde = new Inkwell(this, 180, 670, "tinteroV"); //Inicializa tintero verde
+    console.log(sceneConst.greenInkwellPosX + " " + sceneConst.inkwellPosY);
+    this.tinteroVerde = new Inkwell(this, sceneConst.greenInkwellPosX, sceneConst.inkwellPosY, "tinteroV"); //Inicializa tintero verde
 
-    this.tinteroRojo = new Inkwell(this, 925, 670, "tinteroR"); //Inicializa tintero rojo
+    this.tinteroRojo = new Inkwell(this, sceneConst.redInkwellPosX, sceneConst.inkwellPosY, "tinteroR"); //Inicializa tintero rojo
 
     //CALENDARIO
-    this.calendar = this.add.sprite(100, 300, "calendarOriginal");
-    this.calendar.setScale(0.45)
+    this.calendar = this.add.sprite(sceneConst.calendarPosX, sceneConst.calendarPosY, "calendarOriginal");
+    this.calendar.setScale(sceneConst.calendarScale)
 
     //PLUMA
 
-    this.pen = new Pen(this, 700, 700, "pen", "penR", "penV");
+    this.pen = new Pen(this, sceneConst.penPosX, sceneConst.penPosY, "pen", "penR", "penV");
 
     //Preparación de los archivos de texto
     let dialogoJefe = this.cache.text.get("jefe");
@@ -83,90 +83,88 @@ export default class Game extends Phaser.Scene {
 
     //Info del libro
     this.bookInfo = {
-      novelaBien: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
-      poesiaBien: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-      teatroBien: ["Romance", "Aventura", "Histórico", "Suspense"],
-      novelaMal: ["Romance", "Suspense", "Policíaco", "Fantasía", "Comedia"],
-      poesiaMal: [],
-      teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-      everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-      numPagsBien: [0, 2], // libro corto y largo
-      numPagsMal: [1] // libro mediano
+      novelaBien: sceneConst.firstLevelNovelG,
+      poesiaBien: sceneConst.firstLevelPoetryG,
+      teatroBien: sceneConst.firstLevelTheatreG,
+      novelaMal: sceneConst.firstLevelNovelB,
+      poesiaMal: sceneConst.firstLevelPoetryB,
+      teatroMal: sceneConst.firstLevelTheatreB,
+      everyCategory: sceneConst.everyCategory,
+      numPagsBien: [sceneConst.thickBook, sceneConst.thinBook], // libro corto y largo
+      numPagsMal: [sceneConst.normalBook] // libro mediano
     }
 
     //En algun punto seran constantes
     this.order = {
-      numCorrects : 7, // Número mínimo de libros correctos 
-      minBooks : 17, // Número mínimo de libros entre los que se encuentran los anteriores
-      specialChara : []
+      numCorrects: sceneConst.firstLevelCorrects, // Número mínimo de libros correctos 
+      minBooks: sceneConst.firstLevelMinCor, // Número mínimo de libros entre los que se encuentran los anteriores
+      specialChara: []
     }
 
-    this.events = new Events(this, 955, 380, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
+    this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
       dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
       dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo,
-      this.order, this.gameManager, 1, 4, 1970);
+      this.order, this.gameManager, sceneConst.firstDay, sceneConst.month, sceneConst.year);
 
     //DESKBELL
     this.bellSound = this.sound.add("deskbellSound");
-    this.bell = new DeskBell(this, 825, 500, "deskBellSP", "deskBellPressed", this.events, this.bellSound); //Inicializa timbre
+    this.bell = new DeskBell(this, sceneConst.bellPosX, sceneConst.bellPosY, "deskBellSP", "deskBellPressed", this.events, this.bellSound); //Inicializa timbre
 
-     //SEGURIDAD
+    //SEGURIDAD
 
-     this.bodyguard = new Bodyguard(this,955,340,"bodyguard", this.events) //Inicializa bodyguard
+    this.bodyguard = new Bodyguard(this, sceneConst.guardPosX, sceneConst.guardPosY, "bodyguard", this.events) //Inicializa bodyguard
 
-     //BOSS
-     this.boss = new Boss(this, 0, 340, "bodyguard", dialogoJefe, "box", 0, 4, this.bookInfo);
+    //BOSS
+    this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bodyguard", dialogoJefe, "box", 0, 4, this.bookInfo);
 
-     //ALARMA
- 
-     this.alarm = new Alarm(this,200,800,"deskBellSP", "deskBellPressed", this.bodyguard); //Inicializa alarma.
- 
-     this.Intro();
+    //ALARMA
 
-     this.music = this.sound.add("music"); //Música manejable
-     this.music.play();
+    this.alarm = new Alarm(this, sceneConst.alarmPosX, sceneConst.alarmPosY, "deskBellSP", "deskBellPressed", this.bodyguard); //Inicializa alarma.
 
-     this.boss.EnterChar(); //Entrada el Boss
+    this.Intro();
 
-     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+    this.music = this.sound.add("music"); //Música manejable
+    this.music.play();
+
+    this.boss.EnterChar(); //Entrada el Boss
+
+    this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
   }
 
   handleTimeFinished() {
-    if(this.gameManager.isCleared())
+    if (this.gameManager.isCleared())
       this.scene.start('victoryScene', this.gameManager)
     else
       this.scene.start('gameOverScene', this.gameManager);
   }
 
-
-
   update(time, delta) {
-    if(!this.gameManager.isGameOver()){ // Comprueba si no se han recibido los strikes minimos
-      if(this.keyEsc.isDown){
+    if (!this.gameManager.isGameOver()) { // Comprueba si no se han recibido los strikes minimos
+      if (this.keyEsc.isDown) {
         this.keyEsc.reset();
         this.game.scene.pause(this);
         this.scene.launch('pause', this.music);
       }
-  
+
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject
-  
+
       if (this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
         this.pen.setRed();
       }
-  
+
       if (this.physics.overlap(this.pen, this.tinteroVerde)) { //Overlap Verde
         this.pen.setGreen();
       }
-  
+
       this.pen.changeColor();
-  
+
       this.pen.PenR.on("pointerup", pointer => {
         if (!this.pen.hasSigned && this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Roja
           this.events.DenyChar();
           this.pen.setNormal();
         }
       })
-  
+
       this.pen.PenV.on("pointerup", pointer => {
         if (!this.pen.hasSigned && this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Verde
           this.events.AcceptChar();
@@ -174,7 +172,7 @@ export default class Game extends Phaser.Scene {
         }
       })
     }
-    else{
+    else {
       this.scene.start('gameOverScene', this.gameManager);
     }
   }
@@ -200,7 +198,7 @@ export default class Game extends Phaser.Scene {
     });
   }
 
-  bossFinished(){
+  bossFinished() {
     this.bell.startWork();
   }
 

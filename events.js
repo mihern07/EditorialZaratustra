@@ -1,4 +1,5 @@
 import Personaje from "./character.js";
+import { eventsConst } from "./constants.js";
 import Newspaper from "./newspaper.js";
 
 export default class Events extends Phaser.GameObjects.GameObject {
@@ -152,7 +153,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
     AcceptChar() {
         this.chara.AcceptChar();
         if (this.isCorrectCharacter){ // adicion de puntos
-            this.gameManager.AddSubstractMoney(200); // 20 será constante 
+            this.gameManager.AddSubstractMoney(eventsConst.moneyAmount); // 20 será constante 
         }
         else{
             this.gameManager.BookStrike();

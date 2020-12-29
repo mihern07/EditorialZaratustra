@@ -2,6 +2,7 @@ import Dialogue from "./dialogue.js";
 import Book from "./book.js";
 import Clock from "./clock_class.js";
 import Document from "./document.js";
+import {characterConst} from "./constants.js";
 
 export default class Character extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, sprite, dialogue, dialogueSprite, bookSprite1, bookSprite2, documentSprite, genre, category, tamPags) {
@@ -9,17 +10,17 @@ export default class Character extends Phaser.GameObjects.Sprite {
         super(scene, x, y, sprite);
         this.scene = scene;
         this.firstPosX = this.x; //Creamos la variable firstPosX (guardar la posicion inicial)
-        this.setScale(.5);
+        this.setScale(characterConst.scale);
         this.scene.add.existing(this);
         this.npc=this.scene.sound.add("npcSound");
 
 
-        this.setDepth(-1);    //MOVER ESTO A CHARACTER
+        this.setDepth(characterConst.depth);    //MOVER ESTO A CHARACTER
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
         this.body.setVelocityX(0);
         this.bringsBook = (genre != undefined); // Determina si el personaje trae un libro
-        this.SPEED = 190;
+        this.SPEED = characterConst.speed;
         //INI: estado inicial
         //SHOW: en el mostrador con el libro
         //GOING: desde el spawn al mostrador
@@ -30,14 +31,14 @@ export default class Character extends Phaser.GameObjects.Sprite {
         //Dialogos
         this.texto = dialogue;
         this.dialogueSprite = dialogueSprite;
-        this.dialogue = new Dialogue(scene, 530, 415, this.dialogueSprite, this.texto.slice(0, 3));
+        this.dialogue = new Dialogue(scene, characterConst.dialoguePosX, characterConst.dialoguePosY, this.dialogueSprite, this.texto.slice(0, 3));
         this.dialogue.setVisible(false);
 
         //if(this.bringsBook){
         //Libro
         this.numPags = this.getNumPags(tamPags); // numero pags
 
-        this.book = new Book(scene, 500, 550, bookSprite1, bookSprite2, genre, category, this.numPags); //Inicializa libro
+        this.book = new Book(scene, characterConst.bookPosX, characterConst.bookPosY, bookSprite1, bookSprite2, genre, category, this.numPags); //Inicializa libro
         this.hasBook = false;
         //}
 
@@ -73,7 +74,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
             //if(this.bringsBook){
             this.ShowBook();
             //}
-            this.document = new Document(this.scene, 650, 550, this.docSprite); 
+            this.document = new Document(this.scene, characterConst.documentPosX, characterConst.documentPosY, this.docSprite); 
 
             this.firstClock = new Clock(this.scene, 0, 0, this.dialogueSprite, this.dialogueSprite);
             this.firstClock.start(this.ShowFirstDialogue.bind(this), '7000');
@@ -169,11 +170,11 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
     preUpdate() {
 
-        if (this.currentS === this.States.GOING && this.x < 540) { //Cuando llegue al medio, se detiene el personaje
+        if (this.currentS === this.States.GOING && this.x < characterConst.midPos) { //Cuando llegue al medio, se detiene el personaje
             this.StopChar();
 
         }
-        else if (this.currentS === this.States.ANSWER && this.x < 120) { //Cuando salga del campo de vision, por la izquierda, se le reinicia
+        else if (this.currentS === this.States.ANSWER && this.x < characterConst.outPos) { //Cuando salga del campo de vision, por la izquierda, se le reinicia
             this.StopChar();
             this.dialogue.setText(this.texto.slice(0, 3));
             this.dialogue.setVisible(false);
@@ -193,13 +194,13 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
     getNumPags(tam) {
         if (tam == 0) {
-            return this.getRndInteger(25, 150);
+            return this.getRndInteger(characterConst.thinPags[0], characterConst.thinPags[1]);
         }
         else if (tam == 1) {
-            return this.getRndInteger(400, 700);
+            return this.getRndInteger(characterConst.normalPags[0], characterConst.normalPags[1]);
         }
         else {
-            return this.getRndInteger(1200, 3000);
+            return this.getRndInteger(characterConst.thickPags[0], characterConst.thickPags[1]);
         }
     }
 

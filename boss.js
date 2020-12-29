@@ -1,4 +1,6 @@
 import Dialogue from "./dialogue.js";
+import RuleDoc from "./ruledoc.js";
+import { bossConst } from "./constants.js";
 
 export default class Boss extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, sprite, dialogue, dialogueSprite, level, contDialogue, bookInfo) {
@@ -6,9 +8,9 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         super(scene, x, y, sprite);
         this.scene = scene;
         this.firstPosX = this.x; //Creamos la variable firstPosX (guardar la posicion inicial)
-        this.setScale(.5);
+        this.setScale(bossConst.scale);
         this.scene.add.existing(this);
-        this.setDepth(-2);
+        this.setDepth(bossConst.depth);
 
         this.bookInfo = bookInfo;
 
@@ -18,11 +20,15 @@ export default class Boss extends Phaser.GameObjects.Sprite {
 
         this.texto = dialogue;
         this.dialogueSprite = dialogueSprite;
-        this.dialogue = new Dialogue(scene, 530, 415, this.dialogueSprite, this.texto.slice(level, level + 3));
+        this.dialogue = new Dialogue(scene, bossConst.dialoguePosX, bossConst.dialoguePosY, this.dialogueSprite, this.texto.slice(level, level + 3));
         this.dialogue.setVisible(false);
         this.dialogue.setInteractive();
 
-        this.SPEED = 190;
+        this.SPEED = bossConst.speed;
+
+        //REGLAS
+        this.rules = new RuleDoc(this.scene, bossConst.rulesPosX, bossConst.rulesPosY, "rules", "openedRules", this.bookInfo.numPagsBien);
+
         //INI: estado inicial
         //SHOW: en el mostrador con el libro
         //GOING: desde el spawn al mostrador
@@ -190,7 +196,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
 
     preUpdate() {
 
-        if (this.currentS === this.States.GOING && this.x > 540) { //Cuando llegue al medio, se detiene el personaje
+        if (this.currentS === this.States.GOING && this.x > bossConst.midPos) { //Cuando llegue al medio, se detiene el personaje
             this.StopChar();
             //DIALOGO
             this.dialogue.setVisible(true);
@@ -199,6 +205,9 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         else if (this.currentS === this.States.ANSWER && this.x < this.firstPosX) { //Cuando salga del campo de vision, por la izquierda, desaparece
             this.visible = false;
             this.scene.bossAnswered = true;
+        }
+        else if (this.currentS === this.States.ANSWER && this.x > bossConst.midPos) {
+            this.rules.visible = true;
         }
     }
 }

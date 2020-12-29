@@ -1,3 +1,4 @@
+import {documentConst} from "./constants.js";
 export default class Document extends Phaser.GameObjects.Sprite{
     constructor(scene,x,y,sprite)
     {
@@ -7,8 +8,8 @@ export default class Document extends Phaser.GameObjects.Sprite{
         this.firstPosY = this.y;
 
         this.scene = scene;
-        this.setScale(.3);
-        this.setDepth(1);
+        this.setScale(documentConst.scale);
+        this.setDepth(documentConst.depth);
 
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;

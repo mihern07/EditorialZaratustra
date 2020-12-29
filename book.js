@@ -1,3 +1,4 @@
+import { bookConst } from "./constants.js";
 export default class Book extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, sprite, sprite2, genre, category, numPags) {
         super(scene, x, y, sprite)
@@ -9,8 +10,8 @@ export default class Book extends Phaser.GameObjects.Sprite {
         this.visible = false;
 
 
-        this.setScale(.3);
-        this.setDepth(2);
+        this.setScale(bookConst.scale);
+        this.setDepth(bookConst.depth);
         //Lo añade a la escena
         scene.add.existing(this);
 
@@ -19,20 +20,20 @@ export default class Book extends Phaser.GameObjects.Sprite {
 
         //Sprite ibro abierto
         this.Libro2 = scene.add.sprite(this.x, this.y, sprite2).setInteractive();
-        this.Libro2.setScale(1.7);
+        this.Libro2.setScale(bookConst.openedScale);
         this.Libro2.visible = false;
 
         this.Libro2.x = this.scene.game.config.width / 2;
         this.Libro2.y = this.scene.game.config.height / 2;
-        this.Libro2.setDepth(4);
-       
-        this.info = [scene.add.text(this.x - 250, this.y - 400, genre, { color: 0x0A0A0A }),
-                    scene.add.text(this.x - 250, this.y - 375, category, { color: 0x0A0A0A }),
-                    scene.add.text(this.x - 250, this.y - 350, numPags + " pags", { color: 0x0A0A0A })]; //Añadimos texto. (cambiar numeros por globales)
+        this.Libro2.setDepth(bookConst.openedDepth);
+
+        this.info = [scene.add.text(this.x - bookConst.offsetX, this.y - bookConst.firstOffsetY, genre, { color: 0x0A0A0A }),
+        scene.add.text(this.x - bookConst.offsetX, this.y - bookConst.secondOffsetY, category, { color: 0x0A0A0A }),
+        scene.add.text(this.x - bookConst.offsetX, this.y - bookConst.thirdOffsetY, numPags + " pags", { color: 0x0A0A0A })]; //Añadimos texto. (cambiar numeros por globales)
 
         for (let i = 0; i < this.info.length; i++) {
             this.info[i].visible = false;
-            this.info[i].setDepth(4);
+            this.info[i].setDepth(bookConst.openedDepth);
         }
 
         //Configuración del Drag        

@@ -1,32 +1,34 @@
-export default class Inkwell extends Phaser.GameObjects.Sprite  {
+import { inkwellConst } from "./constants.js";
 
-constructor(scene,x,y, sprite) {
-super(scene,x,y,sprite);
-this.scene=scene;
+export default class Inkwell extends Phaser.GameObjects.Sprite {
 
-this.scene.physics.add.existing(this);
-this.body.allowGravity = false;
+  constructor(scene, x, y, sprite) {
+    super(scene, x, y, sprite);
+    this.scene = scene;
 
-scene.add.existing(this);
+    this.scene.physics.add.existing(this);
+    this.body.allowGravity = false;
 
-this.setInteractive(); //Lo hacemos interactivo (puedes pulsarlo)
-this.clicked = false; //Creamos variable booleana clicked.
-this.setScale(.75);
+    scene.add.existing(this);
 
-//this.scene.physics.add.existing(this, true);
+    this.setInteractive(); //Lo hacemos interactivo (puedes pulsarlo)
+    this.clicked = false; //Creamos variable booleana clicked.
+    this.setScale(inkwellConst.scale);
+
+    //this.scene.physics.add.existing(this, true);
 
 
-//Cuando es pulsado dicho sprite...
-this.on('pointerdown', pointer => {
-  if (pointer.isDown) {
-    //console.log("Botón seguridad pulsado");
-      this.clicked = true;
-  }
-});
+    //Cuando es pulsado dicho sprite...
+    this.on('pointerdown', pointer => {
+      if (pointer.isDown) {
+        //console.log("Botón seguridad pulsado");
+        this.clicked = true;
+      }
+    });
 
-this.on('pointerup', pointer => {
+    this.on('pointerup', pointer => {
       //console.log("Botón seguridad pulsado");
-        this.clicked = false;
-  });
-}
+      this.clicked = false;
+    });
+  }
 }

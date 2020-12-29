@@ -1,3 +1,4 @@
+import { newsConst } from "./constants.js";
 export default class Newspaper extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, sprite, sprite2, day, month, year, news) {
         super(scene, x, y, sprite)
@@ -9,8 +10,8 @@ export default class Newspaper extends Phaser.GameObjects.Sprite {
         this.visible = true;
 
 
-        this.setScale(.1);
-        this.setDepth(2);
+        this.setScale(newsConst.scale);
+        this.setDepth(newsConst.depth);
         //Lo añade a la escena
         scene.add.existing(this);
 
@@ -19,22 +20,22 @@ export default class Newspaper extends Phaser.GameObjects.Sprite {
 
         //Sprite periódico abierto
         this.bigNews = scene.add.sprite(this.x, this.y, sprite2).setInteractive();
-        this.bigNews.setScale(1.3);
+        this.bigNews.setScale(newsConst.openedScale);
         this.bigNews.visible = false;
 
         this.bigNews.x = this.scene.game.config.width / 2;
         this.bigNews.y = this.scene.game.config.height / 2;
-        this.bigNews.setDepth(4);
-       
+        this.bigNews.setDepth(newsConst.openedDepth);
+
         this.day = day;
         this.month = month;
         this.year = year;
-        this.info = [scene.add.text(this.x - 100, this.y - 350, this.day + "/" + this.month + "/" + this.year, { color: 0x0A0A0A }),
-                    scene.add.text(this.x - 100, this.y - 325, news, { color: 0x0A0A0A })]; //Añadimos texto. (cambiar numeros por globales)
+        this.info = [scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.firstOffsetY, this.day + "/" + this.month + "/" + this.year, { color: 0x0A0A0A }),
+        scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.secondOffsetY, news, { color: 0x0A0A0A })]; //Añadimos texto. (cambiar numeros por globales)
 
         for (let i = 0; i < this.info.length; i++) {
             this.info[i].visible = false;
-            this.info[i].setDepth(4);
+            this.info[i].setDepth(newsConst.openedDepth);
         }
 
         //Configuración del Drag        

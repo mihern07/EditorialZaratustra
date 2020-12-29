@@ -1,13 +1,14 @@
+import {clockConst} from "./constants.js";
 export default class Clock extends Phaser.GameObjects.Sprite{
 
     constructor(scene, x, y, clockImage, manecillaImage){
         super(scene,x,y, clockImage);
         this.scene = scene;
-        this.setScale(0.5);
+        this.setScale(clockConst.clockScale);
         scene.add.existing(this);
 
         this.manecilla = scene.add.sprite(x,y, manecillaImage);
-        this.manecilla.setScale(0.5);
+        this.manecilla.setScale(clockConst.clockScale);
     }
 
     /**
@@ -15,7 +16,7 @@ export default class Clock extends Phaser.GameObjects.Sprite{
      * @param {() => void} callback 
      * @param {number} duration 
      */
-    start(callback, duration = 45000){
+    start(callback, duration = clockConst.duration){
         this.stop();
 
         this.finishedCallback = callback;
