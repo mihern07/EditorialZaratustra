@@ -1,22 +1,26 @@
-import { newsConst } from "./constants.js";
-export default class Newspaper extends Phaser.GameObjects.Sprite {
+import { newsConst, draggableConst } from "./constants.js";
+import Draggable from "./draggable.js";
+
+export default class Newspaper extends Draggable {
     constructor(scene, x, y, sprite, sprite2, day, month, year, news) {
-        super(scene, x, y, sprite)
+        super(scene,x,y,sprite, draggableConst.tableX0, draggableConst.tableXX, draggableConst.tableY0, draggableConst.tableYY)
+        
         this.firstPosX = this.x;
         this.firstPosY = this.y;
 
-        this.scene = scene;
+        // this.scene = scene;
 
         this.visible = true;
 
 
         this.setScale(newsConst.scale);
         this.setDepth(newsConst.depth);
+        
         //Lo añade a la escena
-        scene.add.existing(this);
+        // scene.add.existing(this);
 
         //Permite interactuar con él
-        this.setInteractive({ draggable: true, dropZone: true });
+        // this.setInteractive({ draggable: true, dropZone: true });
 
         //Sprite periódico abierto
         this.bigNews = scene.add.sprite(this.x, this.y, sprite2).setInteractive();
@@ -42,18 +46,18 @@ export default class Newspaper extends Phaser.GameObjects.Sprite {
         //this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
         //this.body.setBoundsRectangle(this.bound);
 
-        this.on('drag', pointer => {
-            if ((pointer.x > 50
-                && pointer.y > 450
-                && pointer.y < 900
-                && pointer.x < 1040)
-                && pointer.leftButtonDown()) {
+        // this.on('drag', pointer => {
+        //     if ((pointer.x > 50
+        //         && pointer.y > 450
+        //         && pointer.y < 900
+        //         && pointer.x < 1040)
+        //         && pointer.leftButtonDown()) {
 
-                this.x = pointer.x;
-                this.y = pointer.y;
+        //         this.x = pointer.x;
+        //         this.y = pointer.y;
 
-            }
-        })
+        //     }
+        // })
 
         //Cuando es pulsado dicho sprite...
         this.on("pointerdown", pointer => {

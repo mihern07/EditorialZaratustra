@@ -198,7 +198,7 @@ export const dialogueConst = {
 }
 export const documentConst = {
     scale: .3,
-    depth: 1
+    depth: 1,
 }
 export const inkwellConst = {
     scale: .75
@@ -208,7 +208,10 @@ export const eventsConst = {
 }
 export const penConst = {
     scale: .2,
-    depth: 3
+    depth: 3,
+    tintNormal: 0x000000,
+    tintRed: 0xff0000,
+    tintGreen: 0x008000
 }
 export const postItConst = {
     offsetX: -10,
@@ -225,4 +228,16 @@ export const ruleConst = {
     depth: 2,
     openedScale: .5,
     openedDepth: 4
+}
+
+export const draggableConst = {
+    tableX0: 50,
+    tableXX: 1040,
+    tableY0: 450,
+    tableYY: 900,
+    
+    boardX0: 890,
+    boardXX: 1040,
+    boardY0: 85,
+    boardYY: 400
 }

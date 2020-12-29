@@ -1,22 +1,20 @@
-import { ruleConst } from "./constants.js";
+import { ruleConst, draggableConst } from "./constants.js";
+import Draggable from "./draggable.js";
 
-export default class RuleDoc extends Phaser.GameObjects.Sprite {
+export default class RuleDoc extends Draggable {
     constructor(scene, x, y, sprite, sprite2, pags) {
-        super(scene, x, y, sprite)
+        super(scene,x,y,sprite, draggableConst.tableX0, draggableConst.tableXX, draggableConst.tableY0, draggableConst.tableYY)
         this.firstPosX = this.x;
         this.firstPosY = this.y;
 
-        this.scene = scene;
         this.pags = pags;
 
         this.setScale(ruleConst.scale);
-        this.setDepth(ruleConst.depth);
+        this.setDepth(ruleConst.depth); 
         //Lo añade a la escena
-        this.scene.add.existing(this);
+        // this.scene.add.existing(this);
 
         this.visible = false;
-        //Permite interactuar con él
-        this.setInteractive({ draggable: true, dropZone: true });
 
         //Sprite ibro abierto
         this.ruleDoc2 = scene.add.sprite(this.x, this.y, sprite2).setInteractive();
@@ -38,19 +36,6 @@ export default class RuleDoc extends Phaser.GameObjects.Sprite {
         //Configuración del Drag        
         //this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
         //this.body.setBoundsRectangle(this.bound);
-
-        this.on('drag', pointer => {
-            if ((pointer.x > 50
-                && pointer.y > 450
-                && pointer.y < 900
-                && pointer.x < 1040)
-                && pointer.leftButtonDown()) {
-
-                this.x = pointer.x;
-                this.y = pointer.y;
-
-            }
-        })
 
         //Cuando es pulsado dicho sprite...
         this.on("pointerdown", pointer => {

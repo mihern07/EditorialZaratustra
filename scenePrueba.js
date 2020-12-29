@@ -10,6 +10,10 @@ import GameManager from "./gameManager.js";
 import Boss from "./boss.js";
 import { sceneConst } from "./constants.js";
 
+const mesaX0 = 50;
+const mesaXX = 1040;
+const mesaY0 = 450;
+const mesaYY = 900;
 
 export default class Game extends Phaser.Scene {
 
@@ -40,7 +44,7 @@ export default class Game extends Phaser.Scene {
     this.gameManager.setGameOver(sceneConst.firstLevelWinCondition, sceneConst.firstLevelLooseCondition);
 
     //BOARD(CORCHO)
-    this.Board = new Board(this, sceneConst.boardPosX, sceneConst.boardPosY, sceneConst.boardNumPostIts, "board", "postIt")
+    this.Board = new Board(this, sceneConst.boardPosX, sceneConst.boardPosY, sceneConst.boardNumPostIts, "board")
 
     //TINTEROS
 
@@ -55,7 +59,7 @@ export default class Game extends Phaser.Scene {
 
     //PLUMA
 
-    this.pen = new Pen(this, sceneConst.penPosX, sceneConst.penPosY, "pen", "penR", "penV");
+    this.pen = new Pen(this, sceneConst.penPosX, sceneConst.penPosY, "pen");
 
     //Preparación de los archivos de texto
     let dialogoJefe = this.cache.text.get("jefe");
@@ -156,21 +160,25 @@ export default class Game extends Phaser.Scene {
         this.pen.setGreen();
       }
 
-      this.pen.changeColor();
+      // this.pen.changeColor();
 
-      this.pen.PenR.on("pointerup", pointer => {
-        if (!this.pen.hasSigned && this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Roja
+      this.pen.on("pointerup", pointer=>{
+        if (this.pen.isRed() && 
+            !this.pen.hasSigned && 
+            this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Roja
+          
           this.events.DenyChar();
           this.pen.setNormal();
         }
-      })
+        else if(this.pen.isGreen() && 
+              !this.pen.hasSigned && 
+              this.physics.overlap(this.pen, this.events.chara.document)){
 
-      this.pen.PenV.on("pointerup", pointer => {
-        if (!this.pen.hasSigned && this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Verde
           this.events.AcceptChar();
           this.pen.setNormal();
         }
       })
+
     }
     else {
       this.scene.start('gameOverScene', this.gameManager);

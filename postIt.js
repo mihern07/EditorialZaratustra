@@ -1,13 +1,14 @@
-import { postItConst } from "./constants.js";
+import { postItConst, draggableConst } from "./constants.js";
+import Draggable from "./draggable.js";
 
-export default class PostIt extends Phaser.GameObjects.Sprite {
+export default class PostIt extends Draggable {
 
     constructor(scene, x, y, sprite, text) {
-        super(scene, x, y, sprite);
+        super(scene, x, y, sprite, draggableConst.boardX0, draggableConst.boardXX, draggableConst.boardY0, draggableConst.boardYY);
 
-        this.scene.add.existing(this);
-        // Se puede arrastrar
-        this.setInteractive({ draggable: true, dropZone: true });
+        // this.scene.add.existing(this);
+        // // Se puede arrastrar
+        // this.setInteractive({ draggable: true, dropZone: true });
 
         this.info = scene.add.text(x + postItConst.offsetX, y + postItConst.offsetY, text, { color: 0x0A0A0A }); //Añadimos texto.
         this.info.setScale(postItConst.scale);

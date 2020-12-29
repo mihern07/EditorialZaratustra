@@ -103,7 +103,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje libro correcto
                 console.log("Personaje Correcto")
                 this.createCorrectBook();
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueBase, this.dialogueSprite, "libroC" + this.category, "libroA" + this.category, this.documentSprite, this.genre, this.category, this.tamPags);
+                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueBase, this.dialogueSprite, "libroC" + this.category, "libroA" + this.category, this.documentSprite, this.genre, this.category, this.tamPagsdocumentSprite);
                 this.isCorrectCharacter = true;
                 break;
             case 9:
@@ -120,6 +120,8 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
     update() {
         if (this.chara.checkGone()) {
+            this.chara.document.destroy();
+            this.chara.book.destroy();
             this.chara.destroy();
             if (this.contKnownCharas < this.clientOrder.length){ // creación de nuevo personaje
                 this.SetChara();

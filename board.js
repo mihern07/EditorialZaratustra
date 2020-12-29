@@ -3,7 +3,7 @@ import { boardConst } from "./constants.js";
 
 export default class Board extends Phaser.GameObjects.Sprite {
 
-    constructor(scene, x, y, numPost, sprite, spritePost) {
+    constructor(scene, x, y, numPost, sprite) {
         super(scene, x, y, sprite);
 
         scene.add.existing(this);
