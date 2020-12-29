@@ -62,8 +62,7 @@ export default class Book extends Draggable {
             //hacer algo.
             if (pointer.rightButtonDown()) {
                 console.log("Libro pulsado");
-                this.visible = !this.visible;
-                this.Libro2.visible = !this.Libro2.visible;
+                this.changeSprites();
 
                 for (let i = 0; i < this.info.length; i++) {
                     this.info[i].visible = !this.info[i].visible;
@@ -75,14 +74,19 @@ export default class Book extends Draggable {
             //hacer algo.
             if (pointer.rightButtonDown()) {
                 console.log("Libro pulsado");
-                this.visible = !this.visible;
-                this.Libro2.visible = !this.Libro2.visible;
+                this.changeSprites();
                 for (let i = 0; i < this.info.length; i++) {
                     this.info[i].visible = !this.info[i].visible;
                 }
             }
         })
     }
+
+    changeSprites() {
+        this.visible = !this.visible;
+        this.Libro2.visible = !this.Libro2.visible;
+    }
+
     cerrarSprites() {
         this.visible = false;
         this.Libro2.visible = false;

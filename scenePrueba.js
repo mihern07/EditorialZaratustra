@@ -129,6 +129,7 @@ export default class Game extends Phaser.Scene {
 
     this.music = this.sound.add("music"); //Música manejable
     this.music.play();
+    this.isPlaying=true;
 
     this.boss.EnterChar(); //Entrada el Boss
 
@@ -147,7 +148,7 @@ export default class Game extends Phaser.Scene {
       if (this.keyEsc.isDown) {
         this.keyEsc.reset();
         this.game.scene.pause(this);
-        this.scene.launch('pause', this.music);
+        this.scene.launch('pause', this.music, this.isPlaying);
       }
 
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject

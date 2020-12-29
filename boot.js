@@ -28,6 +28,7 @@ export default class Boot extends Phaser.Scene {
         this.load.image("bigNewspaper", "sprites/bigNewspaperRaw.png");
         this.load.image("rules", "sprites/rules.png");
         this.load.image("openedRules", "sprites/opened_rules.png");
+        this.load.image("volume","sprites/volumen.png");
     
         //Sprites de los diferentes libros
         this.load.image("libroCHistórico", "sprites/libro_cerrado_historia.png")
