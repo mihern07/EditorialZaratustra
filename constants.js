@@ -39,6 +39,7 @@ export const sceneConst = {
     firstLevelTheatreB: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
     firstLevelCorrects: 7,
     firstLevelMinCor: 17,
+    firstLevelSpecialChara: [],
     firstDay: 1,
 
     month: 4,
@@ -144,9 +145,9 @@ export const bookConst = {
     secondOffsetY: 375,
     thirdOffsetY: 350,
 
-    scale: .3,
+    scale: .1,
     depth: 2,
-    openedScale: 1.7,
+    openedScale: .48,
     openedDepth: 4
 }
 export const characterConst = {
@@ -204,7 +205,17 @@ export const inkwellConst = {
     scale: .75
 }
 export const eventsConst = {
-    moneyAmount: 200
+    moneyAmount: 200,
+    wifeMoneyAmount: 500,
+    childMoneyAmount: 250,
+    homelessMoneyAmount: 300,
+    briberyMoneyAmount: 400,
+    deliveryMoneyAmount: 450,
+    wifeProbability: 85,
+    childProbability: 15,
+    homelessProbability: 30,
+    briberyProbability: 50,
+    deliveryProbability: 60,
 }
 export const penConst = {
     scale: .2,
