@@ -145,7 +145,7 @@ export const bookConst = {
     secondOffsetY: 375,
     thirdOffsetY: 350,
 
-    scale: .1,
+    scale: .075,
     depth: 2,
     openedScale: .48,
     openedDepth: 4
