@@ -110,7 +110,7 @@ export const gameOverConst = {
     buttonScale: 2
 }
 export const deskBellConst = {
-    scale: .2
+    scale: .35
 }
 export const clockConst = {
     clockScale: .5,

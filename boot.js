@@ -12,7 +12,7 @@ export default class Boot extends Phaser.Scene {
         this.load.image("box", "sprites/dialogueBoxv2.png"); //Bocadillo = box
         this.load.image("character", "sprites/personajeSprite.png"); //personaje = character
         this.load.image("deskBellPressed", "sprites/timbrePulsadoSprite.png"); //timbre pulsado = deskBellPressed
-        this.load.spritesheet("deskBellSP", "sprites/timbreSheetSprite.png", { frameWidth: 385, frameHeight: 356 }); //timbre = deskBellSP
+        this.load.image("deskBellSP", "sprites/timbreSprite.png"); //timbre = deskBellSP
         this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
         this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
         this.load.image("document", "sprites/documentoSprite.png");
