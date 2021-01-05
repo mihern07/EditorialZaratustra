@@ -46,14 +46,14 @@ export default class Events extends Phaser.GameObjects.GameObject {
         let cont = 0;
         this.clientOrder = [];
         for (let i = 0; i < this.order.numCorrects; i++) { // Añade los minimos correctos
-            if (this.getRndInteger(0,1) == 0)
+            if (this.getRndInteger(0, 5) != 0)
                 this.clientOrder.push(this.charaTypes.libroCorrecto);
             else
                 this.clientOrder.push(this.charaTypes.noticiaCorrecta);
             cont++;
         }
         for (let i = cont; i < this.order.minBooks; i++) { // Añade el resto (correctos o incorrectos)
-            if (this.getRndInteger(0,1) == 0)
+            if (this.getRndInteger(0, 5) != 0)
                 this.clientOrder.push(this.getRndInteger(this.charaTypes.libroCorrecto, this.charaTypes.libroIncorrecto));
             else
                 this.clientOrder.push(this.getRndInteger(this.charaTypes.noticiaCorrecta, this.charaTypes.noticiaIncorrecta));
@@ -128,27 +128,27 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 break;
             case this.charaTypes.noticiaIncorrecta:
                 console.log("Personaje noticia incorrecta");
-    
-                if(this.getRndInteger(0, 1) == 0){
+
+                if (this.getRndInteger(0, 1) == 0) {
                     this.incorrectDay = this.getRndInteger(1, 30);
                     this.incorrectMonth = this.getRndInteger(1, 12);
                     this.incorrectYear = this.getRndInteger(1960, 2040);
                     while (this.incorrectDay == this.day && this.incorrectMonth == this.month && this.incorrectYear == year) {
-                    this.incorrectDay = this.getRndInteger(1, 30);
-                    this.incorrectMonth = this.getRndInteger(1, 12);
-                    this.incorrectYear = this.getRndInteger(1960, 2040);
+                        this.incorrectDay = this.getRndInteger(1, 30);
+                        this.incorrectMonth = this.getRndInteger(1, 12);
+                        this.incorrectYear = this.getRndInteger(1960, 2040);
                     }
                     this.news = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
                     this.chara = new NewsCharacter(this.scene, this.x, this.y, this.sprite, this.incorrectDay, this.incorrectMonth, this.incorrectYear, this.news);
                 }
-                else{
+                else {
                     this.news = this.noticiaInfo.noticiaMal[this.getRndInteger(0, this.noticiaInfo.noticiaMal.length - 1)];
                     this.chara = new NewsCharacter(this.scene, this.x, this.y, this.sprite, this.day, this.month, this.year, this.news);
                 }
-                    
-                    
+
+
                 break;
-            
+
             default:
                 this.isCharaInScene = false;
                 console.log("El personaje buscado no existe");
@@ -361,7 +361,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
             case this.charaTypes.noticiaCorrecta:
                 //Personaje noticia correcta
                 console.log("Noticia correcta");
-                if(accepted) {
+                if (accepted) {
                     this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
                 }
             case this.charaTypes.noticiaIncorrecta:

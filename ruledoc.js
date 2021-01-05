@@ -33,38 +33,26 @@ export default class RuleDoc extends Draggable {
             this.info[i].setDepth(ruleConst.openedDepth);
         }
 
-        //Configuración del Drag        
-        //this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
-        //this.body.setBoundsRectangle(this.bound);
-
         //Cuando es pulsado dicho sprite...
         this.on("pointerdown", pointer => {
             //hacer algo.
-            if (pointer.rightButtonDown()) {
-                this.visible = !this.visible;
-                this.ruleDoc2.visible = !this.ruleDoc2.visible;
-
-                for (let i = 0; i < this.info.length; i++) {
-                    this.info[i].visible = !this.info[i].visible;
-                }
-            }
+            this.switchSprite(pointer);
         })
 
         this.ruleDoc2.on("pointerdown", pointer => {
             //hacer algo.
-            if (pointer.rightButtonDown()) {
-                this.visible = !this.visible;
-                this.ruleDoc2.visible = !this.ruleDoc2.visible;
-                for (let i = 0; i < this.info.length; i++) {
-                    this.info[i].visible = !this.info[i].visible;
-                }
-            }
+            this.switchSprite(pointer);
         })
     }
-    // cerrarSprites() {
-    //     this.visible = false;
-    //     this.ruleDoc2.visible = false;
-    // }
+    switchSprite(pointer) {
+        if (pointer.rightButtonDown()) {
+            this.visible = !this.visible;
+            this.ruleDoc2.visible = !this.ruleDoc2.visible;
+            for (let i = 0; i < this.info.length; i++) {
+                this.info[i].visible = !this.info[i].visible;
+            }
+        }
+    }
     selectPags(val) {
         switch (val) {
             case 0:

@@ -121,7 +121,7 @@ export const clockConst = {
 export const bossConst = {
     dialoguePosX: 530,
     dialoguePosY: 415,
-    rulesPosX: 650,
+    rulesPosX: 500,
     rulesPosY: 550,
 
     midPos: 540,
@@ -220,7 +220,7 @@ export const eventsConst = {
     deliveryProbability: 60,
 }
 export const penConst = {
-    scale: .2,
+    scale: .25,
     depth: 3,
     tintNormal: 0x000000,
     tintRed: 0xff0000,
@@ -233,7 +233,7 @@ export const postItConst = {
     scale: .8
 }
 export const ruleConst = {
-    offsetX: -270,
+    offsetX: -150,
     offsetY: -260,
     offsetYAcum: 25,
 

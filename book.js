@@ -16,12 +16,6 @@ export default class Book extends Draggable {
         this.setScale(bookConst.scale);
         this.setDepth(bookConst.depth);
 
-        //Lo añade a la escena
-        // scene.add.existing(this);
-        
-        //Permite interactuar con él
-        // this.setInteractive({ draggable: true, dropZone: true });
-        // scene.input.setDraggable(this);
         //Sprite ibro abierto
         this.Libro2 = scene.add.sprite(this.x, this.y, sprite2).setInteractive();
         this.Libro2.setScale(bookConst.openedScale);
@@ -44,44 +38,26 @@ export default class Book extends Draggable {
         //this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
         //this.body.setBoundsRectangle(this.bound);
 
-        // this.on('drag', pointer => {
-        //     if ((pointer.x > 50
-        //         && pointer.y > 450
-        //         && pointer.y < 900
-        //         && pointer.x < 1040)
-        //         && pointer.leftButtonDown()) {
-
-        //         this.x = pointer.x;
-        //         this.y = pointer.y;
-
-        //     }
-        // })
-
         //Cuando es pulsado dicho sprite...
         this.on("pointerdown", pointer => {
             //hacer algo.
-            if (pointer.rightButtonDown()) {
-                console.log("Libro pulsado");
-                this.changeSprites();
-
-                for (let i = 0; i < this.info.length; i++) {
-                    this.info[i].visible = !this.info[i].visible;
-                }
-            }
+            this.switchSprite(pointer);
         })
 
         this.Libro2.on("pointerdown", pointer => {
             //hacer algo.
-            if (pointer.rightButtonDown()) {
-                console.log("Libro pulsado");
-                this.changeSprites();
-                for (let i = 0; i < this.info.length; i++) {
-                    this.info[i].visible = !this.info[i].visible;
-                }
-            }
+            this.switchSprite(pointer);
         })
     }
 
+    switchSprite(pointer) {
+        if (pointer.rightButtonDown()) {
+            this.changeSprites();
+            for (let i = 0; i < this.info.length; i++) {
+                this.info[i].visible = !this.info[i].visible;
+            }
+        }
+    }
     changeSprites() {
         this.visible = !this.visible;
         this.Libro2.visible = !this.Libro2.visible;
