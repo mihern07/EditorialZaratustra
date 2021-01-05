@@ -1,10 +1,12 @@
 import Personaje from "./character.js";
 import { eventsConst } from "./constants.js";
+import NewsCharacter from "./newsCharacter.js";
 import Newspaper from "./newspaper.js";
+import Radio from "./radio.js";
 
 export default class Events extends Phaser.GameObjects.GameObject {
     constructor(scene, x, y, sprite, dialogueJefe, dialogueNinio, dialogueTendencias, dialogueCorreos, dialogueCorreosFalso, dialogueMujerDelJefe,
-        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueBase, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo,
+        dialogueMujerDelJefeFalsa, dialogueSobornador, dialogueVagabundo, dialogueBase, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo, noticiaInfo,
         order, gameManager, day, month, year) {
         super(scene, x, y);
 
@@ -25,6 +27,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.dialogueVagabundo = dialogueVagabundo;
         this.dialogueBase = dialogueBase;
         this.bookInfo = bookInfo;
+        this.noticiaInfo = noticiaInfo;
 
         this.dialogueSprite = dialogueSprite;
         this.bookSprite1 = bookSprite1;
@@ -37,17 +40,23 @@ export default class Events extends Phaser.GameObjects.GameObject {
         //Enum con todos los tipos distintos de personaje
         this.charaTypes = {
             ninio: 0, sobornador: 1, vagabundo: 2, correos: 3, correosFalso: 4, mujerDelJefe: 5,
-            mujerDelJefeFalsa: 6, tendencias: 7, libroCorrecto: 8, libroIncorrecto: 9
+            mujerDelJefeFalsa: 6, tendencias: 7, libroCorrecto: 8, libroIncorrecto: 9, noticiaCorrecta: 10, noticiaIncorrecta: 11
         };
 
         let cont = 0;
         this.clientOrder = [];
         for (let i = 0; i < this.order.numCorrects; i++) { // Añade los minimos correctos
-            this.clientOrder.push(this.charaTypes.libroCorrecto);
+            if (this.getRndInteger(0,1) == 0)
+                this.clientOrder.push(this.charaTypes.libroCorrecto);
+            else
+                this.clientOrder.push(this.charaTypes.noticiaCorrecta);
             cont++;
         }
         for (let i = cont; i < this.order.minBooks; i++) { // Añade el resto (correctos o incorrectos)
-            this.clientOrder.push(this.getRndInteger(this.charaTypes.libroCorrecto, this.charaTypes.libroIncorrecto));
+            if (this.getRndInteger(0,1) == 0)
+                this.clientOrder.push(this.getRndInteger(this.charaTypes.libroCorrecto, this.charaTypes.libroIncorrecto));
+            else
+                this.clientOrder.push(this.getRndInteger(this.charaTypes.noticiaCorrecta, this.charaTypes.noticiaIncorrecta));
         }
         for (let i = 0; i < this.order.specialChara.length; i++) { // Añade los personajes de evento
             this.clientOrder.push(this.order.specialChara[i]);
@@ -58,7 +67,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.month = month;
         this.year = year;
 
-        this.createIncorrectNewspaper();
+        this.radio = new Radio(this.scene, 250, 520, "radio", this);
 
         console.log(this.clientOrder);
         //Crea el primer personaje
@@ -66,6 +75,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
     }
 
     createCharacter(tipo) {
+        this.isCharaInScene = true;
         switch (tipo) {
             case this.charaTypes.ninio:
                 //Niño
@@ -111,7 +121,31 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Personaje Incorrecto")
                 this.createIncorrectChara();
                 break;
+            case this.charaTypes.noticiaIncorrecta:
+                console.log("Personaje noticia incorrecta");
+    
+                if(this.getRndInteger(0, 1) == 0){
+                    this.incorrectDay = this.getRndInteger(1, 30);
+                    this.incorrectMonth = this.getRndInteger(1, 12);
+                    this.incorrectYear = this.getRndInteger(1960, 2040);
+                    while (this.incorrectDay == this.day && this.incorrectMonth == this.month && this.incorrectYear == year) {
+                    this.incorrectDay = this.getRndInteger(1, 30);
+                    this.incorrectMonth = this.getRndInteger(1, 12);
+                    this.incorrectYear = this.getRndInteger(1960, 2040);
+                    }
+                    this.news = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
+                    this.chara = new NewsCharacter(this.scene, this.x, this.y, this.sprite, this.incorrectDay, this.incorrectMonth, this.incorrectYear, this.news);
+                }
+                else{
+                    this.news = this.noticiaInfo.noticiaMal[this.getRndInteger(0, this.noticiaInfo.noticiaMal.length - 1)];
+                    this.chara = new NewsCharacter(this.scene, this.x, this.y, this.sprite, this.day, this.month, this.year, this.news);
+                }
+                    
+                    
+                break;
+            
             default:
+                this.isCharaInScene = false;
                 console.log("El personaje buscado no existe");
                 break;
         }
@@ -123,6 +157,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
             if (this.chara.hasBook)
                 this.chara.book.destroy();
             this.chara.destroy();
+            this.isCharaInScene = false;
             if (this.contKnownCharas < this.clientOrder.length) { // creación de nuevo personaje
                 this.setChara();
             }
@@ -250,22 +285,6 @@ export default class Events extends Phaser.GameObjects.GameObject {
         }
     }
 
-    createCorrectNewspaper() {
-        this.newspaper = new Newspaper(this.scene, this.scene.game.config.width / 4, this.scene.game.config.height / 1.5, "littleNewspaper", "bigNewspaper", this.day, this.month, this.year, "Ejemplo de noticia");
-    }
-
-    createIncorrectNewspaper() {
-        this.incorrectDay = this.getRndInteger(1, 30);
-        this.incorrectMonth = this.getRndInteger(1, 12);
-        this.incorrectYear = this.getRndInteger(1960, 2040);
-        while (this.incorrectDay == this.day && this.incorrectMonth == this.month && this.incorrectYear == year) {
-            this.incorrectDay = this.getRndInteger(1, 30);
-            this.incorrectMonth = this.getRndInteger(1, 12);
-            this.incorrectYear = this.getRndInteger(1960, 2040);
-        }
-        this.newspaper = new Newspaper(this.scene, this.scene.game.config.width / 4, this.scene.game.config.height / 1.5, "littleNewspaper", "bigNewspaper", this.incorrectDay, this.incorrectMonth, this.incorrectYear, "Ejemplo de noticia");
-    }
-
     //Gestiona qué sucede si se acepta o deniega cada tipo de personaje
     charaOutcome(accepted) {
         switch (this.currentCharaType) {
@@ -330,6 +349,19 @@ export default class Events extends Phaser.GameObjects.GameObject {
             case this.charaTypes.libroIncorrecto:
                 //Personaje Libro Incorrecto
                 console.log("Personaje Incorrecto")
+                if (accepted) {
+                    this.gameManager.BookStrike();
+                }
+                break;
+            case this.charaTypes.noticiaCorrecta:
+                //Personaje noticia correcta
+                console.log("Noticia correcta");
+                if(accepted) {
+                    this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
+                }
+            case this.charaTypes.noticiaIncorrecta:
+                //Personaje noticia incorrecta
+                console.log("Noticia incorrecta");
                 if (accepted) {
                     this.gameManager.BookStrike();
                 }

@@ -8,20 +8,12 @@ export default class Newspaper extends Draggable {
         this.firstPosX = this.x;
         this.firstPosY = this.y;
 
-        // this.scene = scene;
-
         this.visible = true;
 
 
         this.setScale(newsConst.scale);
         this.setDepth(newsConst.depth);
         
-        //Lo añade a la escena
-        // scene.add.existing(this);
-
-        //Permite interactuar con él
-        // this.setInteractive({ draggable: true, dropZone: true });
-
         //Sprite periódico abierto
         this.bigNews = scene.add.sprite(this.x, this.y, sprite2).setInteractive();
         this.bigNews.setScale(newsConst.openedScale);
@@ -35,33 +27,14 @@ export default class Newspaper extends Draggable {
         this.month = month;
         this.year = year;
         this.info = [scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.firstOffsetY, this.day + "/" + this.month + "/" + this.year, { color: 0x0A0A0A }),
-        scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.secondOffsetY, news, { color: 0x0A0A0A })]; //Añadimos texto. (cambiar numeros por globales)
+        scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.secondOffsetY, news, { color: 0x0A0A0A })];
 
         for (let i = 0; i < this.info.length; i++) {
             this.info[i].visible = false;
             this.info[i].setDepth(newsConst.openedDepth);
         }
 
-        //Configuración del Drag        
-        //this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
-        //this.body.setBoundsRectangle(this.bound);
-
-        // this.on('drag', pointer => {
-        //     if ((pointer.x > 50
-        //         && pointer.y > 450
-        //         && pointer.y < 900
-        //         && pointer.x < 1040)
-        //         && pointer.leftButtonDown()) {
-
-        //         this.x = pointer.x;
-        //         this.y = pointer.y;
-
-        //     }
-        // })
-
-        //Cuando es pulsado dicho sprite...
         this.on("pointerdown", pointer => {
-            //hacer algo.
             if (pointer.rightButtonDown()) {
                 console.log("Libro pulsado");
                 this.visible = !this.visible;
@@ -74,7 +47,6 @@ export default class Newspaper extends Draggable {
         })
 
         this.bigNews.on("pointerdown", pointer => {
-            //hacer algo.
             if (pointer.rightButtonDown()) {
                 console.log("Libro pulsado");
                 this.visible = !this.visible;

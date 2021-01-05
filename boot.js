@@ -29,6 +29,9 @@ export default class Boot extends Phaser.Scene {
         this.load.image("rules", "sprites/rules.png");
         this.load.image("openedRules", "sprites/opened_rules.png");
         this.load.image("volume","sprites/volumen.png");
+        this.load.image("radio", "sprites/radio.png");
+        this.load.image("radioActiveButton", "sprites/radioActive.png");
+        this.load.image("radioNotActiveButton", "sprites/radioDeactivated.png");
     
         //Sprites de los diferentes libros
         this.load.image("libroCHistórico", "sprites/libro_cerrado_historia.png")
@@ -74,6 +77,7 @@ export default class Boot extends Phaser.Scene {
         this.load.text("sobornador", "dialogue/sobornadorText.txt");
         this.load.text("vagabundo", "dialogue/vagabundoText.txt");
         this.load.text("dialogoBase", "dialogue/dialogoBase.txt");
+        this.load.text("noticiasBase", "dialogue/noticiasBase.txt");
     
         this.load.audio("deskbellSound", "sounds/deskbell.wav"); //Audio timbre
         this.load.audio("npcSound","sounds/npc.wav");

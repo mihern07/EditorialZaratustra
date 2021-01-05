@@ -37,6 +37,8 @@ export const sceneConst = {
     firstLevelPoetryB: [],
     firstLevelTheatreG: ["Romance", "Aventura", "Histórico", "Suspense"],
     firstLevelTheatreB: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+    firstLevelNoticiaG: ["Deportes", "Meteorología", "Ensayo", "Esquela", "Crónica", "Propaganda"],
+    firstLevelNoticiaB: ["Opinión"],
     firstLevelCorrects: 7,
     firstLevelMinCor: 17,
     firstLevelSpecialChara: [],
@@ -130,9 +132,9 @@ export const bossConst = {
     speed: 190
 }
 export const newsConst = {
-    offsetX: -100,
-    firstOffsetY: -350,
-    secondOffsetY: -325,
+    offsetX: -400,
+    firstOffsetY: -375,
+    secondOffsetY: -350,
 
     scale: .1,
     depth: 2,

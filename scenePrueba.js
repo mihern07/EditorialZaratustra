@@ -98,6 +98,11 @@ export default class Game extends Phaser.Scene {
       numPagsMal: [sceneConst.normalBook] // libro mediano
     }
 
+    this.noticiaInfo = {
+      noticiaBien: sceneConst.firstLevelNoticiaG,
+      noticiaMal: sceneConst.firstLevelNoticiaB
+    }
+
     //En algun punto seran constantes
     this.order = {
       numCorrects: sceneConst.firstLevelCorrects, // Número mínimo de libros correctos 
@@ -106,7 +111,7 @@ export default class Game extends Phaser.Scene {
     }
     this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
       dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
-      dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo,
+      dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo, this.noticiaInfo,
       this.order, this.gameManager, sceneConst.firstDay, sceneConst.month, sceneConst.year);
 
     //DESKBELL
