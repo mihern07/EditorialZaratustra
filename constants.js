@@ -23,7 +23,7 @@ export const sceneConst = {
     bossPosX: 0,
     bossPosY: 340,
     alarmPosX: 200,
-    alarmPosY: 800,
+    alarmPosY: 775,
 
     boardNumPostIts: 13,
 

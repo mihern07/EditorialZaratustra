@@ -127,7 +127,7 @@ export default class Game extends Phaser.Scene {
 
     //ALARMA
 
-    this.alarm = new Alarm(this, sceneConst.alarmPosX, sceneConst.alarmPosY, "deskBellSP", "deskBellPressed", this.bodyguard); //Inicializa alarma.
+    this.alarm = new Alarm(this, sceneConst.alarmPosX, sceneConst.alarmPosY, "alarmOff", this.bodyguard, this.events); //Inicializa alarma.
 
     this.Intro();
 

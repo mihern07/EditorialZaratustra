@@ -32,6 +32,9 @@ export default class Boot extends Phaser.Scene {
         this.load.image("radio", "sprites/radio.png");
         this.load.image("radioActiveButton", "sprites/radioActive.png");
         this.load.image("radioNotActiveButton", "sprites/radioDeactivated.png");
+        this.load.image("alarmPressed","sprites/alarmaEncendidaPulsada.png");
+        this.load.image("alarmNoPressed","sprites/alarmaEncendidaSinPulsar.png");
+        this.load.image("alarmOff","sprites/alarmaApagadaSinPulsar.png");
     
         //Sprites de los diferentes libros
         this.load.image("libroCHistórico", "sprites/libro_cerrado_historia.png")
@@ -82,6 +85,7 @@ export default class Boot extends Phaser.Scene {
         this.load.audio("deskbellSound", "sounds/deskbell.wav"); //Audio timbre
         this.load.audio("npcSound","sounds/npc.wav");
         this.load.audio("music","sounds/music.wav");
+        this.load.audio("alarm","sounds/alarm.wav");
       }
 
       create(){
