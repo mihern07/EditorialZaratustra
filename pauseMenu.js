@@ -2,7 +2,7 @@
 class pauseMenu extends Phaser.Scene {
 
 	constructor() {
-		super({key:'pause'});
+        super({key:'pause'});
 	}
 
 	preload() {
@@ -20,15 +20,13 @@ class pauseMenu extends Phaser.Scene {
         this.menu.on("pointerdown", pointer=>{
             if(pointer.leftButtonDown()){
                 if(pointer.y > this.menu.y){
-                    console.log("titleEscene");
-                    this.scene.stop('main');
                     this.musics.stop();
+                    this.scene.stop(this.originSceneKey);
                     this.scene.switch('titleScene');
                 }
                 else{
-                    console.log("MAIN");
                     this.scene.stop();
-                    this.scene.resume('main');
+                    this.scene.resume(this.originSceneKey);
                 }
             }
         })
@@ -50,10 +48,11 @@ class pauseMenu extends Phaser.Scene {
         })
     }
 
-    init(music,isPlaying)
+    init(data)
     {
-        this.musics = music;
-        this.play=isPlaying;
+        this.musics = data.music;
+        this.play = data.playing;
+        this.originSceneKey = data.key;
     }
 
 }
