@@ -36,9 +36,7 @@ export default class Alarm extends Phaser.GameObjects.Sprite {
     });
 
     this.Bell3.on('pointerup', pointer => {
-      this.visible = true;
-      this.Bell2.visible = false;
-      this.Bell3.visible = false;
+      this.SetItOff();
     });
   }
 
@@ -52,10 +50,17 @@ export default class Alarm extends Phaser.GameObjects.Sprite {
       this.visible = false;
     }  
 
-    if(this.event.chara.currentS===this.event.chara.States.INI)
+    if(this.event.chara.currentS===this.event.chara.States.INI || this.event.chara.currentS===this.event.chara.States.ANSWER)
     {
       this.isOff = true;
+      this.SetItOff();
     }
+  }
+
+  SetItOff() {
+    this.visible = true;
+    this.Bell2.visible = false;
+    this.Bell3.visible = false;
   }
 
   changeSprite() {

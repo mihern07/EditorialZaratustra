@@ -24,7 +24,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
     }
 
     EnterChar() { // El personaje entre (puerta)
-        if (this.currentS === this.States.INI && this.event.chara.currentS === this.event.chara.States.WAIT) {
+        if (this.currentS === this.States.INI) {
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.GOING;
         }
