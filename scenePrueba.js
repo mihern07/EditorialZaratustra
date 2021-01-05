@@ -102,9 +102,8 @@ export default class Game extends Phaser.Scene {
     this.order = {
       numCorrects: sceneConst.firstLevelCorrects, // Número mínimo de libros correctos 
       minBooks: sceneConst.firstLevelMinCor, // Número mínimo de libros entre los que se encuentran los anteriores
-      specialChara: []
+      specialChara: sceneConst.firstLevelSpecialChara // perosnajes especiales del nivel
     }
-
     this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
       dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
       dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo,

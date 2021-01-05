@@ -119,19 +119,19 @@ export default class Pen extends Draggable {
     setNormal() {
         this.actualState = this.States.NORMAL; //NORMAL
         this.hasSigned = true;
-        this.setTintFill(penConst.tintNormal);
+        this.clearTint();
     }
 
     setRed() {
         this.actualState = this.States.RED; //ROJO
         this.hasSigned = false;
-        this.setTintFill(penConst.tintRed);
+        this.setTint(penConst.tintRed);  
     }
 
     setGreen() {
         this.actualState = this.States.GREEN; //VERDE
         this.hasSigned = false;
-        this.setTintFill(penConst.tintGreen);
+        this.setTint(penConst.tintGreen);
     }
 
     isRed(){

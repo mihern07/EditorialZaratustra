@@ -1,11 +1,11 @@
 import Dialogue from "./dialogue.js";
-import Book from "./book.js";
 import Clock from "./clock_class.js";
 import Document from "./document.js";
+import Newspaper from "./newspaper.js";
 import { characterConst } from "./constants.js";
 
-export default class Character extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, sprite, dialogue, dialogueSprite, documentSprite, bookSprite1, bookSprite2, genre, category, tamPags) {
+export default class NewsCharacter extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, sprite, day, month, year, news) {
         super(scene, x, y, sprite);
 
         this.scene = scene;
@@ -29,25 +29,18 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.currentS = this.States.INI;
 
         //Dialogos
+        let dialogue = this.scene.cache.text.get("noticiasBase");
+        dialogue = dialogue.split("\n");
+
         this.texto = dialogue;
-        this.dialogueSprite = dialogueSprite;
-        this.dialogue = new Dialogue(scene, characterConst.dialoguePosX, characterConst.dialoguePosY, this.dialogueSprite, this.texto.slice(0, 3));
+        this.dialogue = new Dialogue(scene, characterConst.dialoguePosX, characterConst.dialoguePosY, "box", this.texto.slice(0, 3));
         this.dialogue.setVisible(false);
 
-        if (bookSprite1 != undefined) {
-            //Libro
-            this.numPags = this.getNumPags(tamPags); // numero pags
-
-            this.book = new Book(scene, characterConst.bookPosX, characterConst.bookPosY, bookSprite1, bookSprite2, genre, category, this.numPags); //Inicializa libro
-            this.hasBook = true;
-        }
-        else
-            this.hasBook = false;
-
+        this.newspaper = new Newspaper(scene, scene.game.config.width / 2, scene.game.config.height / 1.5, "littleNewspaper", "bigNewspaper", day, month, year, news)
+        this.newspaper.visible = false;
 
         //Documento
         //Inicializa documento
-        this.docSprite = documentSprite;
         this.hasdocument = false;
         this.isGone = false;
     }
@@ -71,7 +64,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
             this.ShowBook();
 
-            this.document = new Document(this.scene, characterConst.documentPosX, characterConst.documentPosY, this.docSprite);
+            this.document = new Document(this.scene, characterConst.documentPosX, characterConst.documentPosY, "document");
 
             this.firstClock = new Clock(this.scene, 0, 0, this.dialogueSprite, this.dialogueSprite);
             this.firstClock.start(this.ShowFirstDialogue.bind(this), '7000');
@@ -134,10 +127,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
     }
 
     RetrieveBook() { //
-        if (this.hasBook) {
-            this.book.cerrarSprites();
-            this.book.resetPos(); //Devuelve posición inicial al book
-        }
+        this.newspaper.destroy();
     }
 
     RetrieveDocument() { //
@@ -148,9 +138,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
     }
 
     ShowBook() {
-        if (this.hasBook) {
-            this.book.visible = true;        
-        }
+        this.newspaper.visible = true;        
         this.currentS = this.States.WAIT;
     }
 
@@ -183,17 +171,5 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
     getRndInteger(min, max) { // devuelve un num aleatorio entre min y max
         return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    getNumPags(tam) {
-        if (tam == 0) {
-            return this.getRndInteger(characterConst.thinPags[0], characterConst.thinPags[1]);
-        }
-        else if (tam == 1) {
-            return this.getRndInteger(characterConst.normalPags[0], characterConst.normalPags[1]);
-        }
-        else {
-            return this.getRndInteger(characterConst.thickPags[0], characterConst.thickPags[1]);
-        }
     }
 }
