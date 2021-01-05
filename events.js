@@ -121,6 +121,11 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Personaje Incorrecto")
                 this.createIncorrectChara();
                 break;
+            case this.charaTypes.noticiaCorrecta:
+                console.log("Personaje noticia correcta");
+                this.news = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
+                this.chara = new NewsCharacter(this.scene, this.x, this.y, this.sprite, this.day, this.month, this.year, this.news);
+                break;
             case this.charaTypes.noticiaIncorrecta:
                 console.log("Personaje noticia incorrecta");
     
