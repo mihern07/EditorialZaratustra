@@ -65,28 +65,6 @@ export default class Game extends Phaser.Scene {
 
     this.pen = new Pen(this, sceneConst.penPosX, sceneConst.penPosY, "pen");
 
-    //Preparación de los archivos de texto
-    let dialogoJefe = this.cache.text.get("jefe");
-    dialogoJefe = dialogoJefe.split("\n");
-    let dialogoNinio = this.cache.text.get("ninio");
-    dialogoNinio = dialogoNinio.split("\n");
-    let dialogoTendencias = this.cache.text.get("tendencias");
-    dialogoTendencias = dialogoTendencias.split("\n");
-    let dialogoCorreos = this.cache.text.get("correos");
-    dialogoCorreos = dialogoCorreos.split("\n");
-    let dialogoCorreosFalso = this.cache.text.get("correosFalso");
-    dialogoCorreosFalso = dialogoCorreosFalso.split("\n");
-    let dialogoMujerDelJefe = this.cache.text.get("mujerDelJefe");
-    dialogoMujerDelJefe = dialogoMujerDelJefe.split("\n");
-    let dialogoMujerDelJefeFalsa = this.cache.text.get("mujerdelJefeFalsa");
-    dialogoMujerDelJefeFalsa = dialogoMujerDelJefeFalsa.split("\n");
-    let dialogoSobornador = this.cache.text.get("sobornador");
-    dialogoSobornador = dialogoSobornador.split("\n");
-    let dialogoVagabundo = this.cache.text.get("vagabundo");
-    dialogoVagabundo = dialogoVagabundo.split("\n");
-    let dialogoBase = this.cache.text.get("dialogoBase");
-    dialogoBase = dialogoBase.split("\n");
-
     this.bg.setDepth(-2); //MOVER A FONDO Para que el fondo se dibuje detrás del todo
 
     //Info del libro
@@ -113,9 +91,7 @@ export default class Game extends Phaser.Scene {
       minBooks: sceneConst.firstLevelMinCor, // Número mínimo de libros entre los que se encuentran los anteriores
       specialChara: sceneConst.firstLevelSpecialChara // perosnajes especiales del nivel
     }
-    this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
-      dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
-      dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo, this.noticiaInfo,
+    this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", "box", "book", "book2", "document", this.bookInfo, this.noticiaInfo,
       this.order, this.gameManager, sceneConst.firstDay, sceneConst.month, sceneConst.year);
 
     //DESKBELL
@@ -127,7 +103,9 @@ export default class Game extends Phaser.Scene {
     this.bodyguard = new Bodyguard(this, sceneConst.guardPosX, sceneConst.guardPosY, "bodyguard", this.events) //Inicializa bodyguard
 
     //BOSS
-    this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bodyguard", dialogoJefe, "box", 0, 4, this.bookInfo);
+    this.dialogoJefe = this.cache.text.get("jefe");
+    this.dialogoJefe = this.dialogoJefe.split("\n");
+    this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bodyguard", this.dialogoJefe, "box", 0, 4, this.bookInfo);
 
     //ALARMA
 

@@ -5,7 +5,7 @@ import Newspaper from "./newspaper.js";
 import { characterConst } from "./constants.js";
 
 export default class NewsCharacter extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, sprite, day, month, year, news) {
+    constructor(scene, x, y, sprite, dialogue ,day, month, year, news) {
         super(scene, x, y, sprite);
 
         this.scene = scene;
@@ -27,10 +27,6 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
         //ANSWER: al volver, izq. o dcha.
         this.States = { INI: 0, GOING: 1, SHOW: 2, ANSWER: 3, WAIT: 4 };
         this.currentS = this.States.INI;
-
-        //Dialogos
-        let dialogue = this.scene.cache.text.get("noticiasBase");
-        dialogue = dialogue.split("\n");
 
         this.texto = dialogue;
         this.dialogue = new Dialogue(scene, characterConst.dialoguePosX, characterConst.dialoguePosY, "box", this.texto.slice(0, 3));

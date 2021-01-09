@@ -74,13 +74,21 @@ export default class Boot extends Phaser.Scene {
         this.load.text("ninio", "dialogue/ninioText.txt");
         this.load.text("tendencias", "dialogue/personaje_tendencias.txt");
         this.load.text("correos", "dialogue/correosText.txt");
-        this.load.text("correosFalso", "dialogue/correosText.txt");
         this.load.text("mujerDelJefe", "dialogue/mujer_del_jefe.txt");
-        this.load.text("mujerdelJefeFalsa", "dialogue/mujer_del_jefe.txt");
         this.load.text("sobornador", "dialogue/sobornadorText.txt");
         this.load.text("vagabundo", "dialogue/vagabundoText.txt");
         this.load.text("dialogoBase", "dialogue/dialogoBase.txt");
+        this.load.text("dialogoBaseAmigable", "dialogue/dialogoBaseAmigable.txt");
+        this.load.text("dialogoBaseMalEducado", "dialogue/dialogoBaseMalEducado.txt");
+        this.load.text("dialogoBasePijo", "dialogue/dialogoBasePijo.txt");
+        this.load.text("dialogoBaseResponsable", "dialogue/dialogoBaseResponsable.txt");
+        this.load.text("dialogoBaseTimido", "dialogue/dialogoBaseTimido.txt");
         this.load.text("noticiasBase", "dialogue/noticiasBase.txt");
+        this.load.text("noticiasAmigable", "dialogue/noticiasAmigable.txt");
+        this.load.text("noticiasMalEducado", "dialogue/noticiasMalEducado.txt");
+        this.load.text("noticiasPijo", "dialogue/noticiasPijo.txt");
+        this.load.text("noticiasResponsable", "dialogue/noticiasResponsable.txt");
+        this.load.text("noticiasTimido", "dialogue/noticiasTimido.txt");
     
         this.load.audio("deskbellSound", "sounds/deskbell.wav"); //Audio timbre
         this.load.audio("npcSound","sounds/npc.wav");
