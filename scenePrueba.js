@@ -39,7 +39,8 @@ export default class Game extends Phaser.Scene {
 
     //CLOCK
     this.clock = new Clock(this, sceneConst.clockPosX, sceneConst.clockPosY, "clock", "manecilla"); //Inicializa reloj
-    this.clock.start(this.handleTimeFinished.bind(this), '180000');
+    this.timeSceneEnds = 180000;
+    this.clock.start(this.handleTimeFinished.bind(this), this.timeSceneEnds);
 
     //FOREGROUND(MESA)
     this.fg = this.add.sprite(sceneConst.fgPosX, sceneConst.fgPosY, "foreground");
@@ -114,7 +115,11 @@ export default class Game extends Phaser.Scene {
 
     //Radio
     this.radio = new Radio(this, 250, 520, "radio", this.events, this.bookInfo, this.noticiaInfo);
-    this.radio.setActive(this.events.getBookMalRadio(), this.events.getNoticiaMalRadio());
+
+    this.radioClock = new Clock(this, 0, 0, "clock", "manecilla");
+    this.radioClock.visible = false;
+    this.radioActivationTime = this.getRndInteger(5000, this.timeSceneEnds / 2);
+    this.radioClock.start(this.activateRadio.bind(this), this.radioActivationTime);
 
     this.Intro();
 
@@ -125,6 +130,10 @@ export default class Game extends Phaser.Scene {
     this.boss.EnterChar(); //Entrada el Boss
 
     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+  }
+
+  activateRadio(){
+    this.radio.setActive(this.events.getBookMalRadio(), this.events.getNoticiaMalRadio());
   }
 
   handleTimeFinished() {
@@ -205,6 +214,10 @@ export default class Game extends Phaser.Scene {
   //
   bossFinished() {
     this.bell.startWork();
+  }
+
+  getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
 }

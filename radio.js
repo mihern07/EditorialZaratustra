@@ -1,3 +1,6 @@
+import Dialogue from "./dialogue.js";
+import Clock from "./clock_class.js";
+
 export default class Radio extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, sprite, events, bookInfo, noticiaInfo) {
     super(scene, x, y, sprite);
@@ -27,19 +30,19 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     switch(this.getRndInteger(0,2)){
       case 0:
         this.bookACensurar = this.bookInfo.novelaBien[this.getRndInteger(0, this.bookInfo.novelaBien.length-1)];
-        while(this.censuradoYa()){
+        while(this.censuradoYa(this.bookACensurar)){
           this.bookACensurar = this.bookInfo.novelaBien[this.getRndInteger(0, this.bookInfo.novelaBien.length-1)];
         }
       break;
       case 1:
         this.bookACensurar = this.bookInfo.poesiaBien[this.getRndInteger(0, this.bookInfo.poesiaBien.length-1)];
-        while(this.censuradoYa()){
+        while(this.censuradoYa(this.bookACensurar)){
           this.bookACensurar = this.bookInfo.poesiaBien[this.getRndInteger(0, this.bookInfo.poesiaBien.length-1)];
         }
       break;
       case 2:
         this.bookACensurar = this.bookInfo.teatroBien[this.getRndInteger(0, this.bookInfo.teatroBien.length-1)];
-        while(this.censuradoYa()){
+        while(this.censuradoYa(this.bookACensurar)){
           this.bookACensurar = this.bookInfo.teatroBien[this.getRndInteger(0, this.bookInfo.teatroBien.length-1)];
         }
       break;
@@ -48,24 +51,32 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     console.log(this.bookACensurar + " censurado");
 
     //Añadir una noticia mal
-    this.bookACensurar = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length-1)];
-    while(this.censuradoYa()){
-      this.bookACensurar = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length-1)];
+    this.noticiaACensurar = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length-1)];
+    while(this.censuradoYa(this.noticiaACensurar)){
+      this.noticiaACensurar = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length-1)];
     }
-    this.events.addCensoredNoticia(this.bookACensurar);
-    console.log(this.bookACensurar + " censurado");
+    this.events.addCensoredNoticia(this.noticiaACensurar);
+    console.log(this.noticiaACensurar + " censurado");
+    
+    this.text = "Radio\nLamentamos comunicar que a partir de ahora se\nsancionará la publicación de " + this.bookACensurar + " y " + this.noticiaACensurar;
 
+    this.dialogue = new Dialogue(this.scene, 300, 100, "box", this.text);
+    this.clock = new Clock(this.scene, 0, 0, "clock", "manecilla");
+    this.clock.visible = false;
+    this.clock.start(this.setNotActive.bind(this), 10000);
   }
 
   setNotActive(){
     this.notActiveButton.visible = true;
     this.activeButton.visible = false;
+    this.dialogue.destroyText();
+    this.dialogue.destroy();
   }
 
-  censuradoYa(){
+  censuradoYa(censuraAComprobar){
     this.estaCensurado = false;
     let i = 0;
-    while (i < this.bookMalRadio.length && this.bookACensurar != this.bookMalRadio[i]){
+    while (i < this.bookMalRadio.length && censuraAComprobar != this.bookMalRadio[i]){
       i++;
     }
     if (i == this.bookMalRadio.length){
