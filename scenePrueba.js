@@ -39,8 +39,7 @@ export default class Game extends Phaser.Scene {
 
     //CLOCK
     this.clock = new Clock(this, sceneConst.clockPosX, sceneConst.clockPosY, "clock", "manecilla"); //Inicializa reloj
-    this.timeSceneEnds = 180000;
-    this.clock.start(this.handleTimeFinished.bind(this), this.timeSceneEnds);
+    this.clock.start(this.handleTimeFinished.bind(this), sceneConst.timeSceneEnds);
 
     //FOREGROUND(MESA)
     this.fg = this.add.sprite(sceneConst.fgPosX, sceneConst.fgPosY, "foreground");
@@ -114,11 +113,11 @@ export default class Game extends Phaser.Scene {
     this.alarm = new Alarm(this, sceneConst.alarmPosX, sceneConst.alarmPosY, "alarmOff", this.bodyguard, this.events); //Inicializa alarma.
 
     //Radio
-    this.radio = new Radio(this, 250, 520, "radio", this.events, this.bookInfo, this.noticiaInfo);
+    this.radio = new Radio(this, sceneConst.radioPosX, sceneConst.radioPosY, "radio", this.events, this.bookInfo, this.noticiaInfo);
 
     this.radioClock = new Clock(this, 0, 0, "clock", "manecilla");
     this.radioClock.visible = false;
-    this.radioActivationTime = this.getRndInteger(5000, this.timeSceneEnds / 2);
+    this.radioActivationTime = this.getRndInteger(sceneConst.offSetBtwRadio, sceneConst.timeSceneEnds / 2);
     this.radioClock.start(this.activateRadio.bind(this), this.radioActivationTime);
 
     this.Intro();

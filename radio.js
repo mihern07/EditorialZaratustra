@@ -1,5 +1,6 @@
 import Dialogue from "./dialogue.js";
 import Clock from "./clock_class.js";
+import { radioConst} from "./constants.js";
 
 export default class Radio extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, sprite, events, bookInfo, noticiaInfo) {
@@ -8,15 +9,17 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     this.events = events;
     this.bookInfo = bookInfo;
     this.noticiaInfo = noticiaInfo;
-    this.setScale(.8);
+    this.setScale(radioConst.scale);
     scene.add.existing(this);
 
 
-    this.notActiveButton = scene.add.sprite(x + 65, y + 40, "radioNotActiveButton");
-    this.notActiveButton.setScale(.08);
+    this.notActiveButton = scene.add.sprite(x + radioConst.buttonOffsetX, y + radioConst.buttonOffsetY, "radioNotActiveButton");
+    this.notActiveButton.setScale(radioConst.buttonScale);
+    this.notActiveButton.setDepth(5);
 
-    this.activeButton = scene.add.sprite(x + 65, y + 40, "radioActiveButton").setInteractive();
-    this.activeButton.setScale(.08);
+    this.activeButton = scene.add.sprite(x + radioConst.buttonOffsetX, y + radioConst.buttonOffsetY, "radioActiveButton").setInteractive();
+    this.activeButton.setScale(radioConst.buttonScale);
+    this.activeButton.setDepth(5);
     this.activeButton.visible = false;
   }
   setActive(bookMalRadio, noticiaMalRadio){
@@ -60,10 +63,10 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     
     this.text = "Radio\nLamentamos comunicar que a partir de ahora se\nsancionará la publicación de " + this.bookACensurar + " y " + this.noticiaACensurar;
 
-    this.dialogue = new Dialogue(this.scene, 300, 100, "box", this.text);
+    this.dialogue = new Dialogue(this.scene, radioConst.dialogueX, radioConst.dialogueY, "box", this.text);
     this.clock = new Clock(this.scene, 0, 0, "clock", "manecilla");
     this.clock.visible = false;
-    this.clock.start(this.setNotActive.bind(this), 10000);
+    this.clock.start(this.setNotActive.bind(this), radioConst.dialogueTime);
   }
 
   setNotActive(){

@@ -1,3 +1,5 @@
+import { storyIntro} from "./constants.js";
+
 export default class StoryIntro extends Phaser.Scene{
     constructor() {
         super({key: 'storyIntro'});
@@ -9,10 +11,10 @@ export default class StoryIntro extends Phaser.Scene{
     }
 
     create(){
-        this.background = this.add.sprite(550, 400, "street");
+        this.background = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "street");
         this.background.setInteractive();
-        this.fondo = this.add.sprite(550, 400, "fondo");
-        this.fondo.setScale(.5);
+        this.fondo = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "fondo");
+        this.fondo.setScale(storyIntro.backgroundScale);
         this.dialogoAPartir = this.cache.text.get("intro");
         this.dialogoAPartir = this.dialogoAPartir.split("\n");
 
@@ -22,7 +24,7 @@ export default class StoryIntro extends Phaser.Scene{
         this.i = this.i + 4;
         this.j = this.j + 4;
 
-        this.showText = this.add.text(200, 350, this.text);
+        this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text);
 
 
 
@@ -33,7 +35,7 @@ export default class StoryIntro extends Phaser.Scene{
                 if (this.text.length == 0){
                     this.scene.switch("main");
                 }
-                this.showText = this.add.text(200, 350, this.text);
+                this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text);
                 this.i = this.i + 4;
                 this.j = this.j + 4;
             }
