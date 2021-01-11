@@ -8,6 +8,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, sprite, dialogue, dialogueSprite, documentSprite, bookSprite1, bookSprite2, genre, category, tamPags) {
         super(scene, x, y, sprite);
 
+        this.category = category;
+
         this.scene = scene;
         this.firstPosX = this.x; //Creamos la variable firstPosX (guardar la posicion inicial)
         this.setScale(characterConst.scale);
@@ -195,5 +197,9 @@ export default class Character extends Phaser.GameObjects.Sprite {
         else {
             return this.getRndInteger(characterConst.thickPags[0], characterConst.thickPags[1]);
         }
+    }
+
+    getCategory(){
+        return this.category;
     }
 }

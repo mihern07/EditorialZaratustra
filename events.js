@@ -22,6 +22,8 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
         this.bookInfo = bookInfo;
         this.noticiaInfo = noticiaInfo;
+        this.bookMalRadio = [];     //Rellenado por radio.js
+        this.noticiaMalRadio = [];  //Rellenado por radio.js
 
         this.dialogueSprite = dialogueSprite;
         this.bookSprite1 = bookSprite1;
@@ -60,8 +62,6 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.day = day;
         this.month = month;
         this.year = year;
-
-        this.radio = new Radio(this.scene, 250, 520, "radio", this);
 
         console.log(this.clientOrder);
         //Crea el primer personaje
@@ -363,7 +363,11 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje libro correcto
                 console.log("Personaje Correcto")
                 if (accepted) {
-                    this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
+                    if (this.isBookBanned(this.chara.getCategory())){
+                        this.gameManager.BookStrike();
+                    }else{
+                        this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
+                    }
                 }
                 break;
             case this.charaTypes.libroIncorrecto:
@@ -377,7 +381,11 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje noticia correcta
                 console.log("Noticia correcta");
                 if (accepted) {
-                    this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
+                    if (this.isNoticiaBanned(this.chara.getCategory())){
+                        this.gameManager.BookStrike();
+                    }else{
+                        this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
+                    }
                 }
             case this.charaTypes.noticiaIncorrecta:
                 //Personaje noticia incorrecta
@@ -390,6 +398,54 @@ export default class Events extends Phaser.GameObjects.GameObject {
         console.log(this.gameManager.dinero);
         console.log(this.gameManager.strikes);
         console.log(this.gameManager.bookStrikeCont);
+    }
+
+    getBookMalRadio(){
+        return this.bookMalRadio;
+    }
+
+    getNoticiaMalRadio(){
+        return this.noticiaMalRadio;
+    }
+
+    addCensoredBook(aCensurar){
+        this.bookMalRadio.push(aCensurar);
+        console.log (this.bookMalRadio);
+    }
+
+    addCensoredNoticia(aCensurar){
+        this.noticiaMalRadio.push(aCensurar);
+        console.log (this.noticiaMalRadio);
+    }
+
+    isBookBanned(category){
+        if(this.bookMalRadio.length == 0)
+            return false;
+        let banned = false;
+        let i = 0;
+        while (i < this.bookMalRadio.length && category != this.bookMalRadio[i]){
+            i++;
+        }
+        if (i == this.bookMalRadio.length){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    isNoticiaBanned(category){
+        if(this.noticiaMalRadio.length == 0)
+            return false;
+        let banned = false;
+        let i = 0;
+        while (i < this.noticiaMalRadio.length && category != this.noticiaMalRadio[i]){
+            i++;
+        }
+        if (i == this.noticiaMalRadio.length){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)

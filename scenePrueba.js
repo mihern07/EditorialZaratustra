@@ -8,6 +8,7 @@ import Bodyguard from "./bodyguard.js"
 import Alarm from "./alarm.js"
 import GameManager from "./gameManager.js";
 import Boss from "./boss.js";
+import Radio from "./radio.js"
 import { sceneConst } from "./constants.js";
 
 const mesaX0 = 50;
@@ -110,6 +111,10 @@ export default class Game extends Phaser.Scene {
     //ALARMA
 
     this.alarm = new Alarm(this, sceneConst.alarmPosX, sceneConst.alarmPosY, "alarmOff", this.bodyguard, this.events); //Inicializa alarma.
+
+    //Radio
+    this.radio = new Radio(this, 250, 520, "radio", this.events, this.bookInfo, this.noticiaInfo);
+    this.radio.setActive(this.events.getBookMalRadio(), this.events.getNoticiaMalRadio());
 
     this.Intro();
 
