@@ -14,7 +14,7 @@ export const levelsConst = {
             }, 
             noticiaInfo: {
                 noticiaBien: [],
-                noticiaMal: []
+                noticiaMal: ["Deportes", "Meteorología", "Ensayo", "Esquela", "Crónica", "Propaganda"]
             }, 
             bookInfo: {
                 novelaBien: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
@@ -331,7 +331,7 @@ export const postItConst = {
     scale: .8
 }
 export const ruleConst = {
-    offsetX: -85,
+    offsetX: -225,
     offsetY: -245,
     offsetYAcum: 25,
     noticiaOffsetY: -115,
