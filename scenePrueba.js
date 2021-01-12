@@ -11,11 +11,6 @@ import Boss from "./boss.js";
 import Radio from "./radio.js"
 import { sceneConst } from "./constants.js";
 
-const mesaX0 = 50;
-const mesaXX = 1040;
-const mesaY0 = 450;
-const mesaYY = 900;
-
 export default class Game extends Phaser.Scene {
 
   constructor() {

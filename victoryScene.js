@@ -31,7 +31,7 @@ export default class VictoryScene extends Phaser.Scene {
 
         this.button.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
-                this.scene.start('titleScene');
+                this.scene.switch('titleScene');
             }
         })
     }
