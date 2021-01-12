@@ -16,15 +16,19 @@ export default class GameOverScene extends Phaser.Scene {
         this.congratulation = this.add.text(gameOverConst.congratPosX, gameOverConst.congratPosY, "¡Oh no! Inténtalo otra vez",  { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.congratulation.setTint(gameOverConst.congratTint);
         this.congratulation.setFontSize(gameOverConst.congSize);
+        
         this.puntuacion = this.add.text(gameOverConst.puntPosX, gameOverConst.puntPosY, this.gameManager.dinero + "€/" + this.gameManager.objetivo + "€ conseguidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.puntuacion.setTint(gameOverConst.puntTint);
         this.puntuacion.setFontSize(gameOverConst.puntSize);
+        
         this.strikes = this.add.text(gameOverConst.strikesPosX, gameOverConst.strikesPosY, this.gameManager.strikes + "/" + this.gameManager.numMaxStrikes + " strikes recibidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.strikes.setTint(gameOverConst.strikeTint);
         this.strikes.setFontSize(gameOverConst.strikeSize);
+        
         this.button = this.add.sprite(gameOverConst.buttonPosX, gameOverConst.buttonPosY, "buttonNotPressed");
         this.button.setInteractive();
         this.button.setScale(gameOverConst.buttonScale);
+        
         this.buttonText = this.add.text(gameOverConst.buttonTextPosX, gameOverConst.buttonTextPosY, "Volver al menú", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.buttonText.setFontSize(gameOverConst.buttonTextSize);
 

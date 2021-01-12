@@ -32,7 +32,7 @@ export default class Book extends Draggable {
         // Propiedades del texto
         for (let i = 0; i < this.info.length; i++) {
             this.info[i].visible = false;
-            this.info[i].setScale(bookConst.textScale);
+            this.info[i].setFontSize(bookConst.textScale);
             this.info[i].setDepth(bookConst.openedDepth);
         }
 
