@@ -86,9 +86,19 @@ export default class Boot extends Phaser.Scene {
         this.load.audio("npcSound","sounds/npc.wav");
         this.load.audio("music","sounds/music.wav");
         this.load.audio("alarm","sounds/alarm.wav");
+
+        // Codigo para usar webfonts
+        this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
       }
 
       create(){
+        // Webfonts que se van a utilizar
+        WebFont.load({
+          google: {
+              families: ['Yeon Sung',  'Dancing Script', 'Barlow Condensed', 'Lobster']
+          },
+        });
+
         this.scene.start('titleScene');
       }
 }

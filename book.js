@@ -25,27 +25,23 @@ export default class Book extends Draggable {
         this.Libro2.y = this.scene.game.config.height / 2;
         this.Libro2.setDepth(bookConst.openedDepth);
 
-        this.info = [scene.add.text(this.x - bookConst.offsetX, this.y - bookConst.firstOffsetY, genre, { color: 0x0A0A0A }),
-        scene.add.text(this.x - bookConst.offsetX, this.y - bookConst.secondOffsetY, category, { color: 0x0A0A0A }),
-        scene.add.text(this.x - bookConst.offsetX, this.y - bookConst.thirdOffsetY, numPags + " pags", { color: 0x0A0A0A })]; //Añadimos texto. (cambiar numeros por globales)
+        this.info = [scene.add.text(this.x + bookConst.offsetX, this.y + bookConst.firstOffsetY, genre, { fontFamily: 'Lobster'}).setStroke('#000000', 4),
+        scene.add.text(this.x + bookConst.offsetX, this.y + bookConst.secondOffsetY, category, { fontFamily: 'Lobster'}).setStroke('#000000', 4),
+        scene.add.text(this.x + bookConst.offsetX, this.y + bookConst.thirdOffsetY, numPags + " pags", { fontFamily: 'Lobster'}).setStroke('#000000', 4)]; //Añadimos texto
 
+        // Propiedades del texto
         for (let i = 0; i < this.info.length; i++) {
             this.info[i].visible = false;
+            this.info[i].setScale(bookConst.textScale);
             this.info[i].setDepth(bookConst.openedDepth);
         }
 
-        //Configuración del Drag        
-        //this.bound = new Phaser.Geom.Rectangle(100, 100, 500, 400);
-        //this.body.setBoundsRectangle(this.bound);
-
         //Cuando es pulsado dicho sprite...
         this.on("pointerdown", pointer => {
-            //hacer algo.
             this.switchSprite(pointer);
         })
 
         this.Libro2.on("pointerdown", pointer => {
-            //hacer algo.
             this.switchSprite(pointer);
         })
     }

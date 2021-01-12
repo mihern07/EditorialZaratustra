@@ -127,7 +127,7 @@ export default class Game extends Phaser.Scene {
     this.bodyguard = new Bodyguard(this, sceneConst.guardPosX, sceneConst.guardPosY, "bodyguard", this.events) //Inicializa bodyguard
 
     //BOSS
-    this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bodyguard", dialogoJefe, "box", 0, 4, this.bookInfo);
+    this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bodyguard", dialogoJefe, "box", 0, 4, this.bookInfo, this.noticiaInfo);
 
     //ALARMA
 

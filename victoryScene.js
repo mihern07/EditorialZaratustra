@@ -14,17 +14,19 @@ export default class VictoryScene extends Phaser.Scene {
     create() {
         this.background = this.add.sprite(victoryConst.bgPosX, victoryConst.bgPosY, "pesetas");
         this.background.setScale(victoryConst.bgScale);
-        this.congratulation = this.add.text(victoryConst.congratPosX, victoryConst.congratPosY, "¡Buen trabajo!");
+        this.congratulation = this.add.text(victoryConst.congratPosX, victoryConst.congratPosY, "¡Buen trabajo!", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.congratulation.setFontSize(victoryConst.congSize);
-        this.puntuacion = this.add.text(victoryConst.puntPosX, victoryConst.puntPosY, this.gameManager.dinero + "€/" + this.gameManager.objetivo + "€ conseguidos");
+        this.puntuacion = this.add.text(victoryConst.puntPosX, victoryConst.puntPosY, this.gameManager.dinero + "€/" + this.gameManager.objetivo + "€ conseguidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
+        this.puntuacion.setTint(victoryConst.puntTint);
         this.puntuacion.setFontSize(victoryConst.puntSize);
-        this.strikes = this.add.text(victoryConst.strikesPosX, victoryConst.strikesPosY, this.gameManager.strikes + "/3 strikes recibidos");
+        this.strikes = this.add.text(victoryConst.strikesPosX, victoryConst.strikesPosY, this.gameManager.strikes + "/3 strikes recibidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
+        this.strikes.setTint(victoryConst.strikeTint);
         this.strikes.setFontSize(victoryConst.strikeSize);
 
         this.button = this.add.sprite(victoryConst.buttonPosX, victoryConst.buttonPosY, "buttonNotPressed");
         this.button.setInteractive();
         this.button.setScale(victoryConst.buttonScale);
-        this.buttonText = this.add.text(victoryConst.buttonTextPosX, victoryConst.buttonTextPosY, "Volver al menú");
+        this.buttonText = this.add.text(victoryConst.buttonTextPosX, victoryConst.buttonTextPosY, "Volver al menú", { fontFamily: 'Yeon Sung' });
         this.buttonText.setFontSize(victoryConst.buttonTextSize);
 
         this.button.on("pointerdown", pointer => {

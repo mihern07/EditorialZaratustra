@@ -35,28 +35,24 @@ export default class Newspaper extends Draggable {
         }
 
         this.on("pointerdown", pointer => {
-            if (pointer.rightButtonDown()) {
-                console.log("Libro pulsado");
-                this.visible = !this.visible;
-                this.bigNews.visible = !this.bigNews.visible;
-
-                for (let i = 0; i < this.info.length; i++) {
-                    this.info[i].visible = !this.info[i].visible;
-                }
-            }
+            this.switchSprite(pointer);
         })
 
         this.bigNews.on("pointerdown", pointer => {
-            if (pointer.rightButtonDown()) {
-                console.log("Libro pulsado");
-                this.visible = !this.visible;
-                this.bigNews.visible = !this.bigNews.visible;
-                for (let i = 0; i < this.info.length; i++) {
-                    this.info[i].visible = !this.info[i].visible;
-                }
-            }
+            this.switchSprite(pointer);
         })
     }
+
+    switchSprite(pointer) {
+        if (pointer.rightButtonDown()) {
+            this.visible = !this.visible;
+            this.bigNews.visible = !this.bigNews.visible;
+            for (let i = 0; i < this.info.length; i++) {
+                this.info[i].visible = !this.info[i].visible;
+            }
+        }
+    }
+
     cerrarSprites() {
         this.visible = false;
         this.bigNews.visible = false;

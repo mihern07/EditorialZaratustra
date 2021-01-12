@@ -3,7 +3,7 @@ import RuleDoc from "./ruledoc.js";
 import { bossConst } from "./constants.js";
 
 export default class Boss extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, sprite, dialogue, dialogueSprite, level, contDialogue, bookInfo) {
+    constructor(scene, x, y, sprite, dialogue, dialogueSprite, level, contDialogue, bookInfo, noticiaInfo) {
 
         super(scene, x, y, sprite);
         this.scene = scene;
@@ -13,6 +13,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         this.setDepth(bossConst.depth);
 
         this.bookInfo = bookInfo;
+        this.noticiaInfo = noticiaInfo;
 
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
@@ -27,7 +28,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         this.SPEED = bossConst.speed;
 
         //REGLAS
-        this.rules = new RuleDoc(this.scene, bossConst.rulesPosX, bossConst.rulesPosY, "rules", "openedRules", this.bookInfo.numPagsBien);
+        this.rules = new RuleDoc(this.scene, bossConst.rulesPosX, bossConst.rulesPosY, "rules", "openedRules", this.bookInfo.numPagsBien, this.noticiaInfo.noticiaMal);
 
         //INI: estado inicial
         //SHOW: en el mostrador con el libro

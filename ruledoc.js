@@ -2,15 +2,16 @@ import { ruleConst, draggableConst } from "./constants.js";
 import Draggable from "./draggable.js";
 
 export default class RuleDoc extends Draggable {
-    constructor(scene, x, y, sprite, sprite2, pags) {
-        super(scene,x,y,sprite, draggableConst.tableX0, draggableConst.tableXX, draggableConst.tableY0, draggableConst.tableYY)
+    constructor(scene, x, y, sprite, sprite2, pags, noticias) {
+        super(scene, x, y, sprite, draggableConst.tableX0, draggableConst.tableXX, draggableConst.tableY0, draggableConst.tableYY)
         this.firstPosX = this.x;
         this.firstPosY = this.y;
 
         this.pags = pags;
+        this.noticias = noticias;
 
         this.setScale(ruleConst.scale);
-        this.setDepth(ruleConst.depth); 
+        this.setDepth(ruleConst.depth);
         //Lo añade a la escena
         // this.scene.add.existing(this);
 
@@ -25,13 +26,35 @@ export default class RuleDoc extends Draggable {
         this.ruleDoc2.y = this.scene.game.config.height / 2;
         this.ruleDoc2.setDepth(ruleConst.openedDepth);
 
-        this.info = []
+        this.pagsInfo = []
 
+
+        // Añade la info sobre el numero de paginas
         for (let i = 0; i < this.pags.length; i++) {
-            this.info.push(scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.offsetY + (i * ruleConst.offsetYAcum), this.selectPags(this.pags[i]), { color: 0x0A0A0A }))
-            this.info[i].visible = false;
-            this.info[i].setDepth(ruleConst.openedDepth);
+            this.pagsInfo.push(scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.offsetY + (i * ruleConst.offsetYAcum), this.selectPags(this.pags[i]), {  fontFamily: 'Barlow Condensed', color: 0x5D3C09 }).setStroke('#5D3C09', 1))
+            this.pagsInfo[i].visible = false;
+            this.pagsInfo[i].setDepth(ruleConst.openedDepth);
         }
+
+        for (let i = 0; i < this.noticias.length; i++) {
+            if(this.noticias.length > 4 && i == 4)
+                this.noticiasInfo += "\n";
+
+            if (this.noticias.length != 1 && i == this.noticias.length - 1)
+                this.noticiasInfo += "y " + noticias[i];
+            else if (this.noticias.length != 1 && i == 0)
+                this.noticiasInfo = noticias[i] + ", ";
+            else if (this.noticias.length != 1)
+                this.noticiasInfo += noticias[i] + ", ";
+            else if (this.noticias.length != 1 && i == this.noticias.length - 2)
+                this.noticiasInfo += noticias[i] + " ";
+            else
+                this.noticiasInfo = noticias[i];
+        }
+        console.log(this.noticiasInfo);
+        this.noticiasText = scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.noticiaOffsetY, this.noticiasInfo,  { fontFamily: 'Barlow Condensed', color: 0x5D3C09 }).setStroke('#5D3C09', 1);
+        this.noticiasText.visible = false;
+        this.noticiasText.setDepth(ruleConst.openedDepth);
 
         //Cuando es pulsado dicho sprite...
         this.on("pointerdown", pointer => {
@@ -48,8 +71,9 @@ export default class RuleDoc extends Draggable {
         if (pointer.rightButtonDown()) {
             this.visible = !this.visible;
             this.ruleDoc2.visible = !this.ruleDoc2.visible;
-            for (let i = 0; i < this.info.length; i++) {
-                this.info[i].visible = !this.info[i].visible;
+            this.noticiasText.visible = !this.noticiasText.visible
+            for (let i = 0; i < this.pagsInfo.length; i++) {
+                this.pagsInfo[i].visible = !this.pagsInfo[i].visible;
             }
         }
     }
