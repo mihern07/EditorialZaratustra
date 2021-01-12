@@ -19,6 +19,10 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         this.body.allowGravity = false;
         this.body.setVelocityX(0);
 
+        //Visual de movimiento
+        this.xnow = 0;
+        this.defaultY = y;
+
         this.texto = dialogue;
         this.dialogueSprite = dialogueSprite;
         this.dialogue = new Dialogue(scene, bossConst.dialoguePosX, bossConst.dialoguePosY, this.dialogueSprite, this.texto.slice(level, level + 3));
@@ -207,8 +211,14 @@ export default class Boss extends Phaser.GameObjects.Sprite {
             this.visible = false;
             this.scene.bossAnswered = true;
         }
+
         else if (this.currentS === this.States.ANSWER && this.x > bossConst.midPos) {
             this.rules.visible = true;
+        }
+
+        else if(this.currentS === this.States.GOING || this.currentS === this.States.ANSWER){
+            this.y = this.defaultY + Math.sin(2*Math.PI*(this.xnow/50))*5;
+            this.xnow++;
         }
     }
 }

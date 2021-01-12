@@ -83,27 +83,40 @@ export const levelsConst = {
 export const sceneConst = {
     bgPosX: 550,
     bgPosY: 397,
+    
     fgPosX: 550,
     fgPosY: 392,
+    
     clockPosX: 750,
     clockPosY: 55,
+    
     boardPosX: 965,
     boardPosY: 340,
+    
     redInkwellPosX: 925,
+    
     greenInkwellPosX: 180,
+    
     inkwellPosY: 670,
+    
     calendarPosX: 100,
     calendarPosY: 300,
+    
     penPosX: 700,
     penPosY: 700,
+    
     eventsPosX: 955,
-    eventsPosY: 400,
+    eventsPosY: 410,
+    
     bellPosX: 825,
     bellPosY: 500,
+    
     guardPosX: 965,
     guardPosY: 420,
+    
     bossPosX: 0,
     bossPosY: 340,
+    
     alarmPosX: 200,
     alarmPosY: 775,
 

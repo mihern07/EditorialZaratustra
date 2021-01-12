@@ -12,6 +12,8 @@ class levelManager extends Phaser.Scene {
 
         this.actualLevel = 1;
 
+        this.scene.remove("storyIntro");
+
         //Primer nivel sólo si no existe
         if(this.scene.get(levelsConst.keyLevel + this.actualLevel) === null){
             this.level = new levelTemplate(levelsConst.keyLevel + this.actualLevel, this, levelsConst.dataLevel[0]);
@@ -24,10 +26,11 @@ class levelManager extends Phaser.Scene {
 
     nextLevel(){
         if(this.actualLevel < levelsConst.totalLevels){
+            //Borramos el actual
+            this.scene.remove(levelsConst.keyLevel + this.actualLevel);
+            delete this.level;
             //Sumamos nivel
             this.actualLevel++;
-            //Borramos el actual
-            delete this.level;
             //Creamos el nivel
             this.level = new levelTemplate(levelsConst.keyLevel + this.actualLevel, this, levelsConst.dataLevel[this.actualLevel-1]);
             //Se añade al array y se pone en marcha

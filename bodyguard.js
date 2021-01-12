@@ -10,6 +10,10 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.event = events;
         this.setDepth(guardConst.depth);
 
+        //Movimiento visual
+        this.defaultY = y;
+        this.xnow = 0;
+
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
         this.body.setVelocityX(0);
@@ -48,6 +52,11 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.StopChar();
             this.x = this.firstPosX;
             this.currentS = this.States.INI;
+        }
+
+        else if(this.currentS === this.States.GOING || this.currentS === this.States.ANSWER){
+            this.y = this.defaultY + Math.sin(2*Math.PI*(this.xnow/50))*5;
+            this.xnow++;
         }
     }
 }

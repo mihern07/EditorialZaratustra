@@ -2,7 +2,7 @@ import Dialogue from "./dialogue.js";
 import Book from "./book.js";
 import Clock from "./clock_class.js";
 import Document from "./document.js";
-import { characterConst } from "./constants.js";
+import { characterConst, sceneConst } from "./constants.js";
 
 export default class Character extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, random, sprite, dialogue, dialogueSprite, documentSprite, bookSprite1, bookSprite2, genre, category, tamPags) {
@@ -16,6 +16,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.npc = this.scene.sound.add("npcSound");
 
+        this.xnow = 0;
 
         this.setDepth(characterConst.depth);
         this.scene.physics.add.existing(this);
@@ -29,21 +30,21 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.setScale(characterConst.clothesScale);
             this.y = characterConst.clothesY;
 
-            this.sprite2 = scene.add.sprite(this.x, characterConst.headY, this.chooseSpriteHead()).setInteractive();
-            this.sprite2.setDepth(characterConst.depth);
-            this.sprite2.setScale(characterConst.hairScale);
+            this.head = scene.add.sprite(this.x, characterConst.headY, this.chooseSpriteHead()).setInteractive();
+            this.head.setDepth(characterConst.depth);
+            this.head.setScale(characterConst.hairScale);
 
-            this.scene.physics.add.existing(this.sprite2);
-            this.sprite2.body.allowGravity = false;
-            this.sprite2.body.setVelocityX(0);
+            this.scene.physics.add.existing(this.head);
+            this.head.body.allowGravity = false;
+            this.head.body.setVelocityX(0);
 
-            this.sprite3 = scene.add.sprite(this.x, characterConst.hairY, this.chooseSpriteHair()).setInteractive();
-            this.sprite3.setDepth(characterConst.depth);
-            this.sprite3.setScale(characterConst.hairScale);
+            this.hair = scene.add.sprite(this.x, characterConst.hairY, this.chooseSpriteHair()).setInteractive();
+            this.hair.setDepth(characterConst.depth);
+            this.hair.setScale(characterConst.hairScale);
 
-            this.scene.physics.add.existing(this.sprite3);
-            this.sprite3.body.allowGravity = false;
-            this.sprite3.body.setVelocityX(0);
+            this.scene.physics.add.existing(this.hair);
+            this.hair.body.allowGravity = false;
+            this.hair.body.setVelocityX(0);
         }
 
         //INI: estado inicial
@@ -137,8 +138,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(-this.SPEED);
             if(this.randoms) 
             {
-                this.sprite2.body.setVelocityX(-this.SPEED);
-                this.sprite3.body.setVelocityX(-this.SPEED);
+                this.head.body.setVelocityX(-this.SPEED);
+                this.hair.body.setVelocityX(-this.SPEED);
             }
             this.currentS = this.States.GOING;
             this.CreateDocument();
@@ -150,8 +151,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(0);
             if(this.randoms) 
             {
-                this.sprite2.body.setVelocityX(0);
-                this.sprite3.body.setVelocityX(0);
+                this.head.body.setVelocityX(0);
+                this.hair.body.setVelocityX(0);
             }
 
             this.currentS = this.States.SHOW;
@@ -175,8 +176,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(0);
             if(this.randoms) 
             {
-                this.sprite2.body.setVelocityX(0);
-                this.sprite3.body.setVelocityX(0);
+                this.head.body.setVelocityX(0);
+                this.hair.body.setVelocityX(0);
             }
 
             this.currentS = this.States.INI;
@@ -188,8 +189,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(-this.SPEED);
             if(this.randoms) 
             {
-                this.sprite2.body.setVelocityX(-this.SPEED);
-                this.sprite3.body.setVelocityX(-this.SPEED);
+                this.head.body.setVelocityX(-this.SPEED);
+                this.hair.body.setVelocityX(-this.SPEED);
             }
             this.currentS = this.States.ANSWER;
             this.firstClock.stop();
@@ -208,8 +209,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(this.SPEED);
             if(this.randoms) 
             {
-                this.sprite2.body.setVelocityX(this.SPEED);
-                this.sprite3.body.setVelocityX(this.SPEED);
+                this.head.body.setVelocityX(this.SPEED);
+                this.hair.body.setVelocityX(this.SPEED);
             }
             this.currentS = this.States.ANSWER;
 
@@ -278,6 +279,17 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.StopChar();
             this.dialogueChange();
             this.isGone = true;
+        }
+        else if(this.currentS === this.States.GOING || this.currentS === this.States.ANSWER){
+            if(this.randoms){
+                this.y = characterConst.clothesY + Math.sin(2*Math.PI*(this.xnow/50))*6;
+                this.head.y = characterConst.headY +  Math.sin(2*Math.PI*(this.xnow/50))*4;
+                this.hair.y = characterConst.hairY + Math.sin(2*Math.PI*(this.xnow/50))*4;
+            }
+            else{
+                this.y = sceneConst.eventsPosY + Math.sin(2*Math.PI*(this.xnow/50))*5;
+            }
+            this.xnow++;
         }
     }
 

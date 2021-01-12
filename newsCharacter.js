@@ -14,6 +14,9 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.npc = this.scene.sound.add("npcSound");
 
+        //Visual de movimiento
+        this.defaultY = y;
+        this.xnow = 0;
 
         this.setDepth(characterConst.depth);
         this.scene.physics.add.existing(this);
@@ -240,6 +243,10 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
             this.StopChar();
             this.dialogueChange();
             this.isGone = true;
+        }
+        else if(this.currentS === this.States.GOING || this.currentS === this.States.ANSWER){
+            this.y = this.defaultY + Math.sin(2*Math.PI*(this.xnow/50))*5;
+            this.xnow++;
         }
     }
 

@@ -46,7 +46,10 @@ class TitleScene extends Phaser.Scene {
 	}
 
 	clickButton() {
-		this.scene.switch("storyIntro");
+		if(this.scene.get("storyIntro") != null)
+			this.scene.switch("storyIntro");
+		else
+			this.scene.switch("levelManager");
 	}
 
 }

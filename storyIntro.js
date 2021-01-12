@@ -14,7 +14,6 @@ export default class StoryIntro extends Phaser.Scene{
         this.background = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "street");
         this.background.setInteractive();
         
-        
         this.fondo = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "fondo");
         this.fondo.setScale(storyIntro.backgroundScaleX, storyIntro.backgroundScaleY);
         
@@ -36,9 +35,11 @@ export default class StoryIntro extends Phaser.Scene{
                 if (this.text.length == 0){
                     this.scene.switch("levelManager");
                 }
-                this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
-                this.i = this.i + 4;
-                this.j = this.j + 4;
+                else{
+                    this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
+                    this.i = this.i + 4;
+                    this.j = this.j + 4;
+                }
             }
           });
     }
