@@ -106,7 +106,7 @@ export default class Game extends Phaser.Scene {
     //BOSS
     this.dialogoJefe = this.cache.text.get("jefe");
     this.dialogoJefe = this.dialogoJefe.split("\n");
-    this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bodyguard", this.dialogoJefe, "box", 0, 4, this.bookInfo);
+    this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bodyguard", this.dialogoJefe, "box", 0, 4, this.bookInfo, this.noticiaInfo);
 
     //ALARMA
 

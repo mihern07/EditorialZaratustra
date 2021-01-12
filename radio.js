@@ -15,11 +15,9 @@ export default class Radio extends Phaser.GameObjects.Sprite {
 
     this.notActiveButton = scene.add.sprite(x + radioConst.buttonOffsetX, y + radioConst.buttonOffsetY, "radioNotActiveButton");
     this.notActiveButton.setScale(radioConst.buttonScale);
-    this.notActiveButton.setDepth(5);
 
     this.activeButton = scene.add.sprite(x + radioConst.buttonOffsetX, y + radioConst.buttonOffsetY, "radioActiveButton").setInteractive();
     this.activeButton.setScale(radioConst.buttonScale);
-    this.activeButton.setDepth(5);
     this.activeButton.visible = false;
   }
   setActive(bookMalRadio, noticiaMalRadio){
