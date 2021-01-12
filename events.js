@@ -42,14 +42,15 @@ export default class Events extends Phaser.GameObjects.GameObject {
         let cont = 0;
         this.clientOrder = [];
         for (let i = 0; i < this.order.numCorrects; i++) { // Añade los minimos correctos
-            if (this.getRndInteger(0, 5) != 0)
+            if (this.noticiaInfo.noticiaBien.length == 0 || this.getRndInteger(0, 5) != 0)
                 this.clientOrder.push(this.charaTypes.libroCorrecto);
             else
                 this.clientOrder.push(this.charaTypes.noticiaCorrecta);
             cont++;
         }
+
         for (let i = cont; i < this.order.minBooks; i++) { // Añade el resto (correctos o incorrectos)
-            if (this.getRndInteger(0, 5) != 0)
+            if (this.noticiaInfo.noticiaBien.length == 0 || this.getRndInteger(0, 5) != 0)
                 this.clientOrder.push(this.getRndInteger(this.charaTypes.libroCorrecto, this.charaTypes.libroIncorrecto));
             else
                 this.clientOrder.push(this.getRndInteger(this.charaTypes.noticiaCorrecta, this.charaTypes.noticiaIncorrecta));

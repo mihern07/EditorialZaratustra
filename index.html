@@ -64,7 +64,8 @@
       import gameOverScene from "./gameOverScene.js";
       import pauseMenu from "./pauseMenu.js";
       import levelManager from "./levelManager.js";
-      
+      import storyIntro from "./storyIntro.js";
+
       var config = {
         type: Phaser.AUTO,
         width: 1100,
@@ -77,7 +78,7 @@
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
         }, 
-        scene: [Boot, titleScene, Game, victoryScene, gameOverScene, pauseMenu, levelManager],
+        scene: [Boot, titleScene, storyIntro, Game, victoryScene, gameOverScene, pauseMenu, levelManager],
         physics: {
           default: "arcade",
           arcade: { gravity: { y: 400 }, debug: false },
