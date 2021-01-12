@@ -1,0 +1,44 @@
+import { storyIntro} from "./constants.js";
+
+export default class StoryIntro extends Phaser.Scene{
+    constructor() {
+        super({key: 'storyIntro'});
+    }
+    preload(){
+        this.load.text("intro", "dialogue/storyIntro.txt");
+        this.load.image("street", "sprites/street.jpg");
+        this.load.image("fondo", "sprites/negro_semitransparente.png");
+    }
+
+    create(){
+        this.background = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "street");
+        this.background.setInteractive();
+        this.fondo = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "fondo");
+        this.fondo.setScale(storyIntro.backgroundScale);
+        this.dialogoAPartir = this.cache.text.get("intro");
+        this.dialogoAPartir = this.dialogoAPartir.split("\n");
+
+        this.i = 0;
+        this.j = 4;
+        this.text = this.dialogoAPartir.slice(this.i,this.j);
+        this.i = this.i + 4;
+        this.j = this.j + 4;
+
+        this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text);
+
+
+
+        this.background.on('pointerdown', pointer => {
+            if (pointer.leftButtonDown()) {
+                this.showText.destroy();
+                this.text = this.dialogoAPartir.slice(this.i,this.j);
+                if (this.text.length == 0){
+                    this.scene.switch("main");
+                }
+                this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text);
+                this.i = this.i + 4;
+                this.j = this.j + 4;
+            }
+          });
+    }
+}

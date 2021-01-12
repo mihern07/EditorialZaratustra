@@ -44,6 +44,11 @@ export const sceneConst = {
     firstLevelSpecialChara: [],
     firstDay: 1,
 
+    timeSceneEnds: 180000,
+    offSetBtwRadio: 5000,
+    radioPosX: 250,
+    radioPosY: 520,
+
     month: 4,
     year: 1920,
 
@@ -259,4 +264,22 @@ export const draggableConst = {
     boardXX: 1040,
     boardY0: 85,
     boardYY: 400
+}
+
+export const radioConst = {
+    buttonOffsetX: 65,
+    buttonOffsetY: 40,
+    scale: 0.8,
+    buttonScale: 0.08,
+    dialogueX: 300,
+    dialogueY: 100,
+    dialogueTime: 10000
+}
+
+export const storyIntro = {
+    backgroundPosX: 550,
+    backgroundPosY: 400,
+    backgroundScale: 0.5,
+    textPosX: 200,
+    textPosY: 350
 }

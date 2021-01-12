@@ -16,4 +16,8 @@ export default class Dialogue extends Phaser.GameObjects.Sprite {
         this.visible = isVisible;
         this.texto.visible = isVisible;
     }
+
+    destroyText(){
+        this.texto.destroy();
+    }
 }
