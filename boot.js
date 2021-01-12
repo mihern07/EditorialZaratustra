@@ -35,6 +35,41 @@ export default class Boot extends Phaser.Scene {
         this.load.image("alarmPressed","sprites/alarmaEncendidaPulsada.png");
         this.load.image("alarmNoPressed","sprites/alarmaEncendidaSinPulsar.png");
         this.load.image("alarmOff","sprites/alarmaApagadaSinPulsar.png");
+
+        this.load.image("bodyguardSprite","sprites/guardiaPsje.png"); //Sprite Guardaespaldas
+        this.load.image("bossSprite","sprites/jefePsje.png"); //Sprite Jefe
+        this.load.image("sobornador","sprites/sobornador.png"); //Sprite Sobornador
+        this.load.image("bossWife","sprites/mujerJefe.png"); //Sprite Mujer del Jefe
+        this.load.image("cartero","sprites/correos.png"); //Sprite Correos
+        this.load.image("boy","sprites/ninio.png"); //Sprite Niño
+        this.load.image("tend","sprites/tendencias.png"); //Sprite Tendencias
+        this.load.image("vagabundo","sprites/vagabundo.png"); //Sprite Vagabundo
+
+        //Sprites Cabezas
+        this.load.image("head1","sprites/cabeza1.png");
+        this.load.image("head2","sprites/cabeza2.png");
+        this.load.image("head3","sprites/cabeza3.png");
+        this.load.image("head4","sprites/cabeza4.png");
+        this.load.image("head5","sprites/cabeza5.png");
+
+        //Sprites Pelos
+        this.load.image("hair1","sprites/pelo1.png");
+        this.load.image("hair2","sprites/pelo2.png");
+        this.load.image("hair3","sprites/pelo3.png");
+        this.load.image("hair4","sprites/pelo4.png");
+        this.load.image("hair5","sprites/pelo5.png");
+        this.load.image("hair6","sprites/pelo6.png");
+        this.load.image("hair7","sprites/pelo7.png");
+        this.load.image("hair8","sprites/pelo8.png");
+
+        //Sprites Ropa
+        this.load.image("clothes1","sprites/ropa1.png");
+        this.load.image("clothes2","sprites/ropa2.png");
+        this.load.image("clothes3","sprites/ropa3.png");
+        this.load.image("clothes4","sprites/ropa4.png");
+        this.load.image("clothes5","sprites/ropa5.png");
+        this.load.image("clothes6","sprites/ropa6.png");
+        this.load.image("clothes7","sprites/ropa7.png");
     
         //Sprites de los diferentes libros
         this.load.image("libroCHistórico", "sprites/libro_cerrado_historia.png")

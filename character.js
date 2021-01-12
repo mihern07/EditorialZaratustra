@@ -5,7 +5,7 @@ import Document from "./document.js";
 import { characterConst } from "./constants.js";
 
 export default class Character extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, sprite, dialogue, dialogueSprite, documentSprite, bookSprite1, bookSprite2, genre, category, tamPags) {
+    constructor(scene, x, y, random, sprite, dialogue, dialogueSprite, documentSprite, bookSprite1, bookSprite2, genre, category, tamPags) {
         super(scene, x, y, sprite);
 
         this.category = category;
@@ -22,6 +22,29 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.body.allowGravity = false;
         this.body.setVelocityX(0);
         this.SPEED = characterConst.speed;
+        this.randoms = random;
+
+        if(random)
+        {
+            this.setScale(characterConst.clothesScale);
+            this.y = characterConst.clothesY;
+
+            this.sprite2 = scene.add.sprite(this.x, characterConst.headY, this.chooseSpriteHead()).setInteractive();
+            this.sprite2.setDepth(characterConst.depth);
+            this.sprite2.setScale(characterConst.hairScale);
+
+            this.scene.physics.add.existing(this.sprite2);
+            this.sprite2.body.allowGravity = false;
+            this.sprite2.body.setVelocityX(0);
+
+            this.sprite3 = scene.add.sprite(this.x, characterConst.hairY, this.chooseSpriteHair()).setInteractive();
+            this.sprite3.setDepth(characterConst.depth);
+            this.sprite3.setScale(characterConst.hairScale);
+
+            this.scene.physics.add.existing(this.sprite3);
+            this.sprite3.body.allowGravity = false;
+            this.sprite3.body.setVelocityX(0);
+        }
 
         //INI: estado inicial
         //SHOW: en el mostrador con el libro
@@ -54,9 +77,69 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.isGone = false;
     }
 
+    chooseSpriteHair() {
+        this.value = this.getRndInteger(0,7);
+        switch(this.value) //PELO DEL CHARACTER
+        {
+            case 0:
+            this.sprite = "hair1";
+            break;
+            case 1:
+                this.sprite = "hair2";
+            break;
+            case 2:
+                this.sprite = "hair3";
+            break;
+            case 3:
+                this.sprite = "hair4";
+            break;
+            case 4:
+                this.sprite = "hair5";
+            break;
+            case 5:
+                this.sprite = "hair6";
+            break;
+            case 6:
+                this.sprite = "hair7";
+            break;
+            case 7:
+                this.sprite = "hair8";
+            break;
+        }
+        return this.sprite;
+    }
+
+    chooseSpriteHead() {
+        this.value = this.getRndInteger(0,4);
+        switch(this.value) //PELO DEL CHARACTER
+        {
+            case 0:
+            this.sprite = "head1";
+            break;
+            case 1:
+                this.sprite = "head2";
+            break;
+            case 2:
+                this.sprite = "head3";
+            break;
+            case 3:
+                this.sprite = "head4";
+            break;
+            case 4:
+                this.sprite = "head5";
+            break;
+        }
+        return this.sprite;
+    }
+
     EnterChar() { // El personaje entre (puerta)
         if (this.currentS === this.States.INI) {
             this.body.setVelocityX(-this.SPEED);
+            if(this.randoms) 
+            {
+                this.sprite2.body.setVelocityX(-this.SPEED);
+                this.sprite3.body.setVelocityX(-this.SPEED);
+            }
             this.currentS = this.States.GOING;
             this.CreateDocument();
         }
@@ -65,6 +148,11 @@ export default class Character extends Phaser.GameObjects.Sprite {
     StopChar() { // El personaje pare
         if (this.currentS === this.States.GOING) {
             this.body.setVelocityX(0);
+            if(this.randoms) 
+            {
+                this.sprite2.body.setVelocityX(0);
+                this.sprite3.body.setVelocityX(0);
+            }
 
             this.currentS = this.States.SHOW;
 
@@ -85,6 +173,11 @@ export default class Character extends Phaser.GameObjects.Sprite {
         }
         else if (this.currentS === this.States.ANSWER) {
             this.body.setVelocityX(0);
+            if(this.randoms) 
+            {
+                this.sprite2.body.setVelocityX(0);
+                this.sprite3.body.setVelocityX(0);
+            }
 
             this.currentS = this.States.INI;
         }
@@ -93,6 +186,11 @@ export default class Character extends Phaser.GameObjects.Sprite {
     AcceptChar() { // El personaje entre (aceptado)
         if (this.currentS === this.States.WAIT) {
             this.body.setVelocityX(-this.SPEED);
+            if(this.randoms) 
+            {
+                this.sprite2.body.setVelocityX(-this.SPEED);
+                this.sprite3.body.setVelocityX(-this.SPEED);
+            }
             this.currentS = this.States.ANSWER;
             this.firstClock.stop();
             this.secondClock.stop();
@@ -108,6 +206,11 @@ export default class Character extends Phaser.GameObjects.Sprite {
     {
         if (this.currentS === this.States.WAIT) {
             this.body.setVelocityX(this.SPEED);
+            if(this.randoms) 
+            {
+                this.sprite2.body.setVelocityX(this.SPEED);
+                this.sprite3.body.setVelocityX(this.SPEED);
+            }
             this.currentS = this.States.ANSWER;
 
             this.firstClock.stop();

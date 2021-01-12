@@ -97,11 +97,11 @@ export const sceneConst = {
     penPosX: 700,
     penPosY: 700,
     eventsPosX: 955,
-    eventsPosY: 380,
+    eventsPosY: 400,
     bellPosX: 825,
     bellPosY: 500,
-    guardPosX: 955,
-    guardPosY: 340,
+    guardPosX: 965,
+    guardPosY: 420,
     bossPosX: 0,
     bossPosY: 340,
     alarmPosX: 200,
@@ -208,12 +208,12 @@ export const clockConst = {
 export const bossConst = {
     dialoguePosX: 530,
     dialoguePosY: 415,
-    rulesPosX: 500,
+    rulesPosX: 650,
     rulesPosY: 550,
 
     midPos: 540,
 
-    scale: .5,
+    scale: .4,
     depth: -2,
 
     speed: 190
@@ -249,6 +249,15 @@ export const characterConst = {
     documentPosX: 650,
     documentPosY: 550,
 
+    headY: 260,
+    headScale: .36,
+
+    hairY: 240,
+    hairScale: .36,
+
+    clothesY: 350,
+    clothesScale: .4,
+
     midPos: 540,
     outPos: 120,
 
@@ -256,15 +265,15 @@ export const characterConst = {
     normalPags: [400, 700],
     thickPags: [1200, 3000],
 
-    scale: .5,
+    scale: .4,
     depth: -1,
 
     speed: 190
 }
 export const guardConst = {
-    midPos: 580,
+    midPos: 620,
 
-    scale: .5,
+    scale: .4,
     depth: -2,
 
     speed: 190

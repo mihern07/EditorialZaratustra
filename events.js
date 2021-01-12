@@ -75,42 +75,42 @@ export default class Events extends Phaser.GameObjects.GameObject {
             case this.charaTypes.ninio:
                 //Niño
                 let dialogoNinio = this.splitDialogue(this.dialogosEvento[0]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, dialogoNinio, this.dialogueSprite, this.documentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, false, "boy", dialogoNinio, this.dialogueSprite, this.documentSprite);
                 break;
             case this.charaTypes.sobornador:
                 //Sobornador
                 let dialogoSobornador = this.splitDialogue(this.dialogosEvento[4]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, dialogoSobornador, this.dialogueSprite, this.documentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, false, "sobornador", dialogoSobornador, this.dialogueSprite, this.documentSprite);
                 break;
             case this.charaTypes.vagabundo:
                 //Vagabundo
                 let dialogoVagabundo = this.splitDialogue(this.dialogosEvento[5]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, dialogoVagabundo, this.dialogueSprite, this.documentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, false, "vagabundo", dialogoVagabundo, this.dialogueSprite, this.documentSprite);
                 break;
             case this.charaTypes.correos:
                 //Correos
                 let dialogoCorreos = this.splitDialogue(this.dialogosEvento[2]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, dialogoCorreos, this.dialogueSprite, this.documentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, false, "cartero", dialogoCorreos, this.dialogueSprite, this.documentSprite);
                 break;
             case this.charaTypes.correosFalso:
                 //Correos falso
                 let dialogoCorreosFalso = this.splitDialogue(this.dialogosEvento[2]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, dialogoCorreosFalso, this.dialogueSprite, this.documentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, false, "cartero", dialogoCorreosFalso, this.dialogueSprite, this.documentSprite);
                 break;
             case this.charaTypes.mujerDelJefe:
                 //Mujer del jefe
                 let dialogueMujerDelJefe = this.splitDialogue(this.dialogosEvento[3]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, dialogueMujerDelJefe, this.dialogueSprite, this.documentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, false, "bossWife", dialogueMujerDelJefe, this.dialogueSprite, this.documentSprite);
                 break;
             case this.charaTypes.mujerDelJefeFalsa:
                 //Mujer del jefe falsa
                 let dialogueMujerDelJefeFalsa = this.splitDialogue(this.dialogosEvento[3]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, dialogueMujerDelJefeFalsa, this.dialogueSprite, this.documentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, false, "bossWife", dialogueMujerDelJefeFalsa, this.dialogueSprite, this.documentSprite);
                 break;
             case this.charaTypes.tendencias:
                 //Personaje tendencias
                 let dialogueTendencias = this.splitDialogue(this.dialogosEvento[1]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, dialogueTendencias, this.dialogueSprite, this.documentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, false, "tend", dialogueTendencias, this.dialogueSprite, this.documentSprite);
                 //this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogueVagabundo, this.dialogueSprite, this.documentSprite, this.bookSprite1, this.bookSprite2);
                 break;
             case this.charaTypes.libroCorrecto:
@@ -118,7 +118,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Personaje Correcto")
                 this.createCorrectBook();
                 this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length - 1)]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPagsdocumentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPagsdocumentSprite);
                 break;
             case this.charaTypes.libroIncorrecto:
                 //Personaje Libro Incorrecto
@@ -129,7 +129,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Personaje noticia correcta");
                 this.news = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
                 this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0,this.dialogosNoticias.length - 1)]);
-                this.chara = new NewsCharacter(this.scene, this.x, this.y, this.sprite, this.dialogoNoticia, this.day, this.month, this.year, this.news);
+                this.chara = new NewsCharacter(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoNoticia, this.day, this.month, this.year, this.news);
                 break;
             case this.charaTypes.noticiaIncorrecta:
                 console.log("Personaje noticia incorrecta");
@@ -145,12 +145,12 @@ export default class Events extends Phaser.GameObjects.GameObject {
                     }
                     this.news = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
                     this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0,this.dialogosNoticias.length - 1)]);
-                    this.chara = new NewsCharacter(this.scene, this.x, this.y, this.sprite, this.dialogoNoticia, this.incorrectDay, this.incorrectMonth, this.incorrectYear, this.news);
+                    this.chara = new NewsCharacter(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoNoticia, this.incorrectDay, this.incorrectMonth, this.incorrectYear, this.news);
                 }
                 else {
                     this.news = this.noticiaInfo.noticiaMal[this.getRndInteger(0, this.noticiaInfo.noticiaMal.length - 1)];
                     this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0,this.dialogosNoticias.length - 1)]);
-                    this.chara = new NewsCharacter(this.scene, this.x, this.y, this.sprite, this.dialogoNoticia, this.day, this.month, this.year, this.news);
+                    this.chara = new NewsCharacter(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoNoticia, this.day, this.month, this.year, this.news);
                 }
 
 
@@ -161,6 +161,35 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("El personaje buscado no existe");
                 break;
         }
+    }
+
+    chooseSprites() {
+        this.value = this.getRndInteger(0,6);
+        switch(this.value) //PELO DEL CHARACTER
+        {
+            case 0:
+            this.sprite = "clothes1";
+            break;
+            case 1:
+                this.sprite = "clothes2";
+            break;
+            case 2:
+                this.sprite = "clothes3";
+            break;
+            case 3:
+                this.sprite = "clothes4";
+            break;
+            case 4:
+                this.sprite = "clothes5";
+            break;
+            case 5:
+                this.sprite = "clothes6";
+            break;
+            case 6:
+                this.sprite = "clothes7";
+            break;
+        }
+        return this.sprite;
     }
 
     splitDialogue(dialogue){
@@ -175,6 +204,11 @@ export default class Events extends Phaser.GameObjects.GameObject {
             if (this.chara.hasBook)
                 this.chara.book.destroy();
             this.chara.destroy();
+            if(this.chara.sprite3!=null)
+            {
+                this.chara.sprite2.destroy(); //Arreglar.
+                this.chara.sprite3.destroy();
+            }
             this.isCharaInScene = false;
             if (this.contKnownCharas < this.clientOrder.length) { // creación de nuevo personaje
                 this.setChara();
@@ -286,13 +320,13 @@ export default class Events extends Phaser.GameObjects.GameObject {
                     this.category = this.bookInfo.teatroMal[this.getRndInteger(0, this.bookInfo.teatroMal.length - 1)];
                 }
                 let dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length)]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
+                this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
                 break;
             case 1:
                 //Número de páginas Incorrecto
                 this.tamPags = this.bookInfo.numPagsMal[this.getRndInteger(0, this.bookInfo.numPagsMal.length - 1)];
                 this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length)]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
+                this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
                 break;
             case 2:
                 //Sprite Incorrecto
@@ -301,7 +335,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 } while (this.wrongSprite == this.category);
 
                 this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length)]);
-                this.chara = new Personaje(this.scene, this.x, this.y, this.sprite, this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.wrongSprite, "libroA" + this.wrongSprite, this.genre, this.category, this.tamPags);
+                this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.wrongSprite, "libroA" + this.wrongSprite, this.genre, this.category, this.tamPags);
                 break;
         }
     }
