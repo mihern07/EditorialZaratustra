@@ -1,0 +1,12 @@
+Jefe
+Recuerde que ha de tener en cuenta el
+color de los libros.
+Jefe
+Es responsabilidad del cliente presentar
+su libro con el color correcto para su género.
+Jefe
+Si el color del libro no corresponde con el
+color del género debe de denegar su entrada.
+Jefe
+Los colores correspondientes a cada género se
+pueden consultar en este papel. Que pase un buen día
