@@ -16,6 +16,8 @@ export default class Book extends Draggable {
         this.setScale(bookConst.scale);
         this.setDepth(bookConst.depth);
 
+        this.pageSound = this.scene.sound.add("pageSound");
+
         //Sprite ibro abierto
         this.Libro2 = scene.add.sprite(this.x, this.y, sprite2).setInteractive();
         this.Libro2.setScale(bookConst.openedScale);
@@ -48,6 +50,7 @@ export default class Book extends Draggable {
 
     switchSprite(pointer) {
         if (pointer.rightButtonDown()) {
+            this.pageSound.play();
             this.changeSprites();
             for (let i = 0; i < this.info.length; i++) {
                 this.info[i].visible = !this.info[i].visible;

@@ -95,6 +95,10 @@ export default class Game extends Phaser.Scene {
     this.music.play();
     this.isPlaying = true;
 
+    this.signed = this.sound.add("sign");
+
+    this.inkSound = this.sound.add("ink");
+
     this.boss.EnterChar(); //Entrada el Boss
 
     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
@@ -136,10 +140,12 @@ export default class Game extends Phaser.Scene {
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject
 
       if (this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
+        this.inkSound.play();
         this.pen.setRed();
       }
 
       if (this.physics.overlap(this.pen, this.tinteroVerde)) { //Overlap Verde
+        this.inkSound.play();
         this.pen.setGreen();
       }
 
@@ -150,13 +156,15 @@ export default class Game extends Phaser.Scene {
             !this.pen.hasSigned && 
             this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Roja
           
+          this.signed.play();
           this.events.DenyChar();
           this.pen.setNormal();
         }
         else if(this.pen.isGreen() && 
               !this.pen.hasSigned && 
               this.physics.overlap(this.pen, this.events.chara.document)){
-
+                
+          this.signed.play();
           this.events.AcceptChar();
           this.pen.setNormal();
         }

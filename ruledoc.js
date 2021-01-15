@@ -17,6 +17,8 @@ export default class RuleDoc extends Draggable {
 
         this.visible = false;
 
+        this.pageSound = this.scene.sound.add("pageSound");
+
         //Sprite ibro abierto
         this.ruleDoc2 = scene.add.sprite(this.x, this.y, sprite2).setInteractive();
         this.ruleDoc2.setScale(ruleConst.openedScale);
@@ -69,6 +71,7 @@ export default class RuleDoc extends Draggable {
     }
     switchSprite(pointer) {
         if (pointer.rightButtonDown()) {
+            this.pageSound.play();
             this.visible = !this.visible;
             this.ruleDoc2.visible = !this.ruleDoc2.visible;
             this.noticiasText.visible = !this.noticiasText.visible
