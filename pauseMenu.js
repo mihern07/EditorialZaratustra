@@ -15,6 +15,7 @@ class pauseMenu extends Phaser.Scene {
         this.volumeBold = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'volume2');
         this.noVolume = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'noVolume');
         this.noVolumeBold = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'noVolume2');
+
         this.volume.setInteractive();
         this.volumeBold.setInteractive();
         this.noVolume.setInteractive();
@@ -83,7 +84,8 @@ class pauseMenu extends Phaser.Scene {
 
         this.continueBold.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
-                this.scene.switch(this.originSceneKey);
+                this.scene.run(this.originSceneKey);
+                this.scene.sleep();
             }
         })
 
@@ -134,8 +136,13 @@ class pauseMenu extends Phaser.Scene {
     update() {
         if (this.keyEsc.isDown) {
             this.keyEsc.reset();
-            this.scene.switch(this.originSceneKey);
+            this.scene.run(this.originSceneKey);
+            this.scene.sleep();
         }
+    }
+
+    getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
 }
