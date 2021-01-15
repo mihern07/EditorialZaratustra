@@ -258,6 +258,26 @@ export const victoryConst = {
     bgScale: 1.1,
     buttonScale: 2
 }
+export const creditsConst = {
+    posX: 550,
+    pos2X: 300,
+    posY: 900,
+    pos2Y: 1300,
+    pos3Y: 1400,
+    pos4Y: 1800,
+    pos5Y: 1900,
+    pos6Y: 2100,
+    pos7Y: 2200,
+    pos8Y: 2500,
+
+    puntTint: 0x71CA1E,
+    strikeTint: 0x71CA1E,
+
+    textSize: 50,
+    size:40,
+
+    scale: 1.1,
+}
 export const gameOverConst = {
     bgPosX: 550,
     bgPosY: 400,

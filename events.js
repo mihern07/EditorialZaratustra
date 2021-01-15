@@ -203,12 +203,12 @@ export default class Events extends Phaser.GameObjects.GameObject {
             this.chara.document.destroy();
             if (this.chara.hasBook)
                 this.chara.book.destroy();
-            this.chara.destroy();
-            if(this.chara.sprite3!=null)
+            if(this.chara.head!=null)
             {
-                this.chara.sprite2.destroy(); //Arreglar.
-                this.chara.sprite3.destroy();
+                this.chara.head.destroy(); //Arreglar.
+                this.chara.hair.destroy();
             }
+            this.chara.destroy();
             this.isCharaInScene = false;
             if (this.contKnownCharas < this.clientOrder.length) { // creación de nuevo personaje
                 this.setChara();
