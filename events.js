@@ -193,7 +193,6 @@ export default class Events extends Phaser.GameObjects.GameObject {
     }
 
     splitDialogue(dialogue){
-        console.log(dialogue);
         this.dialogoAPartir = this.scene.cache.text.get(dialogue);
         this.dialogoAPartir = this.dialogoAPartir.split("\n");
         return this.dialogoAPartir;

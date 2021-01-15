@@ -1,44 +1,46 @@
 export const levelsConst = {
-    
+
     totalLevels: 2,
-    
+
     keyLevel: 'level',
-    
+
     dataLevel: [
         //NIVEL 1
-        {clock: true, board: false, calendar: true, bodyguard: false, alarm: false, radio: false, winCondition: 1500, loseCondition: 2, month: 4, year: 1920, day: 1,
+        {
+            clock: true, board: false, calendar: true, bodyguard: false, alarm: false, radio: false, winCondition: 1000, loseCondition: 2, month: 4, year: 1920, day: 1,
             order: {
                 numCorrects: 7, // Número mínimo de libros correctos 
                 minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
                 specialChara: [] // perosnajes especiales del nivel
-            }, 
+            },
             noticiaInfo: {
                 noticiaBien: [],
-                noticiaMal: ["Deportes", "Meteorología", "Ensayo", "Esquela", "Crónica", "Propaganda"]
-            }, 
+                noticiaMal: []
+            },
             bookInfo: {
-                novelaBien: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
-                poesiaBien: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-                teatroBien: ["Romance", "Aventura", "Histórico", "Suspense"],
-                novelaMal: ["Romance", "Suspense", "Policíaco", "Fantasía", "Comedia"],
-                poesiaMal: [],
-                teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                novelaBien: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                poesiaBien: [],
+                teatroBien: [],
+                novelaMal: [],
+                poesiaMal: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                teatroMal: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
                 everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-                numPagsBien: [2, 0], // libro corto y largo
-                numPagsMal: [1] // libro mediano
+                numPagsBien: [0, 1, 2], // libro corto y largo
+                numPagsMal: [] // libro mediano
             }
         },
         //NIVEL 2
-        {clock: true, board: true, calendar: true, bodyguard: false, alarm: false, radio: false, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 2,
+        {
+            clock: true, board: true, calendar: true, bodyguard: false, alarm: false, radio: false, WinCondition: 1200, LoseCondition: 2, month: 4, year: 1920, day: 2,
             order: {
                 numCorrects: 7, // Número mínimo de libros correctos 
                 minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
                 specialChara: [] // perosnajes especiales del nivel
-            }, 
+            },
             noticiaInfo: {
-                noticiaBien: ["Deportes", "Meteorología", "Ensayo", "Esquela", "Crónica", "Propaganda"],
-                noticiaMal: ["Opinión"]
-            }, 
+                noticiaBien: [],
+                noticiaMal: []
+            },
             bookInfo: {
                 novelaBien: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
                 poesiaBien: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
@@ -52,17 +54,68 @@ export const levelsConst = {
             }
         },
 
-        //NIVEL treh
-        {clock: true, board: true, calendar: false, bodyguard: false, alarm: false, radio: false, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 3,
+        //NIVEL 3 // Añadir explicación de noticias
+        {
+            clock: true, board: true, calendar: true, bodyguard: false, alarm: false, radio: false, WinCondition: 1300, LoseCondition: 2, month: 4, year: 1920, day: 3,
             order: {
                 numCorrects: 7, // Número mínimo de libros correctos 
                 minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
                 specialChara: [] // perosnajes especiales del nivel
-            }, 
+            },
             noticiaInfo: {
-                noticiaBien: ["Deportes", "Meteorología", "Ensayo", "Esquela", "Crónica", "Propaganda"],
-                noticiaMal: ["Opinión"]
-            }, 
+                noticiaBien: ["Deportes", "Meteorología", "Esquela", "Crónica", "Propaganda"],
+                noticiaMal: ["Opinión", "Ensayo"]
+            },
+            bookInfo: {
+                novelaBien: ["Aventura", "Histórico", "Ficción", "Romance", "Suspense"],
+                poesiaBien: [ "Suspense", "Histórico", "Comedia", "Ficción"],
+                teatroBien: ["Romance", "Aventura", "Histórico", "Suspense"],
+                novelaMal: ["Policíaco", "Fantasía", "Comedia",  "Drama", "Académico"],
+                poesiaMal: ["Drama", "Fantasía","Romance", "Aventura", "Académico"],
+                teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Policíaco", "Ficción"],
+                everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                numPagsBien: [1], // libro corto y largo
+                numPagsMal: [0, 2] // libro mediano
+            }
+        },
+
+        //NIVEL 4 // Añadir explicacion de bodyguard
+        {
+            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: false, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 3,
+            order: {
+                numCorrects: 7, // Número mínimo de libros correctos 
+                minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
+                specialChara: [1, 0] // perosnajes especiales del nivel
+            },
+            noticiaInfo: {
+                noticiaBien: ["Opinión", "Ensayo", "Esquela", "Crónica", "Propaganda"],
+                noticiaMal: ["Deportes", "Meteorología"]
+            },
+            bookInfo: {
+                novelaBien: ["Aventura", "Drama", "Académico", "Suspense", "Policíaco", "Fantasía", "Comedia"],
+                poesiaBien: ["Romance", "Comedia", "Ficción"],
+                teatroBien: ["Romance", "Aventura", "Histórico", "Suspense", "Ficción"],
+                novelaMal: ["Histórico", "Ficción", "Romance",],
+                poesiaMal: ["Histórico", "Policíaco", "Drama", "Aventura", "Suspense", "Fantasía", "Académico",],
+                teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia"],
+                everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                numPagsBien: [1, 0], // libro corto y largo
+                numPagsMal: [2] // libro mediano
+            }
+        },
+
+        //NIVEL 5 // Añadir explicacion de radio + Cambiar un poco las categorías
+        {
+            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: true, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 3,
+            order: {
+                numCorrects: 7, // Número mínimo de libros correctos 
+                minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
+                specialChara: [2] // perosnajes especiales del nivel
+            },
+            noticiaInfo: {
+                noticiaBien: ["Opinión", "Ensayo", "Deportes", "Propaganda"],
+                noticiaMal: ["Esquela", "Crónica", "Meteorología"]
+            },
             bookInfo: {
                 novelaBien: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
                 poesiaBien: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
@@ -71,11 +124,60 @@ export const levelsConst = {
                 poesiaMal: [],
                 teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
                 everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-                numPagsBien: [2, 0], // libro corto y largo
+                numPagsBien: [0], // libro corto y largo
+                numPagsMal: [1, 2] // libro mediano
+            }
+        },
+
+        //NIVEL 6 // Añadir explicacion de radio
+        {
+            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: true, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 3,
+            order: {
+                numCorrects: 7, // Número mínimo de libros correctos 
+                minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
+                specialChara: [3, 4] // perosnajes especiales del nivel
+            },
+            noticiaInfo: {
+                noticiaBien: ["Meteorología", "Ensayo", "Esquela", "Crónica"],
+                noticiaMal: ["Deportes", "Opinión", "Propaganda"]
+            },
+            bookInfo: {
+                novelaBien: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
+                poesiaBien: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                teatroBien: ["Romance", "Aventura", "Histórico", "Suspense"],
+                novelaMal: ["Romance", "Suspense", "Policíaco", "Fantasía", "Comedia"],
+                poesiaMal: [],
+                teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                numPagsBien: [1, 2], // libro corto y largo
+                numPagsMal: [0] // libro mediano
+            }
+        },
+
+        //NIVEL 7 // Añadir explicacion de radio
+        {
+            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: true, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 3,
+            order: {
+                numCorrects: 7, // Número mínimo de libros correctos 
+                minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
+                specialChara: [5, 6] // perosnajes especiales del nivel
+            },
+            noticiaInfo: {
+                noticiaBien: [ "Deportes", "Meteorología", "Propaganda"],
+                noticiaMal: ["Opinión", "Ensayo", "Esquela", "Crónica"]
+            },
+            bookInfo: {
+                novelaBien: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
+                poesiaBien: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                teatroBien: ["Romance", "Aventura", "Histórico", "Suspense"],
+                novelaMal: ["Romance", "Suspense", "Policíaco", "Fantasía", "Comedia"],
+                poesiaMal: [],
+                teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
+                numPagsBien: [0, 2], // libro corto y largo
                 numPagsMal: [1] // libro mediano
             }
         },
-    
     ]
 }
 
@@ -83,61 +185,31 @@ export const levelsConst = {
 export const sceneConst = {
     bgPosX: 550,
     bgPosY: 397,
-    
     fgPosX: 550,
     fgPosY: 392,
-    
     clockPosX: 750,
     clockPosY: 55,
-    
     boardPosX: 965,
     boardPosY: 340,
-    
     redInkwellPosX: 925,
-    
     greenInkwellPosX: 180,
-    
     inkwellPosY: 670,
-    
     calendarPosX: 100,
     calendarPosY: 300,
-    
     penPosX: 700,
     penPosY: 700,
-    
     eventsPosX: 955,
     eventsPosY: 410,
-    
     bellPosX: 825,
     bellPosY: 500,
-    
     guardPosX: 965,
     guardPosY: 420,
-    
     bossPosX: 0,
     bossPosY: 340,
-    
     alarmPosX: 200,
     alarmPosY: 775,
 
     boardNumPostIts: 13,
-
-    // everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-
-    // firstLevelWinCondition: 1500,
-    // firstLevelLooseCondition: 2,
-    // firstLevelNovelG: ["Aventura", "Histórico", "Drama", "Académico", "Ficción"],
-    // firstLevelNovelB: ["Romance", "Suspense", "Policíaco", "Fantasía", "Comedia"],
-    // firstLevelPoetryG: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-    // firstLevelPoetryB: [],
-    // firstLevelTheatreG: ["Romance", "Aventura", "Histórico", "Suspense"],
-    // firstLevelTheatreB: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-    // firstLevelNoticiaG: ["Deportes", "Meteorología", "Ensayo", "Esquela", "Crónica", "Propaganda"],
-    // firstLevelNoticiaB: ["Opinión"],
-    // firstLevelCorrects: 7,
-    // firstLevelMinCor: 17,
-    // firstLevelSpecialChara: [],
-    // firstDay: 1,
 
     timeSceneEnds: 180000,
     offSetBtwRadio: 5000,
@@ -360,7 +432,7 @@ export const draggableConst = {
     tableXX: 1040,
     tableY0: 450,
     tableYY: 900,
-    
+
     boardX0: 890,
     boardXX: 1040,
     boardY0: 85,
@@ -385,4 +457,12 @@ export const storyIntro = {
     textScale: 26,
     textPosX: 200,
     textPosY: 350
+}
+
+export const pauseConst = {
+    volumePos: 10,
+    middlePos: 2,
+    buttonPos: 3,
+    depth: 100,
+    volumeScale: .3,
 }

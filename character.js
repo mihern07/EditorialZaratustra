@@ -69,8 +69,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
         }
         else
             this.hasBook = false;
-
-
+                  
         //Documento
         //Inicializa documento
         this.docSprite = documentSprite;

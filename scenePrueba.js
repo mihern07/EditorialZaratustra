@@ -8,8 +8,12 @@ import Bodyguard from "./bodyguard.js"
 import Alarm from "./alarm.js"
 import GameManager from "./gameManager.js";
 import Boss from "./boss.js";
-import Radio from "./radio.js"
 import { sceneConst } from "./constants.js";
+
+const mesaX0 = 50;
+const mesaXX = 1040;
+const mesaY0 = 450;
+const mesaYY = 900;
 
 export default class Game extends Phaser.Scene {
 
@@ -33,8 +37,8 @@ export default class Game extends Phaser.Scene {
     this.bg = this.add.sprite(sceneConst.bgPosX, sceneConst.bgPosY, "background") // Los NPC's solo se ven por encima del bg
 
     //CLOCK
-    this.clock = new Clock(this, sceneConst.clockPosX, sceneConst.clockPosY, "clock", "manecilla"); //Inicializa reloj
-    this.clock.start(this.handleTimeFinished.bind(this), sceneConst.timeSceneEnds);
+    this.clock = new Clock(this, sceneConst.clockPosX, sceneConst.clockPosY, "clock"); //Inicializa reloj
+    this.clock.start(this.handleTimeFinished.bind(this), '180000');
 
     //FOREGROUND(MESA)
     this.fg = this.add.sprite(sceneConst.fgPosX, sceneConst.fgPosY, "foreground");
@@ -60,6 +64,28 @@ export default class Game extends Phaser.Scene {
     //PLUMA
 
     this.pen = new Pen(this, sceneConst.penPosX, sceneConst.penPosY, "pen");
+
+    //Preparación de los archivos de texto
+    let dialogoJefe = this.cache.text.get("jefe");
+    dialogoJefe = dialogoJefe.split("\n");
+    let dialogoNinio = this.cache.text.get("ninio");
+    dialogoNinio = dialogoNinio.split("\n");
+    let dialogoTendencias = this.cache.text.get("tendencias");
+    dialogoTendencias = dialogoTendencias.split("\n");
+    let dialogoCorreos = this.cache.text.get("correos");
+    dialogoCorreos = dialogoCorreos.split("\n");
+    let dialogoCorreosFalso = this.cache.text.get("correosFalso");
+    dialogoCorreosFalso = dialogoCorreosFalso.split("\n");
+    let dialogoMujerDelJefe = this.cache.text.get("mujerDelJefe");
+    dialogoMujerDelJefe = dialogoMujerDelJefe.split("\n");
+    let dialogoMujerDelJefeFalsa = this.cache.text.get("mujerdelJefeFalsa");
+    dialogoMujerDelJefeFalsa = dialogoMujerDelJefeFalsa.split("\n");
+    let dialogoSobornador = this.cache.text.get("sobornador");
+    dialogoSobornador = dialogoSobornador.split("\n");
+    let dialogoVagabundo = this.cache.text.get("vagabundo");
+    dialogoVagabundo = dialogoVagabundo.split("\n");
+    let dialogoBase = this.cache.text.get("dialogoBase");
+    dialogoBase = dialogoBase.split("\n");
 
     this.bg.setDepth(-2); //MOVER A FONDO Para que el fondo se dibuje detrás del todo
 
@@ -87,7 +113,9 @@ export default class Game extends Phaser.Scene {
       minBooks: sceneConst.firstLevelMinCor, // Número mínimo de libros entre los que se encuentran los anteriores
       specialChara: sceneConst.firstLevelSpecialChara // perosnajes especiales del nivel
     }
-    this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", "box", "book", "book2", "document", this.bookInfo, this.noticiaInfo,
+    this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", dialogoJefe, dialogoNinio, dialogoTendencias,
+      dialogoCorreos, dialogoCorreosFalso, dialogoMujerDelJefe, dialogoMujerDelJefeFalsa,
+      dialogoSobornador, dialogoVagabundo, dialogoBase, "box", "book", "book2", "document", this.bookInfo, this.noticiaInfo,
       this.order, this.gameManager, sceneConst.firstDay, sceneConst.month, sceneConst.year);
 
     //DESKBELL
@@ -99,21 +127,11 @@ export default class Game extends Phaser.Scene {
     this.bodyguard = new Bodyguard(this, sceneConst.guardPosX, sceneConst.guardPosY, "bodyguard", this.events) //Inicializa bodyguard
 
     //BOSS
-    this.dialogoJefe = this.cache.text.get("jefe");
-    this.dialogoJefe = this.dialogoJefe.split("\n");
-    this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bodyguard", this.dialogoJefe, "box", 0, 4, this.bookInfo, this.noticiaInfo);
+    this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bodyguard", dialogoJefe, "box", 0, 4, this.bookInfo, this.noticiaInfo);
 
     //ALARMA
 
     this.alarm = new Alarm(this, sceneConst.alarmPosX, sceneConst.alarmPosY, "alarmOff", this.bodyguard, this.events); //Inicializa alarma.
-
-    //Radio
-    this.radio = new Radio(this, sceneConst.radioPosX, sceneConst.radioPosY, "radio", this.events, this.bookInfo, this.noticiaInfo);
-
-    this.radioClock = new Clock(this, 0, 0, "clock", "manecilla");
-    this.radioClock.visible = false;
-    this.radioActivationTime = this.getRndInteger(sceneConst.offSetBtwRadio, sceneConst.timeSceneEnds / 2);
-    this.radioClock.start(this.activateRadio.bind(this), this.radioActivationTime);
 
     this.Intro();
 
@@ -124,10 +142,6 @@ export default class Game extends Phaser.Scene {
     this.boss.EnterChar(); //Entrada el Boss
 
     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
-  }
-
-  activateRadio(){
-    this.radio.setActive(this.events.getBookMalRadio(), this.events.getNoticiaMalRadio());
   }
 
   handleTimeFinished() {
@@ -208,10 +222,6 @@ export default class Game extends Phaser.Scene {
   //
   bossFinished() {
     this.bell.startWork();
-  }
-
-  getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
 }

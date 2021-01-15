@@ -1,3 +1,4 @@
+import { pauseConst } from "./constants.js";
 
 class pauseMenu extends Phaser.Scene {
 
@@ -6,37 +7,37 @@ class pauseMenu extends Phaser.Scene {
     }
 
     create() {
-        this.menu = this.add.image(this.game.config.width / 2, this.game.config.height / 2, 'menu');
+        this.menu = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height / pauseConst.middlePos, 'menu');
         this.menu.setInteractive();
-        this.menu.setDepth(100);
+        this.menu.setDepth(pauseConst.depth);
 
-        this.volume = this.add.image(this.game.config.width / 10, this.game.config.height / 10, 'volume');
-        this.volumeBold = this.add.image(this.game.config.width / 10, this.game.config.height / 10, 'volume2');
-        this.noVolume = this.add.image(this.game.config.width / 10, this.game.config.height / 10, 'noVolume');
-        this.noVolumeBold = this.add.image(this.game.config.width / 10, this.game.config.height / 10, 'noVolume2');
+        this.volume = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'volume');
+        this.volumeBold = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'volume2');
+        this.noVolume = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'noVolume');
+        this.noVolumeBold = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'noVolume2');
         this.volume.setInteractive();
         this.volumeBold.setInteractive();
         this.noVolume.setInteractive();
         this.noVolumeBold.setInteractive();
-        this.volume.setScale(.3);
-        this.volumeBold.setScale(.3);
-        this.noVolume.setScale(.3);
-        this.noVolumeBold.setScale(.3);
+        this.volume.setScale(pauseConst.volumeScale);
+        this.volumeBold.setScale(pauseConst.volumeScale);
+        this.noVolume.setScale(pauseConst.volumeScale);
+        this.noVolumeBold.setScale(pauseConst.volumeScale);
 
         this.volumeBold.visible = false;
         this.noVolume.visible = false;
         this.noVolumeBold.visible = false;
 
 
-        this.continue = this.add.image(this.game.config.width / 2, this.game.config.height / 3, 'continue');
-        this.continueBold = this.add.image(this.game.config.width / 2, this.game.config.height / 3, 'continue2');
-        this.exit = this.add.image(this.game.config.width / 2, this.game.config.height - this.game.config.height / 3, 'exit');
-        this.exitBold = this.add.image(this.game.config.width / 2, this.game.config.height - this.game.config.height / 3, 'exit2');
+        this.continue = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height / pauseConst.buttonPos, 'continue');
+        this.continueBold = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height / pauseConst.buttonPos, 'continue2');
+        this.exit = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height - this.game.config.height / pauseConst.buttonPos, 'exit');
+        this.exitBold = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height - this.game.config.height / pauseConst.buttonPos, 'exit2');
 
-        this.continue.setDepth(100);
-        this.continueBold.setDepth(100);
-        this.exit.setDepth(100);
-        this.exitBold.setDepth(100);
+        this.continue.setDepth(pauseConst.depth);
+        this.continueBold.setDepth(pauseConst.depth);
+        this.exit.setDepth(pauseConst.depth);
+        this.exitBold.setDepth(pauseConst.depth);
         this.continue.setInteractive();
         this.continueBold.setInteractive();
         this.exit.setInteractive();

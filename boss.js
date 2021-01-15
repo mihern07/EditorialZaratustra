@@ -110,7 +110,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         if (novelLength != 0)
             this.dialogue.setText(info);
         else
-            this.dialogue.setText("Hoy no se permiten novelas");
+            this.dialogue.setText("Jefe\nHoy no se permiten novelas");
     }
 
     dialogueTeatro() {
@@ -136,7 +136,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         if (teatroLength != 0)
             this.dialogue.setText(info);
         else
-            this.dialogue.setText("Hoy no se permiten obras de teatro");
+            this.dialogue.setText("Jefe\nHoy no se permiten obras de teatro");
     }
 
     dialoguePoesia() {
@@ -162,7 +162,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         if (poesiaLength != 0)
             this.dialogue.setText(info);
         else
-            this.dialogue.setText("Hoy no se permiten poemas");
+            this.dialogue.setText("Jefe\nHoy no se permiten poemas");
     }
 
     dialogueTam() {
@@ -191,7 +191,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         if (numPagsLength != 0)
             this.dialogue.setText(info);
         else
-            this.dialogue.setText("Hoy no se permiten obras de ningún tamaño (por algún motivo)");
+            this.dialogue.setText("Jefe\nHoy no se permiten obras de ningún tamaño (por algún motivo)");
     }
 
     StopChar() { // El personaje pare
