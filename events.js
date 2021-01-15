@@ -325,8 +325,8 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 break;
             case 1:
                 //Número de páginas Incorrecto
-                this.tamPags = this.bookInfo.numPagsMal[this.getRndInteger(0, this.bookInfo.numPagsMal.length - 1)];
-                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length)]);
+                this.tamPags = this.bookInfo.numPagsMal[this.getRndInteger(0, this.bookInfo.numPagsMal.length)];
+                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length - 1)]);
                 this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
                 break;
             case 2:
