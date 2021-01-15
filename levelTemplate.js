@@ -25,12 +25,12 @@ export default class Game extends Phaser.Scene {
     console.log("Creado nivel: " + this.sceneKey);
     //GLOBAL
     //this.input.mouse.disableContextMenu(); //No permite click derecho en el juego.
-   
+
     //FONDO
     this.bg = this.add.sprite(sceneConst.bgPosX, sceneConst.bgPosY, "background") // Los NPC's solo se ven por encima del bg
 
     //CLOCK
-    if(this.dataM.clock){
+    if (this.dataM.clock) {
       this.clock = new Clock(this, sceneConst.clockPosX, sceneConst.clockPosY, "clock", "manecilla"); //Inicializa reloj
     }
     //FOREGROUND(MESA)
@@ -41,7 +41,7 @@ export default class Game extends Phaser.Scene {
     this.gameManager.setGameOver(this.dataM.winCondition, this.dataM.loseCondition);
 
     //BOARD(CORCHO)
-    if(this.dataM.board)
+    if (this.dataM.board)
       this.Board = new Board(this, sceneConst.boardPosX, sceneConst.boardPosY, sceneConst.boardNumPostIts, "board")
 
     //TINTEROS
@@ -52,25 +52,25 @@ export default class Game extends Phaser.Scene {
     this.tinteroRojo = new Inkwell(this, sceneConst.redInkwellPosX, sceneConst.inkwellPosY, "tinteroR"); //Inicializa tintero rojo
 
     //CALENDARIO
-    if(this.dataM.calendar){
+    if (this.dataM.calendar) {
       this.calendar = this.add.sprite(sceneConst.calendarPosX, sceneConst.calendarPosY, "calendarOriginal");
       this.calendar.setScale(sceneConst.calendarScale);
     }
-    
+
     //PLUMA
     this.pen = new Pen(this, sceneConst.penPosX, sceneConst.penPosY, "pen");
 
     this.bg.setDepth(-2); //MOVER A FONDO Para que el fondo se dibuje detrás del todo
-            
+
     this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", "box", "book", "book2", "document", this.dataM.bookInfo, this.dataM.noticiaInfo,
-    this.dataM.order, this.gameManager, this.dataM.day, this.dataM.month, this.dataM.year);
+      this.dataM.order, this.gameManager, this.dataM.day, this.dataM.month, this.dataM.year);
 
     //DESKBELL
     this.bellSound = this.sound.add("deskbellSound");
     this.bell = new DeskBell(this, sceneConst.bellPosX, sceneConst.bellPosY, "deskBellSP", "deskBellPressed", this.events, this.bellSound); //Inicializa timbre
 
     //SEGURIDAD
-    if(this.dataM.bodyguard)
+    if (this.dataM.bodyguard)
       this.bodyguard = new Bodyguard(this, sceneConst.guardPosX, sceneConst.guardPosY, "bodyguardSprite", this.events) //Inicializa bodyguard
 
     //BOSS
@@ -79,10 +79,10 @@ export default class Game extends Phaser.Scene {
     this.boss = new Boss(this, sceneConst.bossPosX, sceneConst.bossPosY, "bossSprite", this.dialogoJefe, "box", 0, 4, this.dataM.bookInfo, this.dataM.noticiaInfo);
 
     //ALARMA
-    if(this.dataM.alarm)
+    if (this.dataM.alarm)
       this.alarm = new Alarm(this, sceneConst.alarmPosX, sceneConst.alarmPosY, "alarmOff", this.bodyguard, this.events); //Inicializa alarma.
-    
-    if(this.dataM.radio){
+
+    if (this.dataM.radio) {
       this.radio = new Radio(this, sceneConst.radioPosX, sceneConst.radioPosY, "radio", this.events, this.dataM.bookInfo, this.dataM.noticiaInfo);
       this.radioClock = new Clock(this, 0, 0, "clock", "manecilla");
       this.radioClock.visible = false;
@@ -104,10 +104,10 @@ export default class Game extends Phaser.Scene {
     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     this.keyReset = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 
-    this.events.on('wake', function(){ this.music.play()});
+    this.events.on('wake', function () { this.music.play() });
   }
 
-  activateRadio(){
+  activateRadio() {
     this.radio.setActive(this.events.getBookMalRadio(), this.events.getNoticiaMalRadio());
   }
 
@@ -124,19 +124,19 @@ export default class Game extends Phaser.Scene {
         this.keyEsc.reset();
         this.game.scene.sleep(this);
         this.scene.launch('pause', {
-          music: this.music, 
+          music: this.music,
           playing: this.isPlaying,
           key: this.sceneKey
         });
       }
 
-      if(this.keyReset.isDown){
+      if (this.keyReset.isDown) {
         this.keyReset.reset();
         this.levelManager.nextLevel();
         this.music.stop();
         this.scene.stop();
       }
-      
+
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject
 
       if (this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
@@ -151,19 +151,24 @@ export default class Game extends Phaser.Scene {
 
       // this.pen.changeColor();
 
-      this.pen.on("pointerup", pointer=>{
-        if (this.pen.isRed() && 
-            !this.pen.hasSigned && 
-            this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Roja
-          
+      this.pen.on("pointerup", pointer => {
+        if (this.pen.isRed() &&
+          !this.pen.hasSigned &&
+          this.physics.overlap(this.pen, this.events.chara.document)) { //Overlap Documento Pluma Roja
           this.signed.play();
-          this.events.DenyChar();
+
+          if (this.events.chara.randoms || this.getRndInteger(1, 100) < 15) { // 85% de que no se vaya si es un personaje especial
+            this.events.DenyChar();
+          }
+          else {
+            // Dialogo rollo "pero tu de que vas puta anormal, yo no me voy de aqui"
+          }
           this.pen.setNormal();
         }
-        else if(this.pen.isGreen() && 
-              !this.pen.hasSigned && 
-              this.physics.overlap(this.pen, this.events.chara.document)){
-                
+        else if (this.pen.isGreen() &&
+          !this.pen.hasSigned &&
+          this.physics.overlap(this.pen, this.events.chara.document)) {
+
           this.signed.play();
           this.events.AcceptChar();
           this.pen.setNormal();
@@ -199,8 +204,8 @@ export default class Game extends Phaser.Scene {
 
   //
   bossFinished() {
-    if(this.dataM.clock){
-      this.clock.start(this.handleTimeFinished.bind(this),  sceneConst.timeSceneEnds);
+    if (this.dataM.clock) {
+      this.clock.start(this.handleTimeFinished.bind(this), sceneConst.timeSceneEnds);
     }
     this.bell.startWork();
   }

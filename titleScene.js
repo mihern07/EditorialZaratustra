@@ -6,21 +6,15 @@ class TitleScene extends Phaser.Scene {
 		super({key:'titleScene'});
 	}
 
-	preload() {
-		this.load.image('title', 'sprites/logoBien.png');
-		this.load.image('anim', 'sprites/anim.png');
-		this.load.image('anim2', 'sprites/anim2.png');
-	}
-
 	create() {
-		var bg = this.add.sprite(titleConst.bgPosX,titleConst.bgPosY,'title');
+		let bg = this.add.sprite(titleConst.bgPosX,titleConst.bgPosY,'title');
 		
 		bg.setOrigin(0,0);
 		
 		bg.scale = titleConst.bgScale;
 		
-		var anim = this.add.sprite(titleConst.animPosX,titleConst.animPosY, 'anim');
-		var animBold = this.add.sprite(titleConst.animPosX,titleConst.animPosY, 'anim2');
+		let anim = this.add.sprite(titleConst.animPosX,titleConst.animPosY, 'anim');
+		let animBold = this.add.sprite(titleConst.animPosX,titleConst.animPosY, 'anim2');
 		
 		anim.setOrigin(0,0);
 		animBold.setOrigin(0,0);
