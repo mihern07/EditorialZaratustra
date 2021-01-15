@@ -38,7 +38,6 @@ export default class Boot extends Phaser.Scene {
     this.load.image("penR", "sprites/penRedSprite.png");
     this.load.image("board", "sprites/boardSprite.png"); // Board
     this.load.image("postIt", "sprites/postItBlancoSprite.png"); // PostIt
-    this.load.image("calendarOriginal", "sprites/calendar31_04.png");
     this.load.image("paperParticle", "sprites/paperParticle.png");
     this.load.image("bodyguard", "sprites/guardaespaldas.png"); //Guardaespaldas = bodyguard
     this.load.image("littleNewspaper", "sprites/littleNewspaper.png");
@@ -52,6 +51,15 @@ export default class Boot extends Phaser.Scene {
     this.load.image("alarmPressed", "sprites/alarmaEncendidaPulsada.png");
     this.load.image("alarmNoPressed", "sprites/alarmaEncendidaSinPulsar.png");
     this.load.image("alarmOff", "sprites/alarmaApagadaSinPulsar.png");
+
+    // Calendarios
+    this.load.image("calendar14", "sprites/calendar14.png");
+    this.load.image("calendar24", "sprites/calendar24.png");
+    this.load.image("calendar34", "sprites/calendar34.png");
+    this.load.image("calendar44", "sprites/calendar44.png");
+    this.load.image("calendar54", "sprites/calendar54.png");
+    this.load.image("calendar64", "sprites/calendar64.png");
+    this.load.image("calendar74", "sprites/calendar74.png");
 
     this.load.image("bodyguardSprite", "sprites/guardiaPsje.png"); //Sprite Guardaespaldas
     this.load.image("bossSprite", "sprites/jefePsje.png"); //Sprite Jefe

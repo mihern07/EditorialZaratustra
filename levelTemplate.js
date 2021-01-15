@@ -53,7 +53,7 @@ export default class Game extends Phaser.Scene {
 
     //CALENDARIO
     if (this.dataM.calendar) {
-      this.calendar = this.add.sprite(sceneConst.calendarPosX, sceneConst.calendarPosY, "calendarOriginal");
+      this.calendar = this.add.sprite(sceneConst.calendarPosX, sceneConst.calendarPosY, "calendar" + this.dataM.day + this.dataM.month);
       this.calendar.setScale(sceneConst.calendarScale);
     }
 

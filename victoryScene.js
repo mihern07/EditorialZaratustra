@@ -19,7 +19,7 @@ export default class VictoryScene extends Phaser.Scene {
         this.puntuacion = this.add.text(victoryConst.puntPosX, victoryConst.puntPosY, this.gameManager.dinero + "€/" + this.gameManager.objetivo + "€ conseguidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.puntuacion.setTint(victoryConst.puntTint);
         this.puntuacion.setFontSize(victoryConst.puntSize);
-        this.strikes = this.add.text(victoryConst.strikesPosX, victoryConst.strikesPosY, this.gameManager.strikes + "/3 strikes recibidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
+        this.strikes = this.add.text(victoryConst.strikesPosX, victoryConst.strikesPosY, this.gameManager.strikes + "/" +this.gameManager.numMaxStrikes + " strikes recibidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.strikes.setTint(victoryConst.strikeTint);
         this.strikes.setFontSize(victoryConst.strikeSize);
 
