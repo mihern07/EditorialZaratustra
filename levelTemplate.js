@@ -99,6 +99,14 @@ export default class Game extends Phaser.Scene {
 
     this.inkSound = this.sound.add("ink");
 
+    this.ink1 = this.sound.add("ink1");
+    this.ink2 = this.sound.add("ink2");
+    this.ink3 = this.sound.add("ink3");
+    this.ink4 = this.sound.add("ink4");
+    this.ink5 = this.sound.add("ink5");
+
+    this.inkPlayed=false;
+
     this.boss.EnterChar(); //Entrada el Boss
 
     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
@@ -140,13 +148,13 @@ export default class Game extends Phaser.Scene {
 
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject
 
-      if (this.physics.overlap(this.pen, this.tinteroRojo)) { //Overlap Rojo
-        this.inkSound.play();
+      if (this.physics.overlap(this.pen, this.tinteroRojo) && !this.pen.isRed()) { //Overlap Rojo
+        this.ChooseInkSound();
         this.pen.setRed();
       }
 
-      if (this.physics.overlap(this.pen, this.tinteroVerde)) { //Overlap Verde
-        this.inkSound.play();
+      if (this.physics.overlap(this.pen, this.tinteroVerde) && !this.pen.isGreen()) { //Overlap Verde
+        this.ChooseInkSound();
         this.pen.setGreen();
       }
 
@@ -180,6 +188,30 @@ export default class Game extends Phaser.Scene {
     else {
       this.scene.start('gameOverScene', this.gameManager);
     }
+  }
+
+  ChooseInkSound()
+  {
+    this.value = this.getRndInteger(0,4);
+    switch(this.value) //PELO DEL CHARACTER
+    {
+        case 0:
+          this.ink1.play();
+        break;
+        case 1:
+          this.ink2.play();
+        break;
+        case 2:
+          this.ink3.play();
+        break;
+        case 3:
+          this.ink4.play();
+        break;
+        case 4:
+          this.ink5.play();
+        break;
+    }
+    this.inkPlayed=true;
   }
 
   Intro() {

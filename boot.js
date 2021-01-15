@@ -149,6 +149,11 @@ export default class Boot extends Phaser.Scene {
     this.load.audio("pageSound","sounds/page.wav");
     this.load.audio("ink","sounds/inkSound.wav");
     this.load.audio("sign","sounds/write.wav");
+    this.load.audio("ink1","sounds/gota1.wav");
+    this.load.audio("ink2","sounds/gota2.wav");
+    this.load.audio("ink3","sounds/gota3.wav");
+    this.load.audio("ink4","sounds/gota4.wav");
+    this.load.audio("ink5","sounds/gota5.wav");
 
     // Codigo para usar webfonts
     this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
