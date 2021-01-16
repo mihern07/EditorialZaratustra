@@ -483,6 +483,10 @@ export default class Events extends Phaser.GameObjects.GameObject {
         }
     }
 
+    refuseDenial(){
+        this.chara.refuseDenial();
+    }
+
     getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }

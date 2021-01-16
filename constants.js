@@ -81,7 +81,7 @@ export const levelsConst = {
 
         //NIVEL 4 // Añadir explicacion de bodyguard
         {
-            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: false, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 3,
+            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: false, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 4,
             order: {
                 numCorrects: 7, // Número mínimo de libros correctos 
                 minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
@@ -106,7 +106,7 @@ export const levelsConst = {
 
         //NIVEL 5 // Añadir explicacion de radio + Cambiar un poco las categorías
         {
-            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: true, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 3,
+            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: true, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 5,
             order: {
                 numCorrects: 7, // Número mínimo de libros correctos 
                 minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
@@ -131,7 +131,7 @@ export const levelsConst = {
 
         //NIVEL 6 // Añadir explicacion de radio
         {
-            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: true, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 3,
+            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: true, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 6,
             order: {
                 numCorrects: 7, // Número mínimo de libros correctos 
                 minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
@@ -156,7 +156,7 @@ export const levelsConst = {
 
         //NIVEL 7 // Añadir explicacion de radio
         {
-            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: true, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 3,
+            clock: true, board: true, calendar: true, bodyguard: true, alarm: true, radio: true, WinCondition: 1500, LoseCondition: 2, month: 4, year: 1920, day: 7,
             order: {
                 numCorrects: 7, // Número mínimo de libros correctos 
                 minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores

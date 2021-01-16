@@ -170,7 +170,8 @@ export default class Game extends Phaser.Scene {
             this.events.DenyChar();
           }
           else {
-            // Dialogo rollo "pero tu de que vas puta anormal, yo no me voy de aqui"
+            // Dialogo que indica que no quiere irse
+            this.events.refuseDenial();
           }
           this.pen.setNormal();
         }

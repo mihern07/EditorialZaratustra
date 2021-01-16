@@ -1,5 +1,5 @@
 Mujer del jefe
-Hola, buenas. Mi marido (Insertar nombre del jefe)
+Hola, buenas. Mi marido Fernando
 se dejó las llaves, puedo pasar a entregárselas.
 Mujer del jefe
 Perdona, ¿podría dejarme pasar? Que yo sepa no le
@@ -12,3 +12,7 @@ Mujer del jefe
 ¡Se va a quedar usted sin trabajo!
 Mujer del jefe
 Muchas gracias, que tenga un buen día.
+
+Mujer del Jefe
+Yo en tu lugar no haría eso, a mi marido
+no le va a gustar.

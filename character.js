@@ -316,4 +316,9 @@ export default class Character extends Phaser.GameObjects.Sprite {
     getCategory(){
         return this.category;
     }
+
+    refuseDenial(){
+        this.dialogue.setText(this.texto.slice(15, 18));
+        this.npc.play();
+    }
 }

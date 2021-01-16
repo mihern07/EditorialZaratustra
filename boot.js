@@ -22,8 +22,6 @@ export default class Boot extends Phaser.Scene {
     //Nivel
     this.load.image("background", "sprites/backgroundSprite.png") //Fondo = background
     this.load.image("foreground", "sprites/foregroundSprite.png") //Mesa = foreground
-    this.load.image("book", "sprites/libroCerradoSprite.png"); //Libro cerrado = book
-    this.load.image("book2", "sprites/libroAbiertoSprite.png"); //libro abierto = book2
     this.load.image("clock", "sprites/clockPrototypeSprite.png"); //Reloj = clock
     this.load.image("manecilla", "sprites/manecilla.png"); //Manecilla = manecilla
     this.load.image("box", "sprites/dialogueBoxv2.png"); //Bocadillo = box
