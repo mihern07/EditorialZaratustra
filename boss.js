@@ -39,7 +39,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
                 //Explicación de los colores
                 this.extraText = this.scene.cache.text.get("jefeColores");
                 this.extraText = this.extraText.split("\n");
-                this.contExtraDialogue = 4;
+                this.contExtraDialogue = 7;
                 break;
             case 3:
                 //Explicación de las noticias
