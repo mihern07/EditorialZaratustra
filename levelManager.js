@@ -54,6 +54,12 @@ class levelManager {
             this.scene.scene.add(levelsConst.keyLevel + this.actualLevel, this.level, true);
         }
     }
+
+    restartActualLevel(){
+        this.scene.scene.remove(levelsConst.keyLevel + this.actualLevel);
+        this.level = new levelTemplate(levelsConst.keyLevel + this.actualLevel, this, levelsConst.dataLevel[this.actualLevel-1]);
+        this.scene.scene.add(levelsConst.keyLevel + this.actualLevel, this.level, true);
+    }
 	
 }
 

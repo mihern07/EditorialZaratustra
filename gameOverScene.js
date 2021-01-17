@@ -30,12 +30,13 @@ export default class GameOverScene extends Phaser.Scene {
         this.button.setInteractive();
         this.button.setScale(gameOverConst.buttonScale);
         
-        this.buttonText = this.add.text(gameOverConst.buttonTextPosX, gameOverConst.buttonTextPosY, "Volver al menú", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
+        this.buttonText = this.add.text(gameOverConst.buttonTextPosX, gameOverConst.buttonTextPosY, "Continuar", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.buttonText.setFontSize(gameOverConst.buttonTextSize);
 
         this.button.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
-                this.levelManager.nextLevel();
+                this.scene.sleep();
+                this.levelManager.restartActualLevel();
             }
         })
     }

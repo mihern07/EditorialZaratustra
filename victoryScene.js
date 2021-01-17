@@ -8,8 +8,9 @@ export default class VictoryScene extends Phaser.Scene {
         this.load.image("pesetas", "sprites/pesetas.jpg");
         this.load.image("buttonNotPressed", "sprites/buttonNotPressed.png");
     }
-    init(gameManager) {
-        this.gameManager = gameManager;
+    init(data) {
+        this.gameManager = data.gameManager;
+        this.levelManager = data.levelManager;
     }
     create() {
         this.background = this.add.sprite(victoryConst.bgPosX, victoryConst.bgPosY, "pesetas");
@@ -31,7 +32,7 @@ export default class VictoryScene extends Phaser.Scene {
 
         this.button.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
-                this.scene.switch('titleScene');
+                this.levelManager.nextLevel();
             }
         })
     }

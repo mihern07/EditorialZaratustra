@@ -124,9 +124,9 @@ export default class Game extends Phaser.Scene {
 
   handleTimeFinished() {
     if (this.gameManager.isCleared())
-      this.scene.start('victoryScene', this.gameManager)
+      this.scene.start('victoryScene',{gameManager: this.gameManager, levelManager: this.levelManager})
     else
-      this.scene.start('gameOverScene', this.gameManager);
+      this.scene.start('gameOverScene', {gameManager: this.gameManager, levelManager: this.levelManager});
   }
 
   update(time, delta) {
@@ -153,10 +153,9 @@ export default class Game extends Phaser.Scene {
 
       if (this.keyReset.isDown) {
         this.keyReset.reset();
-        this.strikeShake()
-        // this.levelManager.nextLevel();
-        // this.music.stop();
-        // this.scene.stop();
+        this.levelManager.nextLevel();
+        this.music.stop();
+        this.scene.stop();
       }
 
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject
@@ -200,7 +199,8 @@ export default class Game extends Phaser.Scene {
 
     }
     else {
-      this.scene.start('gameOverScene', {gameManager: this.gameManager, levelManager: this.levelManager});
+      this.scene.sleep();
+      this.scene.run('gameOverScene', {gameManager: this.gameManager, levelManager: this.levelManager});
     }
   }
 
