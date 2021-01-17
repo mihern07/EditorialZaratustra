@@ -394,7 +394,7 @@ export const alarmConst = {
 }
 export const dialogueConst = {
     offsetX: -250,
-    offsetY: -35,
+    offsetY: -40,
 
     scale: .4
 }

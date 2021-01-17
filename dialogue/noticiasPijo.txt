@@ -1,9 +1,9 @@
 Periodista
-Buenas, te traigo una noticia mortal.
-Jaja, ¿lo pillas?
+Buenas, te traigo una noticia mortal. Jaja, ¿lo pillas?
+
 Periodista
-Tú hazme caso, esta noticia es incluso más
-caliente que lo que está pasando en París.
+Tú hazme caso, esta noticia es incluso más caliente que
+lo que está pasando en París.
 Periodista
 Date prisa, sino se me va a estropear el pelo.
 
@@ -11,5 +11,4 @@ Periodista
 Oh dios mio, el mal gusto de alguna gente.
 
 Periodista
-Si es que ya sabía yo que siempre tengo
-razón.
+Si es que ya sabía yo que siempre tengo razón.

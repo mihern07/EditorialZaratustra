@@ -6,6 +6,7 @@ export default class Dialogue extends Phaser.GameObjects.Sprite {
         this.setScale(dialogueConst.scale);
 
         this.texto = scene.add.text(x + dialogueConst.offsetX, y + dialogueConst.offsetY, texto, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3); //Añadimos texto.
+        this.texto.setFontSize(17);
     }
 
     setText(text) {
