@@ -1,9 +1,9 @@
 Periodista
-Buenos días, aquí le traigo una noticia,
-a la espera de evaluación.
+Buenos días, aquí le traigo una noticia, a la espera
+de evaluación.
 Periodista
-Admito que algunas partes son mejorables
-pero estoy contento con el resultado final.
+Admito que algunas partes son mejorables, pero estoy
+contento con el resultado final.
 Periodista
 ....................
 
@@ -11,5 +11,4 @@ Periodista
 Entiendo, que pase un buen día.
 
 Periodista
-Muchas gracias por su arduo trabajo.
-Que pase un buen día.
+Muchas gracias por su arduo trabajo. Que pase un buen día.
