@@ -6,9 +6,9 @@ export default class EndScene extends Phaser.Scene{
         super({key: 'endScene'});
     }
     preload(){
-		this.load.text("introEnd", "dialogue/dialogoFinal.txt");
-		this.load.text("end1", "dialogue/final1.txt");
-		this.load.text("end2", "dialogue/final2.txt");
+		this.load.text("introEnd", "dialogue/ricardoDialogue.txt");
+		this.load.text("end1", "dialogue/dontSpyEnding.txt");
+		this.load.text("end2", "dialogue/spyEnding.txt");
         this.load.image("street", "sprites/street.jpg");
         this.load.image("fondo", "sprites/negro_semitransparente.png");
     }
@@ -34,10 +34,10 @@ export default class EndScene extends Phaser.Scene{
         this.dialogoAPartir = this.dialogoAPartir.split("\n");
 
         this.i = 0;
-        this.j = 2;
+        this.j = 3;
         this.text = this.dialogoAPartir.slice(this.i,this.j);
-        this.i = this.i + 2;
-        this.j = this.j + 2;
+        this.i = this.i + 3;
+        this.j = this.j + 3;
 
         this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
         
@@ -56,8 +56,8 @@ export default class EndScene extends Phaser.Scene{
                 else{
 					this.showText.destroy();
                     this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
-                    this.i = this.i + 2;
-                    this.j = this.j + 2;
+                    this.i = this.i + 3;
+                    this.j = this.j + 3;
                 }
 			}
 		  });
@@ -91,13 +91,13 @@ export default class EndScene extends Phaser.Scene{
         this.dialogoAPartir = this.dialogoAPartir.split("\n");
 
         this.i = 0;
-        this.j = 2;
+        this.j = 3;
 
         this.text = this.dialogoAPartir.slice(this.i,this.j);
         this.showText.destroy();
         this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
-        this.i = this.i + 2;
-        this.j = this.j + 2;
+        this.i = this.i + 3;
+        this.j = this.j + 3;
     }
 
     changeSprite()
