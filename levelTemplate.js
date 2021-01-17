@@ -121,10 +121,12 @@ export default class Game extends Phaser.Scene {
   }
 
   handleTimeFinished() {
+    this.music.stop();
+    this.scene.sleep();
     if (this.gameManager.isCleared())
-      this.scene.start('victoryScene',{gameManager: this.gameManager, levelManager: this.levelManager})
+      this.scene.run('victoryScene',{gameManager: this.gameManager, levelManager: this.levelManager})
     else
-      this.scene.start('gameOverScene', {gameManager: this.gameManager, levelManager: this.levelManager});
+      this.scene.run('gameOverScene', {gameManager: this.gameManager, levelManager: this.levelManager});
   }
 
   update(time, delta) {
@@ -197,6 +199,7 @@ export default class Game extends Phaser.Scene {
 
     }
     else {
+      this.music.stop();
       this.scene.sleep();
       this.scene.run('gameOverScene', {gameManager: this.gameManager, levelManager: this.levelManager});
     }

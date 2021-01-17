@@ -63,7 +63,6 @@ export default class Character extends Phaser.GameObjects.Sprite {
         if (bookSprite1 != undefined) {
             //Libro
             this.numPags = this.getNumPags(tamPags); // numero pags
-
             this.book = new Book(scene, characterConst.bookPosX, characterConst.bookPosY, bookSprite1, bookSprite2, genre, category, this.numPags); //Inicializa libro
             this.hasBook = true;
         }

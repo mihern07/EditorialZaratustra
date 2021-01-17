@@ -317,7 +317,7 @@ export const clockConst = {
 export const bossConst = {
     dialoguePosX: 530,
     dialoguePosY: 415,
-    rulesPosX: 650,
+    rulesPosX: 330,
     rulesPosY: 550,
 
     midPos: 540,
@@ -452,10 +452,10 @@ export const ruleConst = {
 }
 
 export const draggableConst = {
-    tableX0: 50,
-    tableXX: 1040,
+    tableX0: 150,
+    tableXX: 900,
     tableY0: 450,
-    tableYY: 900,
+    tableYY: 740,
 
     boardX0: 890,
     boardXX: 1040,
