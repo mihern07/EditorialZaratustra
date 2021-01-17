@@ -1,6 +1,6 @@
 export const levelsConst = {
 
-    totalLevels: 2,
+    totalLevels: 7,
 
     keyLevel: 'level',
 
@@ -9,9 +9,9 @@ export const levelsConst = {
         {
             clock: true, board: false, calendar: true, bodyguard: false, alarm: false, radio: false, winCondition: 1000, loseCondition: 2, month: 4, year: 1920, day: 1,
             order: {
-                numCorrects: 7, // Número mínimo de libros correctos 
-                minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
-                specialChara: [] // perosnajes especiales del nivel
+                numCorrects: 1, // Número mínimo de libros correctos 
+                minBooks: 3, // Número mínimo de libros entre los que se encuentran los anteriores
+                specialChara: [0] // perosnajes especiales del nivel
             },
             noticiaInfo: {
                 noticiaBien: [],

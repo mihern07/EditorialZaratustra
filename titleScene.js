@@ -1,14 +1,18 @@
 import {titleConst} from "./constants.js";
+import levelManager from "./levelManager.js";
 
 class TitleScene extends Phaser.Scene {
 
 	constructor() {
 		super({key:'titleScene'});
+		this.levelManager = new levelManager(this);
 	}
 
 	create() {
+		this.input.mouse.disableContextMenu(); //No permite click derecho en el juego.
+
 		let bg = this.add.sprite(titleConst.bgPosX,titleConst.bgPosY,'title');
-		
+
 		bg.setOrigin(0,0);
 		
 		bg.scale = titleConst.bgScale;
@@ -27,6 +31,9 @@ class TitleScene extends Phaser.Scene {
 		anim.setInteractive({ useHandCursor: true });
 		animBold.setInteractive({ useHandCursor: true });
 		
+		//Fade de inicio
+		this.cameras.main.fadeIn(2000, 0, 0, 0);
+
 		anim.on('pointerover', function(pointer){
 			animBold.visible = true;
 
@@ -40,10 +47,18 @@ class TitleScene extends Phaser.Scene {
 	}
 
 	clickButton() {
-		if(this.scene.get("storyIntro") != null)
-			this.scene.switch("storyIntro");
-		else
-			this.scene.switch("levelManager");
+		if(this.scene.get("storyIntro") != null){
+			this.scene.run("storyIntro", this.levelManager);
+			this.scene.sleep();
+		}
+		else if(!this.levelManager.started){
+			this.levelManager.firstLevel();
+			this.scene.sleep();
+		}
+		else{
+			this.levelManager.restart();
+			this.scene.sleep();
+		}
 	}
 
 }

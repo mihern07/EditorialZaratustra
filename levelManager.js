@@ -1,46 +1,58 @@
 import levelTemplate from "./levelTemplate.js";
 import { levelsConst } from "./constants.js";
 
-class levelManager extends Phaser.Scene {
+class levelManager {
 
-	constructor() {
-        super({key:'levelManager'});
-	}
-
-	create() {
-        this.input.mouse.disableContextMenu(); //No permite click derecho en el juego.
-
+	constructor(scene) {
         this.actualLevel = 1;
-
-        this.scene.remove("storyIntro");
-
-        //Primer nivel sólo si no existe
-        if(this.scene.get(levelsConst.keyLevel + this.actualLevel) === null){
-            this.level = new levelTemplate(levelsConst.keyLevel + this.actualLevel, this, levelsConst.dataLevel[0]);
-            this.scene.add(levelsConst.keyLevel + this.actualLevel, this.level, true);
-        }
-        else
-            this.resumeLevel();
-        
+        this.scene = scene;
+        this.started = false;  
 	}
+
+    firstLevel(){        
+        this.scene.scene.remove("storyIntro");
+
+        if(this.scene.scene.get("level1") == null){
+            this.started = true;
+            this.level = new levelTemplate(levelsConst.keyLevel + this.actualLevel, this, levelsConst.dataLevel[0]);
+            this.scene.scene.add(levelsConst.keyLevel + this.actualLevel, this.level, true);
+        }
+    }
 
     nextLevel(){
         if(this.actualLevel < levelsConst.totalLevels){
             //Borramos el actual
-            this.scene.remove(levelsConst.keyLevel + this.actualLevel);
+            this.scene.scene.remove(levelsConst.keyLevel + this.actualLevel);
             delete this.level;
             //Sumamos nivel
             this.actualLevel++;
             //Creamos el nivel
             this.level = new levelTemplate(levelsConst.keyLevel + this.actualLevel, this, levelsConst.dataLevel[this.actualLevel-1]);
             //Se añade al array y se pone en marcha
-            this.scene.add(levelsConst.keyLevel + this.actualLevel, this.level, true);
+            this.scene.scene.add(levelsConst.keyLevel + this.actualLevel, this.level, true);
+            //this.scene.run(levelsConst.keyLevel + this.actualLevel);
+        }
+        else{
+            this.scene.scene.remove(levelsConst.keyLevel + this.actualLevel);
+            delete this.level;
+
+            this.scene.scene.run('endingScene');
         }
     }
 
     resumeLevel(){
         //Continuamos con el nivel actual
-        this.scene.switch(levelsConst.keyLevel + this.actualLevel);
+        this.scene.scene.run(levelsConst.keyLevel + this.actualLevel);
+    }
+
+    restart(){
+        if(this.scene.scene.get("level1") == null){
+            this.scene.scene.remove(levelsConst.keyLevel + this.actualLevel);
+            this.actualLevel = 1;
+            this.started = true;
+            this.level = new levelTemplate(levelsConst.keyLevel + this.actualLevel, this, levelsConst.dataLevel[0]);
+            this.scene.scene.add(levelsConst.keyLevel + this.actualLevel, this.level, true);
+        }
     }
 	
 }

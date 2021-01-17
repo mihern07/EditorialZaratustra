@@ -58,12 +58,9 @@
     </table></div>
     <script type="module">
       import Boot from "./boot.js";
-      import Game from "./scenePrueba.js";
       import titleScene from "./titleScene.js";
       import victoryScene from "./victoryScene.js";
       import gameOverScene from "./gameOverScene.js";
-      import pauseMenu from "./pauseMenu.js";
-      import levelManager from "./levelManager.js";
       import storyIntro from "./storyIntro.js";
 
       var config = {
@@ -78,10 +75,10 @@
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
         }, 
-        scene: [Boot, titleScene, storyIntro, Game, victoryScene, gameOverScene, pauseMenu, levelManager],
+        scene: [Boot, titleScene, storyIntro, victoryScene, gameOverScene],
         physics: {
           default: "arcade",
-          arcade: { gravity: { y: 400 }, debug: false },
+          arcade: { gravity: { y: 400 }, debug: true },
         },
       };
       new Phaser.Game(config);

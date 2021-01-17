@@ -23,6 +23,10 @@ export default class GameManager{
         this.numeroAleatorio = this.getRndInteger(1,100);
         if (this.numeroAleatorio <= probability){
             this.strikes++;
+            return true;
+        }
+        else{
+            return false;
         }
     }
 
@@ -69,4 +73,6 @@ export default class GameManager{
         this.objetivo = amountToClear;
         this.numMaxStrikes = maxStrikes;
     }
+
+
 }

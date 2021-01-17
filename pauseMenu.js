@@ -2,11 +2,23 @@ import { pauseConst } from "./constants.js";
 
 class pauseMenu extends Phaser.Scene {
 
-    constructor() {
+    constructor(data) {
         super({ key: 'pause' });
+        
+    }
+
+    init(data){
+        this.musics = data.music;
+        console.log(data);
+        this.play = data.playing;
+        this.originSceneKey = data.key;
+        this.actualLevel = data.level;
+        this.levelManager = data.levelManager;
+        this.scene.bringToTop();
     }
 
     create() {
+        console.log("EN PAUSA");
         this.menu = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height / pauseConst.middlePos, 'menu');
         this.menu.setInteractive();
         this.menu.setDepth(pauseConst.depth);
@@ -29,7 +41,6 @@ class pauseMenu extends Phaser.Scene {
         this.noVolume.visible = false;
         this.noVolumeBold.visible = false;
 
-
         this.continue = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height / pauseConst.buttonPos, 'continue');
         this.continueBold = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height / pauseConst.buttonPos, 'continue2');
         this.exit = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height - this.game.config.height / pauseConst.buttonPos, 'exit');
@@ -39,6 +50,7 @@ class pauseMenu extends Phaser.Scene {
         this.continueBold.setDepth(pauseConst.depth);
         this.exit.setDepth(pauseConst.depth);
         this.exitBold.setDepth(pauseConst.depth);
+        
         this.continue.setInteractive();
         this.continueBold.setInteractive();
         this.exit.setInteractive();
@@ -82,10 +94,12 @@ class pauseMenu extends Phaser.Scene {
             this.exitBold.visible = false;
         });
 
+        this.events.on('wake', function(){ console.log("WAKEPAUSE")});
+
         this.continueBold.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
                 this.scene.run(this.originSceneKey);
-                this.scene.sleep();
+                this.scene.remove('pause');
             }
         })
 
@@ -93,8 +107,9 @@ class pauseMenu extends Phaser.Scene {
             this.exitBold.visible = true;
             if (pointer.leftButtonDown()) {
                 this.musics.stop();
-                this.scene.sleep(this.originSceneKey);
-                this.scene.switch('titleScene');
+                this.scene.run('titleScene');
+                this.scene.remove(this.originSceneKey);
+                this.scene.remove('pause');
             }
         })
 
@@ -108,7 +123,7 @@ class pauseMenu extends Phaser.Scene {
                 this.volume.visible = false;
                 this.volumeBold.visible = false;
 
-                this.musics.volume = 0;
+                this.musics.stop();
                 this.play = false;
             }
         })
@@ -119,30 +134,18 @@ class pauseMenu extends Phaser.Scene {
                 this.noVolumeBold.visible = false;
                 this.volume.visible = true;
 
-                this.musics.volume = 1;
+                this.musics.play();
                 this.play = true;
             }
         })
-
-
-    }
-
-    init(data) {
-        this.musics = data.music;
-        this.play = data.playing;
-        this.originSceneKey = data.key;
     }
 
     update() {
         if (this.keyEsc.isDown) {
             this.keyEsc.reset();
             this.scene.run(this.originSceneKey);
-            this.scene.sleep();
+            this.scene.remove('pause');
         }
-    }
-
-    getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)
-        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
 }

@@ -1,3 +1,4 @@
+import PauseMenu from "./pauseMenu.js"
 import Clock from "./clock_class.js";
 import DeskBell from "./deskbell.js";
 import Inkwell from "./inkwell_class.js";
@@ -21,14 +22,13 @@ export default class Game extends Phaser.Scene {
   create() {
 
     this.sceneKey = this.scene.key;
-
     console.log("Creado nivel: " + this.sceneKey);
     //GLOBAL
     //this.input.mouse.disableContextMenu(); //No permite click derecho en el juego.
 
     //FONDO
     this.bg = this.add.sprite(sceneConst.bgPosX, sceneConst.bgPosY, "background") // Los NPC's solo se ven por encima del bg
-
+    this.bg.setDepth(-2); //MOVER A FONDO Para que el fondo se dibuje detrás del todo
     //CLOCK
     if (this.dataM.clock) {
       this.clock = new Clock(this, sceneConst.clockPosX, sceneConst.clockPosY, "clock", "manecilla"); //Inicializa reloj
@@ -60,8 +60,8 @@ export default class Game extends Phaser.Scene {
     //PLUMA
     this.pen = new Pen(this, sceneConst.penPosX, sceneConst.penPosY, "pen");
 
-    this.bg.setDepth(-2); //MOVER A FONDO Para que el fondo se dibuje detrás del todo
-
+    
+            
     this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", "box", "book", "book2", "document", this.dataM.bookInfo, this.dataM.noticiaInfo,
       this.dataM.order, this.gameManager, this.dataM.day, this.dataM.month, this.dataM.year);
 
@@ -89,7 +89,8 @@ export default class Game extends Phaser.Scene {
       this.radioActivationTime = this.getRndInteger(sceneConst.offSetBtwRadio, sceneConst.timeSceneEnds / 2);
       this.radioClock.start(this.activateRadio.bind(this), this.radioActivationTime);
     }
-    this.Intro();
+
+    // this.Intro();
 
     this.music = this.sound.add("music"); //Música manejable
     this.music.play();
@@ -130,20 +131,30 @@ export default class Game extends Phaser.Scene {
     if (!this.gameManager.isGameOver()) { // Comprueba si no se han recibido los strikes minimos
       if (this.keyEsc.isDown) {
         this.keyEsc.reset();
-        this.game.scene.pause(this);
-        this.scene.sendToBack();
-        this.scene.run('pause', {
+        this.scene.sleep();
+        this.scene.add('pause', PauseMenu, false, {
           music: this.music,
           playing: this.isPlaying,
-          key: this.sceneKey
-        });
+          key: this.sceneKey,
+          level: this.dataM.day,
+          levelManager: this.levelManager
+        })
+        this.scene.run('pause');
+        // this.scene.resume('pause', {
+        //   music: this.music,
+        //   playing: this.isPlaying,
+        //   key: this.sceneKey,
+        //   level: this.dataM.day,
+        //   levelManager: this.levelManager
+        // });
       }
 
       if (this.keyReset.isDown) {
         this.keyReset.reset();
-        this.levelManager.nextLevel();
-        this.music.stop();
-        this.scene.stop();
+        this.strikeShake()
+        // this.levelManager.nextLevel();
+        // this.music.stop();
+        // this.scene.stop();
       }
 
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject
@@ -187,7 +198,7 @@ export default class Game extends Phaser.Scene {
 
     }
     else {
-      this.scene.start('gameOverScene', this.gameManager);
+      this.scene.start('gameOverScene', {gameManager: this.gameManager, levelManager: this.levelManager});
     }
   }
 
@@ -215,26 +226,26 @@ export default class Game extends Phaser.Scene {
     this.inkPlayed=true;
   }
 
-  Intro() {
-    this.cameras.main.fadeIn(2000, 0, 0, 0);
-    //this.createParticles("paperParticle");
-  }
+  // Intro() {
+  //   this.cameras.main.fadeIn(2000, 0, 0, 0);
+  //   //this.createParticles("paperParticle");
+  // }
 
-  createParticles(particleSprite) {
-    //Particles
-    let leaves = this.add.particles(particleSprite);
-    leaves.createEmitter({
-      frames: [{ key: particleSprite, frame: 0 }],
-      x: { min: 100, max: this.game.config.width },
-      y: -50,
-      speedX: { min: -50, max: 50 },
-      speedY: { min: 100, max: 120 },
-      lifespan: 7000,
-      scale: { start: 0.1, end: 0.01 },
-      rotate: { start: 0, end: 120 },
-      frequency: 300
-    });
-  }
+  // createParticles(particleSprite) {
+  //   //Particles
+  //   let leaves = this.add.particles(particleSprite);
+  //   leaves.createEmitter({
+  //     frames: [{ key: particleSprite, frame: 0 }],
+  //     x: { min: 100, max: this.game.config.width },
+  //     y: -50,
+  //     speedX: { min: -50, max: 50 },
+  //     speedY: { min: 100, max: 120 },
+  //     lifespan: 7000,
+  //     scale: { start: 0.1, end: 0.01 },
+  //     rotate: { start: 0, end: 120 },
+  //     frequency: 300
+  //   });
+  // }
 
   //
   bossFinished() {
@@ -246,6 +257,11 @@ export default class Game extends Phaser.Scene {
 
   getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  strikeShake(){
+    this.cameras.main.flash(500, 155,0,0,false);
+    this.cameras.main.shake(500, 0.001);
   }
 
 }

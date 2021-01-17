@@ -8,8 +8,9 @@ export default class GameOverScene extends Phaser.Scene {
         this.load.image("street", "sprites/street.jpg");
         this.load.image("buttonNotPressed", "sprites/buttonNotPressed.png");
     }
-    init(gameManager) {
-        this.gameManager = gameManager;
+    init(data) {
+        this.gameManager = data.gameManager;
+        this.levelManager = data.levelManager;
     }
     create() {
         this.background = this.add.sprite(gameOverConst.bgPosX, gameOverConst.bgPosY, "street");
@@ -34,7 +35,7 @@ export default class GameOverScene extends Phaser.Scene {
 
         this.button.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
-                this.scene.start('titleScene');
+                this.levelManager.nextLevel();
             }
         })
     }
