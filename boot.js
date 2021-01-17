@@ -130,9 +130,11 @@ export default class Boot extends Phaser.Scene {
 
     this.load.text("jefe", "dialogue/jefe.txt");
     this.load.text("ninio", "dialogue/ninioText.txt");
-    this.load.text("tendencias", "dialogue/personaje_tendencias.txt");
+    this.load.text("tendencias", "dialogue/personaje_tendencias.txt"); // XD
     this.load.text("correos", "dialogue/correosText.txt");
+    this.load.text("correosMal", "dialogue/correosMalText.txt");
     this.load.text("mujerDelJefe", "dialogue/mujer_del_jefe.txt");
+    this.load.text("mujerDelJefeMal", "dialogue/mujer_del_jefe_mal.txt");
     this.load.text("sobornador", "dialogue/sobornadorText.txt");
     this.load.text("vagabundo", "dialogue/vagabundoText.txt");
     this.load.text("dialogoBase", "dialogue/dialogoBase.txt");

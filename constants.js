@@ -216,10 +216,6 @@ export const sceneConst = {
     radioPosX: 250,
     radioPosY: 520,
 
-    // thinBook: 0,
-    // normalBook: 1,
-    // thickBook: 2,
-
     bgDepth: -2,
 
     calendarScale: .45
@@ -384,8 +380,8 @@ export const guardConst = {
     speed: 190
 }
 export const boardConst = {
-    categories: ["Nov\nela", "Poe\nsía", "Tea\ntro", "Rom\nance", "Ave\nntura", "Sus\npen\nse", "His\ntór\nico", "Pol\nicía\nco", "Dra\nma", "Fan\ntasía", "Aca\ndém\nico", "Com\nedia", "Fic\nción"],
-    catSprites: ["novelaPost", "poesiaPost", "TeatroPost", "romancePost", "aventuraPost", "suspensePost", "historicoPost", "policiacoPost", "dramaPost", "fantasiaPost", "academicoPost", "comediaPost", "ficcionPost"],
+    categories: ["Rom\nance", "Ave\nntura", "Sus\npen\nse", "His\ntór\nico", "Pol\nicía\nco", "Dra\nma", "Fan\ntasía", "Aca\ndém\nico", "Com\nedia", "Fic\nción", "Nov\nela", "Poe\nsía", "Tea\ntro"],
+    catSprites: ["romancePost", "aventuraPost", "suspensePost", "historicoPost", "policiacoPost", "dramaPost", "fantasiaPost", "academicoPost", "comediaPost", "ficcionPost", "novelaPost", "poesiaPost", "TeatroPost"],
 
     offsetX: -45,
     offsetY: -75,

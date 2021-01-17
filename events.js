@@ -53,9 +53,18 @@ export default class Events extends Phaser.GameObjects.GameObject {
             else
                 this.clientOrder.push(this.getRndInteger(this.charaTypes.noticiaCorrecta, this.charaTypes.noticiaIncorrecta));
         }
-        for (let i = 0; i < this.order.specialChara.length; i++) { // Añade los personajes de evento
-            this.clientOrder.push(this.order.specialChara[i]);
+
+        // Añadimos los personajes de evento
+        if(this.order.specialChara[0] == this.charaTypes.correos || this.order.specialChara[0] == this.charaTypes.mujerDelJefe){ // si es correos o mujer del jefe
+            let randomSpecial = this.getRndInteger(0,1);
+            this.clientOrder.push(this.order.specialChara[randomSpecial]);
         }
+        else{
+            for (let i = 0; i < this.order.specialChara.length; i++) { 
+                this.clientOrder.push(this.order.specialChara[i]);
+            }
+        }
+
         this.clientOrder = this.clientOrder.sort(() => Math.random() - 0.5); // Mezcla elementos de la array (https://flaviocopes.com/how-to-shuffle-array-javascript/)
 
         this.day = day;

@@ -14,7 +14,7 @@ export default class Board extends Phaser.GameObjects.Sprite {
         this.postIts = [];
 
         for (let i = 0; i < numPost; i++) {
-            if (i < 3) {
+            if (i > 9) {
                 this.postIts.push(new PostIt(this.scene, this.x + boardConst.offsetX + i * boardConst.postItDiff, this.y + boardConst.offsetY, "postIt", this.categories[i]));
             }
             else {
