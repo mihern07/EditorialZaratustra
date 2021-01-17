@@ -106,6 +106,8 @@ export default class Game extends Phaser.Scene {
     this.ink4 = this.sound.add("ink4");
     this.ink5 = this.sound.add("ink5");
 
+    this.incorrectSound = this.sound.add("incorrectSound");
+
     this.inkPlayed=false;
 
     this.boss.EnterChar(); //Entrada el Boss
@@ -262,6 +264,7 @@ export default class Game extends Phaser.Scene {
   strikeShake(){
     this.cameras.main.flash(500, 155,0,0,false);
     this.cameras.main.shake(500, 0.001);
+    this.incorrectSound.play();
   }
 
 }
