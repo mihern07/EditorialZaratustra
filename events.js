@@ -1,8 +1,6 @@
 import Personaje from "./character.js";
 import { eventsConst } from "./constants.js";
 import NewsCharacter from "./newsCharacter.js";
-import Newspaper from "./newspaper.js";
-import Radio from "./radio.js";
 
 export default class Events extends Phaser.GameObjects.GameObject {
     constructor(scene, x, y, sprite, dialogueSprite, bookSprite1, bookSprite2, documentSprite, bookInfo, noticiaInfo,
@@ -117,7 +115,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje libro correcto
                 console.log("Personaje Correcto")
                 this.createCorrectBook();
-                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length - 1)]);
+                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0, this.dialogosLibro.length - 1)]);
                 this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPagsdocumentSprite);
                 break;
             case this.charaTypes.libroIncorrecto:
@@ -128,8 +126,8 @@ export default class Events extends Phaser.GameObjects.GameObject {
             case this.charaTypes.noticiaCorrecta:
                 console.log("Personaje noticia correcta");
                 this.news = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
-                this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0,this.dialogosNoticias.length - 1)]);
-                this.chara = new NewsCharacter(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoNoticia, this.day, this.month, this.year, this.news);
+                this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0, this.dialogosNoticias.length - 1)]);
+                this.chara = new NewsCharacter(this.scene, this.x, this.y, this.chooseSprites(), this.dialogoNoticia, this.day, this.month, this.year, this.news);
                 break;
             case this.charaTypes.noticiaIncorrecta:
                 console.log("Personaje noticia incorrecta");
@@ -144,13 +142,13 @@ export default class Events extends Phaser.GameObjects.GameObject {
                         this.incorrectYear = this.getRndInteger(1960, 2040);
                     }
                     this.news = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
-                    this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0,this.dialogosNoticias.length - 1)]);
-                    this.chara = new NewsCharacter(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoNoticia, this.incorrectDay, this.incorrectMonth, this.incorrectYear, this.news);
+                    this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0, this.dialogosNoticias.length - 1)]);
+                    this.chara = new NewsCharacter(this.scene, this.x, this.y, this.chooseSprites(), this.dialogoNoticia, this.incorrectDay, this.incorrectMonth, this.incorrectYear, this.news);
                 }
                 else {
                     this.news = this.noticiaInfo.noticiaMal[this.getRndInteger(0, this.noticiaInfo.noticiaMal.length - 1)];
-                    this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0,this.dialogosNoticias.length - 1)]);
-                    this.chara = new NewsCharacter(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoNoticia, this.day, this.month, this.year, this.news);
+                    this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0, this.dialogosNoticias.length - 1)]);
+                    this.chara = new NewsCharacter(this.scene, this.x, this.y, this.chooseSprites(), this.dialogoNoticia, this.day, this.month, this.year, this.news);
                 }
 
 
@@ -164,35 +162,35 @@ export default class Events extends Phaser.GameObjects.GameObject {
     }
 
     chooseSprites() {
-        this.value = this.getRndInteger(0,6);
-        switch(this.value) //PELO DEL CHARACTER
+        this.value = this.getRndInteger(0, 6);
+        switch (this.value) //PELO DEL CHARACTER
         {
             case 0:
-            this.sprite = "clothes1";
-            break;
+                this.sprite = "clothes1";
+                break;
             case 1:
                 this.sprite = "clothes2";
-            break;
+                break;
             case 2:
                 this.sprite = "clothes3";
-            break;
+                break;
             case 3:
                 this.sprite = "clothes4";
-            break;
+                break;
             case 4:
                 this.sprite = "clothes5";
-            break;
+                break;
             case 5:
                 this.sprite = "clothes6";
-            break;
+                break;
             case 6:
                 this.sprite = "clothes7";
-            break;
+                break;
         }
         return this.sprite;
     }
 
-    splitDialogue(dialogue){
+    splitDialogue(dialogue) {
         this.dialogoAPartir = this.scene.cache.text.get(dialogue);
         this.dialogoAPartir = this.dialogoAPartir.split("\n");
         return this.dialogoAPartir;
@@ -203,8 +201,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
             this.chara.document.destroy();
             if (this.chara.hasBook)
                 this.chara.book.destroy();
-            if(this.chara.head!=null)
-            {
+            if (this.chara.head != null) {
                 this.chara.head.destroy(); //Arreglar.
                 this.chara.hair.destroy();
             }
@@ -319,13 +316,13 @@ export default class Events extends Phaser.GameObjects.GameObject {
                     this.genre = "Teatro";
                     this.category = this.bookInfo.teatroMal[this.getRndInteger(0, this.bookInfo.teatroMal.length - 1)];
                 }
-                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length - 1)]);
+                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0, this.dialogosLibro.length - 1)]);
                 this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
                 break;
             case 1:
                 //Número de páginas Incorrecto
                 this.tamPags = this.bookInfo.numPagsMal[this.getRndInteger(0, this.bookInfo.numPagsMal.length)];
-                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length - 1)]);
+                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0, this.dialogosLibro.length - 1)]);
                 this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
                 break;
             case 2:
@@ -334,7 +331,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                     this.wrongSprite = this.bookInfo.everyCategory[this.getRndInteger(0, this.bookInfo.everyCategory.length - 1)];
                 } while (this.wrongSprite == this.category);
 
-                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0,this.dialogosLibro.length - 1)]);
+                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0, this.dialogosLibro.length - 1)]);
                 this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.wrongSprite, "libroA" + this.wrongSprite, this.genre, this.category, this.tamPags);
                 break;
         }
@@ -347,7 +344,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Niño
                 if (accepted) {
                     this.gameManager.AddSubstractMoney(eventsConst.childMoneyAmount);
-                    if(this.gameManager.Strike(eventsConst.childProbability))
+                    if (this.gameManager.Strike(eventsConst.childProbability))
                         this.scene.strikeShake();
                 }
                 break;
@@ -355,7 +352,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Sobornador
                 if (accepted) {
                     this.gameManager.AddSubstractMoney(eventsConst.briberyMoneyAmount);
-                    if(this.gameManager.Strike(eventsConst.briberyProbability))
+                    if (this.gameManager.Strike(eventsConst.briberyProbability))
                         this.scene.strikeShake();
                 }
                 break;
@@ -363,7 +360,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Vagabundo
                 if (accepted) {
                     this.gameManager.AddSubstractMoney(eventsConst.homelessMoneyAmount);
-                    if(this.gameManager.Strike(eventsConst.homelessProbability))
+                    if (this.gameManager.Strike(eventsConst.homelessProbability))
                         this.scene.strikeShake();
                 }
                 break;
@@ -373,14 +370,14 @@ export default class Events extends Phaser.GameObjects.GameObject {
                     this.gameManager.AddSubstractMoney(eventsConst.deliveryMoneyAmount);
                 }
                 else {
-                    if(this.gameManager.Strike(eventsConst.deliveryProbability))
+                    if (this.gameManager.Strike(eventsConst.deliveryProbability))
                         this.scene.strikeShake();
                 }
                 break;
             case this.charaTypes.correosFalso:
                 //Correos falso
                 if (accepted) {
-                    if(this.gameManager.Strike(eventsConst.deliveryProbability))
+                    if (this.gameManager.Strike(eventsConst.deliveryProbability))
                         this.scene.strikeShake();
                 }
                 break;
@@ -390,14 +387,14 @@ export default class Events extends Phaser.GameObjects.GameObject {
                     this.gameManager.AddSubstractMoney(eventsConst.wifeMoneyAmount);
                 }
                 else {
-                    if(this.gameManager.Strike(eventsConst.wifeProbability))
+                    if (this.gameManager.Strike(eventsConst.wifeProbability))
                         this.scene.strikeShake();
                 }
                 break;
             case this.charaTypes.mujerDelJefeFalsa:
                 //Mujer del jefe falsa
                 if (accepted) {
-                    if(this.gameManager.Strike(eventsConst.wifeProbability))
+                    if (this.gameManager.Strike(eventsConst.wifeProbability))
                         this.scene.strikeShake();
                 }
                 break;
@@ -405,10 +402,10 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje libro correcto
                 console.log("Personaje Correcto")
                 if (accepted) {
-                    if (this.isBookBanned(this.chara.getCategory())){
+                    if (this.isBookBanned(this.chara.getCategory())) {
                         this.gameManager.BookStrike();
                         this.scene.strikeShake();
-                    }else{
+                    } else {
                         this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
                     }
                 }
@@ -425,13 +422,14 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje noticia correcta
                 console.log("Noticia correcta");
                 if (accepted) {
-                    if (this.isNoticiaBanned(this.chara.getCategory())){
+                    if (this.isNoticiaBanned(this.chara.getCategory())) {
                         this.gameManager.BookStrike();
                         this.scene.strikeShake();
-                    }else{
+                    } else {
                         this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
                     }
                 }
+                break;
             case this.charaTypes.noticiaIncorrecta:
                 //Personaje noticia incorrecta
                 console.log("Noticia incorrecta");
@@ -446,55 +444,55 @@ export default class Events extends Phaser.GameObjects.GameObject {
         console.log(this.gameManager.bookStrikeCont);
     }
 
-    getBookMalRadio(){
+    getBookMalRadio() {
         return this.bookMalRadio;
     }
 
-    getNoticiaMalRadio(){
+    getNoticiaMalRadio() {
         return this.noticiaMalRadio;
     }
 
-    addCensoredBook(aCensurar){
+    addCensoredBook(aCensurar) {
         this.bookMalRadio.push(aCensurar);
-        console.log (this.bookMalRadio);
+        console.log(this.bookMalRadio);
     }
 
-    addCensoredNoticia(aCensurar){
+    addCensoredNoticia(aCensurar) {
         this.noticiaMalRadio.push(aCensurar);
-        console.log (this.noticiaMalRadio);
+        console.log(this.noticiaMalRadio);
     }
 
-    isBookBanned(category){
-        if(this.bookMalRadio.length == 0)
+    isBookBanned(category) {
+        if (this.bookMalRadio.length == 0)
             return false;
         let banned = false;
         let i = 0;
-        while (i < this.bookMalRadio.length && category != this.bookMalRadio[i]){
+        while (i < this.bookMalRadio.length && category != this.bookMalRadio[i]) {
             i++;
         }
-        if (i == this.bookMalRadio.length){
+        if (i == this.bookMalRadio.length) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    isNoticiaBanned(category){
-        if(this.noticiaMalRadio.length == 0)
+    isNoticiaBanned(category) {
+        if (this.noticiaMalRadio.length == 0)
             return false;
         let banned = false;
         let i = 0;
-        while (i < this.noticiaMalRadio.length && category != this.noticiaMalRadio[i]){
+        while (i < this.noticiaMalRadio.length && category != this.noticiaMalRadio[i]) {
             i++;
         }
-        if (i == this.noticiaMalRadio.length){
+        if (i == this.noticiaMalRadio.length) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    refuseDenial(){
+    refuseDenial() {
         this.chara.refuseDenial();
     }
 

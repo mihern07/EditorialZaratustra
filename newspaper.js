@@ -26,8 +26,8 @@ export default class Newspaper extends Draggable {
         this.day = day;
         this.month = month;
         this.year = year;
-        this.info = [scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.firstOffsetY, this.day + "/" + this.month + "/" + this.year, { color: 0x0A0A0A }),
-        scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.secondOffsetY, news, { color: 0x0A0A0A })];
+        this.info = [scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.firstOffsetY, this.day + "/" + this.month + "/" + this.year, { fontFamily: 'Yung Seon' }).setStroke('#000000', 4),
+        scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.secondOffsetY, news, { fontFamily: 'Yung Seon' }).setStroke('#000000', 4).setFontSize(20)];
 
         for (let i = 0; i < this.info.length; i++) {
             this.info[i].visible = false;
