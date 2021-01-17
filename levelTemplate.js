@@ -131,7 +131,7 @@ export default class Game extends Phaser.Scene {
     if (!this.gameManager.isGameOver()) { // Comprueba si no se han recibido los strikes minimos
       if (this.keyEsc.isDown) {
         this.keyEsc.reset();
-        this.scene.sleep();
+        this.scene.pause();
         this.scene.add('pause', PauseMenu, false, {
           music: this.music,
           isPlaying: this.isPlaying,

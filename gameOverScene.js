@@ -14,6 +14,10 @@ export default class GameOverScene extends Phaser.Scene {
     }
     create() {
         this.background = this.add.sprite(gameOverConst.bgPosX, gameOverConst.bgPosY, "street");
+
+        this.fondo = this.add.sprite(gameOverConst.blackBoxPosX, gameOverConst.blackBoxPosY, "fondo");
+        this.fondo.setScale(gameOverConst.blackBoxScaleX, gameOverConst.blackBoxScaleY);
+
         this.congratulation = this.add.text(gameOverConst.congratPosX, gameOverConst.congratPosY, "¡Oh no! Inténtalo otra vez",  { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.congratulation.setTint(gameOverConst.congratTint);
         this.congratulation.setFontSize(gameOverConst.congSize);

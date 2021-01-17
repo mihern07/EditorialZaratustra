@@ -4,11 +4,6 @@ export default class StoryIntro extends Phaser.Scene{
     constructor() {
         super({key: 'storyIntro'});
     }
-    preload(){
-        this.load.text("intro", "dialogue/storyIntro.txt");
-        this.load.image("street", "sprites/street.jpg");
-        this.load.image("fondo", "sprites/negro_semitransparente.png");
-    }
 
     create(levelManager){
         this.background = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "street");

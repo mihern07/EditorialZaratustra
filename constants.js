@@ -9,7 +9,7 @@ export const levelsConst = {
         {
             clock: true, board: false, calendar: true, bodyguard: false, alarm: false, radio: false, winCondition: 1000, loseCondition: 2, month: 4, year: 1920, day: 1,
             order: {
-                numCorrects: 1, // Número mínimo de libros correctos 
+                numCorrects: 7, // Número mínimo de libros correctos 
                 minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
                 specialChara: [] // perosnajes especiales del nivel
             },
@@ -232,15 +232,17 @@ export const titleConst = {
 export const victoryConst = {
     bgPosX: 550,
     bgPosY: 400,
-    congratPosX: 350,
+    blackBoxPosX: 550,
+    blackBoxPosY: 330,
+    congratPosX: 390,
     congratPosY: 200,
-    puntPosX: 325,
+    puntPosX: 250,
     puntPosY: 300,
-    strikesPosX: 315,
+    strikesPosX: 355,
     strikesPosY: 400,
     buttonPosX: 550,
     buttonPosY: 600,
-    buttonTextPosX: 420,
+    buttonTextPosX: 460,
     buttonTextPosY: 585,
 
     puntTint: 0x71CA1E,
@@ -252,7 +254,9 @@ export const victoryConst = {
     buttonTextSize: 30,
 
     bgScale: 1.1,
-    buttonScale: 2
+    buttonScale: 2,
+    blackBoxScaleX: 0.8,
+    blackBoxScaleY: 1
 }
 export const creditsConst = {
     posX: 550,
@@ -277,9 +281,11 @@ export const creditsConst = {
 export const gameOverConst = {
     bgPosX: 550,
     bgPosY: 400,
-    congratPosX: 200,
+    blackBoxPosX: 550,
+    blackBoxPosY: 330,
+    congratPosX: 390,
     congratPosY: 200,
-    puntPosX: 325,
+    puntPosX: 250,
     puntPosY: 300,
     strikesPosX: 315,
     strikesPosY: 400,
@@ -297,7 +303,9 @@ export const gameOverConst = {
     strikeSize: 40,
     buttonTextSize: 30,
 
-    buttonScale: 2
+    buttonScale: 2,
+    blackBoxScaleX: 0.8,
+    blackBoxScaleY: 1
 }
 export const deskBellConst = {
     scale: .35

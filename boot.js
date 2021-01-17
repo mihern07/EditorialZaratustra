@@ -19,6 +19,11 @@ export default class Boot extends Phaser.Scene {
     this.load.image('exit', 'sprites/salir.png');
     this.load.image('exit2', 'sprites/salir2.png');
 
+    // Intro
+    this.load.text("intro", "dialogue/storyIntro.txt");
+    this.load.image("street", "sprites/street.jpg");
+    this.load.image("fondo", "sprites/negro_semitransparente.png");
+
     //Nivel
     this.load.image("background", "sprites/backgroundSprite.png") //Fondo = background
     this.load.image("foreground", "sprites/foregroundSprite.png") //Mesa = foreground
