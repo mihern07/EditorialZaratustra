@@ -147,6 +147,10 @@ export default class Boot extends Phaser.Scene {
     this.load.text("noticiasPijo", "dialogue/noticiasPijo.txt");
     this.load.text("noticiasResponsable", "dialogue/noticiasResponsable.txt");
     this.load.text("noticiasTimido", "dialogue/noticiasTimido.txt");
+    this.load.text("jefeColores","dialogue/jefeColores.txt");
+    this.load.text("jefeGuardia","dialogue/jefeGuardia.txt");
+    this.load.text("jefeNoticia","dialogue/jefeNoticia.txt");
+    this.load.text("jefeRadio","dialogue/jefeRadio.txt");
 
     this.load.audio("deskbellSound", "sounds/deskbell.wav"); //Audio timbre
     this.load.audio("npcSound", "sounds/npc.wav");

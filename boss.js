@@ -12,6 +12,8 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.setDepth(bossConst.depth);
 
+        this.level = level-1;
+
         this.bookInfo = bookInfo;
         this.noticiaInfo = noticiaInfo;
 
@@ -25,9 +27,43 @@ export default class Boss extends Phaser.GameObjects.Sprite {
 
         this.texto = dialogue;
         this.dialogueSprite = dialogueSprite;
-        this.dialogue = new Dialogue(scene, bossConst.dialoguePosX, bossConst.dialoguePosY, this.dialogueSprite, this.texto.slice(level, level + 3));
+        this.dialogue = new Dialogue(scene, bossConst.dialoguePosX, bossConst.dialoguePosY, this.dialogueSprite, this.texto.slice(this.level * 3, this.level * 3 + 3));
         this.dialogue.setVisible(false);
         this.dialogue.setInteractive();
+
+
+        //Asignamos el diálogo extra del jefe si hay
+        this.dialogueExtraCount = 0;    //Utilizado para ir pasando el texto extra
+        switch(this.level){
+            case 0:
+                //Explicación de los colores
+                this.extraText = this.scene.cache.text.get("jefeColores");
+                this.extraText = this.extraText.split("\n");
+                this.contExtraDialogue = 4;
+                break;
+            case 3:
+                //Explicación de las noticias
+                this.extraText = this.scene.cache.text.get("jefeNoticia");
+                this.extraText = this.extraText.split("\n");
+                this.contExtraDialogue = 3;
+                break;
+            case 4:
+                //Explicación del guardia
+                this.extraText = this.scene.cache.text.get("jefeGuardia");
+                this.extraText = this.extraText.split("\n");
+                this.contExtraDialogue = 4;
+                break;
+            case 5:
+                //Explicación de la radio
+                this.extraText = this.scene.cache.text.get("jefeRadio");
+                this.extraText = this.extraText.split("\n");
+                this.contExtraDialogue = 6;
+                break;
+            default:
+                //No hay diálogo extra
+                this.contExtraDialogue = 0;
+                break;
+        }
 
         this.SPEED = bossConst.speed;
 
@@ -49,7 +85,11 @@ export default class Boss extends Phaser.GameObjects.Sprite {
                     this.nextDialogue();
                 }
                 else {
-                    this.GoBack();
+                    if (this.contExtraDialogue > 0){
+                        this.extraInfo();
+                    }else{
+                        this.GoBack();
+                    }
                 }
             }
         });
@@ -87,8 +127,14 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         }
     }
 
+    extraInfo(){
+        this.dialogue.setText(this.extraText.slice(this.dialogueExtraCount, this.dialogueExtraCount + 3));
+        this.dialogueExtraCount += 3;
+        this.contExtraDialogue--;
+    }
+
     dialogueNovela() {
-        let info = "Jefe\nHoy se permiten en novela: ";
+        let info = "Jefe Fernando\nHoy se permiten en novela: ";
         let novelLength = this.bookInfo.novelaBien.length;
         if (novelLength == 10) {
             info += "todas las categorías";
@@ -110,11 +156,11 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         if (novelLength != 0)
             this.dialogue.setText(info);
         else
-            this.dialogue.setText("Jefe\nHoy no se permiten novelas");
+            this.dialogue.setText("Jefe Fernando\nHoy no se permiten novelas");
     }
 
     dialogueTeatro() {
-        let info = "Jefe\nHoy se permite en teatro: ";
+        let info = "Jefe Fernando\nHoy se permite en teatro: ";
         let teatroLength = this.bookInfo.teatroBien.length;
         if (teatroLength == 10) {
             info += "todas las categorías";
@@ -136,11 +182,11 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         if (teatroLength != 0)
             this.dialogue.setText(info);
         else
-            this.dialogue.setText("Jefe\nHoy no se permiten obras de teatro");
+            this.dialogue.setText("Jefe Fernando\nHoy no se permiten obras de teatro");
     }
 
     dialoguePoesia() {
-        let info = "Jefe\nHoy se permite en poesía: ";
+        let info = "Jefe Fernando\nHoy se permite en poesía: ";
         let poesiaLength = this.bookInfo.poesiaBien.length;
         if (poesiaLength == 10) {
             info += "todas las categorías";
@@ -162,11 +208,11 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         if (poesiaLength != 0)
             this.dialogue.setText(info);
         else
-            this.dialogue.setText("Jefe\nHoy no se permiten poemas");
+            this.dialogue.setText("Jefe Fernando\nHoy no se permiten poemas");
     }
 
     dialogueTam() {
-        let info = "Jefe\nY respecto al tamaño, ";
+        let info = "Jefe Fernando\nY respecto al tamaño, ";
         let numPagsLength = this.bookInfo.numPagsBien.length;
         if (numPagsLength == 3) info += "aceptamos todas por igual.";
         else {
@@ -191,7 +237,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         if (numPagsLength != 0)
             this.dialogue.setText(info);
         else
-            this.dialogue.setText("Jefe\nHoy no se permiten obras de ningún tamaño (por algún motivo)");
+            this.dialogue.setText("Jefe Fernando\nHoy no se permiten obras de ningún tamaño (por algún motivo)");
     }
 
     StopChar() { // El personaje pare
