@@ -26,7 +26,7 @@ export default class CreditsScene extends Phaser.Scene {
         this.text1 = this.add.text(creditsConst.pos2X, creditsConst.pos2Y, "Desarrolladores principales", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.text1.setFontSize(creditsConst.textSize);
 
-        this.text2 = this.add.text(creditsConst.pos2X, creditsConst.pos3Y, "- Daniel Illanes\n- Miguel Hernández\n- Sergio José Alfonso\n- Alejandro Ortega", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
+        this.text2 = this.add.text(creditsConst.pos2X, creditsConst.pos3Y, "- Daniel Illanes\n- Miguel Hernández\n- Sergio Alfonso\n- Alejandro Ortega", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.text2.setFontSize(creditsConst.size);
 
         this.text3 = this.add.text(creditsConst.pos2X, creditsConst.pos4Y, "Arte", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);

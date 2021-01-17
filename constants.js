@@ -9,7 +9,7 @@ export const levelsConst = {
         {
             clock: true, board: false, calendar: true, bodyguard: false, alarm: false, radio: false, winCondition: 1000, loseCondition: 2, month: 4, year: 1920, day: 1,
             order: {
-                numCorrects: 7, // Número mínimo de libros correctos 
+                numCorrects: 1, // Número mínimo de libros correctos 
                 minBooks: 17, // Número mínimo de libros entre los que se encuentran los anteriores
                 specialChara: [] // perosnajes especiales del nivel
             },

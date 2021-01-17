@@ -55,12 +55,12 @@ export default class Events extends Phaser.GameObjects.GameObject {
         }
 
         // Añadimos los personajes de evento
-        if(this.order.specialChara[0] == this.charaTypes.correos || this.order.specialChara[0] == this.charaTypes.mujerDelJefe){ // si es correos o mujer del jefe
-            let randomSpecial = this.getRndInteger(0,1);
+        if (this.order.specialChara[0] == this.charaTypes.correos || this.order.specialChara[0] == this.charaTypes.mujerDelJefe) { // si es correos o mujer del jefe
+            let randomSpecial = this.getRndInteger(0, 1);
             this.clientOrder.push(this.order.specialChara[randomSpecial]);
         }
-        else{
-            for (let i = 0; i < this.order.specialChara.length; i++) { 
+        else {
+            for (let i = 0; i < this.order.specialChara.length; i++) {
                 this.clientOrder.push(this.order.specialChara[i]);
             }
         }
@@ -296,7 +296,11 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
     createIncorrectChara() {
         this.createCorrectBook(); // Crea un libro correcto
-        let wrongAspect = this.getRndInteger(0, 2); // Selecciona el aspecto que será erróneo
+        let wrongAspect;
+        if(this.bookInfo.numPagsMal.length == 0) 
+            wrongAspect = this.getRndInteger(0, 1); // Selecciona el aspecto que será erróneo
+        else
+            wrongAspect = this.getRndInteger(0, 2); 
         switch (wrongAspect) {
             case 0:
                 //Categoría errónea
@@ -329,12 +333,6 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
                 break;
             case 1:
-                //Número de páginas Incorrecto
-                this.tamPags = this.bookInfo.numPagsMal[this.getRndInteger(0, this.bookInfo.numPagsMal.length)];
-                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0, this.dialogosLibro.length - 1)]);
-                this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
-                break;
-            case 2:
                 //Sprite Incorrecto
                 do {
                     this.wrongSprite = this.bookInfo.everyCategory[this.getRndInteger(0, this.bookInfo.everyCategory.length - 1)];
@@ -343,6 +341,13 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0, this.dialogosLibro.length - 1)]);
                 this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.wrongSprite, "libroA" + this.wrongSprite, this.genre, this.category, this.tamPags);
                 break;
+            case 2:
+                //Número de páginas Incorrecto
+                this.tamPags = this.bookInfo.numPagsMal[this.getRndInteger(0, this.bookInfo.numPagsMal.length - 1)];
+                this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0, this.dialogosLibro.length - 1)]);
+                this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
+                break;
+
         }
     }
 

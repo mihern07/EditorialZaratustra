@@ -18,7 +18,7 @@ export default class GameOverScene extends Phaser.Scene {
         this.congratulation.setTint(gameOverConst.congratTint);
         this.congratulation.setFontSize(gameOverConst.congSize);
         
-        this.puntuacion = this.add.text(gameOverConst.puntPosX, gameOverConst.puntPosY, this.gameManager.dinero + "€/" + this.gameManager.objetivo + "€ conseguidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
+        this.puntuacion = this.add.text(gameOverConst.puntPosX, gameOverConst.puntPosY, this.gameManager.dinero + "ptas./" + this.gameManager.objetivo + "ptas. conseguidas", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.puntuacion.setTint(gameOverConst.puntTint);
         this.puntuacion.setFontSize(gameOverConst.puntSize);
         
