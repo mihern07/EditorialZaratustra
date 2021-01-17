@@ -36,7 +36,7 @@ class levelManager {
             this.scene.scene.remove(levelsConst.keyLevel + this.actualLevel);
             delete this.level;
 
-            this.scene.scene.run('endingScene');
+            this.scene.scene.run('endScene');
         }
     }
 

@@ -114,8 +114,6 @@ export default class Game extends Phaser.Scene {
 
     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     this.keyReset = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-
-    this.events.on('wake', function () { this.music.play() });
   }
 
   activateRadio() {
@@ -136,7 +134,7 @@ export default class Game extends Phaser.Scene {
         this.scene.sleep();
         this.scene.add('pause', PauseMenu, false, {
           music: this.music,
-          playing: this.isPlaying,
+          isPlaying: this.isPlaying,
           key: this.sceneKey,
           level: this.dataM.day,
           levelManager: this.levelManager

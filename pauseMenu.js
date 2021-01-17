@@ -9,8 +9,7 @@ class pauseMenu extends Phaser.Scene {
 
     init(data){
         this.musics = data.music;
-        console.log(data);
-        this.play = data.playing;
+        this.musicActive = data.isPlaying;
         this.originSceneKey = data.key;
         this.actualLevel = data.level;
         this.levelManager = data.levelManager;
@@ -37,8 +36,9 @@ class pauseMenu extends Phaser.Scene {
         this.noVolume.setScale(pauseConst.volumeScale);
         this.noVolumeBold.setScale(pauseConst.volumeScale);
 
+        this.volume.visible = this.musicActive;
         this.volumeBold.visible = false;
-        this.noVolume.visible = false;
+        this.noVolume.visible = !this.musicActive;
         this.noVolumeBold.visible = false;
 
         this.continue = this.add.image(this.game.config.width / pauseConst.middlePos, this.game.config.height / pauseConst.buttonPos, 'continue');
@@ -115,16 +115,12 @@ class pauseMenu extends Phaser.Scene {
 
         this.volumeBold.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
-                // this.noVolume.setActive(true);
-                // this.noVolumeBold.setActive(true);
-                // this.volume.setActive(false);
-                // this.volumeBold.setActive(false);
                 this.noVolume.visible = true;
                 this.volume.visible = false;
                 this.volumeBold.visible = false;
 
                 this.musics.stop();
-                this.play = false;
+                this.scene.get(this.originSceneKey).isPlaying = false;
             }
         })
 
@@ -135,7 +131,7 @@ class pauseMenu extends Phaser.Scene {
                 this.volume.visible = true;
 
                 this.musics.play();
-                this.play = true;
+                this.scene.get(this.originSceneKey).isPlaying = true;
             }
         })
     }

@@ -62,7 +62,8 @@
       import victoryScene from "./victoryScene.js";
       import gameOverScene from "./gameOverScene.js";
       import storyIntro from "./storyIntro.js";
-
+      import endingScene from "./endScene.js";
+      import creditsScene from "./creditsScene.js";
       var config = {
         type: Phaser.AUTO,
         width: 1100,
@@ -75,10 +76,10 @@
           mode: Phaser.Scale.FIT,
           autoCenter: Phaser.Scale.CENTER_BOTH,
         }, 
-        scene: [Boot, titleScene, storyIntro, victoryScene, gameOverScene],
+        scene: [Boot, titleScene, storyIntro, victoryScene, gameOverScene, endingScene, creditsScene],
         physics: {
           default: "arcade",
-          arcade: { gravity: { y: 400 }, debug: true },
+          arcade: { gravity: { y: 400 }, debug: false },
         },
       };
       new Phaser.Game(config);

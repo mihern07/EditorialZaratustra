@@ -27,7 +27,7 @@ export default class VictoryScene extends Phaser.Scene {
         this.button = this.add.sprite(victoryConst.buttonPosX, victoryConst.buttonPosY, "buttonNotPressed");
         this.button.setInteractive();
         this.button.setScale(victoryConst.buttonScale);
-        this.buttonText = this.add.text(victoryConst.buttonTextPosX, victoryConst.buttonTextPosY, "Volver al menú", { fontFamily: 'Yeon Sung' });
+        this.buttonText = this.add.text(victoryConst.buttonTextPosX, victoryConst.buttonTextPosY, "Siguiente nivel", { fontFamily: 'Yeon Sung' });
         this.buttonText.setFontSize(victoryConst.buttonTextSize);
 
         this.button.on("pointerdown", pointer => {
