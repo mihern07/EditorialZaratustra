@@ -30,6 +30,7 @@ export default class Boot extends Phaser.Scene {
     this.load.image("clock", "sprites/clockPrototypeSprite.png"); //Reloj = clock
     this.load.image("manecilla", "sprites/manecilla.png"); //Manecilla = manecilla
     this.load.image("box", "sprites/dialogueBoxv2.png"); //Bocadillo = box
+    this.load.image("radioBox", "sprites/dialogueBoxRadio.png");
     this.load.image("character", "sprites/personajeSprite.png"); //personaje = character
     this.load.image("deskBellPressed", "sprites/timbrePulsadoSprite.png"); //timbre pulsado = deskBellPressed
     this.load.image("deskBellSP", "sprites/timbreSprite.png"); //timbre = deskBellSP
@@ -185,6 +186,6 @@ export default class Boot extends Phaser.Scene {
       },
     });
 
-    this.scene.start('endScene');
+    this.scene.start('titleScene');
   }
 }

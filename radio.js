@@ -61,7 +61,7 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     
     this.text = "Radio\nLamentamos comunicar que a partir de ahora se\nsancionará la publicación de " + this.bookACensurar + " y " + this.noticiaACensurar;
 
-    this.dialogue = new Dialogue(this.scene, radioConst.dialogueX, radioConst.dialogueY, "box", this.text);
+    this.dialogue = new Dialogue(this.scene, radioConst.dialogueX, radioConst.dialogueY, "radioBox", this.text);
     this.clock = new Clock(this.scene, 0, 0, "clock", "manecilla");
     this.clock.visible = false;
     this.clock.start(this.setNotActive.bind(this), radioConst.dialogueTime);

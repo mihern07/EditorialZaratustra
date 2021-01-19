@@ -403,6 +403,7 @@ export const alarmConst = {
 export const dialogueConst = {
     offsetX: -250,
     offsetY: -40,
+    radioOffsetY: -65,
 
     scale: .4
 }
@@ -440,7 +441,7 @@ export const postItConst = {
     scale: .8
 }
 export const ruleConst = {
-    offsetX: -225,
+    offsetX: 75,
     offsetY: -245,
     offsetYAcum: 25,
     noticiaOffsetY: -115,

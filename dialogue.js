@@ -4,8 +4,10 @@ export default class Dialogue extends Phaser.GameObjects.Sprite {
         super(scene, x, y, sprite);
         scene.add.existing(this);
         this.setScale(dialogueConst.scale);
-
-        this.texto = scene.add.text(x + dialogueConst.offsetX, y + dialogueConst.offsetY, texto, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3); //Añadimos texto.
+        if (sprite == "box")
+            this.texto = scene.add.text(x + dialogueConst.offsetX, y + dialogueConst.offsetY, texto, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3); //Añadimos texto.
+        else
+            this.texto = scene.add.text(x + dialogueConst.offsetX, y + dialogueConst.radioOffsetY, texto, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.texto.setFontSize(17);
     }
 
@@ -18,7 +20,7 @@ export default class Dialogue extends Phaser.GameObjects.Sprite {
         this.texto.visible = isVisible;
     }
 
-    destroyText(){
+    destroyText() {
         this.texto.destroy();
     }
 }
