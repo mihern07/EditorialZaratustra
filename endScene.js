@@ -1,5 +1,4 @@
 import { storyIntro} from "./constants.js";
-import CreditsScene from "./creditsScene.js";
 
 export default class EndScene extends Phaser.Scene{
     constructor() {
@@ -11,6 +10,8 @@ export default class EndScene extends Phaser.Scene{
 		this.load.text("end2", "dialogue/spyEnding.txt");
         this.load.image("street", "sprites/street.jpg");
         this.load.image("fondo", "sprites/negro_semitransparente.png");
+        this.load.image("buttonNotPressed", "sprites/buttonNotPressed.png");
+
     }
 
     create(){
@@ -20,12 +21,12 @@ export default class EndScene extends Phaser.Scene{
         this.fondo = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "fondo");
 		this.fondo.setScale(storyIntro.backgroundScaleX, storyIntro.backgroundScaleY);
 		
-		this.button1 = this.add.sprite(300,700,"rules").setInteractive();
-		this.button1.setScale(.5);
+		this.button1 = this.add.sprite(250,700,"buttonNotPressed").setInteractive();
+		this.button1.setScale(1.5);
 		this.button1.visible=false;
 
-		this.button2 = this.add.sprite(900,700,"pen").setInteractive();
-		this.button2.setScale(.5);
+		this.button2 = this.add.sprite(850,700,"buttonNotPressed").setInteractive();
+		this.button2.setScale(1.5);
 		this.button2.visible=false;
 
 		this.buttonpressed=false;
