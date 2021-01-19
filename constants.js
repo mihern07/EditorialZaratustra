@@ -484,6 +484,26 @@ export const storyIntro = {
     textPosY: 350
 }
 
+export const endConst = {
+    backgroundPosX: 550,
+    backgroundPosY: 400,
+    backgroundScaleX: 0.8,
+    backgroundScaleY: 0.7,
+    textScale: 26,
+    textPosX: 200,
+    textPosY: 350,
+
+    button1PosX: 250,
+    button2PosX: 850,
+    buttonPosY: 700,
+
+    buttonText1PosX: 150,
+    buttonText2PosX: 790,
+    buttonTextPosY: 670,
+
+    buttonTextSize: 50,
+}
+
 export const pauseConst = {
     volumePos: 10,
     middlePos: 2,

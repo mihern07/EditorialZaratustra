@@ -1,4 +1,4 @@
-import { storyIntro} from "./constants.js";
+import { endConst} from "./constants.js";
 
 export default class EndScene extends Phaser.Scene{
     constructor() {
@@ -15,19 +15,27 @@ export default class EndScene extends Phaser.Scene{
     }
 
     create(){
-        this.background = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "street");
+        this.background = this.add.sprite(endConst.backgroundPosX, endConst.backgroundPosY, "street");
         this.background.setInteractive();
         
-        this.fondo = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "fondo");
-		this.fondo.setScale(storyIntro.backgroundScaleX, storyIntro.backgroundScaleY);
+        this.fondo = this.add.sprite(endConst.backgroundPosX, endConst.backgroundPosY, "fondo");
+		this.fondo.setScale(endConst.backgroundScaleX, endConst.backgroundScaleY);
 		
-		this.button1 = this.add.sprite(250,700,"buttonNotPressed").setInteractive();
+		this.button1 = this.add.sprite(endConst.button1PosX,endConst.buttonPosY,"buttonNotPressed").setInteractive();
 		this.button1.setScale(1.5);
 		this.button1.visible=false;
 
-		this.button2 = this.add.sprite(850,700,"buttonNotPressed").setInteractive();
+		this.button2 = this.add.sprite(endConst.button2PosX,endConst.buttonPosY,"buttonNotPressed").setInteractive();
 		this.button2.setScale(1.5);
-		this.button2.visible=false;
+        this.button2.visible=false;
+        
+        this.buttonText1 = this.add.text(endConst.buttonText1PosX, endConst.buttonTextPosY, "No Espiar", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
+        this.buttonText1.setFontSize(endConst.buttonTextSize);
+        this.buttonText1.visible=false;
+
+        this.buttonText2 = this.add.text(endConst.buttonText2PosX, endConst.buttonTextPosY, "Espiar", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
+        this.buttonText2.setFontSize(endConst.buttonTextSize);
+        this.buttonText2.visible=false;
 
 		this.buttonpressed=false;
         
@@ -40,8 +48,8 @@ export default class EndScene extends Phaser.Scene{
         this.i = this.i + 3;
         this.j = this.j + 3;
 
-        this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
-        
+        this.showText = this.add.text(endConst.textPosX, endConst.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(endConst.textScale);
+
         this.background.on('pointerdown', pointer => {
             if (pointer.leftButtonDown()) {
                 this.text = this.dialogoAPartir.slice(this.i,this.j);
@@ -52,11 +60,13 @@ export default class EndScene extends Phaser.Scene{
                     {
                         this.button1.visible=true;
                         this.button2.visible=true;
+                        this.buttonText1.visible=true;
+                        this.buttonText2.visible=true;
                     }
                 }
                 else{
 					this.showText.destroy();
-                    this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
+                    this.showText = this.add.text(endConst.textPosX, endConst.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(endConst.textScale);
                     this.i = this.i + 3;
                     this.j = this.j + 3;
                 }
@@ -96,7 +106,7 @@ export default class EndScene extends Phaser.Scene{
 
         this.text = this.dialogoAPartir.slice(this.i,this.j);
         this.showText.destroy();
-        this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
+        this.showText = this.add.text(endConst.textPosX, endConst.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(endConst.textScale);
         this.i = this.i + 3;
         this.j = this.j + 3;
     }
@@ -105,5 +115,7 @@ export default class EndScene extends Phaser.Scene{
     {
         this.button1.visible = !this.button1.visible;
         this.button2.visible = !this.button2.visible;
+        this.buttonText1.visible = !this.buttonText1.visible;
+        this.buttonText2.visible = !this.buttonText2.visible;
     }
 }
