@@ -87,7 +87,7 @@ export default class Game extends Phaser.Scene {
       this.radioClock = new Clock(this, 0, 0, "clock", "manecilla");
       this.radioClock.visible = false;
       this.radioActivationTime = this.getRndInteger(sceneConst.offSetBtwRadio, sceneConst.timeSceneEnds / 2);
-      this.radioClock.start(this.activateRadio.bind(this), this.radioActivationTime);
+      
     }
 
     // this.Intro();
@@ -254,6 +254,9 @@ export default class Game extends Phaser.Scene {
   bossFinished() {
     if (this.dataM.clock) {
       this.clock.start(this.handleTimeFinished.bind(this), sceneConst.timeSceneEnds);
+    }
+    if (this.dataM.radio){
+      this.radioClock.start(this.activateRadio.bind(this), this.radioActivationTime);
     }
     this.bell.startWork();
   }
