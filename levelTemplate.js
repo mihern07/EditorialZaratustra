@@ -86,7 +86,7 @@ export default class Game extends Phaser.Scene {
       this.radio = new Radio(this, sceneConst.radioPosX, sceneConst.radioPosY, "radio", this.events, this.dataM.bookInfo, this.dataM.noticiaInfo);
       this.radioClock = new Clock(this, 0, 0, "clock", "manecilla");
       this.radioClock.visible = false;
-      this.radioActivationTime = this.getRndInteger(sceneConst.offSetBtwRadio, sceneConst.timeSceneEnds / 30);
+      this.radioActivationTime = this.getRndInteger(sceneConst.offSetBtwRadio, sceneConst.timeSceneEnds / 2);
       
     }
 
