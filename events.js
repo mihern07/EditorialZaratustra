@@ -13,7 +13,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.scene = scene;
 
 
-        this.dialogosEvento = ["ninio", "tendencias", "correos", "mujerDelJefe", "sobornador", "vagabundo"];
+        this.dialogosEvento = ["ninio", "tendencias", "correos", "mujerDelJefe", "sobornador", "vagabundo", "mujerDelJefeMal", "correosMal"];
         this.dialogosLibro = ["dialogoBase", "dialogoBaseAmigable", "dialogoBaseMalEducado", "dialogoBasePijo", "dialogoBaseResponsable", "dialogoBaseTimido"];
         this.dialogosNoticias = ["noticiasBase", "noticiasAmigable", "noticiasMalEducado", "noticiasPijo", "noticiasResponsable", "noticiasTimido"];
 
@@ -101,7 +101,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 break;
             case this.charaTypes.correosFalso:
                 //Correos falso
-                let dialogoCorreosFalso = this.splitDialogue(this.dialogosEvento[2]);
+                let dialogoCorreosFalso = this.splitDialogue(this.dialogosEvento[7]);
                 this.chara = new Personaje(this.scene, this.x, this.y, false, "cartero", dialogoCorreosFalso, this.dialogueSprite, this.documentSprite);
                 break;
             case this.charaTypes.mujerDelJefe:
@@ -111,7 +111,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 break;
             case this.charaTypes.mujerDelJefeFalsa:
                 //Mujer del jefe falsa
-                let dialogueMujerDelJefeFalsa = this.splitDialogue(this.dialogosEvento[3]);
+                let dialogueMujerDelJefeFalsa = this.splitDialogue(this.dialogosEvento[6]);
                 this.chara = new Personaje(this.scene, this.x, this.y, false, "bossWife", dialogueMujerDelJefeFalsa, this.dialogueSprite, this.documentSprite);
                 break;
             case this.charaTypes.tendencias:
