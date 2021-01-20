@@ -106,6 +106,8 @@ export default class Game extends Phaser.Scene {
     this.ink4 = this.sound.add("ink4");
     this.ink5 = this.sound.add("ink5");
 
+    this.sonidoRadio = this.sound.add("sonidoRadio");
+
     this.incorrectSound = this.sound.add("incorrectSound");
 
     this.inkPlayed=false;
@@ -257,6 +259,7 @@ export default class Game extends Phaser.Scene {
     }
     if (this.dataM.radio){
       this.radioClock.start(this.activateRadio.bind(this), this.radioActivationTime);
+      this.sonidoRadio.play();
     }
     this.bell.startWork();
   }
