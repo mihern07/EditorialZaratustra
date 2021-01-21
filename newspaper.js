@@ -10,7 +10,6 @@ export default class Newspaper extends Draggable {
 
         this.visible = true;
 
-
         this.setScale(newsConst.scale);
         this.setDepth(newsConst.depth);
 
@@ -23,10 +22,12 @@ export default class Newspaper extends Draggable {
         this.bigNews.y = this.scene.game.config.height / 2;
         this.bigNews.setDepth(newsConst.openedDepth);
 
+        //Fecha de noticia
         this.day = day;
         this.month = month;
         this.year = year;
         this.info = [scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.firstOffsetY, this.day + "/" + this.month + "/" + this.year, { fontFamily: 'Yung Seon' }).setStroke('#000000', 4),
+        //Categoría
         scene.add.text(this.x + newsConst.offsetX, this.y + newsConst.secondOffsetY, news, { fontFamily: 'Yung Seon' }).setStroke('#000000', 4).setFontSize(20)];
 
         for (let i = 0; i < this.info.length; i++) {
@@ -34,6 +35,7 @@ export default class Newspaper extends Draggable {
             this.info[i].setDepth(newsConst.openedDepth);
         }
 
+        //Cambios de sprite
         this.on("pointerdown", pointer => {
             this.switchSprite(pointer);
         })
@@ -43,6 +45,7 @@ export default class Newspaper extends Draggable {
         })
     }
 
+    //Cambio de sprite
     switchSprite(pointer) {
         if (pointer.rightButtonDown()) {
             this.visible = !this.visible;

@@ -23,12 +23,11 @@ export default class LevelTemplate extends Phaser.Scene {
 
     this.sceneKey = this.scene.key;
     console.log("Creado nivel: " + this.sceneKey);
-    //GLOBAL
-    //this.input.mouse.disableContextMenu(); //No permite click derecho en el juego.
 
     //FONDO
     this.bg = this.add.sprite(sceneConst.bgPosX, sceneConst.bgPosY, "background") // Los NPC's solo se ven por encima del bg
-    this.bg.setDepth(-2); //MOVER A FONDO Para que el fondo se dibuje detrás del todo
+    this.bg.setDepth(-2); //Mover a fondo para se dibuje detrás
+
     //CLOCK
     if (this.dataM.clock) {
       this.clock = new Clock(this, sceneConst.clockPosX, sceneConst.clockPosY, "clock", "manecilla"); //Inicializa reloj
@@ -45,8 +44,6 @@ export default class LevelTemplate extends Phaser.Scene {
       this.board = new Board(this, sceneConst.boardPosX, sceneConst.boardPosY, sceneConst.boardNumPostIts, "board")
 
     //TINTEROS
-
-    //console.log(sceneConst.greenInkwellPosX + " " + sceneConst.inkwellPosY);
     this.tinteroVerde = new Inkwell(this, sceneConst.greenInkwellPosX, sceneConst.inkwellPosY, "tinteroV"); //Inicializa tintero verde
 
     this.tinteroRojo = new Inkwell(this, sceneConst.redInkwellPosX, sceneConst.inkwellPosY, "tinteroR"); //Inicializa tintero rojo
@@ -60,8 +57,7 @@ export default class LevelTemplate extends Phaser.Scene {
     //PLUMA
     this.pen = new Pen(this, sceneConst.penPosX, sceneConst.penPosY, "pen");
 
-    
-            
+    //EVENTS  para gestionar los personajes
     this.events = new Events(this, sceneConst.eventsPosX, sceneConst.eventsPosY, "character", "box", "book", "book2", "document", this.dataM.bookInfo, this.dataM.noticiaInfo,
       this.dataM.order, this.gameManager, this.dataM.day, this.dataM.month, this.dataM.year);
 
@@ -87,11 +83,10 @@ export default class LevelTemplate extends Phaser.Scene {
       this.radioClock = new Clock(this, 0, 0, "clock", "manecilla");
       this.radioClock.visible = false;
       this.radioActivationTime = this.getRndInteger(sceneConst.offSetBtwRadio, sceneConst.timeSceneEnds / 2);
-      
+
     }
 
-    // this.Intro();
-
+    //Adición y control de sonidos
     this.music = this.sound.add("music"); //Música manejable
     this.music.play();
     this.isPlaying = true;
@@ -110,30 +105,33 @@ export default class LevelTemplate extends Phaser.Scene {
 
     this.incorrectSound = this.sound.add("incorrectSound");
 
-    this.inkPlayed=false;
+    this.inkPlayed = false;
 
-    this.boss.enterChar(); //Entrada el Boss
+    this.boss.enterChar(); //Entrada del Boss
 
+    //Input por teclado
     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     this.keyReset = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
   }
 
+  //Activa el efecto de la radio
   activateRadio() {
     this.radio.setActive(this.events.getBookMalRadio(), this.events.getNoticiaMalRadio());
   }
 
+  //Cuando acaba el tiempo del clock se gestiona si se gana o se pierde
   handleTimeFinished() {
     this.music.stop();
     this.scene.sleep();
     if (this.gameManager.isCleared())
-      this.scene.run('victoryScene',{gameManager: this.gameManager, levelManager: this.levelManager})
+      this.scene.run('victoryScene', { gameManager: this.gameManager, levelManager: this.levelManager })
     else
-      this.scene.run('gameOverScene', {gameManager: this.gameManager, levelManager: this.levelManager});
+      this.scene.run('gameOverScene', { gameManager: this.gameManager, levelManager: this.levelManager });
   }
 
   update(time, delta) {
     if (!this.gameManager.isGameOver()) { // Comprueba si no se han recibido los strikes minimos
-      if (this.keyEsc.isDown) {
+      if (this.keyEsc.isDown) { //Menú de pausa
         this.keyEsc.reset();
         this.scene.pause();
         this.scene.add('pause', PauseMenu, false, {
@@ -146,7 +144,7 @@ export default class LevelTemplate extends Phaser.Scene {
         this.scene.run('pause');
       }
 
-      if (this.keyReset.isDown) {
+      if (this.keyReset.isDown) { //Avanza nivel
         this.keyReset.reset();
         this.levelManager.nextLevel();
         this.music.stop();
@@ -165,8 +163,6 @@ export default class LevelTemplate extends Phaser.Scene {
         this.pen.setGreen();
       }
 
-      // this.pen.changeColor();
-
       this.pen.on("pointerup", pointer => {
         if (this.pen.isRed() &&
           !this.pen.hasSigned &&
@@ -182,7 +178,7 @@ export default class LevelTemplate extends Phaser.Scene {
           }
           this.pen.setNormal();
         }
-        else if (this.pen.isGreen() &&
+        else if (this.pen.isGreen() && //Overlap Documento Pluma Verde
           !this.pen.hasSigned &&
           this.physics.overlap(this.pen, this.events.chara.document)) {
 
@@ -196,40 +192,39 @@ export default class LevelTemplate extends Phaser.Scene {
     else {
       this.music.stop();
       this.scene.sleep();
-      this.scene.run('gameOverScene', {gameManager: this.gameManager, levelManager: this.levelManager});
+      this.scene.run('gameOverScene', { gameManager: this.gameManager, levelManager: this.levelManager });
     }
   }
 
-  chooseInkSound()
-  {
-    this.value = this.getRndInteger(0,4);
-    switch(this.value) //PELO DEL CHARACTER
-    {
-        case 0:
-          this.ink1.play();
+  //Selección entre sonidos de tinta
+  chooseInkSound() {
+    this.value = this.getRndInteger(0, 4);
+    switch (this.value) {
+      case 0:
+        this.ink1.play();
         break;
-        case 1:
-          this.ink2.play();
+      case 1:
+        this.ink2.play();
         break;
-        case 2:
-          this.ink3.play();
+      case 2:
+        this.ink3.play();
         break;
-        case 3:
-          this.ink4.play();
+      case 3:
+        this.ink4.play();
         break;
-        case 4:
-          this.ink5.play();
+      case 4:
+        this.ink5.play();
         break;
     }
-    this.inkPlayed=true;
+    this.inkPlayed = true;
   }
 
-  //
+  //Comienzan los timers del nivel al irse el jefe de la escena
   bossFinished() {
     if (this.dataM.clock) {
       this.clock.start(this.handleTimeFinished.bind(this), sceneConst.timeSceneEnds);
     }
-    if (this.dataM.radio){
+    if (this.dataM.radio) {
       this.radioClock.start(this.activateRadio.bind(this), this.radioActivationTime);
       this.sonidoRadio.play();
     }
@@ -240,8 +235,9 @@ export default class LevelTemplate extends Phaser.Scene {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  strikeShake(){
-    this.cameras.main.flash(500, 155,0,0,false);
+  //Sacudida de pantalla
+  strikeShake() {
+    this.cameras.main.flash(500, 155, 0, 0, false);
     this.cameras.main.shake(500, 0.001);
     this.incorrectSound.play();
   }

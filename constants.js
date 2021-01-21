@@ -442,6 +442,11 @@ export const postItConst = {
     offsetX: -11,
     offsetY: -22,
 
+    limitX: 1040,
+    limitY: 400,
+    firstLimitY: 85,
+    firstLimitX: 890,
+
     scale: .8
 }
 export const ruleConst = {

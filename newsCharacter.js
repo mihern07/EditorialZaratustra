@@ -9,13 +9,13 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
         super(scene, x, y, sprite);
 
         this.scene = scene;
-        this.firstPosX = this.x; //Creamos la variable firstPosX (guardar la posicion inicial)
+        this.firstPosX = this.x; //Guarda la posicion inicial
         this.setScale(characterConst.scale);
         this.scene.add.existing(this);
         this.npc = this.scene.sound.add("npcSound");
         this.setScale(characterConst.clothesScale);
         this.y = characterConst.clothesY;
-        this.randoms = true;
+        this.randoms = true; //Los Personajes de noticia siempre son aleatorios
 
         //Visual de movimiento
         this.defaultY = y;
@@ -43,11 +43,6 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
         this.hair.body.allowGravity = false;
         this.hair.body.setVelocityX(0);
 
-
-        //INI: estado inicial
-        //SHOW: en el mostrador con el libro
-        //GOING: desde el spawn al mostrador
-        //ANSWER: al volver, izq. o dcha.
         this.States = { INI: 0, GOING: 1, SHOW: 2, ANSWER: 3, WAIT: 4 };
         this.currentS = this.States.INI;
 
@@ -66,7 +61,7 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
 
     chooseSpriteHair() {
         this.value = this.getRndInteger(0, 7);
-        switch (this.value) //PELO DEL CHARACTER
+        switch (this.value) //Pelo del personaje
         {
             case 0:
                 this.sprite = "hair1";
@@ -98,7 +93,7 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
 
     chooseSpriteHead() {
         this.value = this.getRndInteger(0, 4);
-        switch (this.value) //PELO DEL CHARACTER
+        switch (this.value) //Cabeza del personaje
         {
             case 0:
                 this.sprite = "head1";
@@ -197,17 +192,20 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
         }
     }
 
+    //Principio del dialogo
     showFirstDialogue() {
         this.dialogue.setText(this.texto.slice(3, 6))
         this.npc.play();
     }
 
+    //Siguiente dialogo
     showSecondDialogue() {
         this.dialogue.setText(this.texto.slice(6, 9))
         this.npc.play();
     }
 
-    createDocument() { //Inicializa el documento del personaje 
+    //Inicializa el documento del personaje 
+    createDocument() { 
         this.hasdocument = true;
     }
 
@@ -247,7 +245,7 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
             this.dialogueChange();
             this.isGone = true;
         }
-        else if (this.currentS === this.States.GOING || this.currentS === this.States.ANSWER) {
+        else if (this.currentS === this.States.GOING || this.currentS === this.States.ANSWER) { //Movimiento del personaje
             this.y = characterConst.clothesY + Math.sin(2 * Math.PI * (this.xnow / 50)) * 6;
             this.head.y = characterConst.headY + Math.sin(2 * Math.PI * (this.xnow / 50)) * 4;
             this.hair.y = characterConst.hairY + Math.sin(2 * Math.PI * (this.xnow / 50)) * 4;

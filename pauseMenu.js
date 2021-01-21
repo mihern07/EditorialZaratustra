@@ -21,6 +21,7 @@ class PauseMenu extends Phaser.Scene {
         this.menu.setInteractive();
         this.menu.setDepth(pauseConst.depth);
 
+        //Imágenes de los botones
         this.volume = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'volume');
         this.volumeBold = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'volume2');
         this.noVolume = this.add.image(this.game.config.width / pauseConst.volumePos, this.game.config.height / pauseConst.volumePos, 'noVolume');
@@ -60,6 +61,7 @@ class PauseMenu extends Phaser.Scene {
 
         this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
+        //Botones highliteados
         this.volume.on('pointerover', pointer => {
             this.volumeBold.visible = true;
         });
@@ -95,6 +97,7 @@ class PauseMenu extends Phaser.Scene {
 
         this.events.on('wake', function () { console.log("WAKEPAUSE") });
 
+        //Continuar
         this.continueBold.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
                 this.scene.run(this.originSceneKey);
@@ -102,6 +105,7 @@ class PauseMenu extends Phaser.Scene {
             }
         })
 
+        //Volver al menú
         this.exitBold.on("pointerdown", pointer => {
             this.exitBold.visible = true;
             if (pointer.leftButtonDown()) {
@@ -112,6 +116,7 @@ class PauseMenu extends Phaser.Scene {
             }
         })
 
+        //Quitar música
         this.volumeBold.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
                 this.noVolume.visible = true;
@@ -123,6 +128,7 @@ class PauseMenu extends Phaser.Scene {
             }
         })
 
+        //Poner música
         this.noVolumeBold.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {
                 this.noVolume.visible = false;
@@ -136,6 +142,7 @@ class PauseMenu extends Phaser.Scene {
     }
 
     update() {
+        //Reanuda la escena al presionar esc
         if (this.keyEsc.isDown) {
             this.keyEsc.reset();
             this.scene.run(this.originSceneKey);

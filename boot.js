@@ -25,20 +25,20 @@ export default class Boot extends Phaser.Scene {
     this.load.image("fondo", "sprites/negro_semitransparente.png");
 
     //Nivel
-    this.load.image("background", "sprites/backgroundSprite.png") //Fondo = background
-    this.load.image("foreground", "sprites/foregroundSprite.png") //Mesa = foreground
-    this.load.image("clock", "sprites/clockPrototypeSprite.png"); //Reloj = clock
-    this.load.image("manecilla", "sprites/manecilla.png"); //Manecilla = manecilla
-    this.load.image("box", "sprites/dialogueBoxv2.png"); //Bocadillo = box
+    this.load.image("background", "sprites/backgroundSprite.png") 
+    this.load.image("foreground", "sprites/foregroundSprite.png") 
+    this.load.image("clock", "sprites/clockPrototypeSprite.png"); 
+    this.load.image("manecilla", "sprites/manecilla.png");
+    this.load.image("box", "sprites/dialogueBoxv2.png"); 
     this.load.image("radioBox", "sprites/dialogueBoxRadio.png");
-    this.load.image("deskBellPressed", "sprites/timbrePulsadoSprite.png"); //timbre pulsado = deskBellPressed
-    this.load.image("deskBellSP", "sprites/timbreSprite.png"); //timbre = deskBell
-    this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
-    this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
+    this.load.image("deskBellPressed", "sprites/timbrePulsadoSprite.png");
+    this.load.image("deskBellSP", "sprites/timbreSprite.png");
+    this.load.image("tinteroV", "sprites/tintero.png");
+    this.load.image("tinteroR", "sprites/tinteroRojo.png");
     this.load.image("document", "sprites/documentoSprite.png");
     this.load.image("pen", "sprites/penSprite.png");
-    this.load.image("board", "sprites/boardSprite.png"); // Board
-    this.load.image("postIt", "sprites/postItBlancoSprite.png"); // PostIt
+    this.load.image("board", "sprites/boardSprite.png");
+    this.load.image("postIt", "sprites/postItBlancoSprite.png");
     this.load.image("paperParticle", "sprites/paperParticle.png");
     this.load.image("littleNewspaper", "sprites/littleNewspaper.png");
     this.load.image("bigNewspaper", "sprites/bigNewspaperRaw.png");
@@ -130,9 +130,10 @@ export default class Boot extends Phaser.Scene {
     this.load.image("romancePost", "sprites/postit_romance.png");
     this.load.image("suspensePost", "sprites/postit_suspense.png");
 
+    //Dialogos
     this.load.text("jefe", "dialogue/jefe.txt");
     this.load.text("ninio", "dialogue/ninioText.txt");
-    this.load.text("tendencias", "dialogue/personaje_tendencias.txt"); // XD
+    this.load.text("tendencias", "dialogue/personaje_tendencias.txt");
     this.load.text("correos", "dialogue/correosText.txt");
     this.load.text("correosMal", "dialogue/correosMalText.txt");
     this.load.text("mujerDelJefe", "dialogue/mujer_del_jefe.txt");

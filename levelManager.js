@@ -9,6 +9,7 @@ class LevelManager {
         this.started = false;
     }
 
+    //Primer nivel después de la intro
     firstLevel() {
         this.scene.scene.remove("storyIntro");
 
@@ -19,6 +20,7 @@ class LevelManager {
         }
     }
 
+    //Avanza al siguiente nivel
     nextLevel() {
         if (this.actualLevel < levelsConst.totalLevels) {
             //Borramos el actual
@@ -39,11 +41,12 @@ class LevelManager {
         }
     }
 
+    //Continuamos con el nivel actual
     resumeLevel() {
-        //Continuamos con el nivel actual
         this.scene.scene.run(levelsConst.keyLevel + this.actualLevel);
     }
 
+    //Reinicia el juego desde el principio
     restart() {
         if (this.scene.scene.get("level1") == null) {
             this.scene.scene.remove(levelsConst.keyLevel + this.actualLevel);
@@ -54,6 +57,7 @@ class LevelManager {
         }
     }
 
+    //Reinicia el nivel
     restartActualLevel() {
         this.scene.scene.remove(levelsConst.keyLevel + this.actualLevel);
         this.level = new levelTemplate(levelsConst.keyLevel + this.actualLevel, this, levelsConst.dataLevel[this.actualLevel - 1]);

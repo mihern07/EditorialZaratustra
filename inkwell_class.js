@@ -11,21 +11,6 @@ export default class Inkwell extends Phaser.GameObjects.Sprite {
 
     scene.add.existing(this);
 
-    this.setInteractive(); //Lo hacemos interactivo (puedes pulsarlo)
-    this.clicked = false; //Creamos variable booleana clicked.
     this.setScale(inkwellConst.scale);
-
-    //Cuando es pulsado dicho sprite...
-    this.on('pointerdown', pointer => {
-      if (pointer.isDown) {
-        //console.log("Botón seguridad pulsado");
-        this.clicked = true;
-      }
-    });
-
-    this.on('pointerup', pointer => {
-      //console.log("Botón seguridad pulsado");
-      this.clicked = false;
-    });
   }
 }
