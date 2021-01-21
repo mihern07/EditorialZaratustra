@@ -31,12 +31,12 @@ export default class Alarm extends Phaser.GameObjects.Sprite {
         this.changeSprite();
         console.log("Timbre pulsado");
         this.alarm.play();
-        this.bodyguard.EnterChar();
+        this.bodyguard.enterChar();
       }
     });
 
     this.Bell3.on('pointerup', pointer => {
-      this.SetItOff();
+      this.setItOff();
     });
   }
 
@@ -53,11 +53,11 @@ export default class Alarm extends Phaser.GameObjects.Sprite {
     if(this.event.chara.currentS===this.event.chara.States.INI || this.event.chara.currentS===this.event.chara.States.ANSWER)
     {
       this.isOff = true;
-      this.SetItOff();
+      this.setItOff();
     }
   }
 
-  SetItOff() {
+  setItOff() {
     this.visible = true;
     this.Bell2.visible = false;
     this.Bell3.visible = false;

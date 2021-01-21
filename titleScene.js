@@ -1,11 +1,11 @@
 import {titleConst} from "./constants.js";
-import levelManager from "./levelManager.js";
+import LevelManager from "./levelManager.js";
 
 class TitleScene extends Phaser.Scene {
 
 	constructor() {
 		super({key:'titleScene'});
-		this.levelManager = new levelManager(this);
+		this.levelManager = new LevelManager(this);
 	}
 
 	create() {

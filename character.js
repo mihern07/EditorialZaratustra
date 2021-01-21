@@ -131,7 +131,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
         return this.sprite;
     }
 
-    EnterChar() { // El personaje entre (puerta)
+    enterChar() { // El personaje entre (puerta)
         if (this.currentS === this.States.INI) {
             this.body.setVelocityX(-this.SPEED);
             if(this.randoms) 
@@ -140,11 +140,11 @@ export default class Character extends Phaser.GameObjects.Sprite {
                 this.hair.body.setVelocityX(-this.SPEED);
             }
             this.currentS = this.States.GOING;
-            this.CreateDocument();
+            this.createDocument();
         }
     }
 
-    StopChar() { // El personaje pare
+    stopChar() { // El personaje pare
         if (this.currentS === this.States.GOING) {
             this.body.setVelocityX(0);
             if(this.randoms) 
@@ -158,16 +158,16 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.dialogue.setVisible(true);
             this.npc.play();
 
-            this.ShowBook();
+            this.showBook();
 
             this.document = new Document(this.scene, characterConst.documentPosX, characterConst.documentPosY, this.docSprite);
 
             this.firstClock = new Clock(this.scene, 0, 0, this.dialogueSprite, this.dialogueSprite);
-            this.firstClock.start(this.ShowFirstDialogue.bind(this), '7000');
+            this.firstClock.start(this.showFirstDialogue.bind(this), '7000');
             this.firstClock.setInvisible();
 
             this.secondClock = new Clock(this.scene, 0, 0, this.dialogueSprite, this.dialogueSprite);
-            this.secondClock.start(this.ShowSecondDialogue.bind(this), '14000');
+            this.secondClock.start(this.showSecondDialogue.bind(this), '14000');
             this.secondClock.setInvisible();
         }
         else if (this.currentS === this.States.ANSWER) {
@@ -182,7 +182,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
         }
     }
 
-    AcceptChar() { // El personaje entre (aceptado)
+    acceptChar() { // El personaje entre (aceptado)
         if (this.currentS === this.States.WAIT) {
             this.body.setVelocityX(-this.SPEED);
             if(this.randoms) 
@@ -196,12 +196,12 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.dialogue.setText(this.texto.slice(12, 15))
             this.npc.play();
 
-            this.RetrieveBook();
-            this.RetrieveDocument();
+            this.retrieveBook();
+            this.retrieveDocument();
         }
     }
 
-    DenyChar() // El personaje salga (denegado)
+    denyChar() // El personaje salga (denegado)
     {
         if (this.currentS === this.States.WAIT) {
             this.body.setVelocityX(this.SPEED);
@@ -218,40 +218,40 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.dialogue.setText(this.texto.slice(9, 12))
             this.npc.play();
 
-            this.RetrieveBook();
-            this.RetrieveDocument();
+            this.retrieveBook();
+            this.retrieveDocument();
         }
     }
 
-    ShowFirstDialogue() {
+    showFirstDialogue() {
         this.dialogue.setText(this.texto.slice(3, 6))
         this.npc.play();
     }
 
-    ShowSecondDialogue() {
+    showSecondDialogue() {
         this.dialogue.setText(this.texto.slice(6, 9))
         this.npc.play();
     }
 
-    CreateDocument() { //Inicializa el documento del personaje 
+    createDocument() { //Inicializa el documento del personaje 
         this.hasdocument = true;
     }
 
-    RetrieveBook() { //
+    retrieveBook() { //
         if (this.hasBook) {
             this.book.cerrarSprites();
             this.book.resetPos(); //Devuelve posición inicial al book
         }
     }
 
-    RetrieveDocument() { //
+    retrieveDocument() { //
         if (this.hasdocument) {
             this.document.visible = false;
             this.document.resetPos(); //Devuelve posición inicial al book
         }
     }
 
-    ShowBook() {
+    showBook() {
         if (this.hasBook) {
             this.book.visible = true;        
         }
@@ -265,16 +265,16 @@ export default class Character extends Phaser.GameObjects.Sprite {
     preUpdate() {
 
         if (this.currentS === this.States.GOING && this.x < characterConst.midPos) { //Cuando llegue al medio, se detiene el personaje
-            this.StopChar();
+            this.stopChar();
 
         }
         else if (this.currentS === this.States.ANSWER && this.x < characterConst.outPos) { //Cuando salga del campo de vision, por la izquierda, se le reinicia
-            this.StopChar();
+            this.stopChar();
             this.dialogueChange();
             this.isGone = true;
         }
         else if (this.currentS === this.States.ANSWER && this.x > this.firstPosX) { //Cuando salga del campo de vision, por la derecha, se le reinicia
-            this.StopChar();
+            this.stopChar();
             this.dialogueChange();
             this.isGone = true;
         }

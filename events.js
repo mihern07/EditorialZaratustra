@@ -228,25 +228,25 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
     charaShowBook() {
         if (this.chara.currentS === this.chara.States.SHOW) {
-            this.chara.ShowBook();
+            this.chara.showBook();
             //this.chara.ShowDocument();
         }
     }
 
     // personaje entra
-    EnterChar() {
-        this.chara.EnterChar();
+    enterChar() {
+        this.chara.enterChar();
     }
 
     // personaje es denegado
-    DenyChar() {
-        this.chara.DenyChar();
+    denyChar() {
+        this.chara.denyChar();
         this.charaOutcome(false);
     }
 
     // personaje es aceptado
-    AcceptChar() {
-        this.chara.AcceptChar();
+    acceptChar() {
+        this.chara.acceptChar();
         this.charaOutcome(true);
     }
 
@@ -357,58 +357,58 @@ export default class Events extends Phaser.GameObjects.GameObject {
             case this.charaTypes.ninio:
                 //Niño
                 if (accepted) {
-                    this.gameManager.AddSubstractMoney(eventsConst.childMoneyAmount);
-                    if (this.gameManager.Strike(eventsConst.childProbability))
+                    this.gameManager.addSubstractMoney(eventsConst.childMoneyAmount);
+                    if (this.gameManager.strike(eventsConst.childProbability))
                         this.scene.strikeShake();
                 }
                 break;
             case this.charaTypes.sobornador:
                 //Sobornador
                 if (accepted) {
-                    this.gameManager.AddSubstractMoney(eventsConst.briberyMoneyAmount);
-                    if (this.gameManager.Strike(eventsConst.briberyProbability))
+                    this.gameManager.addSubstractMoney(eventsConst.briberyMoneyAmount);
+                    if (this.gameManager.strike(eventsConst.briberyProbability))
                         this.scene.strikeShake();
                 }
                 break;
             case this.charaTypes.vagabundo:
                 //Vagabundo
                 if (accepted) {
-                    this.gameManager.AddSubstractMoney(eventsConst.homelessMoneyAmount);
-                    if (this.gameManager.Strike(eventsConst.homelessProbability))
+                    this.gameManager.addSubstractMoney(eventsConst.homelessMoneyAmount);
+                    if (this.gameManager.strike(eventsConst.homelessProbability))
                         this.scene.strikeShake();
                 }
                 break;
             case this.charaTypes.correos:
                 //Correos
                 if (accepted) {
-                    this.gameManager.AddSubstractMoney(eventsConst.deliveryMoneyAmount);
+                    this.gameManager.addSubstractMoney(eventsConst.deliveryMoneyAmount);
                 }
                 else {
-                    if (this.gameManager.Strike(eventsConst.deliveryProbability))
+                    if (this.gameManager.strike(eventsConst.deliveryProbability))
                         this.scene.strikeShake();
                 }
                 break;
             case this.charaTypes.correosFalso:
                 //Correos falso
                 if (accepted) {
-                    if (this.gameManager.Strike(eventsConst.deliveryProbability))
+                    if (this.gameManager.strike(eventsConst.deliveryProbability))
                         this.scene.strikeShake();
                 }
                 break;
             case this.charaTypes.mujerDelJefe:
                 //Mujer del jefe
                 if (accepted) {
-                    this.gameManager.AddSubstractMoney(eventsConst.wifeMoneyAmount);
+                    this.gameManager.addSubstractMoney(eventsConst.wifeMoneyAmount);
                 }
                 else {
-                    if (this.gameManager.Strike(eventsConst.wifeProbability))
+                    if (this.gameManager.strike(eventsConst.wifeProbability))
                         this.scene.strikeShake();
                 }
                 break;
             case this.charaTypes.mujerDelJefeFalsa:
                 //Mujer del jefe falsa
                 if (accepted) {
-                    if (this.gameManager.Strike(eventsConst.wifeProbability))
+                    if (this.gameManager.strike(eventsConst.wifeProbability))
                         this.scene.strikeShake();
                 }
                 break;
@@ -417,10 +417,10 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Personaje Correcto")
                 if (accepted) {
                     if (this.isBookBanned(this.chara.getCategory())) {
-                        this.gameManager.BookStrike();
+                        this.gameManager.bookStrike();
                         this.scene.strikeShake();
                     } else {
-                        this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
+                        this.gameManager.addSubstractMoney(eventsConst.moneyAmount);
                     }
                 }
                 break;
@@ -428,7 +428,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje Libro Incorrecto
                 console.log("Personaje Incorrecto")
                 if (accepted) {
-                    this.gameManager.BookStrike();
+                    this.gameManager.bookStrike();
                     this.scene.strikeShake();
                 }
                 break;
@@ -437,10 +437,10 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Noticia correcta");
                 if (accepted) {
                     if (this.isNoticiaBanned(this.chara.getCategory())) {
-                        this.gameManager.BookStrike();
+                        this.gameManager.bookStrike();
                         this.scene.strikeShake();
                     } else {
-                        this.gameManager.AddSubstractMoney(eventsConst.moneyAmount);
+                        this.gameManager.addSubstractMoney(eventsConst.moneyAmount);
                     }
                 }
                 break;
@@ -448,7 +448,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje noticia incorrecta
                 console.log("Noticia incorrecta");
                 if (accepted) {
-                    this.gameManager.BookStrike();
+                    this.gameManager.bookStrike();
                     this.scene.strikeShake();
                 }
                 break;

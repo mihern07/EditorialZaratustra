@@ -1,6 +1,6 @@
 import { pauseConst } from "./constants.js";
 
-class pauseMenu extends Phaser.Scene {
+class PauseMenu extends Phaser.Scene {
 
     constructor(data) {
         super({ key: 'pause' });
@@ -146,4 +146,4 @@ class pauseMenu extends Phaser.Scene {
 
 }
 
-export default pauseMenu;
+export default PauseMenu;

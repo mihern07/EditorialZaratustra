@@ -27,14 +27,14 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.currentS = this.States.INI;
     }
 
-    EnterChar() { // El personaje entre (puerta)
+    enterChar() { // El personaje entre (puerta)
         if (this.currentS === this.States.INI) {
             this.body.setVelocityX(-this.SPEED);
             this.currentS = this.States.GOING;
         }
     }
 
-    StopChar() { // El personaje pare
+    stopChar() { // El personaje pare
         this.body.setVelocityX(0);
         this.currentS = this.States.ANSWER;
     }
@@ -42,14 +42,14 @@ export default class Character extends Phaser.GameObjects.Sprite {
     preUpdate() {
 
         if (this.currentS === this.States.GOING && this.x < guardConst.midPos) { //Cuando llegue al medio, se detiene el personaje
-            this.StopChar();
+            this.stopChar();
             this.body.setVelocityX(this.SPEED);
-            this.event.DenyChar();
+            this.event.denyChar();
             //this.events.chara.DenyChar();
         }
 
         else if (this.currentS === this.States.ANSWER && this.x > this.firstPosX) { //Cuando salga del campo de vision, por la derecha, se le reinicia
-            this.StopChar();
+            this.stopChar();
             this.x = this.firstPosX;
             this.currentS = this.States.INI;
         }

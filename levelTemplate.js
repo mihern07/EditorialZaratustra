@@ -42,7 +42,7 @@ export default class Game extends Phaser.Scene {
 
     //BOARD(CORCHO)
     if (this.dataM.board)
-      this.Board = new Board(this, sceneConst.boardPosX, sceneConst.boardPosY, sceneConst.boardNumPostIts, "board")
+      this.board = new Board(this, sceneConst.boardPosX, sceneConst.boardPosY, sceneConst.boardNumPostIts, "board")
 
     //TINTEROS
 
@@ -112,7 +112,7 @@ export default class Game extends Phaser.Scene {
 
     this.inkPlayed=false;
 
-    this.boss.EnterChar(); //Entrada el Boss
+    this.boss.enterChar(); //Entrada el Boss
 
     this.keyEsc = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
     this.keyReset = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
@@ -163,12 +163,12 @@ export default class Game extends Phaser.Scene {
       this.events.update(); // No preUpdate porque no existe si hereda de GameObject
 
       if (this.physics.overlap(this.pen, this.tinteroRojo) && !this.pen.isRed()) { //Overlap Rojo
-        this.ChooseInkSound();
+        this.chooseInkSound();
         this.pen.setRed();
       }
 
       if (this.physics.overlap(this.pen, this.tinteroVerde) && !this.pen.isGreen()) { //Overlap Verde
-        this.ChooseInkSound();
+        this.chooseInkSound();
         this.pen.setGreen();
       }
 
@@ -181,7 +181,7 @@ export default class Game extends Phaser.Scene {
           this.signed.play();
 
           if (this.events.chara.randoms || this.getRndInteger(1, 100) < 15) { // 85% de que no se vaya si es un personaje especial
-            this.events.DenyChar();
+            this.events.denyChar();
           }
           else {
             // Dialogo que indica que no quiere irse
@@ -194,7 +194,7 @@ export default class Game extends Phaser.Scene {
           this.physics.overlap(this.pen, this.events.chara.document)) {
 
           this.signed.play();
-          this.events.AcceptChar();
+          this.events.acceptChar();
           this.pen.setNormal();
         }
       })
@@ -207,7 +207,7 @@ export default class Game extends Phaser.Scene {
     }
   }
 
-  ChooseInkSound()
+  chooseInkSound()
   {
     this.value = this.getRndInteger(0,4);
     switch(this.value) //PELO DEL CHARACTER

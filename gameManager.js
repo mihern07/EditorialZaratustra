@@ -11,7 +11,7 @@ export default class GameManager{
      * Añade o resta dinero
      * @param {*} quantity Cantidad a sumar (positiva) o negativa (restar)
      */
-    AddSubstractMoney(quantity){
+    addSubstractMoney(quantity){
         this.dinero += quantity;
     }
 
@@ -19,7 +19,7 @@ export default class GameManager{
      * Decide si el jugador recibe un strike dependiendo de una probabilidad
      * @param {*} probability Probabilidad de recibir un strike del 0 al 100
      */
-    Strike(probability){
+    strike(probability){
         this.numeroAleatorio = this.getRndInteger(1,100);
         if (this.numeroAleatorio <= probability){
             this.strikes++;
@@ -31,7 +31,7 @@ export default class GameManager{
     }
 
     //Comprueba si suficientes libros han sido fallados para recibir strike
-    BookStrike(){
+    bookStrike(){
         if (this.bookStrikeCont < 2){
             this.bookStrikeCont++;
         }

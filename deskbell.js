@@ -25,7 +25,7 @@ export default class DeskBell extends Phaser.GameObjects.Sprite {
         this.sounds.play();
 
         if (this.working) {
-          this.events.EnterChar();
+          this.events.enterChar();
         }
         this.changeSprites();
       }
@@ -39,7 +39,7 @@ export default class DeskBell extends Phaser.GameObjects.Sprite {
   }
   changeSprites() {
     this.Bell2.visible = !this.Bell2.visible;
-    this.visibhle = !this.visible;
+    this.visible = !this.visible;
   }
   startWork() {
     this.working = true;

@@ -1,7 +1,7 @@
 import levelTemplate from "./levelTemplate.js";
 import { levelsConst } from "./constants.js";
 
-class levelManager {
+class LevelManager {
 
 	constructor(scene) {
         this.actualLevel = 1;
@@ -63,4 +63,4 @@ class levelManager {
 	
 }
 
-export default levelManager;
+export default LevelManager;

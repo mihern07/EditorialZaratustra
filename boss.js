@@ -88,21 +88,21 @@ export default class Boss extends Phaser.GameObjects.Sprite {
                     if (this.contExtraDialogue > 0){
                         this.extraInfo();
                     }else{
-                        this.GoBack();
+                        this.goBack();
                     }
                 }
             }
         });
     }
 
-    EnterChar() { // El personaje entre (izq)
+    enterChar() { // El personaje entre (izq)
         if (this.currentS === this.States.INI) {
             this.body.setVelocityX(this.SPEED);
             this.currentS = this.States.GOING;
         }
     }
 
-    GoBack() {
+    goBack() {
         this.dialogue.setVisible(false);
         this.currentS = this.States.ANSWER;
         this.body.setVelocityX(-this.SPEED);
@@ -240,7 +240,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
             this.dialogue.setText("Jefe Fernando\nHoy no se permiten obras de ningún tamaño (por algún motivo)");
     }
 
-    StopChar() { // El personaje pare
+    stopChar() { // El personaje pare
         this.body.setVelocityX(0);
         this.currentS = this.States.WAIT;
     }
@@ -248,7 +248,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
     preUpdate() {
 
         if (this.currentS === this.States.GOING && this.x > bossConst.midPos) { //Cuando llegue al medio, se detiene el personaje
-            this.StopChar();
+            this.stopChar();
             //DIALOGO
             this.dialogue.setVisible(true);
         }
