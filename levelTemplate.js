@@ -12,7 +12,7 @@ import Boss from "./boss.js";
 import Radio from "./radio.js"
 import { sceneConst } from "./constants.js";
 
-export default class Game extends Phaser.Scene {
+export default class LevelTemplate extends Phaser.Scene {
 
   constructor(keyS, levelManager, data) {
     super(keyS);

@@ -17,12 +17,14 @@ export default class StoryIntro extends Phaser.Scene {
 
         this.i = 0;
         this.j = 4;
+        //Primer texto
         this.text = this.dialogoAPartir.slice(this.i, this.j);
         this.i = this.i + 4;
         this.j = this.j + 4;
 
         this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
 
+        //Avanza texto hasta llegar al final y empezar el primer nivel
         this.background.on('pointerdown', pointer => {
             if (pointer.leftButtonDown()) {
                 this.showText.destroy();

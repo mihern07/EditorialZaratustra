@@ -12,7 +12,6 @@ export default class RuleDoc extends Draggable {
 
         this.setScale(ruleConst.scale);
         this.setDepth(ruleConst.depth);
-        //Lo añade a la escena
 
         this.visible = false;
 
@@ -27,16 +26,18 @@ export default class RuleDoc extends Draggable {
         this.ruleDoc2.y = this.scene.game.config.height / 2;
         this.ruleDoc2.setDepth(ruleConst.openedDepth);
 
+        //Información a escribir sobre la logintud de páginas de los libros
         this.pagsInfo = []
 
 
-        // Añade la info sobre el numero de paginas
+        //Añade la info sobre el numero de paginas
         for (let i = 0; i < this.pags.length; i++) {
             this.pagsInfo.push(scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.offsetY + (i * ruleConst.offsetYAcum), this.selectPags(this.pags[i]), { fontFamily: 'Barlow Condensed', color: 0x5D3C09 }).setStroke('#5D3C09', 1))
             this.pagsInfo[i].visible = false;
             this.pagsInfo[i].setDepth(ruleConst.openedDepth);
         }
 
+        //Añade la info sobre las noticias
         for (let i = 0; i < this.noticias.length; i++) {
             if (this.noticias.length > 4 && i == 4)
                 this.noticiasInfo += "\n";
@@ -53,21 +54,24 @@ export default class RuleDoc extends Draggable {
                 this.noticiasInfo = noticias[i];
         }
         console.log(this.noticiasInfo);
-        this.noticiasText = scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.noticiaOffsetY, this.noticiasInfo, { fontFamily: 'Barlow Condensed', color: 0x5D3C09 }).setStroke('#5D3C09', 1);
+        
+        //Información a escribir sobre las noticias
+        this.noticiasText = scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.noticiaOffsetY, this.noticiasInfo, 
+            { fontFamily: 'Barlow Condensed', color: 0x5D3C09 }).setStroke('#5D3C09', 1);
+        
         this.noticiasText.visible = false;
         this.noticiasText.setDepth(ruleConst.openedDepth);
 
-        //Cuando es pulsado dicho sprite...
+        //Alternar entre abierto y cerrado
         this.on("pointerdown", pointer => {
-            //hacer algo.
             this.switchSprite(pointer);
         })
 
         this.ruleDoc2.on("pointerdown", pointer => {
-            //hacer algo.
             this.switchSprite(pointer);
         })
     }
+
     switchSprite(pointer) {
         if (pointer.rightButtonDown()) {
             this.pageSound.play();
@@ -79,6 +83,7 @@ export default class RuleDoc extends Draggable {
             }
         }
     }
+    
     selectPags(val) {
         switch (val) {
             case 0:

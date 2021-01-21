@@ -6,6 +6,7 @@ export default class VictoryScene extends Phaser.Scene {
     }
 
     init(data) {
+        //Info tomada del nivel actual
         this.gameManager = data.gameManager;
         this.levelManager = data.levelManager;
     }
@@ -18,17 +19,19 @@ export default class VictoryScene extends Phaser.Scene {
 
         this.congratulation = this.add.text(victoryConst.congratPosX, victoryConst.congratPosY, "¡Buen trabajo!", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.congratulation.setFontSize(victoryConst.congSize);
+        
         this.puntuacion = this.add.text(victoryConst.puntPosX, victoryConst.puntPosY, this.gameManager.dinero + "/" + this.gameManager.objetivo + " ptas. conseguidas", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
         this.puntuacion.setTint(victoryConst.puntTint);
         this.puntuacion.setFontSize(victoryConst.puntSize);
+        
         this.strikes = this.add.text(victoryConst.strikesPosX, victoryConst.strikesPosY, this.gameManager.strikes + "/" + this.gameManager.numMaxStrikes + " strikes recibidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
-
         this.strikes.setTint(victoryConst.strikeTint);
         this.strikes.setFontSize(victoryConst.strikeSize);
 
         this.button = this.add.sprite(victoryConst.buttonPosX, victoryConst.buttonPosY, "buttonNotPressed");
         this.button.setInteractive();
         this.button.setScale(victoryConst.buttonScale);
+
         this.buttonText = this.add.text(victoryConst.buttonTextPosX, victoryConst.buttonTextPosY, "Siguiente nivel", { fontFamily: 'Yeon Sung' });
         this.buttonText.setFontSize(victoryConst.buttonTextSize);
 

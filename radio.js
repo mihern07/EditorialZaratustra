@@ -10,19 +10,24 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     this.bookInfo = bookInfo;
     this.noticiaInfo = noticiaInfo;
     this.setScale(radioConst.scale);
+    
     scene.add.existing(this);
 
-
+    //Botón inactivo
     this.notActiveButton = scene.add.sprite(x + radioConst.buttonOffsetX, y + radioConst.buttonOffsetY, "radioNotActiveButton");
     this.notActiveButton.setScale(radioConst.buttonScale);
 
+    //B
     this.activeButton = scene.add.sprite(x + radioConst.buttonOffsetX, y + radioConst.buttonOffsetY, "radioActiveButton").setInteractive();
     this.activeButton.setScale(radioConst.buttonScale);
     this.activeButton.visible = false;
   }
+
+  //"Censura" una noticia y una categoría al azar en el momento
   setActive(bookMalRadio, noticiaMalRadio) {
     this.bookMalRadio = bookMalRadio;
     this.noticiaMalRadio = noticiaMalRadio;
+    
     this.notActiveButton.visible = false;
     this.activeButton.visible = true;
 
@@ -30,24 +35,29 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     //Añadir un libro mal
     switch (this.getRndInteger(0, 2)) {
       case 0:
+        //Novela
         this.bookACensurar = this.bookInfo.novelaBien[this.getRndInteger(0, this.bookInfo.novelaBien.length - 1)];
         while (this.censuradoYa(this.bookACensurar)) {
           this.bookACensurar = this.bookInfo.novelaBien[this.getRndInteger(0, this.bookInfo.novelaBien.length - 1)];
         }
-        break;
+      break;
       case 1:
+        //Poesía
         this.bookACensurar = this.bookInfo.poesiaBien[this.getRndInteger(0, this.bookInfo.poesiaBien.length - 1)];
         while (this.censuradoYa(this.bookACensurar)) {
           this.bookACensurar = this.bookInfo.poesiaBien[this.getRndInteger(0, this.bookInfo.poesiaBien.length - 1)];
         }
-        break;
+      break;
       case 2:
+        //Teatro
         this.bookACensurar = this.bookInfo.teatroBien[this.getRndInteger(0, this.bookInfo.teatroBien.length - 1)];
         while (this.censuradoYa(this.bookACensurar)) {
           this.bookACensurar = this.bookInfo.teatroBien[this.getRndInteger(0, this.bookInfo.teatroBien.length - 1)];
         }
-        break;
+      break;
     }
+
+    //Cancelación del libro
     this.events.addCensoredBook(this.bookACensurar);
     console.log(this.bookACensurar + " censurado");
 
@@ -56,7 +66,10 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     while (this.censuradoYa(this.noticiaACensurar)) {
       this.noticiaACensurar = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
     }
+    
+    //Cancelación de la noticia
     this.events.addCensoredNoticia(this.noticiaACensurar);
+    
     console.log(this.noticiaACensurar + " censurado");
 
     this.text = "Radio\nLamentamos comunicar que a partir de ahora se\nsancionará la publicación de " + this.bookACensurar + " y " + this.noticiaACensurar;
@@ -67,6 +80,7 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     this.clock.start(this.setNotActive.bind(this), radioConst.dialogueTime);
   }
 
+  //Apaga la radio y anula los textos
   setNotActive() {
     this.notActiveButton.visible = true;
     this.activeButton.visible = false;
@@ -87,7 +101,8 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     }
   }
 
-  getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)
+  //Devuelve un num aleatorio entre min y max (incluidos)
+  getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

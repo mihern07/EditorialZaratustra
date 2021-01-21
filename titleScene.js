@@ -9,7 +9,8 @@ class TitleScene extends Phaser.Scene {
 	}
 
 	create() {
-		this.input.mouse.disableContextMenu(); //No permite click derecho en el juego.
+		//No permite click derecho en el juego.
+		this.input.mouse.disableContextMenu(); 
 
 		let bg = this.add.sprite(titleConst.bgPosX, titleConst.bgPosY, 'title');
 
@@ -34,9 +35,9 @@ class TitleScene extends Phaser.Scene {
 		//Fade de inicio
 		this.cameras.main.fadeIn(2000, 0, 0, 0);
 
+		//Animación del botón
 		anim.on('pointerover', function (pointer) {
 			animBold.visible = true;
-
 		});
 
 		animBold.on('pointerout', function (pointer) {
@@ -47,6 +48,7 @@ class TitleScene extends Phaser.Scene {
 	}
 
 	clickButton() {
+		//La escena StoryIntro se elimina la primera vez
 		if (this.scene.get("storyIntro") != null) {
 			this.scene.run("storyIntro", this.levelManager);
 			this.scene.sleep();
