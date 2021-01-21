@@ -68,10 +68,10 @@ export const levelsConst = {
             },
             bookInfo: {
                 novelaBien: ["Aventura", "Histórico", "Ficción", "Romance", "Suspense"],
-                poesiaBien: [ "Suspense", "Histórico", "Comedia", "Ficción"],
+                poesiaBien: ["Suspense", "Histórico", "Comedia", "Ficción"],
                 teatroBien: ["Romance", "Aventura", "Histórico", "Suspense"],
-                novelaMal: ["Policíaco", "Fantasía", "Comedia",  "Drama", "Académico"],
-                poesiaMal: ["Drama", "Fantasía","Romance", "Aventura", "Académico"],
+                novelaMal: ["Policíaco", "Fantasía", "Comedia", "Drama", "Académico"],
+                poesiaMal: ["Drama", "Fantasía", "Romance", "Aventura", "Académico"],
                 teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Policíaco", "Ficción"],
                 everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
                 numPagsBien: [1], // libro corto y largo
@@ -163,7 +163,7 @@ export const levelsConst = {
                 specialChara: [5, 6] // perosnajes especiales del nivel
             },
             noticiaInfo: {
-                noticiaBien: [ "Deportes", "Meteorología", "Propaganda"],
+                noticiaBien: ["Deportes", "Meteorología", "Propaganda"],
                 noticiaMal: ["Opinión", "Ensayo", "Esquela", "Crónica"]
             },
             bookInfo: {
@@ -274,7 +274,7 @@ export const creditsConst = {
     strikeTint: 0x71CA1E,
 
     textSize: 50,
-    size:40,
+    size: 40,
 
     scale: 1.1,
 }
@@ -426,6 +426,7 @@ export const eventsConst = {
     homelessProbability: 30,
     briberyProbability: 50,
     deliveryProbability: 60,
+    newsProbability: 100
 }
 export const penConst = {
     scale: .25,

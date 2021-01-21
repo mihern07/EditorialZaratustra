@@ -31,19 +31,15 @@ export default class Boot extends Phaser.Scene {
     this.load.image("manecilla", "sprites/manecilla.png"); //Manecilla = manecilla
     this.load.image("box", "sprites/dialogueBoxv2.png"); //Bocadillo = box
     this.load.image("radioBox", "sprites/dialogueBoxRadio.png");
-    this.load.image("character", "sprites/personajeSprite.png"); //personaje = character
     this.load.image("deskBellPressed", "sprites/timbrePulsadoSprite.png"); //timbre pulsado = deskBellPressed
-    this.load.image("deskBellSP", "sprites/timbreSprite.png"); //timbre = deskBellSP
+    this.load.image("deskBellSP", "sprites/timbreSprite.png"); //timbre = deskBell
     this.load.image("tinteroV", "sprites/tintero.png"); //tintero verde = tinteroV
     this.load.image("tinteroR", "sprites/tinteroRojo.png"); // tintero rojo = tinteroR
     this.load.image("document", "sprites/documentoSprite.png");
     this.load.image("pen", "sprites/penSprite.png");
-    this.load.image("penV", "sprites/penGreenSprite.png");
-    this.load.image("penR", "sprites/penRedSprite.png");
     this.load.image("board", "sprites/boardSprite.png"); // Board
     this.load.image("postIt", "sprites/postItBlancoSprite.png"); // PostIt
     this.load.image("paperParticle", "sprites/paperParticle.png");
-    this.load.image("bodyguard", "sprites/guardaespaldas.png"); //Guardaespaldas = bodyguard
     this.load.image("littleNewspaper", "sprites/littleNewspaper.png");
     this.load.image("bigNewspaper", "sprites/bigNewspaperRaw.png");
     this.load.image("rules", "sprites/rules.png");

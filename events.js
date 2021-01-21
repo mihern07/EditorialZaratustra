@@ -297,10 +297,10 @@ export default class Events extends Phaser.GameObjects.GameObject {
     createIncorrectChara() {
         this.createCorrectBook(); // Crea un libro correcto
         let wrongAspect;
-        if(this.bookInfo.numPagsMal.length == 0) 
+        if (this.bookInfo.numPagsMal.length == 0)
             wrongAspect = this.getRndInteger(0, 1); // Selecciona el aspecto que será erróneo
         else
-            wrongAspect = this.getRndInteger(0, 2); 
+            wrongAspect = this.getRndInteger(0, 2);
         switch (wrongAspect) {
             case 0:
                 //Categoría errónea
@@ -437,7 +437,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Noticia correcta");
                 if (accepted) {
                     if (this.isNoticiaBanned(this.chara.getCategory())) {
-                        this.gameManager.bookStrike();
+                        this.gameManager.Strike(eventsConst.newsProbability);
                         this.scene.strikeShake();
                     } else {
                         this.gameManager.addSubstractMoney(eventsConst.moneyAmount);
@@ -448,7 +448,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje noticia incorrecta
                 console.log("Noticia incorrecta");
                 if (accepted) {
-                    this.gameManager.bookStrike();
+                    this.gameManager.Strike(eventsConst.newsProbability);
                     this.scene.strikeShake();
                 }
                 break;
