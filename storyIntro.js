@@ -1,41 +1,41 @@
-import { storyIntro} from "./constants.js";
+import { storyIntro } from "./constants.js";
 
-export default class StoryIntro extends Phaser.Scene{
+export default class StoryIntro extends Phaser.Scene {
     constructor() {
-        super({key: 'storyIntro'});
+        super({ key: 'storyIntro' });
     }
 
-    create(levelManager){
+    create(levelManager) {
         this.background = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "street");
         this.background.setInteractive();
-        
+
         this.fondo = this.add.sprite(storyIntro.backgroundPosX, storyIntro.backgroundPosY, "fondo");
         this.fondo.setScale(storyIntro.backgroundScaleX, storyIntro.backgroundScaleY);
-        
+
         this.dialogoAPartir = this.cache.text.get("intro");
         this.dialogoAPartir = this.dialogoAPartir.split("\n");
 
         this.i = 0;
         this.j = 4;
-        this.text = this.dialogoAPartir.slice(this.i,this.j);
+        this.text = this.dialogoAPartir.slice(this.i, this.j);
         this.i = this.i + 4;
         this.j = this.j + 4;
 
         this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
-        
+
         this.background.on('pointerdown', pointer => {
             if (pointer.leftButtonDown()) {
                 this.showText.destroy();
-                this.text = this.dialogoAPartir.slice(this.i,this.j);
-                if (this.text.length == 0){
+                this.text = this.dialogoAPartir.slice(this.i, this.j);
+                if (this.text.length == 0) {
                     levelManager.firstLevel();
                 }
-                else{
+                else {
                     this.showText = this.add.text(storyIntro.textPosX, storyIntro.textPosY, this.text, { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3).setFontSize(storyIntro.textScale);
                     this.i = this.i + 4;
                     this.j = this.j + 4;
                 }
             }
-          });
+        });
     }
 }

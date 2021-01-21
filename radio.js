@@ -1,6 +1,6 @@
 import Dialogue from "./dialogue.js";
 import Clock from "./clock_class.js";
-import { radioConst} from "./constants.js";
+import { radioConst } from "./constants.js";
 
 export default class Radio extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, sprite, events, bookInfo, noticiaInfo) {
@@ -20,7 +20,7 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     this.activeButton.setScale(radioConst.buttonScale);
     this.activeButton.visible = false;
   }
-  setActive(bookMalRadio, noticiaMalRadio){
+  setActive(bookMalRadio, noticiaMalRadio) {
     this.bookMalRadio = bookMalRadio;
     this.noticiaMalRadio = noticiaMalRadio;
     this.notActiveButton.visible = false;
@@ -28,37 +28,37 @@ export default class Radio extends Phaser.GameObjects.Sprite {
 
     //Mostrar diálogo y cambiar orden de las categorías
     //Añadir un libro mal
-    switch(this.getRndInteger(0,2)){
+    switch (this.getRndInteger(0, 2)) {
       case 0:
-        this.bookACensurar = this.bookInfo.novelaBien[this.getRndInteger(0, this.bookInfo.novelaBien.length-1)];
-        while(this.censuradoYa(this.bookACensurar)){
-          this.bookACensurar = this.bookInfo.novelaBien[this.getRndInteger(0, this.bookInfo.novelaBien.length-1)];
+        this.bookACensurar = this.bookInfo.novelaBien[this.getRndInteger(0, this.bookInfo.novelaBien.length - 1)];
+        while (this.censuradoYa(this.bookACensurar)) {
+          this.bookACensurar = this.bookInfo.novelaBien[this.getRndInteger(0, this.bookInfo.novelaBien.length - 1)];
         }
-      break;
+        break;
       case 1:
-        this.bookACensurar = this.bookInfo.poesiaBien[this.getRndInteger(0, this.bookInfo.poesiaBien.length-1)];
-        while(this.censuradoYa(this.bookACensurar)){
-          this.bookACensurar = this.bookInfo.poesiaBien[this.getRndInteger(0, this.bookInfo.poesiaBien.length-1)];
+        this.bookACensurar = this.bookInfo.poesiaBien[this.getRndInteger(0, this.bookInfo.poesiaBien.length - 1)];
+        while (this.censuradoYa(this.bookACensurar)) {
+          this.bookACensurar = this.bookInfo.poesiaBien[this.getRndInteger(0, this.bookInfo.poesiaBien.length - 1)];
         }
-      break;
+        break;
       case 2:
-        this.bookACensurar = this.bookInfo.teatroBien[this.getRndInteger(0, this.bookInfo.teatroBien.length-1)];
-        while(this.censuradoYa(this.bookACensurar)){
-          this.bookACensurar = this.bookInfo.teatroBien[this.getRndInteger(0, this.bookInfo.teatroBien.length-1)];
+        this.bookACensurar = this.bookInfo.teatroBien[this.getRndInteger(0, this.bookInfo.teatroBien.length - 1)];
+        while (this.censuradoYa(this.bookACensurar)) {
+          this.bookACensurar = this.bookInfo.teatroBien[this.getRndInteger(0, this.bookInfo.teatroBien.length - 1)];
         }
-      break;
+        break;
     }
     this.events.addCensoredBook(this.bookACensurar);
     console.log(this.bookACensurar + " censurado");
 
     //Añadir una noticia mal
-    this.noticiaACensurar = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length-1)];
-    while(this.censuradoYa(this.noticiaACensurar)){
-      this.noticiaACensurar = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length-1)];
+    this.noticiaACensurar = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
+    while (this.censuradoYa(this.noticiaACensurar)) {
+      this.noticiaACensurar = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
     }
     this.events.addCensoredNoticia(this.noticiaACensurar);
     console.log(this.noticiaACensurar + " censurado");
-    
+
     this.text = "Radio\nLamentamos comunicar que a partir de ahora se\nsancionará la publicación de " + this.bookACensurar + " y " + this.noticiaACensurar;
 
     this.dialogue = new Dialogue(this.scene, radioConst.dialogueX, radioConst.dialogueY, "radioBox", this.text);
@@ -67,27 +67,27 @@ export default class Radio extends Phaser.GameObjects.Sprite {
     this.clock.start(this.setNotActive.bind(this), radioConst.dialogueTime);
   }
 
-  setNotActive(){
+  setNotActive() {
     this.notActiveButton.visible = true;
     this.activeButton.visible = false;
     this.dialogue.destroyText();
     this.dialogue.destroy();
   }
 
-  censuradoYa(censuraAComprobar){
+  censuradoYa(censuraAComprobar) {
     this.estaCensurado = false;
     let i = 0;
-    while (i < this.bookMalRadio.length && censuraAComprobar != this.bookMalRadio[i]){
+    while (i < this.bookMalRadio.length && censuraAComprobar != this.bookMalRadio[i]) {
       i++;
     }
-    if (i == this.bookMalRadio.length){
+    if (i == this.bookMalRadio.length) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
 
   getRndInteger(min, max) { // devuelve un num aleatorio entre min y max (incluidos)
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+  }
 }

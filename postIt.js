@@ -6,10 +6,6 @@ export default class PostIt extends Draggable {
     constructor(scene, x, y, sprite, text) {
         super(scene, x, y, sprite, draggableConst.boardX0, draggableConst.boardXX, draggableConst.boardY0, draggableConst.boardYY);
 
-        // this.scene.add.existing(this);
-        // // Se puede arrastrar
-        // this.setInteractive({ draggable: true, dropZone: true });
-
         this.info = scene.add.text(x + postItConst.offsetX, y + postItConst.offsetY, text, { fontFamily: 'Lobster', color: 0x0A0A0A }); //Añadimos texto.
         this.info.setScale(postItConst.scale);
         //Arrastrar con cualquiera de los clicks
@@ -26,7 +22,5 @@ export default class PostIt extends Draggable {
                 this.info.x = this.x + postItConst.offsetX;
             }
         })
-
     }
-
 }

@@ -12,10 +12,9 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.sprite = sprite;
         this.scene = scene;
 
-
-        this.dialogosEvento = ["ninio", "tendencias", "correos", "mujerDelJefe", "sobornador", "vagabundo", "mujerDelJefeMal", "correosMal"];
-        this.dialogosLibro = ["dialogoBase", "dialogoBaseAmigable", "dialogoBaseMalEducado", "dialogoBasePijo", "dialogoBaseResponsable", "dialogoBaseTimido"];
-        this.dialogosNoticias = ["noticiasBase", "noticiasAmigable", "noticiasMalEducado", "noticiasPijo", "noticiasResponsable", "noticiasTimido"];
+        this.dialogosEvento = eventsConst.eventDialogue;
+        this.dialogosLibro = eventsConst.bookDialogue;
+        this.dialogosNoticias = eventsConst.newsDialogue;
 
 
         this.bookInfo = bookInfo;

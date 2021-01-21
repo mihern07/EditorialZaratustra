@@ -19,10 +19,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.body.setVelocityX(0);
 
         this.SPEED = guardConst.speed;
-        //INI: estado inicial
-        //SHOW: en el mostrador con el libro
-        //GOING: desde el spawn al mostrador
-        //ANSWER: al volver, izq. o dcha.
+
         this.States = { INI: 0, GOING: 1, SHOW: 2, ANSWER: 3, WAIT: 4 };
         this.currentS = this.States.INI;
     }
@@ -54,8 +51,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.currentS = this.States.INI;
         }
 
-        else if(this.currentS === this.States.GOING || this.currentS === this.States.ANSWER){
-            this.y = this.defaultY + Math.sin(2*Math.PI*(this.xnow/50))*5;
+        else if (this.currentS === this.States.GOING || this.currentS === this.States.ANSWER) {
+            this.y = this.defaultY + Math.sin(2 * Math.PI * (this.xnow / 50)) * 5;
             this.xnow++;
         }
     }

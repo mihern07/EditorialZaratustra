@@ -5,11 +5,6 @@ export default class CreditsScene extends Phaser.Scene {
         super({ key: 'creditsScene' });
     }
 
-    preload() {
-        this.load.image("title1","sprites/title.png");
-        this.load.image("creditsBG","sprites/creditbg.png");
-    }
-
     init(gameManager) {
         this.gameManager = gameManager;
     }
@@ -46,28 +41,28 @@ export default class CreditsScene extends Phaser.Scene {
     }
 
     update() {
-        if(this.logo.y > -500)
+        if (this.logo.y > -500)
             this.logo.y -= 1;
 
-        if(this.text1.y > -500)
+        if (this.text1.y > -500)
             this.text1.y -= 1;
 
-        if(this.text2.y > -500)
+        if (this.text2.y > -500)
             this.text2.y -= 1;
 
-        if(this.text3.y > -500)
+        if (this.text3.y > -500)
             this.text3.y -= 1;
 
-        if(this.text4.y > -500)
+        if (this.text4.y > -500)
             this.text4.y -= 1;
 
-        if(this.text5.y > -500)
+        if (this.text5.y > -500)
             this.text5.y -= 1;
 
-        if(this.text6.y > -500)
+        if (this.text6.y > -500)
             this.text6.y -= 1;
 
-        if(this.text7.y > -500)
+        if (this.text7.y > -500)
             this.text7.y -= 1;
         else
             this.scene.start('titleScene');

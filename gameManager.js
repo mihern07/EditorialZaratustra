@@ -1,5 +1,5 @@
-export default class GameManager{
-    constructor(){
+export default class GameManager {
+    constructor() {
         this.dinero = 0;
         this.strikes = 0;
         this.objetivo = 0; // Se gestiona con los métodos de la clase para que varíe entre niveles
@@ -11,7 +11,7 @@ export default class GameManager{
      * Añade o resta dinero
      * @param {*} quantity Cantidad a sumar (positiva) o negativa (restar)
      */
-    addSubstractMoney(quantity){
+    addSubstractMoney(quantity) {
         this.dinero += quantity;
     }
 
@@ -19,23 +19,23 @@ export default class GameManager{
      * Decide si el jugador recibe un strike dependiendo de una probabilidad
      * @param {*} probability Probabilidad de recibir un strike del 0 al 100
      */
-    strike(probability){
-        this.numeroAleatorio = this.getRndInteger(1,100);
-        if (this.numeroAleatorio <= probability){
+    strike(probability) {
+        this.numeroAleatorio = this.getRndInteger(1, 100);
+        if (this.numeroAleatorio <= probability) {
             this.strikes++;
             return true;
         }
-        else{
+        else {
             return false;
         }
     }
 
     //Comprueba si suficientes libros han sido fallados para recibir strike
-    bookStrike(){
-        if (this.bookStrikeCont < 2){
+    bookStrike() {
+        if (this.bookStrikeCont < 2) {
             this.bookStrikeCont++;
         }
-        else{
+        else {
             this.bookStrikeCont = 0;
             this.strikes++;
         }
@@ -56,7 +56,7 @@ export default class GameManager{
      * Devuelve true si el jugador ha cumplido el objetivo, false si ha fallado
      * @param {*} amountToClear Cantidad necesaria para completar el nivel actual con éxito
      */
-    isCleared(){
+    isCleared() {
         return this.dinero >= this.objetivo;
     }
 
@@ -65,11 +65,11 @@ export default class GameManager{
      * Devuelve true si el jugador ha perdido, false en caso de que aún pueda seguir jugando
      * @param {*} amountToClear Cantidad necesaria para completar el nivel actual con éxito
      */
-    isGameOver(){
+    isGameOver() {
         return this.strikes >= this.numMaxStrikes;
     }
 
-    setGameOver(amountToClear, maxStrikes){
+    setGameOver(amountToClear, maxStrikes) {
         this.objetivo = amountToClear;
         this.numMaxStrikes = maxStrikes;
     }

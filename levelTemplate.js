@@ -144,13 +144,6 @@ export default class Game extends Phaser.Scene {
           levelManager: this.levelManager
         })
         this.scene.run('pause');
-        // this.scene.resume('pause', {
-        //   music: this.music,
-        //   playing: this.isPlaying,
-        //   key: this.sceneKey,
-        //   level: this.dataM.day,
-        //   levelManager: this.levelManager
-        // });
       }
 
       if (this.keyReset.isDown) {
@@ -230,27 +223,6 @@ export default class Game extends Phaser.Scene {
     }
     this.inkPlayed=true;
   }
-
-  // Intro() {
-  //   this.cameras.main.fadeIn(2000, 0, 0, 0);
-  //   //this.createParticles("paperParticle");
-  // }
-
-  // createParticles(particleSprite) {
-  //   //Particles
-  //   let leaves = this.add.particles(particleSprite);
-  //   leaves.createEmitter({
-  //     frames: [{ key: particleSprite, frame: 0 }],
-  //     x: { min: 100, max: this.game.config.width },
-  //     y: -50,
-  //     speedX: { min: -50, max: 50 },
-  //     speedY: { min: 100, max: 120 },
-  //     lifespan: 7000,
-  //     scale: { start: 0.1, end: 0.01 },
-  //     rotate: { start: 0, end: 120 },
-  //     frequency: 300
-  //   });
-  // }
 
   //
   bossFinished() {

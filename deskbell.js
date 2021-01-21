@@ -11,10 +11,10 @@ export default class DeskBell extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
     this.setInteractive(); //Lo hacemos interactivo (poder pulsarlo)
 
-    this.Bell2 = scene.add.sprite(x, y, sprite2).setInteractive(); //Creamos el sprite 2 (timbre pulsado)
-    this.Bell2.setScale(deskBellConst.scale);
+    this.bell2 = scene.add.sprite(x, y, sprite2).setInteractive(); //Creamos el sprite 2 (timbre pulsado)
+    this.bell2.setScale(deskBellConst.scale);
 
-    this.Bell2.visible = false;
+    this.bell2.visible = false;
     this.working = false;
     //this.scene.physics.add.existing(this, true);
 
@@ -31,14 +31,12 @@ export default class DeskBell extends Phaser.GameObjects.Sprite {
       }
     });
 
-    this.Bell2.on('pointerup', pointer => {
+    this.bell2.on('pointerup', pointer => {
       this.changeSprites();
     });
-
-
   }
   changeSprites() {
-    this.Bell2.visible = !this.Bell2.visible;
+    this.bell2.visible = !this.bell2.visible;
     this.visible = !this.visible;
   }
   startWork() {

@@ -4,10 +4,7 @@ export default class VictoryScene extends Phaser.Scene {
     constructor() {
         super({ key: 'victoryScene' });
     }
-    preload() {
-        this.load.image("pesetas", "sprites/pesetas.jpg");
-        this.load.image("buttonNotPressed", "sprites/buttonNotPressed.png");
-    }
+
     init(data) {
         this.gameManager = data.gameManager;
         this.levelManager = data.levelManager;
@@ -25,7 +22,7 @@ export default class VictoryScene extends Phaser.Scene {
         this.puntuacion.setTint(victoryConst.puntTint);
         this.puntuacion.setFontSize(victoryConst.puntSize);
         this.strikes = this.add.text(victoryConst.strikesPosX, victoryConst.strikesPosY, this.gameManager.strikes + "/" + this.gameManager.numMaxStrikes + " strikes recibidos", { fontFamily: 'Yeon Sung' }).setStroke('#000000', 3);
-        
+
         this.strikes.setTint(victoryConst.strikeTint);
         this.strikes.setFontSize(victoryConst.strikeSize);
 

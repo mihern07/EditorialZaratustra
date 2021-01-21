@@ -4,10 +4,9 @@ class PauseMenu extends Phaser.Scene {
 
     constructor(data) {
         super({ key: 'pause' });
-        
     }
 
-    init(data){
+    init(data) {
         this.musics = data.music;
         this.musicActive = data.isPlaying;
         this.originSceneKey = data.key;
@@ -50,7 +49,7 @@ class PauseMenu extends Phaser.Scene {
         this.continueBold.setDepth(pauseConst.depth);
         this.exit.setDepth(pauseConst.depth);
         this.exitBold.setDepth(pauseConst.depth);
-        
+
         this.continue.setInteractive();
         this.continueBold.setInteractive();
         this.exit.setInteractive();
@@ -94,7 +93,7 @@ class PauseMenu extends Phaser.Scene {
             this.exitBold.visible = false;
         });
 
-        this.events.on('wake', function(){ console.log("WAKEPAUSE")});
+        this.events.on('wake', function () { console.log("WAKEPAUSE") });
 
         this.continueBold.on("pointerdown", pointer => {
             if (pointer.leftButtonDown()) {

@@ -5,7 +5,7 @@ import Newspaper from "./newspaper.js";
 import { characterConst } from "./constants.js";
 
 export default class NewsCharacter extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, sprite, dialogue ,day, month, year, news) {
+    constructor(scene, x, y, sprite, dialogue, day, month, year, news) {
         super(scene, x, y, sprite);
 
         this.scene = scene;
@@ -65,56 +65,56 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
     }
 
     chooseSpriteHair() {
-        this.value = this.getRndInteger(0,7);
-        switch(this.value) //PELO DEL CHARACTER
+        this.value = this.getRndInteger(0, 7);
+        switch (this.value) //PELO DEL CHARACTER
         {
             case 0:
-            this.sprite = "hair1";
-            break;
+                this.sprite = "hair1";
+                break;
             case 1:
                 this.sprite = "hair2";
-            break;
+                break;
             case 2:
                 this.sprite = "hair3";
-            break;
+                break;
             case 3:
                 this.sprite = "hair4";
-            break;
+                break;
             case 4:
                 this.sprite = "hair5";
-            break;
+                break;
             case 5:
                 this.sprite = "hair6";
-            break;
+                break;
             case 6:
                 this.sprite = "hair7";
-            break;
+                break;
             case 7:
                 this.sprite = "hair8";
-            break;
+                break;
         }
         return this.sprite;
     }
 
     chooseSpriteHead() {
-        this.value = this.getRndInteger(0,4);
-        switch(this.value) //PELO DEL CHARACTER
+        this.value = this.getRndInteger(0, 4);
+        switch (this.value) //PELO DEL CHARACTER
         {
             case 0:
-            this.sprite = "head1";
-            break;
+                this.sprite = "head1";
+                break;
             case 1:
                 this.sprite = "head2";
-            break;
+                break;
             case 2:
                 this.sprite = "head3";
-            break;
+                break;
             case 3:
                 this.sprite = "head4";
-            break;
+                break;
             case 4:
                 this.sprite = "head5";
-            break;
+                break;
         }
         return this.sprite;
     }
@@ -183,7 +183,7 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(this.SPEED);
             this.head.body.setVelocityX(this.SPEED);
             this.hair.body.setVelocityX(this.SPEED);
-            
+
             this.currentS = this.States.ANSWER;
 
             this.firstClock.stop();
@@ -223,7 +223,7 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
     }
 
     showBook() {
-        this.newspaper.visible = true;        
+        this.newspaper.visible = true;
         this.currentS = this.States.WAIT;
     }
 
@@ -247,10 +247,10 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
             this.dialogueChange();
             this.isGone = true;
         }
-        else if(this.currentS === this.States.GOING || this.currentS === this.States.ANSWER){
-            this.y = characterConst.clothesY + Math.sin(2*Math.PI*(this.xnow/50))*6;
-            this.head.y = characterConst.headY +  Math.sin(2*Math.PI*(this.xnow/50))*4;
-            this.hair.y = characterConst.hairY + Math.sin(2*Math.PI*(this.xnow/50))*4;
+        else if (this.currentS === this.States.GOING || this.currentS === this.States.ANSWER) {
+            this.y = characterConst.clothesY + Math.sin(2 * Math.PI * (this.xnow / 50)) * 6;
+            this.head.y = characterConst.headY + Math.sin(2 * Math.PI * (this.xnow / 50)) * 4;
+            this.hair.y = characterConst.hairY + Math.sin(2 * Math.PI * (this.xnow / 50)) * 4;
             this.xnow++;
         }
     }
@@ -260,7 +260,7 @@ export default class NewsCharacter extends Phaser.GameObjects.Sprite {
         this.dialogue.setVisible(false);
     }
 
-    getCategory(){
+    getCategory() {
         return this.category;
     }
 

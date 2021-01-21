@@ -12,7 +12,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.setDepth(bossConst.depth);
 
-        this.level = level-1;
+        this.level = level - 1;
 
         this.bookInfo = bookInfo;
         this.noticiaInfo = noticiaInfo;
@@ -34,7 +34,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
 
         //Asignamos el diálogo extra del jefe si hay
         this.dialogueExtraCount = 0;    //Utilizado para ir pasando el texto extra
-        switch(this.level){
+        switch (this.level) {
             case 0:
                 //Explicación de los colores
                 this.extraText = this.scene.cache.text.get("jefeColores");
@@ -70,10 +70,6 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         //REGLAS
         this.rules = new RuleDoc(this.scene, bossConst.rulesPosX, bossConst.rulesPosY, "rules", "openedRules", this.bookInfo.numPagsBien, this.noticiaInfo.noticiaMal);
 
-        //INI: estado inicial
-        //SHOW: en el mostrador con el libro
-        //GOING: desde el spawn al mostrador
-        //ANSWER: al volver, izq. o dcha.
         this.States = { INI: 0, GOING: 1, SHOW: 2, ANSWER: 3, WAIT: 4 };
         this.currentS = this.States.INI;
 
@@ -85,9 +81,9 @@ export default class Boss extends Phaser.GameObjects.Sprite {
                     this.nextDialogue();
                 }
                 else {
-                    if (this.contExtraDialogue > 0){
+                    if (this.contExtraDialogue > 0) {
                         this.extraInfo();
-                    }else{
+                    } else {
                         this.goBack();
                     }
                 }
@@ -127,7 +123,7 @@ export default class Boss extends Phaser.GameObjects.Sprite {
         }
     }
 
-    extraInfo(){
+    extraInfo() {
         this.dialogue.setText(this.extraText.slice(this.dialogueExtraCount, this.dialogueExtraCount + 3));
         this.dialogueExtraCount += 3;
         this.contExtraDialogue--;
@@ -262,8 +258,8 @@ export default class Boss extends Phaser.GameObjects.Sprite {
             this.rules.visible = true;
         }
 
-        else if(this.currentS === this.States.GOING || this.currentS === this.States.ANSWER){
-            this.y = this.defaultY + Math.sin(2*Math.PI*(this.xnow/50))*5;
+        else if (this.currentS === this.States.GOING || this.currentS === this.States.ANSWER) {
+            this.y = this.defaultY + Math.sin(2 * Math.PI * (this.xnow / 50)) * 5;
             this.xnow++;
         }
     }

@@ -3,8 +3,8 @@ import Draggable from "./draggable.js";
 
 export default class Newspaper extends Draggable {
     constructor(scene, x, y, sprite, sprite2, day, month, year, news) {
-        super(scene,x,y,sprite, draggableConst.tableX0, draggableConst.tableXX, draggableConst.tableY0, draggableConst.tableYY)
-        
+        super(scene, x, y, sprite, draggableConst.tableX0, draggableConst.tableXX, draggableConst.tableY0, draggableConst.tableYY)
+
         this.firstPosX = this.x;
         this.firstPosY = this.y;
 
@@ -13,7 +13,7 @@ export default class Newspaper extends Draggable {
 
         this.setScale(newsConst.scale);
         this.setDepth(newsConst.depth);
-        
+
         //Sprite periódico abierto
         this.bigNews = scene.add.sprite(this.x, this.y, sprite2).setInteractive();
         this.bigNews.setScale(newsConst.openedScale);

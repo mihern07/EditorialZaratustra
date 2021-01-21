@@ -15,9 +15,6 @@ export default class Inkwell extends Phaser.GameObjects.Sprite {
     this.clicked = false; //Creamos variable booleana clicked.
     this.setScale(inkwellConst.scale);
 
-    //this.scene.physics.add.existing(this, true);
-
-
     //Cuando es pulsado dicho sprite...
     this.on('pointerdown', pointer => {
       if (pointer.isDown) {

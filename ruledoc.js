@@ -13,7 +13,6 @@ export default class RuleDoc extends Draggable {
         this.setScale(ruleConst.scale);
         this.setDepth(ruleConst.depth);
         //Lo añade a la escena
-        // this.scene.add.existing(this);
 
         this.visible = false;
 
@@ -33,13 +32,13 @@ export default class RuleDoc extends Draggable {
 
         // Añade la info sobre el numero de paginas
         for (let i = 0; i < this.pags.length; i++) {
-            this.pagsInfo.push(scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.offsetY + (i * ruleConst.offsetYAcum), this.selectPags(this.pags[i]), {  fontFamily: 'Barlow Condensed', color: 0x5D3C09 }).setStroke('#5D3C09', 1))
+            this.pagsInfo.push(scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.offsetY + (i * ruleConst.offsetYAcum), this.selectPags(this.pags[i]), { fontFamily: 'Barlow Condensed', color: 0x5D3C09 }).setStroke('#5D3C09', 1))
             this.pagsInfo[i].visible = false;
             this.pagsInfo[i].setDepth(ruleConst.openedDepth);
         }
 
         for (let i = 0; i < this.noticias.length; i++) {
-            if(this.noticias.length > 4 && i == 4)
+            if (this.noticias.length > 4 && i == 4)
                 this.noticiasInfo += "\n";
 
             if (this.noticias.length != 1 && i == this.noticias.length - 1)
@@ -54,7 +53,7 @@ export default class RuleDoc extends Draggable {
                 this.noticiasInfo = noticias[i];
         }
         console.log(this.noticiasInfo);
-        this.noticiasText = scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.noticiaOffsetY, this.noticiasInfo,  { fontFamily: 'Barlow Condensed', color: 0x5D3C09 }).setStroke('#5D3C09', 1);
+        this.noticiasText = scene.add.text(this.x + ruleConst.offsetX, this.y + ruleConst.noticiaOffsetY, this.noticiasInfo, { fontFamily: 'Barlow Condensed', color: 0x5D3C09 }).setStroke('#5D3C09', 1);
         this.noticiasText.visible = false;
         this.noticiasText.setDepth(ruleConst.openedDepth);
 
@@ -89,6 +88,5 @@ export default class RuleDoc extends Draggable {
             case 2:
                 return "Entre 1200 y 3000 páginas";
         }
-
     }
 }

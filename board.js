@@ -22,7 +22,6 @@ export default class Board extends Phaser.GameObjects.Sprite {
             }
         }
 
-
         for (let i = 0; i < this.postIts.length; i++) {
             this.postIts[i].setScale(boardConst.scale);
         }

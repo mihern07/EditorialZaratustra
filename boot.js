@@ -10,10 +10,10 @@ export default class Boot extends Phaser.Scene {
 
     // Menu Pausa
     this.load.image('menu', 'sprites/menu.png');
-    this.load.image('volume','sprites/volumen.png');
-    this.load.image('volume2','sprites/volumen2.png')
-    this.load.image('noVolume','sprites/novolumen.png')
-    this.load.image('noVolume2','sprites/novolumen2.png')
+    this.load.image('volume', 'sprites/volumen.png');
+    this.load.image('volume2', 'sprites/volumen2.png')
+    this.load.image('noVolume', 'sprites/novolumen.png')
+    this.load.image('noVolume2', 'sprites/novolumen2.png')
     this.load.image('continue', 'sprites/continuar.png');
     this.load.image('continue2', 'sprites/continuar2.png');
     this.load.image('exit', 'sprites/salir.png');
@@ -151,25 +151,46 @@ export default class Boot extends Phaser.Scene {
     this.load.text("noticiasPijo", "dialogue/noticiasPijo.txt");
     this.load.text("noticiasResponsable", "dialogue/noticiasResponsable.txt");
     this.load.text("noticiasTimido", "dialogue/noticiasTimido.txt");
-    this.load.text("jefeColores","dialogue/jefeColores.txt");
-    this.load.text("jefeGuardia","dialogue/jefeGuardia.txt");
-    this.load.text("jefeNoticia","dialogue/jefeNoticia.txt");
-    this.load.text("jefeRadio","dialogue/jefeRadio.txt");
+    this.load.text("jefeColores", "dialogue/jefeColores.txt");
+    this.load.text("jefeGuardia", "dialogue/jefeGuardia.txt");
+    this.load.text("jefeNoticia", "dialogue/jefeNoticia.txt");
+    this.load.text("jefeRadio", "dialogue/jefeRadio.txt");
 
-    this.load.audio("deskbellSound", "sounds/deskbell.wav"); //Audio timbre
+    //Audio 
+    this.load.audio("deskbellSound", "sounds/deskbell.wav");
     this.load.audio("npcSound", "sounds/npc.wav");
     this.load.audio("music", "sounds/music.wav");
     this.load.audio("alarm", "sounds/alarm.wav");
-    this.load.audio("pageSound","sounds/page.wav");
-    this.load.audio("ink","sounds/inkSound.wav");
-    this.load.audio("sign","sounds/write.wav");
-    this.load.audio("ink1","sounds/gota1.wav");
-    this.load.audio("ink2","sounds/gota2.wav");
-    this.load.audio("ink3","sounds/gota3.wav");
-    this.load.audio("ink4","sounds/gota4.wav");
-    this.load.audio("ink5","sounds/gota5.wav");
-    this.load.audio("incorrectSound","sounds/incorrect.wav");
-    this.load.audio("sonidoRadio","sounds/radioSound.mp3");
+    this.load.audio("pageSound", "sounds/page.wav");
+    this.load.audio("ink", "sounds/inkSound.wav");
+    this.load.audio("sign", "sounds/write.wav");
+    this.load.audio("ink1", "sounds/gota1.wav");
+    this.load.audio("ink2", "sounds/gota2.wav");
+    this.load.audio("ink3", "sounds/gota3.wav");
+    this.load.audio("ink4", "sounds/gota4.wav");
+    this.load.audio("ink5", "sounds/gota5.wav");
+    this.load.audio("incorrectSound", "sounds/incorrect.wav");
+    this.load.audio("sonidoRadio", "sounds/radioSound.mp3");
+
+    //Escena Game Over
+    this.load.image("street", "sprites/street.jpg");
+    this.load.image("buttonNotPressed", "sprites/buttonNotPressed.png");
+
+    //Escena Victoria
+    this.load.image("pesetas", "sprites/pesetas.jpg");
+    this.load.image("buttonNotPressed", "sprites/buttonNotPressed.png");
+
+    // Escena Final
+    this.load.text("introEnd", "dialogue/ricardoDialogue.txt");
+    this.load.text("end1", "dialogue/dontSpyEnding.txt");
+    this.load.text("end2", "dialogue/spyEnding.txt");
+    this.load.image("street", "sprites/street.jpg");
+    this.load.image("fondo", "sprites/negro_semitransparente.png");
+    this.load.image("buttonNotPressed", "sprites/buttonNotPressed.png");
+
+    //Escena Créditos
+    this.load.image("title1", "sprites/title.png");
+    this.load.image("creditsBG", "sprites/creditbg.png");
 
     // Codigo para usar webfonts
     this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
