@@ -345,3 +345,10 @@ _5.5.2 Arquetipos_
 - _Papers, Please ( __Lucas Pope__ , 2013)_
 - _Luces de Bohemia (Valle-Inclán, 1924)_
 - _Reigns (__François Alliot, 2016)_
+
+**7. Contribución del equipo**
+Aquí incluimos el porcentaje de contribución de cada uno de los miembros del equipo. Estos porcentajes suman el 100% que constituye la totalidad del desarrollo.
+- Sergio José Alfonso Rojas - 28%
+- Miguel Hernández García - 28%
+- Daniel Illanes Morillas - 22%
+- Alejandro Ortega Ruiz - 22%
