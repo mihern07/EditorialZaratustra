@@ -8,27 +8,39 @@ export default class Character extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, random, sprite, dialogue, dialogueSprite, documentSprite, bookSprite1, bookSprite2, genre, category, tamPags) {
         super(scene, x, y, sprite);
 
+        //Categoría del libro del personaje
         this.category = category;
 
         this.scene = scene;
-        this.firstPosX = this.x; //Creamos la variable firstPosX (guardar la posicion inicial)
+
+        //Posición inicial
+        this.firstPosX = this.x;
+
         this.setScale(characterConst.scale);
         this.scene.add.existing(this);
         this.npc = this.scene.sound.add("npcSound");
 
+        //Animación del movimiento
         this.xnow = 0;
 
         this.setDepth(characterConst.depth);
+
+        //Físicas del personaje
         this.scene.physics.add.existing(this);
         this.body.allowGravity = false;
         this.body.setVelocityX(0);
         this.SPEED = characterConst.speed;
-        this.randoms = random;
 
+        //Determina si es un personaje de generación estética aleatoria (no es de evento)
+        this.randoms = random;
+        //Generamos aleatoriamente su apariencia
         if (random) {
             this.setScale(characterConst.clothesScale);
+
+            //Para la animación del movimiento de la ropa
             this.y = characterConst.clothesY;
 
+            //Cabeza
             this.head = scene.add.sprite(this.x, characterConst.headY, this.chooseSpriteHead()).setInteractive();
             this.head.setDepth(characterConst.depth);
             this.head.setScale(characterConst.hairScale);
@@ -37,6 +49,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.head.body.allowGravity = false;
             this.head.body.setVelocityX(0);
 
+            //Pelo
             this.hair = scene.add.sprite(this.x, characterConst.hairY, this.chooseSpriteHair()).setInteractive();
             this.hair.setDepth(characterConst.depth);
             this.hair.setScale(characterConst.hairScale);
@@ -46,6 +59,7 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.hair.body.setVelocityX(0);
         }
 
+        //Estados posibles del personaje
         //INI: estado inicial
         //SHOW: en el mostrador con el libro
         //GOING: desde el spawn al mostrador
@@ -59,9 +73,10 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.dialogue = new Dialogue(scene, characterConst.dialoguePosX, characterConst.dialoguePosY, this.dialogueSprite, this.texto.slice(0, 3));
         this.dialogue.setVisible(false);
 
+        //Si tiene libro...
         if (bookSprite1 != undefined) {
-            //Libro
-            this.numPags = this.getNumPags(tamPags); // numero pags
+            //Rellenamos datos del libro y lo creamos
+            this.numPags = this.getNumPags(tamPags);
             this.book = new Book(scene, characterConst.bookPosX, characterConst.bookPosY, bookSprite1, bookSprite2, genre, category, this.numPags); //Inicializa libro
             this.hasBook = true;
         }
@@ -69,15 +84,17 @@ export default class Character extends Phaser.GameObjects.Sprite {
             this.hasBook = false;
 
         //Documento
-        //Inicializa documento
         this.docSprite = documentSprite;
         this.hasdocument = false;
+
+        //Determina si el personaje se ha ido
         this.isGone = false;
     }
 
+    //Elección aleatoria de pelo
     chooseSpriteHair() {
         this.value = this.getRndInteger(0, 7);
-        switch (this.value) //PELO DEL CHARACTER
+        switch (this.value)
         {
             case 0:
                 this.sprite = "hair1";
@@ -107,9 +124,10 @@ export default class Character extends Phaser.GameObjects.Sprite {
         return this.sprite;
     }
 
+    //Elección aleatoria de cabeza
     chooseSpriteHead() {
         this.value = this.getRndInteger(0, 4);
-        switch (this.value) //PELO DEL CHARACTER
+        switch (this.value)
         {
             case 0:
                 this.sprite = "head1";
@@ -130,7 +148,8 @@ export default class Character extends Phaser.GameObjects.Sprite {
         return this.sprite;
     }
 
-    enterChar() { // El personaje entre (puerta)
+    //El personaje entra
+    enterChar() {
         if (this.currentS === this.States.INI) {
             this.body.setVelocityX(-this.SPEED);
             if (this.randoms) {
@@ -138,11 +157,14 @@ export default class Character extends Phaser.GameObjects.Sprite {
                 this.hair.body.setVelocityX(-this.SPEED);
             }
             this.currentS = this.States.GOING;
+
+            //Crea el documento de acceso
             this.createDocument();
         }
     }
 
-    stopChar() { // El personaje pare
+    //Detiene al personaje
+    stopChar() {
         if (this.currentS === this.States.GOING) {
             this.body.setVelocityX(0);
             if (this.randoms) {
@@ -152,13 +174,17 @@ export default class Character extends Phaser.GameObjects.Sprite {
 
             this.currentS = this.States.SHOW;
 
+            //Diálogo
             this.dialogue.setVisible(true);
             this.npc.play();
 
+            //Muestra libro ya creado
             this.showBook();
 
+            //Creación del documento
             this.document = new Document(this.scene, characterConst.documentPosX, characterConst.documentPosY, this.docSprite);
 
+            //Relojes de paso automático de diálogo
             this.firstClock = new Clock(this.scene, 0, 0, this.dialogueSprite, this.dialogueSprite);
             this.firstClock.start(this.showFirstDialogue.bind(this), '7000');
             this.firstClock.setInvisible();
@@ -178,27 +204,34 @@ export default class Character extends Phaser.GameObjects.Sprite {
         }
     }
 
-    acceptChar() { // El personaje entre (aceptado)
+    //Al aceptar al personaje
+    acceptChar() {
         if (this.currentS === this.States.WAIT) {
+            //Se va
             this.body.setVelocityX(-this.SPEED);
             if (this.randoms) {
                 this.head.body.setVelocityX(-this.SPEED);
                 this.hair.body.setVelocityX(-this.SPEED);
             }
             this.currentS = this.States.ANSWER;
+
+            //Se despide
             this.firstClock.stop();
             this.secondClock.stop();
             this.dialogue.setText(this.texto.slice(12, 15))
             this.npc.play();
 
+            //Elimina al libro y al documento
             this.retrieveBook();
             this.retrieveDocument();
         }
     }
 
-    denyChar() // El personaje salga (denegado)
+    //Al denegar al personaje
+    denyChar()
     {
         if (this.currentS === this.States.WAIT) {
+            //Se va
             this.body.setVelocityX(this.SPEED);
             if (this.randoms) {
                 this.head.body.setVelocityX(this.SPEED);
@@ -206,45 +239,54 @@ export default class Character extends Phaser.GameObjects.Sprite {
             }
             this.currentS = this.States.ANSWER;
 
+            //Se despide
             this.firstClock.stop();
             this.secondClock.stop();
-
             this.dialogue.setText(this.texto.slice(9, 12))
             this.npc.play();
 
+            //Elimina al libro y al documento
             this.retrieveBook();
             this.retrieveDocument();
         }
     }
 
+    //Métodos para cambiar diálogos
     showFirstDialogue() {
         this.dialogue.setText(this.texto.slice(3, 6))
         this.npc.play();
     }
-
     showSecondDialogue() {
         this.dialogue.setText(this.texto.slice(6, 9))
         this.npc.play();
     }
+    dialogueChange() {
+        this.dialogue.setText(this.texto.slice(0, 3));
+        this.dialogue.setVisible(false);
+    }
 
-    createDocument() { //Inicializa el documento del personaje 
+    //Inicializa el documento del personaje 
+    createDocument() {
         this.hasdocument = true;
     }
 
-    retrieveBook() { //
+    //Hace invisible al libro
+    retrieveBook() {
         if (this.hasBook) {
             this.book.cerrarSprites();
-            this.book.resetPos(); //Devuelve posición inicial al book
+            this.book.resetPos();
         }
     }
 
-    retrieveDocument() { //
+    //Hace invisible al documento
+    retrieveDocument() {
         if (this.hasdocument) {
             this.document.visible = false;
-            this.document.resetPos(); //Devuelve posición inicial al book
+            this.document.resetPos();
         }
     }
 
+    //Muestra el libro si le tiene
     showBook() {
         if (this.hasBook) {
             this.book.visible = true;
@@ -252,26 +294,32 @@ export default class Character extends Phaser.GameObjects.Sprite {
         this.currentS = this.States.WAIT;
     }
 
+    //Comprueba si se ha ido el personaje
     checkGone() {
         return this.isGone;
     }
 
     preUpdate() {
-
-        if (this.currentS === this.States.GOING && this.x < characterConst.midPos) { //Cuando llegue al medio, se detiene el personaje
+        //Cuando llegue al medio, se detiene el personaje
+        if (this.currentS === this.States.GOING && this.x < characterConst.midPos) {
             this.stopChar();
-
         }
-        else if (this.currentS === this.States.ANSWER && this.x < characterConst.outPos) { //Cuando salga del campo de vision, por la izquierda, se le reinicia
+
+        //Cuando salga del campo de vision (por la izquierda) se le reinicia
+        else if (this.currentS === this.States.ANSWER && this.x < characterConst.outPos) {
             this.stopChar();
             this.dialogueChange();
             this.isGone = true;
         }
-        else if (this.currentS === this.States.ANSWER && this.x > this.firstPosX) { //Cuando salga del campo de vision, por la derecha, se le reinicia
+
+        //Cuando salga del campo de vision (por la derecha) se le reinicia
+        else if (this.currentS === this.States.ANSWER && this.x > this.firstPosX) {
             this.stopChar();
             this.dialogueChange();
             this.isGone = true;
         }
+
+        //Animación de movimiento
         else if (this.currentS === this.States.GOING || this.currentS === this.States.ANSWER) {
             if (this.randoms) {
                 this.y = characterConst.clothesY + Math.sin(2 * Math.PI * (this.xnow / 50)) * 6;
@@ -285,15 +333,12 @@ export default class Character extends Phaser.GameObjects.Sprite {
         }
     }
 
-    dialogueChange() {
-        this.dialogue.setText(this.texto.slice(0, 3));
-        this.dialogue.setVisible(false);
-    }
-
-    getRndInteger(min, max) { // devuelve un num aleatorio entre min y max
+    //Devuelve un numero aleatorio entre min y max
+    getRndInteger(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    //Asigna un número aleatorio de páginas
     getNumPags(tam) {
         if (tam == 0) {
             return this.getRndInteger(characterConst.thinPags[0], characterConst.thinPags[1]);
@@ -306,10 +351,12 @@ export default class Character extends Phaser.GameObjects.Sprite {
         }
     }
 
+    //Devuelve la categoría del libro del personaje
     getCategory() {
         return this.category;
     }
 
+    //(Solo personajes especiales) Cambia al diálogo especial de los personajes especiales donde se niegan a irse
     refuseDenial() {
         this.dialogue.setText(this.texto.slice(15, 18));
         this.npc.play();
