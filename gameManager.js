@@ -20,8 +20,11 @@ export default class GameManager {
      * @param {*} probability Probabilidad de recibir un strike del 0 al 100
      */
     strike(probability) {
+        //Generamos un número aleatorio entre 1 y 100
         this.numeroAleatorio = this.getRndInteger(1, 100);
+        //Si dicho número es menor o igual a la probabilidad...
         if (this.numeroAleatorio <= probability) {
+            //Se le suma un strike
             this.strikes++;
             return true;
         }
@@ -32,10 +35,13 @@ export default class GameManager {
 
     //Comprueba si suficientes libros han sido fallados para recibir strike
     bookStrike() {
+        //Si el contador de bookStrike es menor que 2...
         if (this.bookStrikeCont < 2) {
+            //Sumamos 1 bookStrike
             this.bookStrikeCont++;
         }
         else {
+            //Si no, ponemos el bookStrike a 0 y sumamos un strike
             this.bookStrikeCont = 0;
             this.strikes++;
         }
@@ -69,6 +75,7 @@ export default class GameManager {
         return this.strikes >= this.numMaxStrikes;
     }
 
+    //Inicializamos las variables
     setGameOver(amountToClear, maxStrikes) {
         this.objetivo = amountToClear;
         this.numMaxStrikes = maxStrikes;

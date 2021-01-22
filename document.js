@@ -9,7 +9,6 @@ export default class Document extends Draggable {
         this.firstPosX = this.x;
         this.firstPosY = this.y;
 
-        // this.scene = scene;
         this.setScale(documentConst.scale);
 
         this.setDepth(documentConst.depth);
@@ -17,6 +16,7 @@ export default class Document extends Draggable {
         this.setDamping = true;
     }
 
+    //Reseteamos la posicion
     resetPos() {
         this.x = this.firstPosX;
         this.y = this.firstPosY;

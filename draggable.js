@@ -12,17 +12,21 @@ export default class Draggable extends Phaser.GameObjects.Sprite {
 
         this.drag = false;
 
+        //Cuando es arrastrado dicho sprite...
         this.on('drag', pointer => {
             if (this.visible)
                 if (pointer.leftButtonDown())
                     if ((pointer.x > limitX0 && pointer.x < limitXX && pointer.y > limitY0 && pointer.y < limitYY)) {
+                        //Cambiamos su posición
                         this.x = pointer.x;
                         this.y = pointer.y;
                         this.drag = true;
                     }
         })
 
+        //Cuando deja de ser arrastrado dicho sprite...
         this.on('dragend', function () {
+            //Ponemos this.drag a false
             this.drag = false;
         })
     }

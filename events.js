@@ -38,7 +38,9 @@ export default class Events extends Phaser.GameObjects.GameObject {
 
         let cont = 0;
         this.clientOrder = [];
-        for (let i = 0; i < this.order.numCorrects; i++) { // Añade los minimos correctos
+
+        // Añade los minimos correctos
+        for (let i = 0; i < this.order.numCorrects; i++) {
             if (this.noticiaInfo.noticiaBien.length == 0 || this.getRndInteger(0, 5) != 0)
                 this.clientOrder.push(this.charaTypes.libroCorrecto);
             else
@@ -46,7 +48,8 @@ export default class Events extends Phaser.GameObjects.GameObject {
             cont++;
         }
 
-        for (let i = cont; i < this.order.minBooks; i++) { // Añade el resto (correctos o incorrectos)
+        // Añade el resto (correctos o incorrectos)
+        for (let i = cont; i < this.order.minBooks; i++) {
             if (this.noticiaInfo.noticiaBien.length == 0 || this.getRndInteger(0, 5) != 0)
                 this.clientOrder.push(this.getRndInteger(this.charaTypes.libroCorrecto, this.charaTypes.libroIncorrecto));
             else
@@ -75,6 +78,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.setChara();
     }
 
+    //Creamos al character
     createCharacter(tipo) {
         this.isCharaInScene = true;
         switch (tipo) {
@@ -132,15 +136,17 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 this.createIncorrectChara();
                 break;
             case this.charaTypes.noticiaCorrecta:
+                //Personaje noticia correcta
                 console.log("Personaje noticia correcta");
                 this.news = this.noticiaInfo.noticiaBien[this.getRndInteger(0, this.noticiaInfo.noticiaBien.length - 1)];
                 this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0, this.dialogosNoticias.length - 1)]);
                 this.chara = new NewsCharacter(this.scene, this.x, this.y, this.chooseSprites(), this.dialogoNoticia, this.day, this.month, this.year, this.news);
                 break;
             case this.charaTypes.noticiaIncorrecta:
+                //Personaje noticia incorrecta
                 console.log("Personaje noticia incorrecta");
 
-                if (this.getRndInteger(0, 1) == 0) {
+                if (this.getRndInteger(0, 1) == 0) { //Fecha Mal
                     this.incorrectDay = this.getRndInteger(1, 30);
                     this.incorrectMonth = this.getRndInteger(1, 12);
                     this.incorrectYear = this.getRndInteger(1960, 2040);
@@ -153,7 +159,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                     this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0, this.dialogosNoticias.length - 1)]);
                     this.chara = new NewsCharacter(this.scene, this.x, this.y, this.chooseSprites(), this.dialogoNoticia, this.incorrectDay, this.incorrectMonth, this.incorrectYear, this.news);
                 }
-                else {
+                else {  //Noticia Mal
                     this.news = this.noticiaInfo.noticiaMal[this.getRndInteger(0, this.noticiaInfo.noticiaMal.length - 1)];
                     this.dialogoNoticia = this.splitDialogue(this.dialogosNoticias[this.getRndInteger(0, this.dialogosNoticias.length - 1)]);
                     this.chara = new NewsCharacter(this.scene, this.x, this.y, this.chooseSprites(), this.dialogoNoticia, this.day, this.month, this.year, this.news);
@@ -169,6 +175,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         }
     }
 
+    //Se elige al azar el cuerpo del character
     chooseSprites() {
         this.value = this.getRndInteger(0, 6);
         switch (this.value) //PELO DEL CHARACTER
@@ -198,6 +205,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         return this.sprite;
     }
 
+    //Dividimos el diálogo
     splitDialogue(dialogue) {
         this.dialogoAPartir = this.scene.cache.text.get(dialogue);
         this.dialogoAPartir = this.dialogoAPartir.split("\n");
@@ -205,17 +213,18 @@ export default class Events extends Phaser.GameObjects.GameObject {
     }
 
     update() {
+        //Si el character se ha ido, se destruye libro, sprites y documento
         if (this.chara.checkGone()) {
             this.chara.document.destroy();
             if (this.chara.hasBook)
                 this.chara.book.destroy();
             if (this.chara.head != null) {
-                this.chara.head.destroy(); //Arreglar.
+                this.chara.head.destroy();
                 this.chara.hair.destroy();
             }
             this.chara.destroy();
             this.isCharaInScene = false;
-            if (this.contKnownCharas < this.clientOrder.length) { // creación de nuevo personaje
+            if (this.contKnownCharas < this.clientOrder.length) { //Creación de nuevo personaje
                 this.setChara();
             }
             else {
@@ -225,38 +234,38 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.charaShowBook();
     }
 
+    //Character muestra el libro
     charaShowBook() {
         if (this.chara.currentS === this.chara.States.SHOW) {
             this.chara.showBook();
-            //this.chara.ShowDocument();
         }
     }
 
-    // personaje entra
+    //Character entra
     enterChar() {
         this.chara.enterChar();
     }
 
-    // personaje es denegado
+    //Character es denegado
     denyChar() {
         this.chara.denyChar();
         this.charaOutcome(false);
     }
 
-    // personaje es aceptado
+    //Character es aceptado
     acceptChar() {
         this.chara.acceptChar();
         this.charaOutcome(true);
     }
 
-    // Crea el siguiente personaje en la lista de necesarios
+    //Crea el siguiente character en la lista de necesarios
     setChara() {
         this.currentCharaType = this.clientOrder[this.contKnownCharas];
         this.createCharacter(this.currentCharaType);
         this.contKnownCharas++;
     }
 
-    // Crea un personaje aleatorio entre correcto e incorrecto
+    //Crea un character aleatorio entre correcto e incorrecto
     setRandomChara() {
         this.currentCharaType = this.getRndInteger(this.charaTypes.libroCorrecto, this.charaTypes.libroIncorrecto);
         this.createCharacter(this.currentCharaType);
@@ -293,6 +302,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         this.tamPags = this.bookInfo.numPagsBien[this.getRndInteger(0, this.bookInfo.numPagsBien.length - 1)];
     }
 
+    //Crea un character incorrecto
     createIncorrectChara() {
         this.createCorrectBook(); // Crea un libro correcto
         let wrongAspect;
@@ -465,16 +475,19 @@ export default class Events extends Phaser.GameObjects.GameObject {
         return this.noticiaMalRadio;
     }
 
+    //Se censura un libro
     addCensoredBook(aCensurar) {
         this.bookMalRadio.push(aCensurar);
         console.log(this.bookMalRadio);
     }
 
+    //Se censura una noticia
     addCensoredNoticia(aCensurar) {
         this.noticiaMalRadio.push(aCensurar);
         console.log(this.noticiaMalRadio);
     }
 
+    //Comprueba si "category" esta baneada (libro)
     isBookBanned(category) {
         if (this.bookMalRadio.length == 0)
             return false;
@@ -490,6 +503,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         }
     }
 
+    //Comprueba si "category" esta baneada (noticia)
     isNoticiaBanned(category) {
         if (this.noticiaMalRadio.length == 0)
             return false;
@@ -505,6 +519,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
         }
     }
 
+    //El character se niega a irse
     refuseDenial() {
         this.chara.refuseDenial();
     }
