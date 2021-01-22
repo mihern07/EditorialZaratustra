@@ -49,8 +49,8 @@ export const levelsConst = {
                 poesiaMal: [],
                 teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
                 everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-                numPagsBien: [2, 0], // libro corto y largo
-                numPagsMal: [1] // libro mediano
+                numPagsBien: [2, 0],
+                numPagsMal: [1]
             }
         },
 
@@ -74,8 +74,8 @@ export const levelsConst = {
                 poesiaMal: ["Drama", "Fantasía", "Romance", "Aventura", "Académico"],
                 teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Policíaco", "Ficción"],
                 everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-                numPagsBien: [1], // libro corto y largo
-                numPagsMal: [0, 2] // libro mediano
+                numPagsBien: [1], 
+                numPagsMal: [0, 2] 
             }
         },
 
@@ -99,8 +99,8 @@ export const levelsConst = {
                 poesiaMal: ["Histórico", "Policíaco", "Drama", "Aventura", "Suspense", "Fantasía", "Académico",],
                 teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia"],
                 everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-                numPagsBien: [1, 0], // libro corto y largo
-                numPagsMal: [2] // libro mediano
+                numPagsBien: [1, 0], 
+                numPagsMal: [2] 
             }
         },
 
@@ -124,8 +124,8 @@ export const levelsConst = {
                 poesiaMal: ["Suspense", "Drama", "Académico", "Romance"],
                 teatroMal: ["Romance", "Policíaco", "Drama", "Comedia", "Ficción"],
                 everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-                numPagsBien: [0], // libro corto y largo
-                numPagsMal: [1, 2] // libro mediano
+                numPagsBien: [0], 
+                numPagsMal: [1, 2] 
             }
         },
 
@@ -149,8 +149,8 @@ export const levelsConst = {
                 poesiaMal: ["Romance", "Académico", "Comedia", "Ficción"],
                 teatroMal: ["Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
                 everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-                numPagsBien: [1, 2], // libro corto y largo
-                numPagsMal: [0] // libro mediano
+                numPagsBien: [1, 2], 
+                numPagsMal: [0]
             }
         },
 
@@ -174,8 +174,8 @@ export const levelsConst = {
                 poesiaMal: ["Suspense", "Histórico", "Policíaco"],
                 teatroMal: ["Histórico", "Suspense", "Policíaco", "Drama"],
                 everyCategory: ["Romance", "Aventura", "Suspense", "Histórico", "Policíaco", "Drama", "Fantasía", "Académico", "Comedia", "Ficción"],
-                numPagsBien: [0, 2], // libro corto y largo
-                numPagsMal: [1] // libro mediano
+                numPagsBien: [0, 2],
+                numPagsMal: [1] 
             }
         },
     ]

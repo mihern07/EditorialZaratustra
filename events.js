@@ -128,7 +128,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Personaje Correcto")
                 this.createCorrectBook();
                 this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0, this.dialogosLibro.length - 1)]);
-                this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPagsdocumentSprite);
+                this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
                 break;
             case this.charaTypes.libroIncorrecto:
                 //Personaje Libro Incorrecto
@@ -356,7 +356,6 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 this.dialogoLibro = this.splitDialogue(this.dialogosLibro[this.getRndInteger(0, this.dialogosLibro.length - 1)]);
                 this.chara = new Personaje(this.scene, this.x, this.y, true, this.chooseSprites(), this.dialogoLibro, this.dialogueSprite, this.documentSprite, "libroC" + this.category, "libroA" + this.category, this.genre, this.category, this.tamPags);
                 break;
-
         }
     }
 
@@ -446,7 +445,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 console.log("Noticia correcta");
                 if (accepted) {
                     if (this.isNoticiaBanned(this.chara.getCategory())) {
-                        this.gameManager.Strike(eventsConst.newsProbability);
+                        this.gameManager.strike(eventsConst.newsProbability);
                         this.scene.strikeShake();
                     } else {
                         this.gameManager.addSubstractMoney(eventsConst.moneyAmount);
@@ -457,7 +456,7 @@ export default class Events extends Phaser.GameObjects.GameObject {
                 //Personaje noticia incorrecta
                 console.log("Noticia incorrecta");
                 if (accepted) {
-                    this.gameManager.Strike(eventsConst.newsProbability);
+                    this.gameManager.strike(eventsConst.newsProbability);
                     this.scene.strikeShake();
                 }
                 break;
